@@ -44,3 +44,8 @@ O -Options
     •	This course is the perfect option to achieve these goals
 W-Will
     •	I have always been a motivated person and always trying to reach my goals which in my opinion is very important also I am looking forward to working in this team and I hope that we can all help each other in achieving our goals as a group and as individuals as well
+
+	
+Flo van der Vlist
+
+![](https://lh3.googleusercontent.com/zZYTc6qPvWJMCry2YMcFTtGgD37QExbR06yEjGct1Bw70Qh0kKqkRzTCLScFocz3m44SivXlEm37ofjc3I5_kYDDkmhh1MN9BzGMCaOAL12fdZvnhu_0Ull-RrFpp3uW6jB0iqnNJhB5Lbr0wq5fGwDlYvZ6D2dPlSJwP_FoPAUzobK2ypUyjx33mtpkOTMGHJD2vkjbDPD_qK4lOCORRjw95iszJyFJUyAdAI-QVuvU6NRBZlsIFUyEPHetElgjL2sIEM4_1dLWNNTxtTV7yVUB1DLw93FQyAsXKjnO98fh1fGPoBb42QoHv-LHifA1Hr1qOE0W0-KRD0-zwYTqNh7JZkuYgpY0DQrWD5ZbDqdRITDMSjbBac4G_ULDAaR1YBheVhpulaOT-YJS0Qi_Sk4yDx7B4OiEVBxPVgqrYrp-N4JzGpiNpH53lLaLjXw56Gq2NJUDK0gPqimYOUrK5Ep8Re_yYPz3rRPe4qpzr1FWu5DsJfKpXPDP1ReP7iQ2CkMH9kJsUM3QGcxXQbjgCT9TiPVTNX7qebFxT9LCLOW81iCiEfRu7xPsXeVddh7Z_7YVTwf7df_jn8TIAfAnyWyGGtViAYMzTgO_64rrCnFEFyxEkOR0nHV62_cQT-qvYZCUdLgg2SwM5KhHl6y47uZaJ3pBNGkj6tLgko7X7jsl0BYI2C3J9jnll2qhT4AZGEnOmvSZorUJeM1SemDEqxmd=w679-h904-no)
