@@ -11,13 +11,20 @@ http://stackoverflow.com/a/6466993
 Eclipse:
 [http://javapapers.com/java/import-maven-project-into-eclipse/](http://javapapers.com/java/import-maven-project-into-eclipse/)
 
-Intellij:  
+Intellij:
 [https://www.jetbrains.com/help/idea/2016.2/importing-project-from-maven-model.html](https://www.jetbrains.com/help/idea/2016.2/importing-project-from-maven-model.html)
 
 ## Getting your weekly reports
 
-**Jacoco**:  
+**Jacoco**:
 Run `maven install` ([Intellij](https://www.jetbrains.com/help/idea/2016.3/getting-started-with-maven.html#execute_maven_goal)/[Eclipse](http://imgur.com/a/6q7pV))
 
-**Checkstyle**:  
+**Checkstyle**:
 Run `maven site`
+
+## Authors
+
+Lazar Nenovski
+
+
+![](https://gitlab.ewi.tudelft.nl/uploads/-/system/user/avatar/1538/avatar.png)
