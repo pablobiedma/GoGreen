@@ -32,4 +32,4 @@ Lazar Nenovski
 
 Ivan Dimitrov
 
-https://osistud.tudelft.nl/osiris_student/DownloadPasfoto.do
+![](https://gitlab.ewi.tudelft.nl/uploads/-/system/user/avatar/1423/avatar.png?width=400)
