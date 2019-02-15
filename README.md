@@ -1,4 +1,4 @@
-# CSE1105 Template Repository
+﻿# CSE1105 Template Repository
 
 This a template repository to help you get started on making the best project possible!
 
@@ -33,6 +33,10 @@ Lazar Nenovski
 Ivan Dimitrov
 
 ![](https://gitlab.ewi.tudelft.nl/uploads/-/system/user/avatar/1423/avatar.png?width=400)
+
+Ayush Patandin
+
+![](https://gitlab.ewi.tudelft.nl/uploads/-/system/user/avatar/1239/avatar.png?width=400)
 
 G – Goal
     •	Main goal of course is to enhance my programming skills and working on something I have not encountered before and doing the proper research
