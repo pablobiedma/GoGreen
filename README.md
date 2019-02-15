@@ -34,10 +34,6 @@ Ivan Dimitrov
 
 ![](https://gitlab.ewi.tudelft.nl/uploads/-/system/user/avatar/1423/avatar.png?width=400)
 
-Ayush Patandin
-
-![](https://gitlab.ewi.tudelft.nl/uploads/-/system/user/avatar/1239/avatar.png?width=400)
-
 G – Goal
     •	Main goal of course is to enhance my programming skills and working on something I have not encountered before and doing the proper research
     •	To experience and get better at working with a team on  a project so later on I am prepared for the next similar challenge in my life.
@@ -48,6 +44,13 @@ O -Options
     •	This course is the perfect option to achieve these goals
 W-Will
     •	I have always been a motivated person and always trying to reach my goals which in my opinion is very important also I am looking forward to working in this team and I hope that we can all help each other in achieving our goals as a group and as individuals as well
+
+
+
+Ayush Patandin
+
+![](https://gitlab.ewi.tudelft.nl/uploads/-/system/user/avatar/1239/avatar.png?width=400)
+
 
 	
 Flo van der Vlist
