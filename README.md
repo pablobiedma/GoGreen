@@ -48,4 +48,16 @@ W-Will
 	
 Flo van der Vlist
 
-![](https://lh3.googleusercontent.com/zZYTc6qPvWJMCry2YMcFTtGgD37QExbR06yEjGct1Bw70Qh0kKqkRzTCLScFocz3m44SivXlEm37ofjc3I5_kYDDkmhh1MN9BzGMCaOAL12fdZvnhu_0Ull-RrFpp3uW6jB0iqnNJhB5Lbr0wq5fGwDlYvZ6D2dPlSJwP_FoPAUzobK2ypUyjx33mtpkOTMGHJD2vkjbDPD_qK4lOCORRjw95iszJyFJUyAdAI-QVuvU6NRBZlsIFUyEPHetElgjL2sIEM4_1dLWNNTxtTV7yVUB1DLw93FQyAsXKjnO98fh1fGPoBb42QoHv-LHifA1Hr1qOE0W0-KRD0-zwYTqNh7JZkuYgpY0DQrWD5ZbDqdRITDMSjbBac4G_ULDAaR1YBheVhpulaOT-YJS0Qi_Sk4yDx7B4OiEVBxPVgqrYrp-N4JzGpiNpH53lLaLjXw56Gq2NJUDK0gPqimYOUrK5Ep8Re_yYPz3rRPe4qpzr1FWu5DsJfKpXPDP1ReP7iQ2CkMH9kJsUM3QGcxXQbjgCT9TiPVTNX7qebFxT9LCLOW81iCiEfRu7xPsXeVddh7Z_7YVTwf7df_jn8TIAfAnyWyGGtViAYMzTgO_64rrCnFEFyxEkOR0nHV62_cQT-qvYZCUdLgg2SwM5KhHl6y47uZaJ3pBNGkj6tLgko7X7jsl0BYI2C3J9jnll2qhT4AZGEnOmvSZorUJeM1SemDEqxmd=w679-h904-no)
+![](https://gitlab.ewi.tudelft.nl/uploads/-/system/user/avatar/1374/avatar.png?width=400)
+
+<br />
+G – Goal <br />
+    •	To improve my programming skills personally but also learn how to code in cooperation with teammembers. <br />
+    •	This is important for a lot of things I might do after studying. You cannot everything alone, in most of the cases you need teammembers to accomplish something. <br />
+    •	When I know that I can start a similar project without a problem, and understand all the principles of our own program I know I achieved my goal.<br />
+R-Reality <br />
+    •	At the moment I'm busy with studying so there is enough room for improvement when it comes to programming skills, I hope to learn that through this project and a lot of research I will do on my own.<br />
+O -Options <br />
+    •	In this project there is a lot of freedom to learn new things, but there are also a lot of things I never saw before and have to learn, this will take a lot of time but I'm looking forward to learn new things and get our application up and running. <br />
+W-Will <br />
+    •	I will do my best to learn as much as possible and look for all the information I need to go on with the tasks I have to do. I will be doing this the whole quarter starting right now. Right now I will start with reading information about how to start a java project and how to use Git. I will try and do my best to help teammates when it is possible, I will share my problems and tips with them to create a great application.<br />
