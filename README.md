@@ -68,3 +68,19 @@ O -Options <br />
     •	In this project there is a lot of freedom to learn new things, but there are also a lot of things I never saw before and have to learn, this will take a lot of time but I'm looking forward to learn new things and get our application up and running. <br />
 W-Will <br />
     •	I will do my best to learn as much as possible and look for all the information I need to go on with the tasks I have to do. I will be doing this the whole quarter starting right now. Right now I will start with reading information about how to start a java project and how to use Git. I will try and do my best to help teammates when it is possible, I will share my problems and tips with them to create a great application.<br />
+
+Pablo Biedma Nunez
+
+![](https://gitlab.ewi.tudelft.nl/uploads/-/system/user/avatar/1163/avatar.png?width=400)
+
+<br />
+G – Goal <br />
+    •	The main goal for me in this project is to end up helping society by creating this app, cooperating and using our knowledge. <br />
+    •	However, an impact in society is not the only important goal for me, I also want to have an impact in my teammates, helping them in order to by more productive and also in myself by learning from them. <br />
+    •	Finally another goal would be not to have a worse performance as a group due to the lack of 2 members since the beginning.<br />
+R-Reality <br />
+    •	As I said before, we are less people than expected, and we may not have the best programming skills, however, since the first time I meet this group I believe that we can do something special.<br />
+O -Options <br />
+    •	This course is such a great opportunity to: improve society, improve ourselves and improve our teammates. We should use this opportunity to make the most of it.<br />
+W-Will <br />
+    •	My intention is to spend as much time as possible if neccessary in order to make this work given that we have such a cool and important opportunity.<br />
