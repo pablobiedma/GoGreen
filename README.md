@@ -33,3 +33,14 @@ Lazar Nenovski
 Ivan Dimitrov
 
 ![](https://gitlab.ewi.tudelft.nl/uploads/-/system/user/avatar/1423/avatar.png?width=400)
+
+G – Goal
+    •	Main goal of course is to enhance my programming skills and working on something I have not encountered before and doing the proper research
+    •	To experience and get better at working with a team on  a project so later on I am prepared for the next similar challenge in my life.
+    •	This is important for me because by achieving this goal I will be able to share work with others organise a team and make plans for what everyone should be doing at a certain point in time
+R-Reality
+    •	Both of those things that I mentioned as my goals could use improvement even though I am a team player I am sure there is room for improvement and for my programming skills as well
+O -Options
+    •	This course is the perfect option to achieve these goals
+W-Will
+    •	I have always been a motivated person and always trying to reach my goals which in my opinion is very important also I am looking forward to working in this team and I hope that we can all help each other in achieving our goals as a group and as individuals as well
