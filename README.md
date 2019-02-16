@@ -51,6 +51,17 @@ Ayush Patandin
 
 ![](https://gitlab.ewi.tudelft.nl/uploads/-/system/user/avatar/1239/avatar.png?width=400)
 
+<br />
+G – Goal <br />
+    •	The main goal for me in this project is to work together with my team so that I can obtain more experience for projects in the future. <br />
+    •	But I also want to learn things for my teammates, so that I can pass the knowledge to other teammates when working on other projects in the future. <br />
+    •	Finally as last goal I want to show my teammates my working skills, so I hope to surprise them with this project.<br />
+R-Reality <br />
+    •   In reality we have less people working on this project,which is not what I expected, but I have a feeling that with less people we can communicate better with eachother, so that would be better for our project.<br />
+O -Options <br />
+    •	We have the opportunity to divide and conquer:we can split the tasks and each teammate can come up with a plan on how we can fix these tasks.<br />
+W-Will <br />
+    •	I am willing to work with everything I've got on this project, because I think this is the best way to motivate others to work at their best.<br />
 
 	
 Flo van der Vlist
