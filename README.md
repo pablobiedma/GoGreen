@@ -34,10 +34,6 @@ Ivan Dimitrov
 
 ![](https://gitlab.ewi.tudelft.nl/uploads/-/system/user/avatar/1423/avatar.png?width=400)
 
-Ayush Patandin
-
-![](https://gitlab.ewi.tudelft.nl/uploads/-/system/user/avatar/1239/avatar.png?width=400)
-
 G – Goal
     •	Main goal of course is to enhance my programming skills and working on something I have not encountered before and doing the proper research
     •	To experience and get better at working with a team on  a project so later on I am prepared for the next similar challenge in my life.
@@ -49,7 +45,42 @@ O -Options
 W-Will
     •	I have always been a motivated person and always trying to reach my goals which in my opinion is very important also I am looking forward to working in this team and I hope that we can all help each other in achieving our goals as a group and as individuals as well
 
+
+
+Ayush Patandin
+
+![](https://gitlab.ewi.tudelft.nl/uploads/-/system/user/avatar/1239/avatar.png?width=400)
+
+
 	
 Flo van der Vlist
 
-![](https://lh3.googleusercontent.com/zZYTc6qPvWJMCry2YMcFTtGgD37QExbR06yEjGct1Bw70Qh0kKqkRzTCLScFocz3m44SivXlEm37ofjc3I5_kYDDkmhh1MN9BzGMCaOAL12fdZvnhu_0Ull-RrFpp3uW6jB0iqnNJhB5Lbr0wq5fGwDlYvZ6D2dPlSJwP_FoPAUzobK2ypUyjx33mtpkOTMGHJD2vkjbDPD_qK4lOCORRjw95iszJyFJUyAdAI-QVuvU6NRBZlsIFUyEPHetElgjL2sIEM4_1dLWNNTxtTV7yVUB1DLw93FQyAsXKjnO98fh1fGPoBb42QoHv-LHifA1Hr1qOE0W0-KRD0-zwYTqNh7JZkuYgpY0DQrWD5ZbDqdRITDMSjbBac4G_ULDAaR1YBheVhpulaOT-YJS0Qi_Sk4yDx7B4OiEVBxPVgqrYrp-N4JzGpiNpH53lLaLjXw56Gq2NJUDK0gPqimYOUrK5Ep8Re_yYPz3rRPe4qpzr1FWu5DsJfKpXPDP1ReP7iQ2CkMH9kJsUM3QGcxXQbjgCT9TiPVTNX7qebFxT9LCLOW81iCiEfRu7xPsXeVddh7Z_7YVTwf7df_jn8TIAfAnyWyGGtViAYMzTgO_64rrCnFEFyxEkOR0nHV62_cQT-qvYZCUdLgg2SwM5KhHl6y47uZaJ3pBNGkj6tLgko7X7jsl0BYI2C3J9jnll2qhT4AZGEnOmvSZorUJeM1SemDEqxmd=w679-h904-no)
+![](https://gitlab.ewi.tudelft.nl/uploads/-/system/user/avatar/1374/avatar.png?width=400)
+
+<br />
+G – Goal <br />
+    •	To improve my programming skills personally but also learn how to code in cooperation with teammembers. <br />
+    •	This is important for a lot of things I might do after studying. You cannot everything alone, in most of the cases you need teammembers to accomplish something. <br />
+    •	When I know that I can start a similar project without a problem, and understand all the principles of our own program I know I achieved my goal.<br />
+R-Reality <br />
+    •	At the moment I'm busy with studying so there is enough room for improvement when it comes to programming skills, I hope to learn that through this project and a lot of research I will do on my own.<br />
+O -Options <br />
+    •	In this project there is a lot of freedom to learn new things, but there are also a lot of things I never saw before and have to learn, this will take a lot of time but I'm looking forward to learn new things and get our application up and running. <br />
+W-Will <br />
+    •	I will do my best to learn as much as possible and look for all the information I need to go on with the tasks I have to do. I will be doing this the whole quarter starting right now. Right now I will start with reading information about how to start a java project and how to use Git. I will try and do my best to help teammates when it is possible, I will share my problems and tips with them to create a great application.<br />
+
+Pablo Biedma Nunez
+
+![](https://gitlab.ewi.tudelft.nl/uploads/-/system/user/avatar/1163/avatar.png?width=400)
+
+<br />
+G – Goal <br />
+    •	The main goal for me in this project is to end up helping society by creating this app, cooperating and using our knowledge. <br />
+    •	However, an impact in society is not the only important goal for me, I also want to have an impact in my teammates, helping them in order to by more productive and also in myself by learning from them. <br />
+    •	Finally another goal would be not to have a worse performance as a group due to the lack of 2 members since the beginning.<br />
+R-Reality <br />
+    •	As I said before, we are less people than expected, and we may not have the best programming skills, however, since the first time I meet this group I believe that we can do something special.<br />
+O -Options <br />
+    •	This course is such a great opportunity to: improve society, improve ourselves and improve our teammates. We should use this opportunity to make the most of it.<br />
+W-Will <br />
+    •	My intention is to spend as much time as possible if neccessary in order to make this work given that we have such a cool and important opportunity.<br />
