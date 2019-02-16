@@ -51,7 +51,19 @@ Ayush Patandin
 
 ![](https://gitlab.ewi.tudelft.nl/uploads/-/system/user/avatar/1239/avatar.png?width=400)
 
+<br />
+G – Goal <br />
+    •	The main goal for me in this project is to work together with my team so that I can obtain more experience for projects in the future. <br />
+    •	But I also want to learn things for my teammates, so that I can pass the knowledge to other teammates when working on other projects in the future. <br />
+    •	Finally as last goal I want to show my teammates my working skills, so I hope to surprise them with this project.<br />
+R-Reality <br />
+    •   In reality we have less people working on this project,which is not what I expected, but I have a feeling that with less people we can communicate better with eachother, so that would be better for our project.<br />
+O -Options <br />
+    •	We have the opportunity to divide and conquer:we can split the tasks and each teammate can come up with a plan on how we can fix these tasks.<br />
+W-Will <br />
+    •	I am willing to work with everything I've got on this project, because I think this is the best way to motivate others to work at their best.<br />
 
+<br />
 	
 Flo van der Vlist
 
@@ -74,7 +86,7 @@ Pablo Biedma Nunez
 
 ![](https://gitlab.ewi.tudelft.nl/uploads/-/system/user/avatar/1163/avatar.png?width=400)
 
-<br />
+<br/>
 G – Goal <br />
     •	The main goal for me in this project is to end up helping society by creating this app, cooperating and using our knowledge. <br />
     •	However, an impact in society is not the only important goal for me, I also want to have an impact in my teammates, helping them in order to by more productive and also in myself by learning from them. <br />
