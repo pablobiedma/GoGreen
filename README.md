@@ -24,10 +24,20 @@ Run `maven site`
 
 ## Authors
 
-Lazar Nenovski
+### Lazar Nenovski
 
 
 ![](https://gitlab.ewi.tudelft.nl/uploads/-/system/user/avatar/1538/avatar.png)
+
+
+#### **G** - Goal
+	* With this project I hope to improve my communication skills and ability to cooperate with a team
+#### **R** - Reality
+	* Although we are pretty thrown in the deep with this project I feel we have all the necessary tools and skill to succeed
+#### **O** - Options
+	* Optionally I would like to improve my tolerance for Java
+#### **W** - Will
+	* I am highly motivated in doing whatever is necessary to properly and responsibly create this project by the books
 
 
 Ivan Dimitrov
@@ -64,7 +74,7 @@ W-Will <br />
     •	I am willing to work with everything I've got on this project, because I think this is the best way to motivate others to work at their best.<br />
 
 <br />
-	
+
 Flo van der Vlist
 
 ![](https://gitlab.ewi.tudelft.nl/uploads/-/system/user/avatar/1374/avatar.png?width=400)
