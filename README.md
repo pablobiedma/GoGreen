@@ -24,39 +24,6 @@ Run `maven site`
 
 ## Authors
 
-### Lazar Nenovski
-
-
-![](https://gitlab.ewi.tudelft.nl/uploads/-/system/user/avatar/1538/avatar.png)
-
-
-#### **G** - Goal
-	* With this project I hope to improve my communication skills and ability to cooperate with a team
-#### **R** - Reality
-	* Although we are pretty thrown in the deep with this project I feel we have all the necessary tools and skill to succeed
-#### **O** - Options
-	* Optionally I would like to improve my tolerance for Java
-#### **W** - Will
-	* I am highly motivated in doing whatever is necessary to properly and responsibly create this project by the books
-
-
-### Ivan Dimitrov
-
-
-![](https://gitlab.ewi.tudelft.nl/uploads/-/system/user/avatar/1423/avatar.png?width=400)
-
-
-#### **G** - Goal
-	* Main goal of course is to enhance my programming skills and working on something I have not encountered before and doing the proper research
-	* To experience and get better at working with a team on  a project so later on I am prepared for the next similar challenge in my life.
-	* This is important for me because by achieving this goal I will be able to share work with others organise a team and make plans for what everyone should be doing at a certain point in time
-#### **R** - Reality
-	* Both of those things that I mentioned as my goals could use improvement even though I am a team player I am sure there is room for improvement and for my programming skills as well
-#### **O** - Options
-	* This course is the perfect option to achieve these goals
-#### **W** - Will
-	* I have always been a motivated person and always trying to reach my goals which in my opinion is very important also I am looking forward to working in this team and I hope that we can all help each other in achieving our goals as a group and as individuals as well
-
 
 ### Ayush Patandin
 
@@ -92,6 +59,40 @@ Run `maven site`
 	* In this project there is a lot of freedom to learn new things, but there are also a lot of things I never saw before and have to learn, this will take a lot of time but I'm looking forward to learn new things and get our application up and running.
 #### **W** - Will
 	* I will do my best to learn as much as possible and look for all the information I need to go on with the tasks I have to do. I will be doing this the whole quarter starting right now. Right now I will start with reading information about how to start a java project and how to use Git. I will try and do my best to help teammates when it is possible, I will share my problems and tips with them to create a great application.
+
+
+### Ivan Dimitrov
+
+
+![](https://gitlab.ewi.tudelft.nl/uploads/-/system/user/avatar/1423/avatar.png?width=400)
+
+
+#### **G** - Goal
+	* Main goal of course is to enhance my programming skills and working on something I have not encountered before and doing the proper research
+	* To experience and get better at working with a team on  a project so later on I am prepared for the next similar challenge in my life.
+	* This is important for me because by achieving this goal I will be able to share work with others organise a team and make plans for what everyone should be doing at a certain point in time
+#### **R** - Reality
+	* Both of those things that I mentioned as my goals could use improvement even though I am a team player I am sure there is room for improvement and for my programming skills as well
+#### **O** - Options
+	* This course is the perfect option to achieve these goals
+#### **W** - Will
+	* I have always been a motivated person and always trying to reach my goals which in my opinion is very important also I am looking forward to working in this team and I hope that we can all help each other in achieving our goals as a group and as individuals as well
+
+
+### Lazar Nenovski
+
+
+![](https://gitlab.ewi.tudelft.nl/uploads/-/system/user/avatar/1538/avatar.png)
+
+
+#### **G** - Goal
+	* With this project I hope to improve my communication skills and ability to cooperate with a team
+#### **R** - Reality
+	* Although we are pretty thrown in the deep with this project I feel we have all the necessary tools and skill to succeed
+#### **O** - Options
+	* Optionally I would like to improve my tolerance for Java
+#### **W** - Will
+	* I am highly motivated in doing whatever is necessary to properly and responsibly create this project by the books
 
 
 ### Pablo Biedma Nunez
