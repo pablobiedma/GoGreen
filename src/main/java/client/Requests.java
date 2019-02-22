@@ -9,13 +9,9 @@ import java.util.Scanner;
 
 public class Requests {
 
-    public static void GetRequest() throws IOException {
-        //asks user how they traveled
-        System.out.println("How did you travel? by car, bike or public transport?");
-        //saves user Input
-        String userInput = userDetails();
+    public static String GetRequest(String vehicle) throws IOException {
         //Url were to get the JSON data from, "transport" is now hardcoded but will be a variable in the future.
-        URL urlForGetRequest = new URL("http://localhost:8080/transport?vehicle="+userInput);
+        URL urlForGetRequest = new URL("http://localhost:8080/transport?vehicle="+vehicle);
         String readLine;
         //opens a http connection with the URL.
         HttpURLConnection connection = (HttpURLConnection) urlForGetRequest.openConnection();
@@ -34,18 +30,21 @@ public class Requests {
             }
             in.close();
             // print result
-            System.out.println(response.toString());
+            return response.toString();
         } else {
-            System.out.println("GET NOT WORKED");
+           return "GET NOT WORKED";
         }
+
     }
 
+    /*
     //method to let the user input a word and return it.
     public static String userDetails(){
         Scanner sc = new Scanner(System.in);
         String loginDetails = sc.next();
         return loginDetails;
     }
+    */
 
 }
 

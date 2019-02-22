@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Text?>
+
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.Controller">
+   <children>
+      <Button layoutX="99.0" layoutY="287.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="80.0" text="Car" onAction="#carAction" />
+      <Button layoutX="260.0" layoutY="287.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="80.0" text="Bike" onAction="#bikeAction"/>
+      <Button layoutX="412.0" layoutY="287.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="121.0" text="Public Transport" onAction="#PTAction"/>
+      <Text layoutX="200.0" layoutY="34.0"  fx:id="textFlow"/>
+   </children>
+</Pane>
