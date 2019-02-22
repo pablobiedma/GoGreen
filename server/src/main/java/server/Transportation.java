@@ -5,13 +5,13 @@ package server.group12;
  * */
 public class Transportation {
 	private final long id;
-	private final String content;
+	private final String vehicleSuggestion;
 
 	public long getId() {
 		return this.id;
 	}
-	public String getContent() {
-		return this.content;
+	public String getVehicleSuggestion() {
+		return this.vehicleSuggestion;
 	}
 
 	private String suggestVehicle(String vehicleType) {
@@ -27,6 +27,6 @@ public class Transportation {
 
 	public Transportation(long id, String vehicleType) {
 		this.id = id;
-		this.content = new String(suggestVehicle(vehicleType));
+		this.vehicleSuggestion = new String(suggestVehicle(vehicleType));
 	}
 }
