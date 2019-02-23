@@ -13,9 +13,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 public class TransportationController {
 	private final AtomicLong counter = new AtomicLong();
 
-	@RequestMapping(method=RequestMethod.GET, value = "/transport")
-	public Transportation transportation(@RequestParam(value="vehicle", defaultValue="Unknown")
-		   							String vehicleType) {
+	@RequestMapping(method = RequestMethod.GET, value = "/transport")
+	public Transportation transportation(@RequestParam(value = "vehicle",
+			   										   defaultValue = "Unknown")
+		   								 String vehicleType) {
 		return new Transportation(counter.incrementAndGet(), vehicleType);
 	}
 }
