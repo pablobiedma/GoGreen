@@ -1,12 +1,12 @@
-Sprint review
+SPRINT REVIEW
 
--Goal for this week
+-GOAL FOR THIS WEEK
 For this week we have worked on the server and the client and the connection between them.
 As there was said before, we have made a plan to split the tasks of server and client seperately
 to improve teamwork and to deliver faster.  The progress has been made pretty good and we hope to
 provide a good quality demo.
 
--The good things of this week:
+-THE GOOD THINGS OF THIS WEEK:
 1)The progress of the server has been done faster than expected. Now from this point we can add more
  details to the server and improve the server so that it can store data in a file or a database.
 2)The progress of the client is also great. The GUI is still in progress, but so far we have the needs
@@ -19,7 +19,7 @@ one of the things we need for our demo.
 -testing the code.
 
 
--The things we can do better for our project:
+-THE THINGS WE CAN DO BETTER FOR OUR PROJECT:
 1)There are still some things which are a little mess in gitlab. Too many branches were used and it was
 our second week, so it's pretty understandable that we should improve working with gitlab and its functionalities.
 2)The other trouble we had was that we started working with sockets, while we were expected to do differently (to
