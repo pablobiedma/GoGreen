@@ -3,7 +3,7 @@
 #### - Sprint Goal
 Showing demo 1 in a working application
 
-#### - What are we goin to do
+#### - What are we going to do
 This week we have to program the basics of our application so that the application is able to send and receive requests to the server. We will hand out the client-side and server-side tasks to different team members.
 
 #### Tasks Ivan:
