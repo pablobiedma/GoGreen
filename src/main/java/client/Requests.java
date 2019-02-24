@@ -5,7 +5,6 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.util.Scanner;
 
 public class Requests {
 
@@ -34,17 +33,6 @@ public class Requests {
         } else {
            return "GET NOT WORKED";
         }
-
     }
-
-    /*
-    //method to let the user input a word and return it.
-    public static String userDetails(){
-        Scanner sc = new Scanner(System.in);
-        String loginDetails = sc.next();
-        return loginDetails;
-    }
-    */
-
 }
 
