@@ -4,7 +4,6 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import org.springframework.boot.SpringApplication;
 
 import java.io.IOException;
 
