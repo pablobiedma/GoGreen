@@ -15,7 +15,7 @@
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
-      <module name="OOP-Project" options="-parameters" />
+      <module name="OOP-Project" options="" />
     </option>
   </component>
 </project>
