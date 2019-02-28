@@ -2,8 +2,8 @@ package client;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-
 import javafx.scene.text.Text;
+
 import java.io.IOException;
 
 public class Controller {
@@ -13,19 +13,19 @@ public class Controller {
     private Text textFlow;
 
     //When the user clicks on the "Car" button, the event calls this method and this will
-    // show the response of the "GetRequest" method in the "Requests" class in the program.
+    // show the response of the "getRequest" method in the "Requests" class in the program.
     @FXML
     protected void carAction(ActionEvent event) throws IOException {
-        textFlow.setText(Requests.GetRequest("car"));
+        textFlow.setText(Requests.getRequest("car"));
     }
 
     @FXML
     protected void bikeAction(ActionEvent event) throws IOException {
-        textFlow.setText(Requests.GetRequest("bike"));
+        textFlow.setText(Requests.getRequest("bike"));
     }
 
     @FXML
-    protected void PTAction(ActionEvent event) throws IOException {
-        textFlow.setText(Requests.GetRequest("PTAction"));
+    protected void pubTransAction(ActionEvent event) throws IOException {
+        textFlow.setText(Requests.getRequest("PTAction"));
     }
 }

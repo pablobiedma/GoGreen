@@ -6,18 +6,25 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
+/**
+ * Resuests - Sends and interprets requests to GoGreen server.
+ * @throws IOException if it recives unexpected response
+ */
 public class Requests {
-
-    public static String GetRequest(String vehicle) throws IOException {
-        //Url were to get the JSON data from, "transport" is now hardcoded but will be a variable in the future.
-        URL urlForGetRequest = new URL("http://localhost:8080/transport?vehicle="+vehicle);
+    /**
+     * getRequest - Sends and interprets requests to GoGreen server.
+     * @throws IOException if it recives unexpected response
+     */
+    public static String getRequest(String vehicle) throws IOException {
+        // Url were to get the JSON data from, "transport" is now hardcoded
+        // but will be a variable in the future.
+        URL urlForGetRequest = new URL("http://localhost:8080/transport?vehicle=" + vehicle);
         String readLine;
-        //opens a http connection with the URL.
+        // opens a http connection with the URL.
         HttpURLConnection connection = (HttpURLConnection) urlForGetRequest.openConnection();
-        //sets request method and properties.
+        // sets request method and properties.
         connection.setRequestMethod("GET");
         connection.setRequestProperty("Accept", "application/json");
-        //checks whether the connection is made successfully, the response code has to be OK otherwise it will print "GET NOT WORKED".
         int responseCode = connection.getResponseCode();
         if (responseCode == HttpURLConnection.HTTP_OK) {
             //Reads in all the data from the request
@@ -31,8 +38,7 @@ public class Requests {
             // print result
             return response.toString();
         } else {
-           return "GET NOT WORKED";
+            return "GET NOT WORKED";
         }
     }
 }
-
