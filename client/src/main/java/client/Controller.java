@@ -2,8 +2,8 @@ package client;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-
 import javafx.scene.text.Text;
+
 import java.io.IOException;
 
 public class Controller {
@@ -25,7 +25,7 @@ public class Controller {
     }
 
     @FXML
-    protected void PTAction(ActionEvent event) throws IOException {
+    protected void pubTransAction(ActionEvent event) throws IOException {
         textFlow.setText(Requests.GetRequest("PTAction"));
     }
 }
