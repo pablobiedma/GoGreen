@@ -19,8 +19,7 @@ public class Main extends Application {
     public void start(Stage stage) throws Exception {
         // The FXML file (in which buttons/textviews/sizes etc. are declared) will be
         // read and set as scene (the stuff inside the window of the program)
-        URL url = new File("src/main/java/client/GUI.fxml").toURL();
-        Parent root = FXMLLoader.load(url);
+        Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("GUI.fxml"));
         Scene scene = new Scene(root, 500, 400);
 
         stage.setTitle("ECO Green Group 12");

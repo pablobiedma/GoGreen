@@ -13,13 +13,13 @@ public class RequestsTest {
 
     @Test
     public void carRequestTest() throws IOException {
-        assertTrue(Requests.GetRequest("car").contains("At least use public transport!")); }
+        assertTrue(Requests.getRequest("car").contains("At least use public transport!")); }
 
     @Test
     public void publicTransportRequestTest() throws IOException {
-        assertTrue(Requests.GetRequest("public_transport").contains("Use a bike instead")); }
+        assertTrue(Requests.getRequest("public_transport").contains("Use a bike instead")); }
 
     @Test
     public void bikeRequestTest() throws IOException {
-        assertTrue(Requests.GetRequest("bike").contains("Good job!")); }
+        assertTrue(Requests.getRequest("bike").contains("Good job!")); }
 }

@@ -9,7 +9,7 @@
    <children>
       <Button layoutX="99.0" layoutY="287.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="80.0" text="Car" onAction="#carAction" />
       <Button layoutX="260.0" layoutY="287.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="80.0" text="Bike" onAction="#bikeAction"/>
-      <Button layoutX="412.0" layoutY="287.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="121.0" text="Public Transport" onAction="#PTAction"/>
+      <Button layoutX="412.0" layoutY="287.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="121.0" text="Public Transport" onAction="#pubTransAction"/>
       <Text layoutX="200.0" layoutY="34.0"  fx:id="textFlow"/>
    </children>
 </Pane>
