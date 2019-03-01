@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.geometry.Rectangle2D?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" style="-fx-background-color: #fff;" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.controllers.LoginController">
+   <children>
+      <Pane prefHeight="127.0" prefWidth="904.0" style="-fx-background-color: #2B8E00;">
+         <children>
+            <ImageView fitHeight="103.0" fitWidth="120.0" layoutX="10.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/gogreen logo groter.png" />
+               </image>
+               <viewport>
+                  <Rectangle2D />
+               </viewport>
+            </ImageView>
+            <Label alignment="CENTER" layoutX="161.0" layoutY="50.0" prefHeight="23.0" prefWidth="173.0" text="For a better planet" textFill="WHITE">
+               <font>
+                  <Font name="Segoe UI" size="18.0" />
+               </font>
+            </Label>
+            <Label alignment="CENTER" layoutX="144.0" layoutY="64.0" prefHeight="23.0" prefWidth="206.0" text="The change starts with you!" textFill="WHITE">
+               <font>
+                  <Font name="Segoe UI" size="12.0" />
+               </font>
+            </Label>
+         </children>
+      </Pane>
+      <Pane layoutY="120.0" prefHeight="200.0" prefWidth="900.0">
+         <children>
+            <Line endX="-1.220703143189894E-5" endY="200.0" fill="#2b8e00" startX="900.0000610351562" startY="200.0" stroke="#2b8e00" strokeType="OUTSIDE" strokeWidth="2.0" />
+         </children>
+      </Pane>
+      <Pane layoutY="339.0" prefHeight="160.0" prefWidth="900.0">
+         <children>
+            <Button fx:id="btnVegetarianMeal" alignment="BOTTOM_CENTER" contentDisplay="TOP" graphicTextGap="7.0" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onMouseClicked="#loginButton" prefHeight="127.0" prefWidth="200.0" stylesheets="@../fullpackstyling.css" text="VEGETERIAN MEAL">
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+               <graphic>
+                  <ImageView fitHeight="93.0" fitWidth="87.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../images/icons8-dining-room-64.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
+            <Button fx:id="btnLocalProducts" alignment="BOTTOM_CENTER" contentDisplay="TOP" graphicTextGap="7.0" layoutX="235.0" layoutY="14.0" mnemonicParsing="false" onMouseClicked="#loginButton" prefHeight="127.0" prefWidth="200.0" stylesheets="@../fullpackstyling.css" text="LOCAL PRODUCTS">
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+               <graphic>
+                  <ImageView fitHeight="93.0" fitWidth="87.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../images/icons8-place-marker-64.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
+            <Button fx:id="btnLowerTemperature" alignment="BOTTOM_CENTER" contentDisplay="TOP" graphicTextGap="7.0" layoutX="686.0" layoutY="14.0" mnemonicParsing="false" onMouseClicked="#loginButton" prefHeight="127.0" prefWidth="200.0" stylesheets="@../fullpackstyling.css" text="TEMPERATURE">
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+               <graphic>
+                  <ImageView fitHeight="93.0" fitWidth="87.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../images/icons8-thermometer-64.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
+            <Button fx:id="btnTransport" alignment="BOTTOM_CENTER" contentDisplay="TOP" graphicTextGap="7.0" layoutX="459.0" layoutY="14.0" mnemonicParsing="false" onMouseClicked="#loginButton" prefHeight="127.0" prefWidth="200.0" stylesheets="@../fullpackstyling.css" text="TRANSPORT">
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+               <graphic>
+                  <ImageView fitHeight="93.0" fitWidth="87.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../images/icons8-route-64.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
+         </children>
+      </Pane>
+      <Pane layoutY="499.0" prefHeight="160.0" prefWidth="904.0">
+         <children>
+            <Button fx:id="btnSolarPanels" alignment="BOTTOM_CENTER" contentDisplay="TOP" graphicTextGap="7.0" layoutX="126.0" layoutY="14.0" mnemonicParsing="false" onMouseClicked="#loginButton" prefHeight="127.0" prefWidth="200.0" stylesheets="@../fullpackstyling.css" text="SOLAR PANELS">
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+               <graphic>
+                  <ImageView fitHeight="93.0" fitWidth="87.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../images/icons8-solar-panel-64.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
+            <Button fx:id="btnComingSoon" alignment="BOTTOM_CENTER" contentDisplay="TOP" graphicTextGap="7.0" layoutX="573.0" layoutY="14.0" mnemonicParsing="false" onMouseClicked="#loginButton" prefHeight="127.0" prefWidth="200.0" stylesheets="@../fullpackstyling.css" text="COMING SOON!">
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+               <graphic>
+                  <ImageView fitHeight="93.0" fitWidth="87.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../images/icons8-error-64.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
+         </children>
+      </Pane>
+   </children>
+</AnchorPane>
