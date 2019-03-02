@@ -14,7 +14,7 @@ public class LoginController {
         Node node = (Node) event.getSource();
         Stage stage = (Stage) node.getScene().getWindow();
         stage.close();
-        Scene scene = new Scene(FXMLLoader.load(getClass().getClassLoader().getResource("fxml/Menu.fxml")), 900, 700);
+        Scene scene = new Scene(FXMLLoader.load(getClass().getClassLoader().getResource("fxml/Menu.fxml")), 900, 650);
         stage.setScene(scene);
         stage.show();
     }
