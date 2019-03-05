@@ -13,8 +13,4 @@ public class VehicleEntry {
         this.userId = userId;
         this.vehicleType = vehicleType;
     }
-
-    public String getById() {
-        return this.id;
-    }
 }
