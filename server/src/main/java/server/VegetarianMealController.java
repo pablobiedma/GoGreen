@@ -1,4 +1,4 @@
-package server;
+package server.group12;
 
 import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;

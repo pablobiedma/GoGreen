@@ -1,4 +1,4 @@
-package server;
+package server.group12;
 
 import org.springframework.data.mongodb.repository.MongoRepository;
 
