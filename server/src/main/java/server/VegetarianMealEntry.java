@@ -1,4 +1,4 @@
-package server.group12
+package server.group12;
 
 import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Id;
