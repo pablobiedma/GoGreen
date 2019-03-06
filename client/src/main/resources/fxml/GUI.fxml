@@ -5,7 +5,7 @@
 <?import javafx.scene.text.Text?>
 
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.Controller">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.201" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.group12.Controller">
    <children>
       <Button layoutX="99.0" layoutY="287.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="80.0" text="Car" onAction="#carAction" />
       <Button layoutX="260.0" layoutY="287.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="80.0" text="Bike" onAction="#bikeAction"/>
