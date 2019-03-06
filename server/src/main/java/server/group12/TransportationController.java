@@ -1,5 +1,6 @@
 package server.group12;
 
+import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -36,5 +37,10 @@ public class TransportationController {
     @RequestMapping(value = "/type", method = RequestMethod.GET)
     public List<VehicleEntry> getAllVehiclesByType(@RequestParam(value = "type", defaultValue = "Uknown") String type) {
         return repository.getByVehicleType(type);
+    }
+
+    @RequestMapping(value = "/id", method = RequestMethod.GET)
+    public VehicleEntry getAllVehiclesById(@RequestParam(value = "id", defaultValue = "Uknown") ObjectId id) {
+        return repository.getById(id);
     }
 }
