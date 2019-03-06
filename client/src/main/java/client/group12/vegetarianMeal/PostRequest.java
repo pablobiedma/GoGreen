@@ -1,4 +1,4 @@
 package client.group12.vegetarianMeal;
 
-public class CalculatePoints {
+public class PostRequest {
 }

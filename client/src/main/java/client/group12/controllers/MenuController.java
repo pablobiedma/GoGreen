@@ -1,21 +1,19 @@
 package client.group12.controllers;
 
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
-import javafx.scene.Scene;
+import javafx.scene.control.Slider;
 import javafx.scene.input.MouseEvent;
-import client.group12.vegetarianMeal.mealAPI;
-import javafx.stage.Stage;
+import client.group12.vegetarianMeal.MealAPI;
 
 public class MenuController {
 
     @FXML
     public void btnVegetarianMeal(MouseEvent event) throws Exception{
-        mealAPI mealapi = new mealAPI();
+        MealAPI mealapi = new MealAPI();
         mealapi.readAPI();
     }
 
+    @FXML
     public void loginButton(MouseEvent event) throws Exception{
         LoginController loginController = new LoginController();
         loginController.loginButton(event);

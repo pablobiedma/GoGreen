@@ -7,7 +7,7 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 
-public class mealAPI {
+public class MealAPI {
 
     private List<Meal> mealList = new ArrayList<Meal>();
 
