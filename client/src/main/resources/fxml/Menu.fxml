@@ -13,7 +13,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane id="AnchorPane" style="-fx-background-color: #fff;" xmlns="http://javafx.com/javafx/8.0.201" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.group12.controllers.LoginController">
+<AnchorPane id="AnchorPane" style="-fx-background-color: #fff;" xmlns="http://javafx.com/javafx/8.0.201" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.group12.controllers.MenuController">
    <children>
       <Pane prefHeight="127.0" prefWidth="904.0" style="-fx-background-color: #2B8E00;">
          <children>
@@ -71,7 +71,7 @@
       </Pane>
       <Pane layoutY="339.0" prefHeight="160.0" prefWidth="900.0">
          <children>
-            <Button fx:id="btnVegetarianMeal" alignment="BOTTOM_CENTER" contentDisplay="TOP" graphicTextGap="7.0" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onMouseClicked="#loginButton" prefHeight="127.0" prefWidth="200.0" stylesheets="@../fullpackstyling.css" text="VEGETERIAN MEAL">
+            <Button fx:id="btnVegetarianMeal" alignment="BOTTOM_CENTER" contentDisplay="TOP" graphicTextGap="7.0" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onMouseClicked="#btnVegetarianMeal" prefHeight="127.0" prefWidth="200.0" stylesheets="@../fullpackstyling.css" text="VEGETERIAN MEAL">
                <opaqueInsets>
                   <Insets />
                </opaqueInsets>
