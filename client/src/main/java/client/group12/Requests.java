@@ -1,4 +1,4 @@
-package client;
+package client.group12;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -11,14 +11,18 @@ import java.net.URL;
  * @throws IOException if it recives unexpected response
  */
 public class Requests {
+
+    private String host = "localhost";
+    private String port = "8080";
+
     /**
      * getRequest - Sends and interprets requests to GoGreen server.
      * @throws IOException if it recives unexpected response
      */
-    public static String getRequest(String vehicle) throws IOException {
+    public String getRequest(String vehicle, String button) throws IOException {
         // Url were to get the JSON data from, "transport" is now hardcoded
         // but will be a variable in the future.
-        URL urlForGetRequest = new URL("http://localhost:8080/transport?vehicle=" + vehicle);
+        URL urlForGetRequest = new URL("http://" + host + ":" + port + "/" + button + "?" + vehicle);
         String readLine;
         // opens a http connection with the URL.
         HttpURLConnection connection = (HttpURLConnection) urlForGetRequest.openConnection();
