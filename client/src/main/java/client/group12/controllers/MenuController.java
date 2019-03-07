@@ -20,12 +20,6 @@ public class MenuController {
     }
 
     @FXML
-    public void loginButton(MouseEvent event) throws Exception{
-        LoginController loginController = new LoginController();
-        loginController.loginButton(event);
-    }
-
-    @FXML
     public void btnSolarPanels(MouseEvent event) throws Exception{
         Main main = new Main();
         main.changeScene("VegetarianMeal.fxml", event);
@@ -33,6 +27,30 @@ public class MenuController {
 
     @FXML
     public void btnTransport(MouseEvent event) throws Exception{
+        Main main = new Main();
+        main.changeScene("VegetarianMeal.fxml", event);
+    }
+
+    @FXML
+    public void btnComingSoon(MouseEvent event) throws Exception{
+        Main main = new Main();
+        main.changeScene("VegetarianMeal.fxml", event);
+    }
+
+    @FXML
+    public void btnLeaderBoard(MouseEvent event) throws Exception{
+        Main main = new Main();
+        main.changeScene("VegetarianMeal.fxml", event);
+    }
+
+    @FXML
+    public void btnLocalProducts(MouseEvent event) throws Exception{
+        Main main = new Main();
+        main.changeScene("VegetarianMeal.fxml", event);
+    }
+
+    @FXML
+    public void btnTemperature(MouseEvent event) throws Exception{
         Main main = new Main();
         main.changeScene("VegetarianMeal.fxml", event);
     }
