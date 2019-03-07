@@ -14,10 +14,13 @@ public class VegetarianMealController {
     private VegetarianMealUsageRepository repository;
 
     @RequestMapping(value="/new", method = RequestMethod.POST)
-    public VegetarianMealEntry createVegetarianMeal(@Valid @RequestBody VegetarianMealEntry vegetarianMealEntry){ {
+    public VegetarianMealEntry createVegetarianMeal(@Valid @RequestBody VegetarianMealEntry vegetarianMealEntry){
         vegetarianMealEntry.setId(ObjectId.get());
         repository.save(vegetarianMealEntry);
         return vegetarianMealEntry;
     }
+
+    public VegetarianMealUsageRepository getRepository(){
+        return repository;
     }
 }
