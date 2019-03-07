@@ -1,5 +1,6 @@
 package server.group12;
 
+import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Id;
 
 /* VehicleEntry - POJO class to represent
@@ -9,7 +10,7 @@ import org.springframework.data.annotation.Id;
  */
 public class VehicleEntry {
     @Id
-    public String id; // Internel for MondoDB
+    public ObjectId id; // Internel for MondoDB
 
     public long userId;
     public String vehicleType;

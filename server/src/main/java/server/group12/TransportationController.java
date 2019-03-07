@@ -1,11 +1,10 @@
 package server.group12;
 
+import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.concurrent.atomic.AtomicLong;
 
 /* TransportationController - Use Spring Boot controller
@@ -34,5 +33,14 @@ public class TransportationController {
             // (Maybe beacuse during testing it dosen't connect to the database?)
         }
         return trans;
+    }
+    @RequestMapping(value = "/type", method = RequestMethod.GET)
+    public List<VehicleEntry> getAllVehiclesByType(@RequestParam(value = "type", defaultValue = "Uknown") String type) {
+        return repository.getByVehicleType(type);
+    }
+
+    @RequestMapping(value = "/id", method = RequestMethod.GET)
+    public VehicleEntry getAllVehiclesById(@RequestParam(value = "id", defaultValue = "Uknown") ObjectId id) {
+        return repository.getById(id);
     }
 }

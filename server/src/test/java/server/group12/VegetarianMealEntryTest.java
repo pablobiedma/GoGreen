@@ -5,24 +5,31 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 
 public class VegetarianMealEntryTest {
+
     @Test
-    public void testVegetarianMealEntryTestUserId() {
-        VegetarianMealEntry vm = new VegetarianMealEntry(1, "Apple", 20, 50);
-        assertEquals(1, vm.userId);
+    public void testVegetarianMealUserId() {
+        VegetarianMealEntry veg = new VegetarianMealEntry(1,"carrots",100,12);
+        assertEquals(1,veg.userId);
     }
     @Test
-    public void testVegetarianMealEntryTestVegetarianMeal() {
-        VegetarianMealEntry vm = new VegetarianMealEntry(1, "Apple", 20, 50);
-        assertEquals("Apple", vm.vegetarianMeal);
+    public void testVegetarianMeal() {
+        VegetarianMealEntry veg = new VegetarianMealEntry(1,"carrots",100,12);
+        assertEquals("carrots",veg.vegetarianMeal);
     }
     @Test
-    public void testVegetarianMealEntryTestPoints() {
-        VegetarianMealEntry vm = new VegetarianMealEntry(1, "Apple", 20, 50);
-        assertEquals(20, vm.points);
+    public void testVegetarianMealPoints() {
+        VegetarianMealEntry veg = new VegetarianMealEntry(1,"carrots",100,12);
+        assertEquals(100,veg.points);
     }
     @Test
-    public void testVegetarianMealEntryTestCo2() {
-        VegetarianMealEntry vm = new VegetarianMealEntry(1, "Apple", 20, 50);
-        assertEquals(50, vm.co2);
+    public void testVegetarianMealCo2() {
+        VegetarianMealEntry veg = new VegetarianMealEntry(1,"carrots",100,12);
+        assertEquals(12,veg.co2);
     }
+    @Test
+    public void testVegetarianMealgetById() {
+        VegetarianMealEntry veg = new VegetarianMealEntry(1,"carrots",100,12);
+        assertEquals(1,veg.getById());
+    }
+    //Missing a test for setting Object_id
 }
