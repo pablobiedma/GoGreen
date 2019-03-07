@@ -13,9 +13,7 @@ public class VegetarianMealController {
     @Autowired
     private VegetarianMealUsageRepository repository;
 
-    private final AtomicLong counter = new AtomicLong();
-
-    @RequestMapping(value="/save", method = RequestMethod.POST)
+    @RequestMapping(value="/new", method = RequestMethod.POST)
     public VegetarianMealEntry createVegetarianMeal(@Valid @RequestBody VegetarianMealEntry vegetarianMealEntry){ {
         vegetarianMealEntry.setId(ObjectId.get());
         repository.save(vegetarianMealEntry);
