@@ -6,17 +6,14 @@ import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
+import client.group12.Main;
 
 public class LoginController {
 
     @FXML
     public void loginButton(MouseEvent event) throws Exception{
-        Node node = (Node) event.getSource();
-        Stage stage = (Stage) node.getScene().getWindow();
-        stage.close();
-        Scene scene = new Scene(FXMLLoader.load(getClass().getClassLoader().getResource("fxml/Menu.fxml")), 900, 650);
-        stage.setScene(scene);
-        stage.show();
+        Main main = new Main();
+        main.changeScene("Menu.fxml", event);
     }
 
     @FXML

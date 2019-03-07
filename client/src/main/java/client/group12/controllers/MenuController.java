@@ -1,6 +1,10 @@
 package client.group12.controllers;
 
+import client.group12.Main;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Slider;
 import javafx.scene.input.MouseEvent;
 import client.group12.vegetarianMeal.MealAPI;
@@ -11,12 +15,26 @@ public class MenuController {
     public void btnVegetarianMeal(MouseEvent event) throws Exception{
         MealAPI mealapi = new MealAPI();
         mealapi.readAPI();
+        Main main = new Main();
+        main.changeScene("VegetarianMeal.fxml", event);
     }
 
     @FXML
     public void loginButton(MouseEvent event) throws Exception{
         LoginController loginController = new LoginController();
         loginController.loginButton(event);
+    }
+
+    @FXML
+    public void btnSolarPanels(MouseEvent event) throws Exception{
+        Main main = new Main();
+        main.changeScene("VegetarianMeal.fxml", event);
+    }
+
+    @FXML
+    public void btnTransport(MouseEvent event) throws Exception{
+        Main main = new Main();
+        main.changeScene("VegetarianMeal.fxml", event);
     }
 
 }
