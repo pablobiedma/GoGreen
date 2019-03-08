@@ -12,6 +12,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
+<?import javafx.scene.control.ChoiceBox?>
 <AnchorPane id="AnchorPane" style="-fx-background-color: #fff;" xmlns="http://javafx.com/javafx/8.0.201" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.group12.controllers.VegetarianMealController">
    <children>
       <Pane prefHeight="127.0" prefWidth="904.0" style="-fx-background-color: #2B8E00;">
@@ -45,8 +46,9 @@
                </opaqueInsets>
             </Button>
             <Slider fx:id="servingSize" layoutX="70.0" layoutY="267.0" max="500.0" onDragDropped="#calculateCO2" prefHeight="14.0" prefWidth="222.0" />
-            <ListView fx:id="mealList" layoutX="81.0" layoutY="43.0" onContextMenuRequested="#goodFoodName" prefHeight="200.0" prefWidth="200.0" />
+            <ListView fx:id="mealList" layoutX="81.0" layoutY="43.0" onContextMenuRequested="#badFoodName" prefHeight="200.0" prefWidth="200.0" />
             <ListView fx:id="mealList2" layoutX="593.0" layoutY="43.0" onContextMenuRequested="#badFoodName" prefHeight="200.0" prefWidth="200.0" />
+            <ChoiceBox fx:id="cb" layoutX="30" layoutY="30" onContextMenuRequested="#badFoodName" prefHeight="20" prefWidth="200" />
          </children>
       </Pane>
    </children>

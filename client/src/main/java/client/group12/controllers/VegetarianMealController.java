@@ -4,47 +4,51 @@ import client.group12.vegetarianMeal.MealAPI;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.ListView;
 import javafx.scene.control.cell.ComboBoxListCell;
 import javafx.scene.input.MouseEvent;
+import javafx.stage.Stage;
 
+import java.io.IOException;
+import java.net.URL;
 import java.util.List;
+import java.util.ResourceBundle;
 
-public class VegetarianMealController {
+public class VegetarianMealController implements Initializable {
 
     @FXML
     private ListView<String> mealList;
-    @FXML
-    private ListView<String> mealList2 = new ListView<String>();
 
     @FXML
-    private ChoiceBox cb = new ChoiceBox();
-
-    private String listItems = "";
-    ObservableList<String> list;
+    private ChoiceBox<String> cb = new ChoiceBox();
 
     @FXML
     public void calculate(MouseEvent event) throws Exception {
     }
 
-    @FXML
-    public void badFoodName(MouseEvent event) throws Exception {
-        MealAPI mealapi;
-        mealapi = new MealAPI();
-        mealapi.readAPI();
+    @Override
+    public void initialize(URL location, ResourceBundle resources){
+        MealAPI mealapi = new MealAPI();
+        try {
+            mealapi.readAPI();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         String listItems = mealapi.toString();
-        System.out.println(listItems);
-        //list.addAll(listItems);
-        //list = FXCollections.observableArrayList(listItems);
-        //mealList.setItems(FXCollections.<String>observableArrayList(listItems));
-        list = FXCollections.observableArrayList(listItems);
-        mealList = new ListView<String>(list);
-        mealList.setItems(list);
+        ObservableList<String> list = FXCollections.observableArrayList(listItems);
+        cb.setItems(list);
+        //mealList = new ListView<>(list);
+        //mealList.getItems().add(listItems);
+    }
+
+    public void badFoodName() throws IOException {
+
     }
 
     @FXML
-    public void goodFoodName(MouseEvent event) throws Exception {
+    public void goodFoodName(){
         //mealList2.setItems(list);
     }
 

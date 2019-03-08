@@ -53,7 +53,7 @@ public class MealAPI {
             result = result + '"' + mealList.get(j).getFood() + '"' + ", ";
         }
         result = result.substring(0, result.length() - 2);
-        System.out.println("result: " + result);
+        //System.out.println("result: " + result);
         return result;
     }
 
