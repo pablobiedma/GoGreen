@@ -1,6 +1,7 @@
 package client.group12.controllers;
 
 import client.group12.Main;
+import client.group12.Threads;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -9,14 +10,16 @@ import javafx.scene.control.Slider;
 import javafx.scene.input.MouseEvent;
 import client.group12.vegetarianMeal.MealAPI;
 
-public class MenuController {
+public class MenuController extends Threads {
 
     @FXML
     public void btnVegetarianMeal(MouseEvent event) throws Exception{
-        MealAPI mealapi = new MealAPI();
-        mealapi.readAPI();
+        //new Thread(new Threads()).start();
         Main main = new Main();
         main.changeScene("VegetarianMeal.fxml", event);
+        VegetarianMealController vmc = new VegetarianMealController();
+        vmc.badFoodName(event);
+        vmc.goodFoodName(event);
     }
 
     @FXML

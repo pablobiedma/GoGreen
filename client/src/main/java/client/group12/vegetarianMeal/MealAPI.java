@@ -9,6 +9,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 public class MealAPI {
 
+    private String result = "";
+
     private List<Meal> mealList = new ArrayList<Meal>();
 
     public List<Meal> getMealList() {
@@ -36,11 +38,23 @@ public class MealAPI {
             elements.next();
         }
 
+        /*
         for(int i = 0; i < mealList.size(); i++){
             System.out.println(mealList.get(i).getFood());
             System.out.println(mealList.get(i).getCo2());
             System.out.println(mealList.get(i).getServingSize() + "\n");
         }
+        */
 
     }
+
+    public String toString(){
+        for(int j = 0; j < mealList.size(); j++) {
+            result = result + "'" + mealList.get(j).getFood() + "'" + ", ";
+        }
+        result = result.substring(0, result.length()-1);
+        System.out.println("result: " + result);
+        return result;
+    }
+
 }

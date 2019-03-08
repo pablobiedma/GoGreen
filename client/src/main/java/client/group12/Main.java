@@ -12,6 +12,7 @@ import java.io.IOException;
 
 public class Main extends Application {
     private Stage primaryStage;
+    private Scene primaryScene;
 
     // This will start a stage (program window)
     public static void main(String[] args) {
@@ -35,7 +36,12 @@ public class Main extends Application {
         Stage stage = (Stage) node.getScene().getWindow();
         Parent pane = FXMLLoader.load(getClass().getClassLoader().getResource("fxml/"+fxml));
         Scene scene = stage.getScene();
+        this.primaryScene = scene;
         scene.setRoot(pane);
+    }
+
+    public Scene getPrimaryScene(){
+        return this.primaryScene;
     }
 
 }
