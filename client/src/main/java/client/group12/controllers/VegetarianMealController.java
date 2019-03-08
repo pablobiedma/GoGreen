@@ -13,6 +13,8 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -37,10 +39,10 @@ public class VegetarianMealController implements Initializable {
             e.printStackTrace();
         }
         String listItems = mealapi.toString();
-        ObservableList<String> list = FXCollections.observableArrayList(listItems);
-        cb.setItems(list);
-        //mealList = new ListView<>(list);
-        //mealList.getItems().add(listItems);
+        listItems.toLowerCase();
+        List<String> items = Arrays.asList(listItems.split(", "));
+        ObservableList<String> list = FXCollections.observableArrayList(items);
+        cb.getItems().addAll(list);
     }
 
     public void badFoodName() throws IOException {
@@ -49,7 +51,7 @@ public class VegetarianMealController implements Initializable {
 
     @FXML
     public void goodFoodName(){
-        //mealList2.setItems(list);
+
     }
 
     @FXML
