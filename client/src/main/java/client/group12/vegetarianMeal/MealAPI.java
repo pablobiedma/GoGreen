@@ -50,9 +50,9 @@ public class MealAPI {
 
     public String toString(){
         for(int j = 0; j < mealList.size(); j++) {
-            result = result + "'" + mealList.get(j).getFood() + "'" + ", ";
+            result = result + '"' + mealList.get(j).getFood() + '"' + ", ";
         }
-        result = result.substring(0, result.length()-1);
+        result = result.substring(0, result.length() - 2);
         System.out.println("result: " + result);
         return result;
     }

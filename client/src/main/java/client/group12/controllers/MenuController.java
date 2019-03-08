@@ -3,12 +3,7 @@ package client.group12.controllers;
 import client.group12.Main;
 import client.group12.Threads;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.scene.control.Slider;
 import javafx.scene.input.MouseEvent;
-import client.group12.vegetarianMeal.MealAPI;
 
 public class MenuController extends Threads {
 
