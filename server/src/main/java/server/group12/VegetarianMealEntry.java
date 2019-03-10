@@ -12,7 +12,7 @@ public class VegetarianMealEntry {
     public int points;
     public int co2;
 
-    public VegetarianMealEntry(int userId, String vegetarianMeal, int points, int co2){
+    public VegetarianMealEntry(int userId, String vegetarianMeal, int points, int co2) {
         this.userId = userId;
         this.vegetarianMeal = vegetarianMeal;
         this.points = points;

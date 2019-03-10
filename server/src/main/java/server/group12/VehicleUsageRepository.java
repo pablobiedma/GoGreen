@@ -6,5 +6,6 @@ import java.util.List;
 
 public interface VehicleUsageRepository extends MongoRepository<VehicleEntry,String> {
     public VehicleEntry getByUserId(long userId);
+
     public List<VehicleEntry> getByVehicleType(String vehicleType);
 }

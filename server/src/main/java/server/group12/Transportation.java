@@ -1,8 +1,8 @@
 package server.group12;
 
-/* Transportation - dummy class that suggest the user what
- * transportation method to use
- * */
+//Transportation - dummy class that suggest the user what
+//transportation method to use
+
 public class Transportation {
     private final long id;
     private final String vehicleSuggestion;
