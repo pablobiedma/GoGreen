@@ -1,3 +1,4 @@
+/*
 package server.group12;
 
 import org.bson.types.ObjectId;
@@ -9,3 +10,4 @@ public interface VehicleUsageRepository extends MongoRepository<VehicleEntry,Str
     public List<VehicleEntry> getByVehicleType(String vehicleType);
     public VehicleEntry getById(ObjectId id); //using ObjectId since it is unique
 }
+*/

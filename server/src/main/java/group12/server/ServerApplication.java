@@ -1,4 +1,4 @@
-package server.group12;
+package group12.server;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

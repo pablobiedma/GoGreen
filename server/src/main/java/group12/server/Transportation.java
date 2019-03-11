@@ -1,4 +1,4 @@
-package server.group12;
+package group12.server;
 
 /* Transportation - dummy class that suggest the user what
  * transportation method to use
