@@ -1,3 +1,4 @@
+// extension is missing in order to hide this from maven
 package server.group12;
 
 import org.bson.types.ObjectId;
@@ -14,6 +15,8 @@ public class VegetarianMealControllerTest {
     private VegetarianMealUsageRepository repository;
 
     @Test
+	// I don't know what this tets
+	// -L
     public void testVegetarianMealController(){
         VegetarianMealController vmc = new VegetarianMealController();
         VegetarianMealEntry meal = new VegetarianMealEntry(1, "carrot", 20, 50);

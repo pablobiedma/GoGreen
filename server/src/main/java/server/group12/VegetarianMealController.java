@@ -10,10 +10,12 @@ import java.util.concurrent.atomic.AtomicLong;
 @RestController
 @RequestMapping("/vegetarianmeal")
 public class VegetarianMealController {
+	/*
     @Autowired
     private VegetarianMealUsageRepository repository;
 
     @RequestMapping(value="/new", method = RequestMethod.POST)
+	// Why does create method has the same argument and return value?
     public VegetarianMealEntry createVegetarianMeal(@Valid @RequestBody VegetarianMealEntry vegetarianMealEntry){
         vegetarianMealEntry.setId(ObjectId.get());
         repository.save(vegetarianMealEntry);
@@ -23,4 +25,5 @@ public class VegetarianMealController {
     public VegetarianMealUsageRepository getRepository(){
         return repository;
     }
+	*/
 }
