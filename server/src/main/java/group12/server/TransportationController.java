@@ -1,10 +1,11 @@
-package server.group12;
+package group12.server;
 
-import org.bson.types.ObjectId;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
+import group12.database.Database;
+import group12.database.VehicleEntry;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
-import java.util.List;
 import java.util.concurrent.atomic.AtomicLong;
 
 /* TransportationController - Use Spring Boot controller
@@ -22,20 +23,8 @@ public class TransportationController {
         Transportation trans = new Transportation(counter.incrementAndGet(), vehicleType);
         VehicleEntry entry = new VehicleEntry(counter.get(), vehicleType);
 
-		Database.instance.trackVehicleEnriesNonBlocking(entry);
-
+        Database.instance.trackVehicleEnriesNonBlocking(entry);
 
         return trans;
     }
-	/*
-    @RequestMapping(value = "/type", method = RequestMethod.GET)
-    public List<VehicleEntry> getAllVehiclesByType(@RequestParam(value = "type", defaultValue = "Uknown") String type) {
-        return Database.instance.getByVehicleType(type);
-    }
-
-    @RequestMapping(value = "/id", method = RequestMethod.GET)
-    public VehicleEntry getAllVehiclesById(@RequestParam(value = "id", defaultValue = "Uknown") ObjectId id) {
-        return Database.instance.getById(id);
-    }
-	*/
 }

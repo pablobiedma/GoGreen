@@ -1,4 +1,4 @@
-package server.group12;
+package group12.server;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
