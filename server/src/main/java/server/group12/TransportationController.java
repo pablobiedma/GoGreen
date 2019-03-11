@@ -12,8 +12,6 @@ import java.util.concurrent.atomic.AtomicLong;
  */
 @RestController
 public class TransportationController {
-    @Autowired
-    private VehicleUsageRepository repository;
 
     private final AtomicLong counter = new AtomicLong();
 
@@ -23,24 +21,21 @@ public class TransportationController {
                                           String vehicleType) {
         Transportation trans = new Transportation(counter.incrementAndGet(), vehicleType);
         VehicleEntry entry = new VehicleEntry(counter.get(), vehicleType);
-        try {
-            repository.save(entry);
-        } catch (NullPointerException e) {
-            // By documentation this should never happen.
-            // But during testing the save method throws NPE for uknown reasons
-            // Since this is not critical we ignore this for now
-            // Furthur investigation necessary
-            // (Maybe beacuse during testing it dosen't connect to the database?)
-        }
+
+		Database.instance.trackVehicleEnriesNonBlocking(entry);
+
+
         return trans;
     }
+	/*
     @RequestMapping(value = "/type", method = RequestMethod.GET)
     public List<VehicleEntry> getAllVehiclesByType(@RequestParam(value = "type", defaultValue = "Uknown") String type) {
-        return repository.getByVehicleType(type);
+        return Database.instance.getByVehicleType(type);
     }
 
     @RequestMapping(value = "/id", method = RequestMethod.GET)
     public VehicleEntry getAllVehiclesById(@RequestParam(value = "id", defaultValue = "Uknown") ObjectId id) {
-        return repository.getById(id);
+        return Database.instance.getById(id);
     }
+	*/
 }
