@@ -31,16 +31,24 @@ public class Main extends Application {
         stage.show();
     }
 
+    /**
+     * This method changes to scene in the GUI, so going to a menu, going to a features and so on.
+     *
+     * @param fxml link of the fxml file to go to
+     * @param event where the user clicks
+     * @throws IOException throws an IO exception when needed
+     */
+
     public void changeScene(String fxml, MouseEvent event) throws IOException {
         Node node = (Node) event.getSource();
         Stage stage = (Stage) node.getScene().getWindow();
-        Parent pane = FXMLLoader.load(getClass().getClassLoader().getResource("fxml/"+fxml));
+        Parent pane = FXMLLoader.load(getClass().getClassLoader().getResource("fxml/" + fxml));
         Scene scene = stage.getScene();
         this.primaryScene = scene;
         scene.setRoot(pane);
     }
 
-    public Scene getPrimaryScene(){
+    public Scene getPrimaryScene() {
         return this.primaryScene;
     }
 

@@ -6,7 +6,13 @@ public class Meal {
     private int co2;
     private double servingSize;
 
-    public Meal(String food, int co2, double servingSize){
+    /** This is a meal.
+     * @param food the name of the foo
+     * @param co2  the amount of co2 per serving
+     * @param servingSize the serving size (has to be in grams)
+     */
+
+    public Meal(String food, int co2, double servingSize) {
         this.food = food;
         this.co2 = co2;
         this.servingSize = servingSize;

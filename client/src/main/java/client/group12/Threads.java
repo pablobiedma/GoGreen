@@ -1,6 +1,6 @@
 package client.group12;
 
-public class Threads implements Runnable{
+public class Threads implements Runnable {
 
     @Override
     public void run() {

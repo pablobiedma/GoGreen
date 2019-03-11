@@ -10,17 +10,18 @@ public class Calculations {
     private int co2;
     private double servingSize;
     private int reducedCO2;
-    private MealAPI mealapi;
+    private MealApi mealapi;
 
-    public void setMealAPI(MealAPI mealAPI) {
-        this.mealapi = mealAPI;
+    public void setMealApi(MealApi mealApi) {
+        this.mealapi = mealApi;
     }
 
-    //this is the first calculation that is done. the Chosen food is looked up in the mealList and
-    // than the private values are updated and the CO2 emmision is calculated.
+    /**this is the first calculation that is done. the Chosen food is looked up in the mealList and
+     * than the private values are updated and the CO2 emmision is calculated.
+    */
     public double calculateCO2(String chosenFood, int chosenServingSize) throws IOException {
-        //MealAPI mealapi = new MealAPI();
-        //mealapi.readAPI();
+        //MealApi mealapi = new MealApi();
+        //mealapi.readApi();
         List<Meal> mealList = mealapi.getMealList();
         for (int i = 0; i < mealList.size(); i++) {
             if (chosenFood.equals(mealList.get(i).getFood())) {
@@ -35,10 +36,12 @@ public class Calculations {
         return calculatedCO2;
     }
 
-    //this is the second calculation that is done, people also choose
-    // a bad food what they normally eat, so the reduced CO2 can be calculated.
-    public int reducedCO2(String badFood, int chosenServingSize, double CO2GoodFood) throws IOException {
-        this.reducedCO2 = (int) (calculateCO2(badFood, chosenServingSize) - CO2GoodFood);
+    /**this is the second calculation that is done, people also choose
+     * a bad food what they normally eat, so the reduced CO2 can be calculated.
+    */
+    public int reducedCO2(
+            String badFood, int chosenServingSize, double goodFood) throws IOException {
+        this.reducedCO2 = (int) (calculateCO2(badFood, chosenServingSize) - goodFood);
         //System.out.println(reducedCO2);
         return this.reducedCO2;
     }

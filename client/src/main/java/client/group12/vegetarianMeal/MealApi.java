@@ -1,15 +1,15 @@
 package client.group12.vegetarianMeal;
 
-import java.io.IOException;
-import java.net.URL;
-import java.util.*;
-
-import client.group12.Threads;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import java.io.IOException;
+import java.net.URL;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
 
-public class MealAPI {
+public class MealApi {
 
     private String result = "";
 
@@ -23,18 +23,24 @@ public class MealAPI {
         this.mealList = mealList;
     }
 
-    public void readAPI() throws IOException {
+
+    /**
+     * Reads the online json data and.
+     * Stores the meal with the data we need in a list.
+     */
+    public void readApi() throws IOException {
 
         ObjectMapper objectMapper = new ObjectMapper();
         JsonNode rootNode = objectMapper.readTree(new URL("https://opendata.socrata.com/resource/8nz9-yn2p.json"));
 
-        //iterates over all the elements in the JsonNode and stores the data we need (food name, co2 emmision per serving and the size of the serving)
+        //iterates over all the elements in the JsonNode and stores the data we need
+        // (food name, co2 emmision per serving and the size of the serving)
         Iterator<JsonNode> elements = rootNode.elements();
-        while(elements.hasNext()) {
-            JsonNode n = elements.next();
-            String food = n.get("food").asText();
-            int co2Node = n.get("grams_co2e_per_serving").asInt();
-            double sizeNode = n.get("serving_size").asInt();
+        while (elements.hasNext()) {
+            JsonNode node = elements.next();
+            String food = node.get("food").asText();
+            int co2Node = node.get("grams_co2e_per_serving").asInt();
+            double sizeNode = node.get("serving_size").asInt();
 
             mealList.add(new Meal(food, co2Node, sizeNode));
             elements.next();
@@ -50,8 +56,13 @@ public class MealAPI {
 
     }
 
-    public String toString(){
-        for(int j = 0; j < mealList.size(); j++) {
+    /**
+     * puts all the names of the meals in a list.
+     * @return the string with meal names
+     */
+
+    public String toString() {
+        for (int j = 0; j < mealList.size(); j++) {
             result = result + mealList.get(j).getFood() + ", ";
         }
         result = result.substring(0, result.length() - 2);

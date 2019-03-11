@@ -1,7 +1,7 @@
 package client.group12.controllers;
 
 import client.group12.vegetarianMeal.Calculations;
-import client.group12.vegetarianMeal.MealAPI;
+import client.group12.vegetarianMeal.MealApi;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -9,6 +9,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Slider;
 import javafx.scene.input.MouseEvent;
+
 import java.io.IOException;
 import java.net.URL;
 import java.util.Arrays;
@@ -28,17 +29,17 @@ public class VegetarianMealController implements Initializable {
 
     private String goodFoodName = "";
     private String badFoodName = "";
-    private MealAPI mealAPI = new MealAPI();
+    private MealApi mealApi = new MealApi();
 
 
     @Override
-    public void initialize(URL location, ResourceBundle resources){
+    public void initialize(URL location, ResourceBundle resources) {
         try {
-            mealAPI.readAPI();
+            mealApi.readApi();
         } catch (IOException e) {
             e.printStackTrace();
         }
-        String listItems = mealAPI.toString();
+        String listItems = mealApi.toString();
         listItems.toLowerCase();
         List<String> items = Arrays.asList(listItems.split(", "));
         ObservableList<String> list = FXCollections.observableArrayList(items);
@@ -48,6 +49,13 @@ public class VegetarianMealController implements Initializable {
 
     }
 
+    /**
+     * Calculates the co2 reduced emmision when the user clicks the calculate button.
+     * it also calculates the amount of points the user earned.
+     * @param event mouse click
+     * @throws Exception throws exception when something went wrong
+     */
+
     @FXML
     public void calculateCO2(MouseEvent event) throws Exception {
         badFoodName = cb1.getValue();
@@ -56,12 +64,12 @@ public class VegetarianMealController implements Initializable {
         int servingSize = (int) slider.getValue();
         System.out.println(servingSize + "gram serving");
         Calculations calculation = new Calculations();
-        calculation.setMealAPI(this.mealAPI);
-        double CO2GoodFood = calculation.calculateCO2(goodFoodName, servingSize);
-        System.out.println(CO2GoodFood + " grams of CO2 for the good meal");
-        int reducedCO2 = calculation.reducedCO2(badFoodName, servingSize, CO2GoodFood);
+        calculation.setMealApi(this.mealApi);
+        double goodFood = calculation.calculateCO2(goodFoodName, servingSize);
+        System.out.println(goodFood + " grams of CO2 for the good meal");
+        int reducedCO2 = calculation.reducedCO2(badFoodName, servingSize, goodFood);
         int points = calculation.calculatePoints();
         //SEND POST REQUEST TO UPDATE THE DATABASE
-        System.out.println("Reduced CO2: " + reducedCO2 + "   Amount of points earned: "+points);
+        System.out.println("Reduced CO2: " + reducedCO2 + "   Amount of points earned: " + points);
     }
 }
