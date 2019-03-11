@@ -11,8 +11,6 @@ public class MenuController extends Threads {
     public void btnVegetarianMeal(MouseEvent event) throws Exception{
         //new Thread(new Threads()).start();
         VegetarianMealController vmc = new VegetarianMealController();
-        vmc.badFoodName();
-        vmc.goodFoodName();
         Main main = new Main();
         main.changeScene("VegetarianMeal.fxml", event);
 

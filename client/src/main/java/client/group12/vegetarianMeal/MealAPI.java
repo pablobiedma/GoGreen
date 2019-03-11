@@ -3,6 +3,8 @@ package client.group12.vegetarianMeal;
 import java.io.IOException;
 import java.net.URL;
 import java.util.*;
+
+import client.group12.Threads;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 

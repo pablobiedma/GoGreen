@@ -28,17 +28,17 @@ public class VegetarianMealController implements Initializable {
 
     private String goodFoodName = "";
     private String badFoodName = "";
+    private MealAPI mealAPI = new MealAPI();
 
 
     @Override
     public void initialize(URL location, ResourceBundle resources){
-        MealAPI mealapi = new MealAPI();
         try {
-            mealapi.readAPI();
+            mealAPI.readAPI();
         } catch (IOException e) {
             e.printStackTrace();
         }
-        String listItems = mealapi.toString();
+        String listItems = mealAPI.toString();
         listItems.toLowerCase();
         List<String> items = Arrays.asList(listItems.split(", "));
         ObservableList<String> list = FXCollections.observableArrayList(items);
@@ -49,25 +49,16 @@ public class VegetarianMealController implements Initializable {
     }
 
     @FXML
-    public void badFoodName() {
-
-    }
-
-    @FXML
-    public void goodFoodName(){
-
-    }
-
-    @FXML
     public void calculateCO2(MouseEvent event) throws Exception {
         badFoodName = cb1.getValue();
         goodFoodName = cb.getValue();
         System.out.println(goodFoodName + "    and   " + badFoodName);
         int servingSize = (int) slider.getValue();
-        System.out.println(servingSize);
+        System.out.println(servingSize + "gram serving");
         Calculations calculation = new Calculations();
+        calculation.setMealAPI(this.mealAPI);
         double CO2GoodFood = calculation.calculateCO2(goodFoodName, servingSize);
-        System.out.println(CO2GoodFood);
+        System.out.println(CO2GoodFood + " grams of CO2 for the good meal");
         int reducedCO2 = calculation.reducedCO2(badFoodName, servingSize, CO2GoodFood);
         int points = calculation.calculatePoints();
         //SEND POST REQUEST TO UPDATE THE DATABASE

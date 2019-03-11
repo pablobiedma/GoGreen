@@ -10,12 +10,17 @@ public class Calculations {
     private int co2;
     private double servingSize;
     private int reducedCO2;
+    private MealAPI mealapi;
+
+    public void setMealAPI(MealAPI mealAPI) {
+        this.mealapi = mealAPI;
+    }
 
     //this is the first calculation that is done. the Chosen food is looked up in the mealList and
     // than the private values are updated and the CO2 emmision is calculated.
     public double calculateCO2(String chosenFood, int chosenServingSize) throws IOException {
-        MealAPI mealapi = new MealAPI();
-        mealapi.readAPI();
+        //MealAPI mealapi = new MealAPI();
+        //mealapi.readAPI();
         List<Meal> mealList = mealapi.getMealList();
         for (int i = 0; i < mealList.size(); i++) {
             if (chosenFood.equals(mealList.get(i).getFood())) {
