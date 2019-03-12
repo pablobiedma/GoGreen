@@ -24,7 +24,7 @@ public class TransportationController {
         Transportation trans = new Transportation(counter.incrementAndGet(), vehicleType);
         VehicleEntry entry = new VehicleEntry(counter.get(), vehicleType);
 
-        Database.instance.trackVehicleEnriesNonBlocking(entry);
+        Database.instance.saveNonBlocking(entry);
 
         return trans;
     }

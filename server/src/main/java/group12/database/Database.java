@@ -1,46 +1,53 @@
 package group12.database;
 
 import org.bson.types.ObjectId;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.mongodb.repository.MongoRepository;
+import com.mongodb.DB;
+import com.mongodb.MongoClient;
+import com.mongodb.MongoClientURI;
+import com.mongodb.DBCollection;
 
 public class Database extends Thread {
-
     public static Database instance = new Database();
 
-    private static class VehicleEntryTracker {
-        public interface Repo extends MongoRepository<VehicleEntry, ObjectId> {
-            public VehicleEntry getById(ObjectId id);
-        }
+    private final String dbAddr = "mongodb://localhost";
+    private final int dbPort = 27017;
+    private final String dbName = "GoGreen";
+    private MongoClient mongoClient;
+    private DB mongodb;
 
-        @Autowired
-        private Repo repo;
 
-        public void save(VehicleEntry entry) {
-            repo.save(entry);
-        }
+    DBCollection vehicleTrackerCollection;
+
+    Database() {
+//	try {
+        mongoClient = new MongoClient(new MongoClientURI(dbAddr + ":" + dbPort));
+        mongodb = this.mongoClient.getDB(dbName);
+        vehicleTrackerCollection = mongodb.getCollection("vehicleTrackerCollection");
+//	} catch (Exception e){
+		//bad init
+//	}
     }
 
-    VehicleEntryTracker vehicleEntryTracker;
+    
+    private class SaveNonBlocking<T> extends Thread {
+        private T entry;
 
-    private class TrackVehicleEnriesNonBlocking extends Thread {
-        private VehicleEntry entry;
-
-        TrackVehicleEnriesNonBlocking(VehicleEntry entry) {
+        SaveNonBlocking(T entry) {
             this.entry = entry;
         }
 
         public void run() {
-            vehicleEntryTracker.save(entry);
+            Database.instance.save((VehicleEntry) entry); //temp hack 
+	    // Maybe T should be an interface that VehicleEntry extends?
         }
     }
 
-    public void trackVehicleEntries(VehicleEntry ve) {
-        vehicleEntryTracker.save(ve);
+    public void save(VehicleEntry ve) {
+        this.vehicleTrackerCollection.insert(ve.toDBObject());
     }
 
-    public void trackVehicleEnriesNonBlocking(VehicleEntry ve) {
-        TrackVehicleEnriesNonBlocking worker = new TrackVehicleEnriesNonBlocking(ve);
+    public void saveNonBlocking(VehicleEntry ve) {
+        SaveNonBlocking<VehicleEntry> worker = new SaveNonBlocking<VehicleEntry>(ve);
         worker.start();
     }
 }

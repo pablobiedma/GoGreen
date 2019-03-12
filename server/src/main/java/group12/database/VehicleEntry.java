@@ -1,7 +1,8 @@
 package group12.database;
 
 import org.bson.types.ObjectId;
-import org.springframework.data.annotation.Id;
+import com.mongodb.DBObject;
+import com.mongodb.BasicDBObject;
 
 /* VehicleEntry - POJO class to represent
  * entries in the database
@@ -9,7 +10,6 @@ import org.springframework.data.annotation.Id;
  * (evil)
  */
 public class VehicleEntry {
-    @Id
     public ObjectId id; // Internel for MondoDB
 
     public long userId;
@@ -18,5 +18,11 @@ public class VehicleEntry {
     public VehicleEntry(long userId,String vehicleType) {
         this.userId = userId;
         this.vehicleType = vehicleType;
+    }
+
+    public final DBObject toDBObject() {
+	    return new BasicDBObject("_id", this.id)
+		    .append("userId", this.userId)
+		    .append("vehicleType", this.vehicleType);
     }
 }
