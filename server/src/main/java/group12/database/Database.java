@@ -28,26 +28,25 @@ public class Database extends Thread {
 //	}
     }
 
-    
-    private class SaveNonBlocking<T> extends Thread {
-        private T entry;
 
-        SaveNonBlocking(T entry) {
+    private class SaveNonBlocking extends Thread {
+        private Entry entry;
+
+        SaveNonBlocking(Entry entry) {
             this.entry = entry;
         }
 
         public void run() {
-            Database.instance.save((VehicleEntry) entry); //temp hack 
-	    // Maybe T should be an interface that VehicleEntry extends?
+            Database.instance.save(entry);
         }
     }
 
-    public void save(VehicleEntry ve) {
-        this.vehicleTrackerCollection.insert(ve.toDBObject());
+    public void save(Entry entry) {
+        this.vehicleTrackerCollection.insert(entry.toDBObject());
     }
 
-    public void saveNonBlocking(VehicleEntry ve) {
-        SaveNonBlocking<VehicleEntry> worker = new SaveNonBlocking<VehicleEntry>(ve);
+    public void saveNonBlocking(Entry entry) {
+        SaveNonBlocking worker = new SaveNonBlocking(entry);
         worker.start();
     }
 }
