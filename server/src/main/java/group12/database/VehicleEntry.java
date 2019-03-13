@@ -4,14 +4,12 @@ import org.bson.types.ObjectId;
 import com.mongodb.DBObject;
 import com.mongodb.BasicDBObject;
 
-/* VehicleEntry - POJO class to represent
+/* VehicleEntry - class to represent
  * entries in the database
  * Tracks which vehicle each user uses
  * (evil)
  */
-public class VehicleEntry {
-    public ObjectId id; // Internel for MondoDB
-
+public class VehicleEntry extends Entry {
     public long userId;
     public String vehicleType;
 
@@ -21,7 +19,7 @@ public class VehicleEntry {
     }
 
     public final DBObject toDBObject() {
-	    return new BasicDBObject("_id", this.id)
+	    return super.toBasicDBObject()
 		    .append("userId", this.userId)
 		    .append("vehicleType", this.vehicleType);
     }
