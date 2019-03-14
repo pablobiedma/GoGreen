@@ -1,4 +1,4 @@
-package server.group12;
+package groupxii.server;
 
 //Transportation - dummy class that suggest the user what
 //transportation method to use
@@ -9,7 +9,7 @@ public class Transportation {
 
     public Transportation(long id, String vehicleType) {
         this.id = id;
-        this.vehicleSuggestion = new String(suggestVehicle(vehicleType));
+        this.vehicleSuggestion = suggestVehicle(vehicleType);
     }
 
     public long getId() {
