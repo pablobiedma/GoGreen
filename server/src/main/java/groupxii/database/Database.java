@@ -13,9 +13,9 @@ import java.net.UnknownHostException;
 public class Database extends Thread {
     public static Database instance = new Database();
 
-    private final String dbAddr = "mongodb://localhost";
-    private final int dbPort = 27017;
-    private final String dbName = "GoGreen";
+    private String dbAddr = "mongodb://localhost";
+    private int dbPort = 27017;
+    private String dbName = "GoGreen";
     private MongoClient mongoClient;
     private DB mongodb;
 
@@ -32,6 +32,29 @@ public class Database extends Thread {
         }
     }
 
+    public void setDbAddr(String dbAddr) {
+        this.dbAddr = dbAddr;
+    }
+
+    public void setDbPort(int dbPort) {
+        this.dbPort = dbPort;
+    }
+
+    public void setDbName(String dbName) {
+        this.dbName = dbName;
+    }
+
+    public String getDbAddr() {
+        return this.dbAddr;
+    }
+
+    public int getDbPort() {
+        return this.dbPort;
+    }
+
+    public String getDbName() {
+        return this.dbName;
+    }
 
     private class SaveNonBlocking extends Thread {
         private Entry entry;
