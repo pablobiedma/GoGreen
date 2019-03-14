@@ -10,13 +10,21 @@ import com.mongodb.BasicDBObject;
  * (evil)
  */
 public class VehicleEntry extends Entry {
-    public long userId;
-    public String vehicleType;
+    private long userId;
+    private String vehicleType;
 
-    public VehicleEntry(long userId,String vehicleType) {
+    public VehicleEntry(long userId, String vehicleType) {
         this.userId = userId;
         this.vehicleType = vehicleType;
     }
+
+	public long getUserId() {
+		return this.userId;
+	}
+
+	public String getVehicleType() {
+		return this.vehicleType;
+	}
 
     public final DBObject toDBObject() {
 	    return super.toBasicDBObject()
