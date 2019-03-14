@@ -1,4 +1,4 @@
-package group12.database;
+package groupxii.database;
 
 import org.junit.Test;
 import static org.junit.Assert.assertEquals;

@@ -1,8 +1,6 @@
-package group12.database;
+package groupxii.database;
 
-import org.bson.types.ObjectId;
 import com.mongodb.DBObject;
-import com.mongodb.BasicDBObject;
 
 /* VehicleEntry - class to represent
  * entries in the database
@@ -18,17 +16,17 @@ public class VehicleEntry extends Entry {
         this.vehicleType = vehicleType;
     }
 
-	public long getUserId() {
-		return this.userId;
-	}
+    public long getUserId() {
+        return this.userId;
+    }
 
-	public String getVehicleType() {
-		return this.vehicleType;
-	}
+    public String getVehicleType() {
+        return this.vehicleType;
+    }
 
-    public final DBObject toDBObject() {
-	    return super.toBasicDBObject()
-		    .append("userId", this.userId)
-		    .append("vehicleType", this.vehicleType);
+    public final DBObject toDbObject() {
+        return super.toBasicDbObject()
+            .append("userId", this.userId)
+            .append("vehicleType", this.vehicleType);
     }
 }

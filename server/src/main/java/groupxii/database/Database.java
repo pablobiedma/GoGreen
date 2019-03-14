@@ -1,10 +1,9 @@
-package group12.database;
+package groupxii.database;
 
-import org.bson.types.ObjectId;
 import com.mongodb.DB;
+import com.mongodb.DBCollection;
 import com.mongodb.MongoClient;
 import com.mongodb.MongoClientURI;
-import com.mongodb.DBCollection;
 
 public class Database extends Thread {
     public static Database instance = new Database();
@@ -15,17 +14,12 @@ public class Database extends Thread {
     private MongoClient mongoClient;
     private DB mongodb;
 
-
-    DBCollection vehicleTrackerCollection;
+    private DBCollection vehicleTrackerCollection;
 
     Database() {
-//	try {
         mongoClient = new MongoClient(new MongoClientURI(dbAddr + ":" + dbPort));
         mongodb = this.mongoClient.getDB(dbName);
         vehicleTrackerCollection = mongodb.getCollection("vehicleTrackerCollection");
-//	} catch (Exception e){
-		//bad init
-//	}
     }
 
 
@@ -42,7 +36,7 @@ public class Database extends Thread {
     }
 
     public void save(Entry entry) {
-        this.vehicleTrackerCollection.insert(entry.toDBObject());
+        this.vehicleTrackerCollection.insert(entry.toDbObject());
     }
 
     public void saveNonBlocking(Entry entry) {
