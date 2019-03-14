@@ -3,7 +3,6 @@ package groupxii.database;
 import com.mongodb.DB;
 import com.mongodb.DBCollection;
 import com.mongodb.MongoClient;
-import com.mongodb.MongoClientURI;
 
 import java.net.UnknownHostException;
 
@@ -13,23 +12,25 @@ import java.net.UnknownHostException;
 public class Database extends Thread {
     public static Database instance = new Database();
 
-    private String dbAddr = "mongodb://localhost";
-    private int dbPort = 27017;
-    private String dbName = "GoGreen";
+    private String dbAddr;
+    private int dbPort;
+    private String dbName;
     private MongoClient mongoClient;
     private DB mongodb;
 
     private DBCollection vehicleTrackerCollection;
 
+    private boolean running;
+
     Database() {
-        try {
-            mongoClient = new MongoClient(new MongoClientURI(dbAddr + ":" + dbPort));
-            mongodb = this.mongoClient.getDB(dbName);
-            vehicleTrackerCollection = mongodb.getCollection("vehicleTrackerCollection");
-        } catch (UnknownHostException e) {
-            // Why?
-            //TODO
-        }
+        dbAddr = "localhost";
+        dbPort = 27017;
+        dbName = "GoGreen";
+        running = false;
+    }
+
+    public boolean isRunning() {
+        return this.running;
     }
 
     public void setDbAddr(String dbAddr) {
@@ -54,6 +55,22 @@ public class Database extends Thread {
 
     public String getDbName() {
         return this.dbName;
+    }
+
+    /**
+     * Starts instance of Database.
+     */
+    public void startDb() {
+        try {
+            mongoClient = new MongoClient(this.getDbAddr(), this.getDbPort());
+            mongodb = this.mongoClient.getDB(this.getDbName());
+            vehicleTrackerCollection = mongodb.getCollection("vehicleTrackerCollection");
+            running = true;
+        } catch (UnknownHostException e) {
+            // I don't think this state is reachable.
+            // -L
+            running = false;
+        }
     }
 
     private class SaveNonBlocking extends Thread {
