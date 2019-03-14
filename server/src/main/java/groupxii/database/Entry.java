@@ -4,8 +4,8 @@ import com.mongodb.BasicDBObject;
 import com.mongodb.DBObject;
 import org.bson.types.ObjectId;
 
-/* Entry - abstract class to be used in creating
- * MongoDB entries
+/**
+ * Abstract class to be used in creating for creation of MongoDB entries.
  */
 public abstract class Entry {
     private ObjectId id; // MongoDB's _id

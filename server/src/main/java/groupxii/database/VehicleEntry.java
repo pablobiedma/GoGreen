@@ -2,10 +2,9 @@ package groupxii.database;
 
 import com.mongodb.DBObject;
 
-/* VehicleEntry - class to represent
- * entries in the database
- * Tracks which vehicle each user uses
- * (evil)
+/**
+ * Represents entries in the database which tracks 
+ * which vehicle each request indicates.
  */
 public class VehicleEntry extends Entry {
     private long userId;
@@ -24,6 +23,9 @@ public class VehicleEntry extends Entry {
         return this.vehicleType;
     }
 
+    /**
+     * Translates into a MongoDB JSON object.
+     */
     public final DBObject toDbObject() {
         return super.toBasicDbObject()
             .append("userId", this.userId)

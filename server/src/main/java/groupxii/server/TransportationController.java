@@ -17,6 +17,10 @@ public class TransportationController {
 
     private final AtomicLong counter = new AtomicLong();
 
+    /**
+     * Creates the /transport endpoint which accepts vehicle
+     * as an argument and returns suggested alternative transportation method.
+     */
     @RequestMapping(method = RequestMethod.GET, value = "/transport")
     public Transportation transportation(@RequestParam(value = "vehicle",
                                                        defaultValue = "Unknown")

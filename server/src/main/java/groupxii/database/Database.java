@@ -5,6 +5,11 @@ import com.mongodb.DBCollection;
 import com.mongodb.MongoClient;
 import com.mongodb.MongoClientURI;
 
+import java.net.UnknownHostException;
+
+/**
+ * Manages all database related operations between the server logic and MongoDB.
+ */
 public class Database extends Thread {
     public static Database instance = new Database();
 
@@ -17,13 +22,14 @@ public class Database extends Thread {
     private DBCollection vehicleTrackerCollection;
 
     Database() {
-		try {
+        try {
             mongoClient = new MongoClient(new MongoClientURI(dbAddr + ":" + dbPort));
             mongodb = this.mongoClient.getDB(dbName);
             vehicleTrackerCollection = mongodb.getCollection("vehicleTrackerCollection");
-		} catch (Exception e) {
-			// Why?
-		}
+        } catch (UnknownHostException e) {
+            // Why?
+            //TODO
+        }
     }
 
 
