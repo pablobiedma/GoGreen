@@ -17,9 +17,13 @@ public class Database extends Thread {
     private DBCollection vehicleTrackerCollection;
 
     Database() {
-        mongoClient = new MongoClient(new MongoClientURI(dbAddr + ":" + dbPort));
-        mongodb = this.mongoClient.getDB(dbName);
-        vehicleTrackerCollection = mongodb.getCollection("vehicleTrackerCollection");
+		try {
+            mongoClient = new MongoClient(new MongoClientURI(dbAddr + ":" + dbPort));
+            mongodb = this.mongoClient.getDB(dbName);
+            vehicleTrackerCollection = mongodb.getCollection("vehicleTrackerCollection");
+		} catch (Exception e) {
+			// Why?
+		}
     }
 
 
