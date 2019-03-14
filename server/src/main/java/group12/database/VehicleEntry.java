@@ -1,8 +1,6 @@
 package group12.database;
 
-import org.bson.types.ObjectId;
 import com.mongodb.DBObject;
-import com.mongodb.BasicDBObject;
 
 /* VehicleEntry - class to represent
  * entries in the database

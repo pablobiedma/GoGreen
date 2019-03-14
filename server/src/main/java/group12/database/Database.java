@@ -1,6 +1,5 @@
 package group12.database;
 
-import org.bson.types.ObjectId;
 import com.mongodb.DB;
 import com.mongodb.MongoClient;
 import com.mongodb.MongoClientURI;
