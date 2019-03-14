@@ -1,4 +1,4 @@
-package group12.server;
+package groupxii.server;
 
 import groupxii.database.Database;
 import groupxii.database.VehicleEntry;
