@@ -1,5 +1,6 @@
 package groupxii.server;
 
+import com.mongodb.DB;
 import groupxii.vegetarianMeal.*;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -17,8 +18,13 @@ public class VegetarianMealController {
     private Calculations calculations = new Calculations();
     //FOR TESTING PURPOSES I USE A FIXED USER ID
     private long userId = 50;
-    GetMealData getMealData;
-    List<Meal> mealList = new ArrayList<Meal>();
+    private GetMealData getMealData;
+    private List<Meal> mealList = new ArrayList<Meal>();
+    private DB database;
+
+    public void setDatabase(DB database) {
+        this.database = database;
+    }
 
     @RequestMapping(method = RequestMethod.GET, value = "/getMealData")
     public void getMealData() throws IOException {
@@ -45,6 +51,7 @@ public class VegetarianMealController {
         saveMeal.setMealList(this.mealList);
         saveMeal.saveMealData(userId, goodFoodName, badFoodName, goodServingSize, badServingSize, reducedCo2);
         Meal returnMeal = new Meal(goodFoodName, reducedCo2, goodServingSize);
+
         return returnMeal;
     }
 }
