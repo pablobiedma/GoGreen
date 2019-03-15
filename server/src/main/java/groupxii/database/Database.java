@@ -23,16 +23,22 @@ public class Database extends Thread {
     private DBCollection vehicleTrackerCollection;
 
     private boolean running;
+    private boolean active;
 
     Database() {
         dbAddr = "localhost";
         dbPort = 27017;
         dbName = "GoGreen";
         running = false;
+        active = false;
     }
 
     public boolean isRunning() {
         return this.running;
+    }
+
+    public boolean isActive() {
+        return this.active;
     }
 
     public void setDbAddr(String dbAddr) {
@@ -87,16 +93,33 @@ public class Database extends Thread {
         }
     }
 
+    /**
+     * Determine in which collection to put an entry.
+     */
     public void save(Entry entry) {
-        this.vehicleTrackerCollection.insert(entry.toDbObject());
+        this.active = true;
+
+        if (entry instanceof VehicleEntry) {
+            this.vehicleTrackerCollection.insert(entry.toDbObject());
+        }
+
+        this.active = false;
     }
 
+    /**
+     * Call save(Entry) on a new thread.
+     */
     public void saveNonBlocking(Entry entry) {
+        this.active = true;
         SaveNonBlocking worker = new SaveNonBlocking(entry);
         worker.start();
     }
 
+    /**
+     * Given a vehicle entry, find it in the collection.
+     */
     public DBObject findVehicleEntry(VehicleEntry entry) {
+        while (this.isActive()) {}
         DBCursor cursor = vehicleTrackerCollection.find(entry.toDbObject());
         return cursor.one();
     }

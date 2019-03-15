@@ -56,6 +56,7 @@ public class DatabaseTest {
 		assertFalse(db.isRunning());
 	}
 	*/
+
 	@Test
 	public void testSave() {
 		Database.instance.setDbName("test");
@@ -72,9 +73,6 @@ public class DatabaseTest {
 		Database.instance.startDb();
 		VehicleEntry entry = new VehicleEntry(1337, "car");
 		Database.instance.saveNonBlocking(entry);
-
-		VehicleEntry timewaster = new VehicleEntry(1338, "bike");
-		Database.instance.save(timewaster);
 
 		assertEquals(entry.toDbObject(), Database.instance.findVehicleEntry(entry));
 		//TODO Drop the test DB
