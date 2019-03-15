@@ -6,10 +6,10 @@ import java.util.List;
 
 public class Calculations {
 
-    private double calculatedCO2;
+    private int calculatedCO2;
     private String food;
     private int co2;
-    private double servingSize;
+    private int servingSize;
     private int reducedCO2;
     private List<Meal> mealList = new ArrayList<Meal>();
 
@@ -24,15 +24,15 @@ public class Calculations {
     /**this is the first calculation that is done. the Chosen food is looked up in the mealList and
      * than the private values are updated and the CO2 emmision is calculated.
      */
-    public double calculateCO2(String chosenFood, int chosenServingSize) throws IOException {
+    public int calculateCO2(String chosenFood, int chosenServingSize) throws IOException {
         for (int i = 0; i < mealList.size(); i++) {
             if (chosenFood.equals(mealList.get(i).getFood())) {
                 this.food = mealList.get(i).getFood();
                 this.co2 = mealList.get(i).getCo2();
-                this.servingSize = mealList.get(i).getServingSize();
+                this.servingSize = (int)mealList.get(i).getServingSize();
 
                 double co2PerGram = co2 / servingSize;
-                calculatedCO2 = co2PerGram * chosenServingSize;
+                calculatedCO2 = (int)co2PerGram * chosenServingSize;
             }
         }
         return calculatedCO2;
@@ -42,7 +42,7 @@ public class Calculations {
      * a bad food what they normally eat, so the reduced CO2 can be calculated.
      */
     public int reducedCO2(
-            String badFood, int chosenServingSize, double goodFood) throws IOException {
+            String badFood, int chosenServingSize, int goodFood) throws IOException {
         this.reducedCO2 = (int) (calculateCO2(badFood, chosenServingSize) - goodFood);
         //System.out.println(reducedCO2);
         return this.reducedCO2;

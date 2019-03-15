@@ -20,9 +20,14 @@ public class SaveMeal {
         return mealList;
     }
 
+    public MealEntry getMealEntry() {
+        return mealEntry;
+    }
+
     public void saveMealData(long userId, String goodFoodName, String badFoodName, int goodServingSize, int badServingSize, int reducedCo2) throws IOException {
         //Maybe add points later, don't know how we are goin to calculate that right now.
         MealEntry entry = new MealEntry(userId, goodFoodName, badFoodName, goodServingSize, badServingSize, reducedCo2);
         Database.instance.saveNonBlocking(entry);
+        this.mealEntry = entry;
     }
 }

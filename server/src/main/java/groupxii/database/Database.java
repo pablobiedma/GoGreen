@@ -1,8 +1,6 @@
 package groupxii.database;
 
-import com.mongodb.DB;
-import com.mongodb.DBCollection;
-import com.mongodb.MongoClient;
+import com.mongodb.*;
 
 import java.net.UnknownHostException;
 
@@ -10,7 +8,7 @@ import java.net.UnknownHostException;
  * Manages all database related operations between the server logic and MongoDB.
  */
 public class Database extends Thread {
-    public static Database instance = new Database();
+    public static final Database instance = new Database();
 
     private String dbAddr;
     private int dbPort;
@@ -22,16 +20,22 @@ public class Database extends Thread {
     private DBCollection vegetarianMealCollection;
 
     private boolean running;
+    private boolean active;
 
     Database() {
         dbAddr = "localhost";
         dbPort = 27017;
         dbName = "GoGreen";
         running = false;
+        active = false;
     }
 
     public boolean isRunning() {
         return this.running;
+    }
+
+    public boolean isActive() {
+        return active;
     }
 
     public void setDbAddr(String dbAddr) {
@@ -88,12 +92,30 @@ public class Database extends Thread {
     }
 
     public void save(Entry entry) {
-        //this.vehicleTrackerCollection.insert(entry.toDbObject());
-        this.vegetarianMealCollection.insert(entry.toDbObject());
+        this.active = true;
+
+        if (entry instanceof MealEntry){
+            this.vegetarianMealCollection.insert(entry.toDbObject());
+        }
+        //if (entry instanceof VehicleEntry) {
+            //this.vehicleTrackerCollection.insert(entry.toDbObject());
+        //}
+        this.active = false;
     }
 
     public void saveNonBlocking(Entry entry) {
+        this.active = true;
         SaveNonBlocking worker = new SaveNonBlocking(entry);
         worker.start();
     }
+
+    /**
+     * Given a vehicle entry, find it in the collection.
+     */
+    public DBObject findMealEntry(MealEntry entry) {
+        while (this.isActive()) {}
+        DBCursor cursor = vegetarianMealCollection.find(entry.toDbObject());
+        return cursor.one();
+    }
+
 }
