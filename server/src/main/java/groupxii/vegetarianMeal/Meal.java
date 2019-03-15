@@ -1,4 +1,4 @@
-package client.group12.vegetarianMeal;
+package groupxii.vegetarianMeal;
 
 public class Meal {
 

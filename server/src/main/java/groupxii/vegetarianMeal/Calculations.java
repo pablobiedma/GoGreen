@@ -1,6 +1,7 @@
 package groupxii.vegetarianMeal;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 public class Calculations {
@@ -10,19 +11,20 @@ public class Calculations {
     private int co2;
     private double servingSize;
     private int reducedCO2;
-    private MealApi mealapi;
+    private List<Meal> mealList = new ArrayList<Meal>();
 
-    public void setMealApi(MealApi mealApi) {
-        this.mealapi = mealApi;
+    public void setMealList(List<Meal> mealList) {
+        this.mealList = mealList;
+    }
+
+    public List<Meal> getMealList() {
+        return mealList;
     }
 
     /**this is the first calculation that is done. the Chosen food is looked up in the mealList and
      * than the private values are updated and the CO2 emmision is calculated.
      */
     public double calculateCO2(String chosenFood, int chosenServingSize) throws IOException {
-        //MealApi mealapi = new MealApi();
-        //mealapi.readApi();
-        List<Meal> mealList = mealapi.getMealList();
         for (int i = 0; i < mealList.size(); i++) {
             if (chosenFood.equals(mealList.get(i).getFood())) {
                 this.food = mealList.get(i).getFood();

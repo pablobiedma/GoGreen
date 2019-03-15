@@ -18,7 +18,7 @@ public class Database extends Thread {
     private MongoClient mongoClient;
     private DB mongodb;
 
-    private DBCollection vehicleTrackerCollection;
+    //private DBCollection vehicleTrackerCollection;
     private DBCollection vegetarianMealCollection;
 
     private boolean running;
@@ -65,7 +65,7 @@ public class Database extends Thread {
         try {
             mongoClient = new MongoClient(this.getDbAddr(), this.getDbPort());
             mongodb = this.mongoClient.getDB(this.getDbName());
-            vehicleTrackerCollection = mongodb.getCollection("vehicleTrackerCollection");
+            //vehicleTrackerCollection = mongodb.getCollection("vehicleTrackerCollection");
             vegetarianMealCollection = mongodb.getCollection("vegetarianMealCollection");
             running = true;
         } catch (UnknownHostException e) {
@@ -88,7 +88,7 @@ public class Database extends Thread {
     }
 
     public void save(Entry entry) {
-        this.vehicleTrackerCollection.insert(entry.toDbObject());
+        //this.vehicleTrackerCollection.insert(entry.toDbObject());
         this.vegetarianMealCollection.insert(entry.toDbObject());
     }
 

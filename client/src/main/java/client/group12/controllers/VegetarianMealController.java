@@ -1,7 +1,5 @@
 package client.group12.controllers;
 
-import client.group12.vegetarianMeal.Calculations;
-import client.group12.vegetarianMeal.MealApi;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
