@@ -2,6 +2,8 @@ package groupxii.database;
 
 import com.mongodb.DB;
 import com.mongodb.DBCollection;
+import com.mongodb.DBCursor;
+import com.mongodb.DBObject;
 import com.mongodb.MongoClient;
 
 import java.net.UnknownHostException;
@@ -10,7 +12,7 @@ import java.net.UnknownHostException;
  * Manages all database related operations between the server logic and MongoDB.
  */
 public class Database extends Thread {
-    public static Database instance = new Database();
+    public static final Database instance = new Database();
 
     private String dbAddr;
     private int dbPort;
@@ -92,5 +94,10 @@ public class Database extends Thread {
     public void saveNonBlocking(Entry entry) {
         SaveNonBlocking worker = new SaveNonBlocking(entry);
         worker.start();
+    }
+
+    public DBObject findVehicleEntry(VehicleEntry entry) {
+        DBCursor cursor = vehicleTrackerCollection.find(entry.toDbObject());
+        return cursor.one();
     }
 }

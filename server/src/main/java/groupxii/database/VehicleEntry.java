@@ -10,7 +10,11 @@ public class VehicleEntry extends Entry {
     private long userId;
     private String vehicleType;
 
+    /**
+     * Creates VehicleEntry with a userid and a vehicle type.
+     */
     public VehicleEntry(long userId, String vehicleType) {
+        super();
         this.userId = userId;
         this.vehicleType = vehicleType;
     }
