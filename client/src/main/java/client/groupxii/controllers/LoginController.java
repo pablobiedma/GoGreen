@@ -1,6 +1,6 @@
-package client.group12.controllers;
+package client.groupxii.controllers;
 
-import client.group12.Main;
+import client.groupxii.Main;
 import javafx.fxml.FXML;
 import javafx.scene.input.MouseEvent;
 

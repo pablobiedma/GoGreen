@@ -1,4 +1,4 @@
-package client.group12;
+package client.groupxii;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;

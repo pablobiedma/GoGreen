@@ -1,4 +1,4 @@
-package client.group12;
+package client.groupxii;
 
 public class Threads implements Runnable {
 
