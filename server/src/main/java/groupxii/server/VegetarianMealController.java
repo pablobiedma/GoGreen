@@ -1,6 +1,5 @@
 package groupxii.server;
 
-import com.mongodb.DB;
 import groupxii.database.MealEntry;
 import groupxii.vegetarianMeal.*;
 import groupxii.vegetarianMeal.Meal;
@@ -24,7 +23,7 @@ public class VegetarianMealController {
     private final AtomicLong counter = new AtomicLong();
 
     /*
-    First rund this to load in the MealDataList on the server, this has only to be done once the server starts.
+    First run this to load in the MealDataList on the server, this has only to be done once the server starts.
     in the future we will load this also on the boot of the server.
      */
     @RequestMapping(method = RequestMethod.GET, value = "/getMealData")
