@@ -1,5 +1,5 @@
 
-//EXAMPLE - ignore this maybe (pablo)
+//EXAMPLE - ignore this maybe (pablo).
 export const AUTH_CONFIG = {
   domain: '<username>.auth0.com',
   clientId: '<Get from auth0>',
