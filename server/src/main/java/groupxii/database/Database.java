@@ -72,7 +72,7 @@ public class Database extends Thread {
             //vehicleTrackerCollection = mongodb.getCollection("vehicleTrackerCollection");
             vegetarianMealCollection = mongodb.getCollection("vegetarianMealCollection");
             running = true;
-        } catch (UnknownHostException e) {
+        } catch (MongoException e) {
             // I don't think this state is reachable.
             // -L
             running = false;

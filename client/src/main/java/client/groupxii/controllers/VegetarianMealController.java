@@ -1,21 +1,20 @@
 package client.groupxii.controllers;
 
+import client.groupxii.vegetarianMeal.EatenMealList;
 import client.groupxii.vegetarianMeal.SafeMeal;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.ListView;
 import javafx.scene.control.Slider;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Text;
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.Arrays;
-import java.util.List;
-import java.util.ResourceBundle;
-import java.util.Scanner;
+import java.util.*;
 
 public class VegetarianMealController implements Initializable {
 
@@ -34,16 +33,26 @@ public class VegetarianMealController implements Initializable {
     @FXML
     private Text textfield = new Text();
 
+    @FXML
+    private ListView<String> listView = new ListView();
+
     private String goodFoodName = "";
     private String badFoodName = "";
     private String host = "http://localhost:8080/";
     private String listItems = "";
     private SafeMeal safeMeal = new SafeMeal();
+    private List<String> listViewItems = new ArrayList<String>();
+
+    public void setListViewItems(List<String> listViewItems) {
+        this.listViewItems = listViewItems;
+    }
 
     @Override
-    public void initialize(URL location, ResourceBundle resources) {
+    public void initialize(URL location, ResourceBundle resources){
+        EatenMealList eatenMealList = new EatenMealList();
         try {
             listItems = new Scanner(new URL(host + "mealNameList").openStream(), "UTF-8").nextLine();
+            eatenMealList.readDatabase();
         } catch (IOException e){
             e.printStackTrace();
         }
@@ -51,6 +60,9 @@ public class VegetarianMealController implements Initializable {
         ObservableList<String> list = FXCollections.observableArrayList(items);
         cb.getItems().addAll(list);
         cb1.getItems().addAll(list);
+        setListViewItems(eatenMealList.getEatenMealList());
+        ObservableList<String> listViewObservable = FXCollections.observableArrayList(listViewItems);
+        listView.getItems().addAll(listViewObservable);
     }
 
     /**
