@@ -34,7 +34,7 @@ public class VegetarianMealController implements Initializable {
     private Text textfield = new Text();
 
     @FXML
-    private ListView<String> listView = new ListView();
+    private ListView<String> eatenMeals = new ListView();
 
     private String goodFoodName = "";
     private String badFoodName = "";
@@ -42,6 +42,8 @@ public class VegetarianMealController implements Initializable {
     private String listItems = "";
     private SafeMeal safeMeal = new SafeMeal();
     private List<String> listViewItems = new ArrayList<String>();
+    private EatenMealList eatenMealList = new EatenMealList();
+    private ObservableList<String> listViewObservable
 
     public void setListViewItems(List<String> listViewItems) {
         this.listViewItems = listViewItems;
@@ -49,10 +51,8 @@ public class VegetarianMealController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources){
-        EatenMealList eatenMealList = new EatenMealList();
         try {
             listItems = new Scanner(new URL(host + "mealNameList").openStream(), "UTF-8").nextLine();
-            eatenMealList.readDatabase();
         } catch (IOException e){
             e.printStackTrace();
         }
@@ -60,10 +60,21 @@ public class VegetarianMealController implements Initializable {
         ObservableList<String> list = FXCollections.observableArrayList(items);
         cb.getItems().addAll(list);
         cb1.getItems().addAll(list);
-        setListViewItems(eatenMealList.getEatenMealList());
-        ObservableList<String> listViewObservable = FXCollections.observableArrayList(listViewItems);
-        listView.getItems().addAll(listViewObservable);
+        updateListView();
     }
+
+    @FXML
+    public void updateListView() {
+        try {
+            eatenMealList.readDatabase();
+        } catch (IOException e){
+            e.printStackTrace();
+        }
+        setListViewItems(eatenMealList.getEatenMealList());
+        listViewObservable = FXCollections.observableArrayList(listViewItems);
+        eatenMeals.getItems().addAll(listViewObservable);
+    }
+
 
     /**
      * Calculates the co2 reduced emmision when the user clicks the calculate button.
@@ -79,6 +90,7 @@ public class VegetarianMealController implements Initializable {
         int goodServingSize = (int) slider.getValue();
         int badServingSize = (int) slider1.getValue();
         String enteredMeal = safeMeal.safeMeal(goodFoodName, badFoodName, goodServingSize, badServingSize);
-        textfield.setText(enteredMeal);
+        //textfield.setText(enteredMeal);
+        updateListView();
     }
 }

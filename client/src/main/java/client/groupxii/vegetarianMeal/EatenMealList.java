@@ -7,7 +7,6 @@ import com.mongodb.client.MongoDatabase;
 import org.bson.Document;
 
 import java.io.IOException;
-import java.net.UnknownHostException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -27,28 +26,21 @@ public class EatenMealList {
         MongoCollection<Document> collection = db.getCollection("vegetarianMealCollection");
 
         documents = (List<Document>) collection.find().into(new ArrayList<Document>());
-        int i = 0;
         for(Document document : documents){
-            Document meal = documents.get(i);
-            String goodFoodName = meal.getString("goodFoodName");
-            String badFoodName = meal.getString("badFoodName");
-            int goodServingSize = meal.getInteger("goodServingSize");
-            int badServingSize = meal.getInteger("badServingSize");
-            int reducedCo2 = meal.getInteger("reducedCo2");
-            i++;
-        }
-        i = 0;
-
-        VegetarianMealController vegetarianMealController = new VegetarianMealController();
-        for(int j = 0; j < documents.size(); j++){
-            eatenMealList.add(toString(j));
+            String goodFoodName = document.getString("goodFoodName");
+            String badFoodName = document.getString("badFoodName");
+            int goodServingSize = document.getInteger("goodServingSize");
+            int badServingSize = document.getInteger("badServingSize");
+            int reducedCo2 = document.getInteger("reducedCo2");
+            //System.out.println(toString(goodFoodName, badFoodName, goodServingSize, badServingSize, reducedCo2));
+            eatenMealList.add(toString(goodFoodName, badFoodName, goodServingSize, badServingSize, reducedCo2));
         }
     }
 
-    public String toString(int j) {
-        String result = "You ate " + documents.get(j).get("goodServingSize") + " grams of " + documents.get(j).get("goodFoodName") +
-                " instead of " + documents.get(j).get("badServingSize") + " grams of " + documents.get(j).get("badFoodName") +
-                " bad food, with that you reduced your carbon footprint with " + documents.get(j).get("reducedCo2") + " grams of CO2";
+    public String toString(String goodFoodName, String badFoodName, int goodServingSize, int badServingSize, int reducedCo2) {
+        String result = "You ate " + goodServingSize + " grams of " + goodFoodName +
+                " instead of " + badServingSize + " grams of " + badFoodName +
+                " , by doing so reduced your carbon footprint with " + reducedCo2 + " grams of CO2";
         return result;
     }
 }

@@ -117,5 +117,4 @@ public class Database extends Thread {
         DBCursor cursor = vegetarianMealCollection.find(entry.toDbObject());
         return cursor.one();
     }
-
 }
