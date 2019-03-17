@@ -1,9 +1,0 @@
-
-//EXAMPLE - ignore this maybe (pablo).
-export const AUTH_CONFIG = {
-  domain: '<username>.auth0.com',
-  clientId: '<Get from auth0>',
-  callbackUrl: 'http://localhost:3080/callback',
-  tokenEndpoint: "https://<username>.auth0.com/oauth/token",
-  apiEndpoint: "https://<username>.auth0.com/api/v2/users"
-}
