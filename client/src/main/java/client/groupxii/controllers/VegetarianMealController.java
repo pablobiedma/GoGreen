@@ -43,7 +43,7 @@ public class VegetarianMealController implements Initializable {
     private SafeMeal safeMeal = new SafeMeal();
     private List<String> listViewItems = new ArrayList<String>();
     private EatenMealList eatenMealList = new EatenMealList();
-    private ObservableList<String> listViewObservable
+    private ObservableList<String> listViewObservable;
 
     public void setListViewItems(List<String> listViewItems) {
         this.listViewItems = listViewItems;
@@ -73,6 +73,7 @@ public class VegetarianMealController implements Initializable {
         setListViewItems(eatenMealList.getEatenMealList());
         listViewObservable = FXCollections.observableArrayList(listViewItems);
         eatenMeals.getItems().addAll(listViewObservable);
+        //eatenMeals.setItems(listViewObservable);
     }
 
 
@@ -89,8 +90,8 @@ public class VegetarianMealController implements Initializable {
         goodFoodName = cb.getValue();
         int goodServingSize = (int) slider.getValue();
         int badServingSize = (int) slider1.getValue();
-        String enteredMeal = safeMeal.safeMeal(goodFoodName, badFoodName, goodServingSize, badServingSize);
+        safeMeal.safeMeal(goodFoodName, badFoodName, goodServingSize, badServingSize);
         //textfield.setText(enteredMeal);
-        updateListView();
+        eatenMeals.getItems().add(eatenMealList.getLatestMeal());
     }
 }
