@@ -1,9 +1,7 @@
 package client.groupxii.controllers;
 
-
 import client.groupxii.vegetarianmeal.EatenMealList;
-
-import client.groupxii.vegetarianMeal.SafeMeal;
+import client.groupxii.vegetarianmeal.SafeMeal;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -60,7 +58,6 @@ public class VegetarianMealController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         try {
-
             listItems = new Scanner(new URL(host + "mealNameList").openStream(),
                     "UTF-8").nextLine();
         } catch (IOException e) {
@@ -103,14 +100,8 @@ public class VegetarianMealController implements Initializable {
         goodFoodName = cb.getValue();
         int goodServingSize = (int) slider.getValue();
         int badServingSize = (int) slider1.getValue();
-
-        String enteredMeal = safeMeal.safeMeal(goodFoodName, badFoodName,
-                goodServingSize, badServingSize);
-        textfield.setText(enteredMeal);
-
         safeMeal.safeMeal(goodFoodName, badFoodName, goodServingSize, badServingSize);
         //textfield.setText(enteredMeal);
         eatenMeals.getItems().add(eatenMealList.getLatestMeal());
-
     }
 }
