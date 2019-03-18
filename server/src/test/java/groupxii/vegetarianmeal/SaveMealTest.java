@@ -1,7 +1,9 @@
 package groupxii.vegetarianmeal;
 
+import groupxii.database.MealEntry;
 import org.junit.Test;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -50,10 +52,10 @@ public class SaveMealTest {
     }
 
     @Test
-    public void getMealEntry() {
-    }
-
-    @Test
-    public void saveMealData() {
+    public void getMealEntry() throws IOException {
+        MealEntry m = new MealEntry(2,"apple","steak",1,5,10);
+        SaveMeal sm = new SaveMeal();
+        sm.saveMealData(1,"apple","steak",1,5,10);
+        assertNotEquals(sm.getMealEntry(),m);
     }
 }
