@@ -1,0 +1,26 @@
+stages:
+- build
+- test
+- code-analysis
+
+build:
+  stage: build
+  script:
+  - echo "Building"
+  - mkdir build
+  - touch build/info.txt
+  artifacts:
+    paths:
+    - build/
+
+test:
+  stage: test
+  script:
+  - echo "Testing"
+  - test -f "build/info.txt"
+
+checkstyle:
+    stage: code-analysis
+    script:
+    - mvn post-site
+    allow_failure: true
