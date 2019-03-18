@@ -127,4 +127,13 @@ public class Database extends Thread {
         DBCursor cursor = vehicleTrackerCollection.find(entry.toDbObject());
         return cursor.one();
     }
+
+    /**
+     * Given a meal entry, find it in the collection.
+     */
+    public DBObject findMealEntry(MealEntry entry) {
+        while (this.isActive()) {}
+        DBCursor cursor = vegetarianMealCollection.find(entry.toDbObject());
+        return cursor.one();
+    }
 }
