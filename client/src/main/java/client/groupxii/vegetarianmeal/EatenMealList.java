@@ -47,7 +47,7 @@ public class EatenMealList {
                            int goodServingSize, int badServingSize, int reducedCo2) {
         String result = "You ate " + goodServingSize + " grams of " + goodFoodName
                 + " instead of " + badServingSize + " grams of " + badFoodName
-                + " , by doing so reduced your carbon footprint with "
+                + " , by doing so you reduced your carbon footprint with "
                 + reducedCo2 + " grams of CO2";
         return result;
     }
