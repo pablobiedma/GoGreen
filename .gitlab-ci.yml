@@ -32,6 +32,12 @@ pages:
     paths:
     - public
 
+checkstyle:
+  stage: code-analysis
+  script:
+  - mvn post-site
+  allow_failure: true
+
 deploy:
   stage: deploy
   script:
