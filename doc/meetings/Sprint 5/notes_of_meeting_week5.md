@@ -8,4 +8,15 @@ We presented all our new files (screenshots etc...), our modified GUI and a full
 #### Tasks Delivered:
 We delivered some tasks (added as issues in gitlab). 
 
+#### New important issues
+The vegetarian meal controller needs to split every controller in apart classes.
+migration http to https.
+Keep track on not messing up the tests.
+Make sure that the entries are safe for the user. Make clear what data is available.
+Add the feature to see the records what meal have been eaten.
+Make sensible user schema.
+Raise a flag when the branch fails.
+Code review before merging into master.
+
+
 #### Additional Questions to TA: 
