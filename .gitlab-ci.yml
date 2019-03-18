@@ -1,19 +1,34 @@
-stages:
-- build
-- test
+cache:
+  paths:
+  - .m2/repository/
 
 build:
   stage: build
   script:
-  - echo "Building"
-  - mkdir build
-  - touch build/info.txt
-  artifacts:
-    paths:
-    - build/
+  - mvn $MAVEN_CLI_OPTS compile
 
 test:
   stage: test
   script:
-  - echo "Testing"
-  - test -f "build/info.txt"
+  - mvn $MAVEN_CLI_OPTS test
+  - cat target/site/jacoco/index.html
+  artifacts:
+    paths:
+    - target/site/jacoco/
+pages:
+  stage: deploy
+  dependencies:
+  - test
+  script:
+  - mkdir public
+  - mv target/site/jacoco/index.html public
+  artifacts:
+    paths:
+    - public
+
+deploy:
+  stage: deploy
+  script:
+  - mvn $MAVEN_CLI_OPTS verify
+  only:
+  - master
