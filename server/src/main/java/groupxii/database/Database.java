@@ -23,7 +23,7 @@ public class Database extends Thread {
     private MongoClient mongoClient;
     private DB mongodb;
 
-    //private DBCollection vehicleTrackerCollection;
+    private DBCollection vehicleTrackerCollection;
     private DBCollection vegetarianMealCollection;
 
     private boolean running;
@@ -76,7 +76,7 @@ public class Database extends Thread {
         try {
             mongoClient = new MongoClient(this.getDbAddr(), this.getDbPort());
             mongodb = this.mongoClient.getDB(this.getDbName());
-            //vehicleTrackerCollection = mongodb.getCollection("vehicleTrackerCollection");
+            vehicleTrackerCollection = mongodb.getCollection("vehicleTrackerCollection");
             vegetarianMealCollection = mongodb.getCollection("vegetarianMealCollection");
             running = true;
         } catch (MongoException e) {
@@ -111,10 +111,16 @@ public class Database extends Thread {
         if (entry instanceof MealEntry) {
             this.vegetarianMealCollection.insert(entry.toDbObject());
         }
+<<<<<<< server/src/main/java/groupxii/database/Database.java
 
         //if (entry instanceof VehicleEntry) {
         //this.vehicleTrackerCollection.insert(entry.toDbObject());
         //}
+=======
+        if (entry instanceof VehicleEntry) {
+        this.vehicleTrackerCollection.insert(entry.toDbObject());
+        }
+>>>>>>> server/src/main/java/groupxii/database/Database.java
         this.active = false;
     }
 
@@ -135,12 +141,10 @@ public class Database extends Thread {
     /**
      * Given a vehicle entry, find it in the collection.
      */
-    public DBObject findMealEntry(MealEntry entry) {
 
-        while (this.isActive()) {
-        }
-
-        DBCursor cursor = vegetarianMealCollection.find(entry.toDbObject());
+    public DBObject findVehicleEntry(VehicleEntry entry) {
+        while (this.isActive()) {}
+        DBCursor cursor = vehicleTrackerCollection.find(entry.toDbObject());
         return cursor.one();
     }
 }
