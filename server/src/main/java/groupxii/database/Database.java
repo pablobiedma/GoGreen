@@ -5,7 +5,11 @@ import com.mongodb.DBCollection;
 import com.mongodb.DBCursor;
 import com.mongodb.DBObject;
 import com.mongodb.MongoClient;
+
+
+
 import com.mongodb.MongoException;
+
 
 /**
  * Manages all database related operations between the server logic and MongoDB.
@@ -95,7 +99,11 @@ public class Database extends Thread {
     }
 
     /**
+<<<<<<< HEAD
+     * method which saves an entry.
+=======
      * Determine in which collection to put an entry.
+>>>>>>> 6953de15f0ad7f8a6e60328fd93ae7e0db978942
      */
     public void save(Entry entry) {
         this.active = true;
@@ -103,14 +111,25 @@ public class Database extends Thread {
         if (entry instanceof MealEntry) {
             this.vegetarianMealCollection.insert(entry.toDbObject());
         }
+<<<<<<< server/src/main/java/groupxii/database/Database.java
+
+        //if (entry instanceof VehicleEntry) {
+        //this.vehicleTrackerCollection.insert(entry.toDbObject());
+        //}
+=======
         if (entry instanceof VehicleEntry) {
         this.vehicleTrackerCollection.insert(entry.toDbObject());
         }
+>>>>>>> server/src/main/java/groupxii/database/Database.java
         this.active = false;
     }
 
     /**
+<<<<<<< HEAD
+     * Save a nonblocking entry.
+=======
      * Call save(Entry) on a new thread.
+>>>>>>> 6953de15f0ad7f8a6e60328fd93ae7e0db978942
      */
 
     public void saveNonBlocking(Entry entry) {
@@ -122,6 +141,7 @@ public class Database extends Thread {
     /**
      * Given a vehicle entry, find it in the collection.
      */
+
     public DBObject findVehicleEntry(VehicleEntry entry) {
         while (this.isActive()) {}
         DBCursor cursor = vehicleTrackerCollection.find(entry.toDbObject());
