@@ -25,10 +25,11 @@ public class VegetarianMealController {
     private List<Meal> mealList = new ArrayList<Meal>();
     private final AtomicLong counter = new AtomicLong();
 
-    /*
 
-    First run this to load in the MealDataList on the server, this has only to be
-    done once the server starts.
+
+    /**
+    First run this to load in the MealDataList on the server,
+    this has only to be done once the server starts.
     in the future we will load this also on the boot of the server.
      */
     @RequestMapping(method = RequestMethod.GET, value = "/getMealData")
@@ -36,7 +37,6 @@ public class VegetarianMealController {
         getMealData.readMealListData();
         this.mealList = getMealData.getMealList();
     }
-
 
     /**
      *This method will transform the data from the mealList into one string, which then can be used
@@ -50,10 +50,9 @@ public class VegetarianMealController {
         return mealNameListString;
     }
 
-
     /**
-     *the client can send data to the server with the right values as parameter,
-     *  then this method will store the data in the database.
+    the client can send data to the server with the right values as parameter,
+    then this method will store the data in the database.
      */
     @RequestMapping(method = RequestMethod.GET, value = "/saveMealData")
     public MealEntry saveMealData(@RequestParam(value = "goodFoodName",
@@ -63,14 +62,16 @@ public class VegetarianMealController {
                                   @RequestParam(value = "badFoodName",
                                           defaultValue = "Unknown") String badFoodName,
                                   @RequestParam(value = "badServingSize",
-                                          defaultValue = "Unknown") int badServingSize)
-            throws IOException {
+
+                                          defaultValue = "Unknown")
+                                              int badServingSize) throws IOException {
         calculations.setMealList(this.mealList);
         int reducedCo2 = calculations.reducedCO2(badFoodName, badServingSize,
                 calculations.calculateCO2(goodFoodName, goodServingSize));
         saveMeal.setMealList(this.mealList);
         saveMeal.saveMealData(counter.incrementAndGet(), goodFoodName,
                 badFoodName, goodServingSize, badServingSize, reducedCo2);
+
         return saveMeal.getMealEntry();
     }
 }

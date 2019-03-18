@@ -1,6 +1,5 @@
 package groupxii.database;
 
-
 import com.mongodb.DB;
 import com.mongodb.DBCollection;
 import com.mongodb.DBCursor;
@@ -8,7 +7,9 @@ import com.mongodb.DBObject;
 import com.mongodb.MongoClient;
 
 
-import java.net.UnknownHostException;
+
+import com.mongodb.MongoException;
+
 
 /**
  * Manages all database related operations between the server logic and MongoDB.
@@ -78,7 +79,7 @@ public class Database extends Thread {
             //vehicleTrackerCollection = mongodb.getCollection("vehicleTrackerCollection");
             vegetarianMealCollection = mongodb.getCollection("vegetarianMealCollection");
             running = true;
-        } catch (UnknownHostException e) {
+        } catch (MongoException e) {
             // I don't think this state is reachable.
             // -L
             running = false;
@@ -98,7 +99,11 @@ public class Database extends Thread {
     }
 
     /**
+<<<<<<< HEAD
      * method which saves an entry.
+=======
+     * Determine in which collection to put an entry.
+>>>>>>> 6953de15f0ad7f8a6e60328fd93ae7e0db978942
      */
     public void save(Entry entry) {
         this.active = true;
@@ -107,11 +112,18 @@ public class Database extends Thread {
             this.vegetarianMealCollection.insert(entry.toDbObject());
         }
 
+        //if (entry instanceof VehicleEntry) {
+        //this.vehicleTrackerCollection.insert(entry.toDbObject());
+        //}
         this.active = false;
     }
 
     /**
+<<<<<<< HEAD
      * Save a nonblocking entry.
+=======
+     * Call save(Entry) on a new thread.
+>>>>>>> 6953de15f0ad7f8a6e60328fd93ae7e0db978942
      */
 
     public void saveNonBlocking(Entry entry) {
@@ -131,5 +143,4 @@ public class Database extends Thread {
         DBCursor cursor = vegetarianMealCollection.find(entry.toDbObject());
         return cursor.one();
     }
-
 }

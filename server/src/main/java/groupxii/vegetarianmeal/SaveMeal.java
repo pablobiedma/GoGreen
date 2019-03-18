@@ -27,6 +27,7 @@ public class SaveMeal {
     /**
      * Save the existing MealData.
      */
+
     public void saveMealData(long userId, String goodFoodName,
                              String badFoodName, int goodServingSize,
                              int badServingSize, int reducedCo2)

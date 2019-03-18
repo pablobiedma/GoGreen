@@ -1,4 +1,4 @@
-package client.groupxii.vegetarianmeal;
+package client.groupxii.vegetarianMeal;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -23,10 +23,12 @@ public class SafeMeal {
                            int goodServingSize, int badServingSize) throws IOException {
         // Url were to get the JSON data from, "transport" is now hardcoded
         // but will be a variable in the future.
+
         URL url = new URL("http://" + host + ":" + port
                 + "/saveMealData?goodFoodName=" + goodFoodName + "&goodServingSize="
                 + goodServingSize + "&badFoodName=" + badFoodName + "&badServingSize="
                 + badServingSize );
+
         String readLine;
         // opens a http connection with the URL.
         HttpURLConnection connection = (HttpURLConnection) url.openConnection();
