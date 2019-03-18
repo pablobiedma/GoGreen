@@ -17,6 +17,7 @@ Add the feature to see the records what meal have been eaten.
 Make sensible user schema.
 Raise a flag when the branch fails.
 Code review before merging into master.
+The client needs to authenticate with the server.
 
 
 #### Additional Questions to TA: 
