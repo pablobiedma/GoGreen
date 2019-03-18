@@ -1,4 +1,4 @@
-package groupxii.vegetarianMeal;
+package groupxii.vegetarianmeal;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -12,7 +12,7 @@ public class GetMealData {
 
     private List<Meal> mealList = new ArrayList<Meal>();
 
-    public List<Meal> getMealList(){
+    public List<Meal> getMealList() {
         return mealList;
     }
 
@@ -20,9 +20,13 @@ public class GetMealData {
         this.mealList = mealList;
     }
 
+    /**
+     * Read the data from the meallist.
+     */
     public void readMealListData() throws IOException {
         ObjectMapper objectMapper = new ObjectMapper();
-        JsonNode rootNode = objectMapper.readTree(getClass().getClassLoader().getResource("mealList.txt"));
+        JsonNode rootNode = objectMapper.readTree(getClass().getClassLoader().getResource(
+                "mealList.txt"));
 
         //iterates over all the elements in the JsonNode and stores the data we need
         // (food name, co2 emmision per serving and the size of the serving)
