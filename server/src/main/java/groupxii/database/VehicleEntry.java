@@ -32,7 +32,7 @@ public class VehicleEntry extends Entry {
      */
     public final DBObject toDbObject() {
         return super.toBasicDbObject()
-            .append("userId", this.userId)
-            .append("vehicleType", this.vehicleType);
+                .append("userId", this.userId)
+                .append("vehicleType", this.vehicleType);
     }
 }

@@ -1,15 +1,15 @@
 package groupxii.server;
 
-/* Transportation - dummy class that suggest the user what
- * transportation method to use
- * */
+//Transportation - dummy class that suggest the user what
+//transportation method to use
+
 public class Transportation {
     private final long id;
     private final String vehicleSuggestion;
 
     public Transportation(long id, String vehicleType) {
         this.id = id;
-        this.vehicleSuggestion = new String(suggestVehicle(vehicleType));
+        this.vehicleSuggestion = suggestVehicle(vehicleType);
     }
 
     public long getId() {

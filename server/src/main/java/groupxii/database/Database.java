@@ -5,8 +5,7 @@ import com.mongodb.DBCollection;
 import com.mongodb.DBCursor;
 import com.mongodb.DBObject;
 import com.mongodb.MongoClient;
-
-import java.net.UnknownHostException;
+import com.mongodb.MongoException;
 
 /**
  * Manages all database related operations between the server logic and MongoDB.
@@ -20,7 +19,8 @@ public class Database extends Thread {
     private MongoClient mongoClient;
     private DB mongodb;
 
-    private DBCollection vehicleTrackerCollection;
+    //private DBCollection vehicleTrackerCollection;
+    private DBCollection vegetarianMealCollection;
 
     private boolean running;
     private boolean active;
@@ -38,7 +38,7 @@ public class Database extends Thread {
     }
 
     public boolean isActive() {
-        return this.active;
+        return active;
     }
 
     public void setDbAddr(String dbAddr) {
@@ -72,9 +72,10 @@ public class Database extends Thread {
         try {
             mongoClient = new MongoClient(this.getDbAddr(), this.getDbPort());
             mongodb = this.mongoClient.getDB(this.getDbName());
-            vehicleTrackerCollection = mongodb.getCollection("vehicleTrackerCollection");
+            //vehicleTrackerCollection = mongodb.getCollection("vehicleTrackerCollection");
+            vegetarianMealCollection = mongodb.getCollection("vegetarianMealCollection");
             running = true;
-        } catch (UnknownHostException e) {
+        } catch (MongoException e) {
             // I don't think this state is reachable.
             // -L
             running = false;
@@ -99,16 +100,19 @@ public class Database extends Thread {
     public void save(Entry entry) {
         this.active = true;
 
-        if (entry instanceof VehicleEntry) {
-            this.vehicleTrackerCollection.insert(entry.toDbObject());
+        if (entry instanceof MealEntry) {
+            this.vegetarianMealCollection.insert(entry.toDbObject());
         }
-
+        //if (entry instanceof VehicleEntry) {
+        //this.vehicleTrackerCollection.insert(entry.toDbObject());
+        //}
         this.active = false;
     }
 
     /**
      * Call save(Entry) on a new thread.
      */
+
     public void saveNonBlocking(Entry entry) {
         this.active = true;
         SaveNonBlocking worker = new SaveNonBlocking(entry);
@@ -118,9 +122,9 @@ public class Database extends Thread {
     /**
      * Given a vehicle entry, find it in the collection.
      */
-    public DBObject findVehicleEntry(VehicleEntry entry) {
+    public DBObject findMealEntry(MealEntry entry) {
         while (this.isActive()) {}
-        DBCursor cursor = vehicleTrackerCollection.find(entry.toDbObject());
+        DBCursor cursor = vegetarianMealCollection.find(entry.toDbObject());
         return cursor.one();
     }
 }

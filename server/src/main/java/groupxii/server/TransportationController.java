@@ -23,8 +23,7 @@ public class TransportationController {
      */
     @RequestMapping(method = RequestMethod.GET, value = "/transport")
     public Transportation transportation(@RequestParam(value = "vehicle",
-                                                       defaultValue = "Unknown")
-                                          String vehicleType) {
+            defaultValue = "Unknown") String vehicleType) {
         Transportation trans = new Transportation(counter.incrementAndGet(), vehicleType);
         VehicleEntry entry = new VehicleEntry(counter.get(), vehicleType);
 
