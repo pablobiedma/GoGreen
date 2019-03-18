@@ -1,46 +1,26 @@
-image: maven:latest
-
-variables:
-  MAVEN_CLI_OPTS: "--batch-mode --errors --fail-at-end --show-version -DinstallAtEnd=true -DdeployAtEnd=true"
-  MAVEN_OPTS: "-Dmaven.repo.local=.m2/repository -Dorg.slf4j.simpleLogger.log.org.apache.maven.cli.transfer.Slf4jMavenTransferListener=WARN -Dorg.slf4j.simpleLogger.showDateTime=true -Djava.awt.headless=true"
-
-cache:
-  paths:
-  - .m2/repository/
+stages:
+- build
+- test
+-code-analysis
 
 build:
   stage: build
   script:
-  - mvn $MAVEN_CLI_OPTS compile
+  - echo "Building"
+  - mkdir build
+  - touch build/info.txt
+  artifacts:
+    paths:
+    - build/
 
 test:
   stage: test
   script:
-  - mvn $MAVEN_CLI_OPTS test
-  - cat target/site/jacoco/index.html
-  artifacts:
-    paths:
-    - target/site/jacoco/
-pages:
-  stage: deploy
-  dependencies:
-  - test
-  script:
-  - mkdir public
-  - mv target/site/jacoco/index.html public
-  artifacts:
-    paths:
-    - public
+  - echo "Testing"
+  - test -f "build/info.txt"
 
 checkstyle:
-  stage: code-analysis
-  script:
-  - mvn post-site
-  allow_failure: true
-
-deploy:
-  stage: deploy
-  script:
-  - mvn $MAVEN_CLI_OPTS verify
-  only:
-  - master
+    stage: code-analysis
+    script:
+    - mvn post-site
+    allow_failure: true
