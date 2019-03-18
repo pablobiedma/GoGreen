@@ -69,6 +69,6 @@ public class MealNameListTest {
         name.add(2,"banana");
         name.add(3,"watermelon");
         name.add(4,"strawberry");
-        assertNotEquals(name.subList(0,5),ml.getMealList());
+        assertEquals(name.subList(0,5).toString(), "[" + ml.getMealNameList() + "]");
     }
 }

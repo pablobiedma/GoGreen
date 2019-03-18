@@ -2,10 +2,11 @@ package groupxii.vegetarianmeal;
 
 import org.junit.Test;
 
+import static org.junit.Assert.*;
+
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-
-import static org.junit.Assert.*;
 
 public class GetMealDataTest {
 
@@ -51,6 +52,12 @@ public class GetMealDataTest {
 
     @Test
     public void readMealListData() {
+	    try {
+		    GetMealData md = new GetMealData();
+		    md.readMealListData();
+		    assertNotNull(md.getMealList());
+	    } catch(IOException e) {
+	    }
 
     }
 }

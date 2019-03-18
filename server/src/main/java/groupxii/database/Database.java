@@ -104,7 +104,7 @@ public class Database extends Thread {
             this.vegetarianMealCollection.insert(entry.toDbObject());
         }
         if (entry instanceof VehicleEntry) {
-        this.vehicleTrackerCollection.insert(entry.toDbObject());
+            this.vehicleTrackerCollection.insert(entry.toDbObject());
         }
         this.active = false;
     }
@@ -125,6 +125,15 @@ public class Database extends Thread {
     public DBObject findVehicleEntry(VehicleEntry entry) {
         while (this.isActive()) {}
         DBCursor cursor = vehicleTrackerCollection.find(entry.toDbObject());
+        return cursor.one();
+    }
+
+    /**
+     * Given a meal entry, find it in the collection.
+     */
+    public DBObject findMealEntry(MealEntry entry) {
+        while (this.isActive()) {}
+        DBCursor cursor = vegetarianMealCollection.find(entry.toDbObject());
         return cursor.one();
     }
 }

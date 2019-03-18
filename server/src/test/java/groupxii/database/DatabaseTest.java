@@ -77,4 +77,26 @@ public class DatabaseTest {
 		assertEquals(entry.toDbObject(), Database.instance.findVehicleEntry(entry));
 		//TODO Drop the test DB
 	}
+
+	@Test
+	public void testSaveMeal() {
+		Database.instance.setDbName("test");
+		Database.instance.startDb();
+		MealEntry entry = new MealEntry(1, "apple", "pizza", 100, 100, 200);
+		Database.instance.save(entry);
+		assertEquals(entry.toDbObject(), Database.instance.findMealEntry(entry));
+		//TODO Drop the test DB
+	}
+
+	@Test
+	public void testSaveMealNonBlocking() {
+		Database.instance.setDbName("test");
+		Database.instance.startDb();
+		MealEntry entry = new MealEntry(1, "apple", "pizza", 100, 100, 200);
+		Database.instance.saveNonBlocking(entry);
+
+		assertEquals(entry.toDbObject(), Database.instance.findMealEntry(entry));
+		//TODO Drop the test DB
+	}
+
 }
