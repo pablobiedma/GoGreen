@@ -104,7 +104,7 @@ public class Database extends Thread {
             this.vegetarianMealCollection.insert(entry.toDbObject());
         }
         if (entry instanceof VehicleEntry) {
-        this.vehicleTrackerCollection.insert(entry.toDbObject());
+            this.vehicleTrackerCollection.insert(entry.toDbObject());
         }
         this.active = false;
     }
