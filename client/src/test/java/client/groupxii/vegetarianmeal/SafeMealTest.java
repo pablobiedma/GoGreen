@@ -4,7 +4,7 @@ import org.junit.Test;
 
 import java.io.IOException;
 
-import static junit.framework.TestCase.assertEquals;
+import static junit.framework.TestCase.assertTrue;
 
 public class SafeMealTest {
 
@@ -12,6 +12,6 @@ public class SafeMealTest {
 
     @Test
     public void safeMeal() throws IOException {
-        assertEquals(":0}", safeMeal.safeMeal("APPLES", "BANANAS", 50, 50).substring(299, 302));
+        assertTrue(safeMeal.safeMeal("APPLES", "BANANAS", 50, 50).contains("\"goodFoodName\":\"APPLES\",\"badFoodName\":\"BANANAS\",\"goodServingSize\":50,\"badServingSize\":50,\"reducedCo2\":0}"));
     }
 }
