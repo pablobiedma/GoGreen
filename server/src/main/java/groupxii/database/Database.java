@@ -1,8 +1,11 @@
 package groupxii.database;
 
-import com.mongodb.*;
-
-import java.net.UnknownHostException;
+import com.mongodb.DB;
+import com.mongodb.DBCollection;
+import com.mongodb.DBCursor;
+import com.mongodb.DBObject;
+import com.mongodb.MongoClient;
+import com.mongodb.MongoException;
 
 /**
  * Manages all database related operations between the server logic and MongoDB.
@@ -91,17 +94,24 @@ public class Database extends Thread {
         }
     }
 
+    /**
+     * Determine in which collection to put an entry.
+     */
     public void save(Entry entry) {
         this.active = true;
 
-        if (entry instanceof MealEntry){
+        if (entry instanceof MealEntry) {
             this.vegetarianMealCollection.insert(entry.toDbObject());
         }
         //if (entry instanceof VehicleEntry) {
-            //this.vehicleTrackerCollection.insert(entry.toDbObject());
+        //this.vehicleTrackerCollection.insert(entry.toDbObject());
         //}
         this.active = false;
     }
+
+    /**
+     * Call save(Entry) on a new thread.
+     */
 
     public void saveNonBlocking(Entry entry) {
         this.active = true;

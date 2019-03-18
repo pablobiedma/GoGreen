@@ -1,4 +1,4 @@
-package groupxii.vegetarianmeal;
+package groupxii.vegetarianMeal;
 
 import org.junit.Test;
 

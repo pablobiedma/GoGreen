@@ -1,4 +1,4 @@
-package groupxii.vegetarianmeal;
+package groupxii.vegetarianMeal;
 
 import java.io.IOException;
 import java.util.ArrayList;

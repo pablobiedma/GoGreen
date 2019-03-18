@@ -1,4 +1,4 @@
-package groupxii.vegetarianmeal;
+package groupxii.vegetarianMeal;
 
 public class Meal {
 

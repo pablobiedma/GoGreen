@@ -1,7 +1,7 @@
 package client.groupxii.controllers;
 
-import client.groupxii.vegetarianMeal.EatenMealList;
-import client.groupxii.vegetarianMeal.SafeMeal;
+import client.groupxii.vegetarianmeal.EatenMealList;
+import client.groupxii.vegetarianmeal.SafeMeal;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -14,7 +14,13 @@ import javafx.scene.text.Text;
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.ResourceBundle;
+import java.util.Scanner;
+
+
 
 public class VegetarianMealController implements Initializable {
 
@@ -50,10 +56,11 @@ public class VegetarianMealController implements Initializable {
     }
 
     @Override
-    public void initialize(URL location, ResourceBundle resources){
+    public void initialize(URL location, ResourceBundle resources) {
         try {
-            listItems = new Scanner(new URL(host + "mealNameList").openStream(), "UTF-8").nextLine();
-        } catch (IOException e){
+            listItems = new Scanner(new URL(host + "mealNameList").openStream(),
+                    "UTF-8").nextLine();
+        } catch (IOException e) {
             e.printStackTrace();
         }
         List<String> items = Arrays.asList(listItems.split(", "));
@@ -63,11 +70,14 @@ public class VegetarianMealController implements Initializable {
         updateListView();
     }
 
+    /**
+     * updates the listview with all the items from the database.
+     */
     @FXML
     public void updateListView() {
         try {
             eatenMealList.readDatabase();
-        } catch (IOException e){
+        } catch (IOException e) {
             e.printStackTrace();
         }
         setListViewItems(eatenMealList.getEatenMealList());

@@ -2,12 +2,12 @@ package groupxii.database;
 
 import com.mongodb.DBObject;
 
-public class MealEntry extends Entry{
+public class MealEntry extends Entry {
 
-/**
- * Represents entries in the database which tracks
- * which vehicle each request indicates.
- */
+    /**
+     * Represents entries in the database which tracks
+     * which vehicle each request indicates.
+     */
     private long userId;
     private String goodFoodName;
     private String badFoodName;
@@ -15,7 +15,11 @@ public class MealEntry extends Entry{
     private int badServingSize;
     private int reducedCo2;
 
-    public MealEntry(long userId, String goodFoodName, String badFoodName, int goodServingSize, int badServingSize, int reducedCo2){
+    /**
+     * Constructor of MealEntry.
+     */
+    public MealEntry(long userId, String goodFoodName, String badFoodName,
+                     int goodServingSize, int badServingSize, int reducedCo2) {
         this.badFoodName = badFoodName;
         this.badServingSize = badServingSize;
         this.goodFoodName = goodFoodName;
