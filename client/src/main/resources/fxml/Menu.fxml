@@ -13,7 +13,15 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
+<<<<<<< HEAD
 <AnchorPane id="AnchorPane" style="-fx-background-color: #fff;" xmlns="http://javafx.com/javafx/8.0.201" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.groupxii.controllers.MenuController">
+=======
+<<<<<<< HEAD
+<AnchorPane id="AnchorPane" style="-fx-background-color: #fff;" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.controllers.LoginController">
+=======
+<AnchorPane id="AnchorPane" style="-fx-background-color: #fff;" xmlns="http://javafx.com/javafx/8.0.201" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.groupxii.controllers.MenuController">
+>>>>>>> origin/Vegetarian_Meal_Client
+>>>>>>> 478cc8310e232d75b800efb50d41b013a867fb48
    <children>
       <Pane prefHeight="127.0" prefWidth="904.0" style="-fx-background-color: #2B8E00;">
          <children>
@@ -43,7 +51,15 @@
             <ProgressBar layoutX="14.0" layoutY="147.0" prefWidth="200.0" progress="0.0" style="-fx-accent: #2B8E00;" stylesheets="@../fullpackstyling.css" />
             <Text layoutX="17.0" layoutY="57.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-size: 40;" text="LEVEL" textAlignment="CENTER" wrappingWidth="200.00001668930054" />
             <Text fx:id="level" layoutX="91.0" layoutY="132.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-size: 80; -fx-font-weight: bold;" text="1" />
+<<<<<<< HEAD
             <Button fx:id="btnLeaderboard" alignment="BOTTOM_CENTER" contentDisplay="TOP" graphicTextGap="7.0" layoutX="686.0" layoutY="37.0" mnemonicParsing="false" onMouseClicked="#btnLeaderBoard" prefHeight="127.0" prefWidth="200.0" stylesheets="@../fullpackstyling.css" text="LEADERBOARD">
+=======
+<<<<<<< HEAD
+            <Button fx:id="btnVegetarianMeal1" alignment="BOTTOM_CENTER" contentDisplay="TOP" graphicTextGap="7.0" layoutX="686.0" layoutY="37.0" mnemonicParsing="false" onMouseClicked="#loginButton" prefHeight="127.0" prefWidth="200.0" stylesheets="@../fullpackstyling.css" text="LEADERBOARD">
+=======
+            <Button fx:id="btnLeaderboard" alignment="BOTTOM_CENTER" contentDisplay="TOP" graphicTextGap="7.0" layoutX="686.0" layoutY="37.0" mnemonicParsing="false" onMouseClicked="#btnLeaderBoard" prefHeight="127.0" prefWidth="200.0" stylesheets="@../fullpackstyling.css" text="LEADERBOARD">
+>>>>>>> origin/Vegetarian_Meal_Client
+>>>>>>> 478cc8310e232d75b800efb50d41b013a867fb48
                <opaqueInsets>
                   <Insets />
                </opaqueInsets>
@@ -71,7 +87,15 @@
       </Pane>
       <Pane layoutY="339.0" prefHeight="160.0" prefWidth="900.0">
          <children>
+<<<<<<< HEAD
             <Button fx:id="btnVegetarianMeal" alignment="BOTTOM_CENTER" contentDisplay="TOP" graphicTextGap="7.0" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onMouseClicked="#btnVegetarianMeal" prefHeight="127.0" prefWidth="200.0" stylesheets="@../fullpackstyling.css" text="VEGETERIAN MEAL">
+=======
+<<<<<<< HEAD
+            <Button fx:id="btnVegetarianMeal" alignment="BOTTOM_CENTER" contentDisplay="TOP" graphicTextGap="7.0" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onMouseClicked="#loginButton" prefHeight="127.0" prefWidth="200.0" stylesheets="@../fullpackstyling.css" text="VEGETERIAN MEAL">
+=======
+            <Button fx:id="btnVegetarianMeal" alignment="BOTTOM_CENTER" contentDisplay="TOP" graphicTextGap="7.0" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onMouseClicked="#btnVegetarianMeal" prefHeight="127.0" prefWidth="200.0" stylesheets="@../fullpackstyling.css" text="VEGETERIAN MEAL">
+>>>>>>> origin/Vegetarian_Meal_Client
+>>>>>>> 478cc8310e232d75b800efb50d41b013a867fb48
                <opaqueInsets>
                   <Insets />
                </opaqueInsets>
@@ -83,7 +107,15 @@
                   </ImageView>
                </graphic>
             </Button>
+<<<<<<< HEAD
             <Button fx:id="btnLocalProducts" alignment="BOTTOM_CENTER" contentDisplay="TOP" graphicTextGap="7.0" layoutX="235.0" layoutY="14.0" mnemonicParsing="false" onMouseClicked="#btnLocalProducts" prefHeight="127.0" prefWidth="200.0" stylesheets="@../fullpackstyling.css" text="LOCAL PRODUCTS">
+=======
+<<<<<<< HEAD
+            <Button fx:id="btnLocalProducts" alignment="BOTTOM_CENTER" contentDisplay="TOP" graphicTextGap="7.0" layoutX="235.0" layoutY="14.0" mnemonicParsing="false" onMouseClicked="#loginButton" prefHeight="127.0" prefWidth="200.0" stylesheets="@../fullpackstyling.css" text="LOCAL PRODUCTS">
+=======
+            <Button fx:id="btnLocalProducts" alignment="BOTTOM_CENTER" contentDisplay="TOP" graphicTextGap="7.0" layoutX="235.0" layoutY="14.0" mnemonicParsing="false" onMouseClicked="#btnLocalProducts" prefHeight="127.0" prefWidth="200.0" stylesheets="@../fullpackstyling.css" text="LOCAL PRODUCTS">
+>>>>>>> origin/Vegetarian_Meal_Client
+>>>>>>> 478cc8310e232d75b800efb50d41b013a867fb48
                <opaqueInsets>
                   <Insets />
                </opaqueInsets>
@@ -95,7 +127,15 @@
                   </ImageView>
                </graphic>
             </Button>
+<<<<<<< HEAD
             <Button fx:id="btnLowerTemperature" alignment="BOTTOM_CENTER" contentDisplay="TOP" graphicTextGap="7.0" layoutX="686.0" layoutY="14.0" mnemonicParsing="false" onMouseClicked="#btnTemperature" prefHeight="127.0" prefWidth="200.0" stylesheets="@../fullpackstyling.css" text="TEMPERATURE">
+=======
+<<<<<<< HEAD
+            <Button fx:id="btnLowerTemperature" alignment="BOTTOM_CENTER" contentDisplay="TOP" graphicTextGap="7.0" layoutX="686.0" layoutY="14.0" mnemonicParsing="false" onMouseClicked="#loginButton" prefHeight="127.0" prefWidth="200.0" stylesheets="@../fullpackstyling.css" text="TEMPERATURE">
+=======
+            <Button fx:id="btnLowerTemperature" alignment="BOTTOM_CENTER" contentDisplay="TOP" graphicTextGap="7.0" layoutX="686.0" layoutY="14.0" mnemonicParsing="false" onMouseClicked="#btnTemperature" prefHeight="127.0" prefWidth="200.0" stylesheets="@../fullpackstyling.css" text="TEMPERATURE">
+>>>>>>> origin/Vegetarian_Meal_Client
+>>>>>>> 478cc8310e232d75b800efb50d41b013a867fb48
                <opaqueInsets>
                   <Insets />
                </opaqueInsets>
@@ -107,7 +147,15 @@
                   </ImageView>
                </graphic>
             </Button>
+<<<<<<< HEAD
             <Button fx:id="btnTransport" alignment="BOTTOM_CENTER" contentDisplay="TOP" graphicTextGap="7.0" layoutX="459.0" layoutY="14.0" mnemonicParsing="false" onMouseClicked="#btnTransport" prefHeight="127.0" prefWidth="200.0" stylesheets="@../fullpackstyling.css" text="TRANSPORT">
+=======
+<<<<<<< HEAD
+            <Button fx:id="btnTransport" alignment="BOTTOM_CENTER" contentDisplay="TOP" graphicTextGap="7.0" layoutX="459.0" layoutY="14.0" mnemonicParsing="false" onMouseClicked="#loginButton" prefHeight="127.0" prefWidth="200.0" stylesheets="@../fullpackstyling.css" text="TRANSPORT">
+=======
+            <Button fx:id="btnTransport" alignment="BOTTOM_CENTER" contentDisplay="TOP" graphicTextGap="7.0" layoutX="459.0" layoutY="14.0" mnemonicParsing="false" onMouseClicked="#btnTransport" prefHeight="127.0" prefWidth="200.0" stylesheets="@../fullpackstyling.css" text="TRANSPORT">
+>>>>>>> origin/Vegetarian_Meal_Client
+>>>>>>> 478cc8310e232d75b800efb50d41b013a867fb48
                <opaqueInsets>
                   <Insets />
                </opaqueInsets>
@@ -123,7 +171,15 @@
       </Pane>
       <Pane layoutY="499.0" prefHeight="160.0" prefWidth="904.0">
          <children>
+<<<<<<< HEAD
             <Button fx:id="btnSolarPanels" alignment="BOTTOM_CENTER" contentDisplay="TOP" graphicTextGap="7.0" layoutX="126.0" layoutY="14.0" mnemonicParsing="false" onMouseClicked="#btnSolarPanels" prefHeight="127.0" prefWidth="200.0" stylesheets="@../fullpackstyling.css" text="SOLAR PANELS">
+=======
+<<<<<<< HEAD
+            <Button fx:id="btnSolarPanels" alignment="BOTTOM_CENTER" contentDisplay="TOP" graphicTextGap="7.0" layoutX="126.0" layoutY="14.0" mnemonicParsing="false" onMouseClicked="#loginButton" prefHeight="127.0" prefWidth="200.0" stylesheets="@../fullpackstyling.css" text="SOLAR PANELS">
+=======
+            <Button fx:id="btnSolarPanels" alignment="BOTTOM_CENTER" contentDisplay="TOP" graphicTextGap="7.0" layoutX="126.0" layoutY="14.0" mnemonicParsing="false" onMouseClicked="#btnSolarPanels" prefHeight="127.0" prefWidth="200.0" stylesheets="@../fullpackstyling.css" text="SOLAR PANELS">
+>>>>>>> origin/Vegetarian_Meal_Client
+>>>>>>> 478cc8310e232d75b800efb50d41b013a867fb48
                <opaqueInsets>
                   <Insets />
                </opaqueInsets>
@@ -135,7 +191,15 @@
                   </ImageView>
                </graphic>
             </Button>
+<<<<<<< HEAD
             <Button fx:id="btnComingSoon" alignment="BOTTOM_CENTER" contentDisplay="TOP" graphicTextGap="7.0" layoutX="573.0" layoutY="14.0" mnemonicParsing="false" onMouseClicked="#btnComingSoon" prefHeight="127.0" prefWidth="200.0" stylesheets="@../fullpackstyling.css" text="COMING SOON!">
+=======
+<<<<<<< HEAD
+            <Button fx:id="btnComingSoon" alignment="BOTTOM_CENTER" contentDisplay="TOP" graphicTextGap="7.0" layoutX="573.0" layoutY="14.0" mnemonicParsing="false" onMouseClicked="#loginButton" prefHeight="127.0" prefWidth="200.0" stylesheets="@../fullpackstyling.css" text="COMING SOON!">
+=======
+            <Button fx:id="btnComingSoon" alignment="BOTTOM_CENTER" contentDisplay="TOP" graphicTextGap="7.0" layoutX="573.0" layoutY="14.0" mnemonicParsing="false" onMouseClicked="#btnComingSoon" prefHeight="127.0" prefWidth="200.0" stylesheets="@../fullpackstyling.css" text="COMING SOON!">
+>>>>>>> origin/Vegetarian_Meal_Client
+>>>>>>> 478cc8310e232d75b800efb50d41b013a867fb48
                <opaqueInsets>
                   <Insets />
                </opaqueInsets>

@@ -1,4 +1,4 @@
-package groupxii.vegetarianMeal;
+package groupxii.vegetarianmeal;
 
 import java.util.List;
 
@@ -15,7 +15,10 @@ public class MealNameList {
         return mealList;
     }
 
-    public String getMealNameList(){
+    /**
+     * Human-friendly String representation of MealNameList.
+     */
+    public String getMealNameList() {
         //mealList = GetMealData.getMealList();
         for (int j = 0; j < mealList.size(); j++) {
             result = result + mealList.get(j).getFood() + ", ";

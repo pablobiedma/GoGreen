@@ -1,6 +1,12 @@
 package groupxii.database;
 
-import com.mongodb.*;
+
+import com.mongodb.DB;
+import com.mongodb.DBCollection;
+import com.mongodb.DBCursor;
+import com.mongodb.DBObject;
+import com.mongodb.MongoClient;
+
 
 import java.net.UnknownHostException;
 
@@ -91,17 +97,22 @@ public class Database extends Thread {
         }
     }
 
+    /**
+     * method which saves an entry.
+     */
     public void save(Entry entry) {
         this.active = true;
 
-        if (entry instanceof MealEntry){
+        if (entry instanceof MealEntry) {
             this.vegetarianMealCollection.insert(entry.toDbObject());
         }
-        //if (entry instanceof VehicleEntry) {
-            //this.vehicleTrackerCollection.insert(entry.toDbObject());
-        //}
+
         this.active = false;
     }
+
+    /**
+     * Save a nonblocking entry.
+     */
 
     public void saveNonBlocking(Entry entry) {
         this.active = true;
@@ -113,7 +124,10 @@ public class Database extends Thread {
      * Given a vehicle entry, find it in the collection.
      */
     public DBObject findMealEntry(MealEntry entry) {
-        while (this.isActive()) {}
+
+        while (this.isActive()) {
+        }
+
         DBCursor cursor = vegetarianMealCollection.find(entry.toDbObject());
         return cursor.one();
     }
