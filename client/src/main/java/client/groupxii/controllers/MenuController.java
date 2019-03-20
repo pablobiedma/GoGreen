@@ -1,11 +1,10 @@
 package client.groupxii.controllers;
 
 import client.groupxii.Main;
-import client.groupxii.Threads;
 import javafx.fxml.FXML;
 import javafx.scene.input.MouseEvent;
 
-public class MenuController extends Threads {
+public class MenuController {
 
     /**
      * switches to the vegetarian meal feature.
