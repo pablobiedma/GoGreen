@@ -23,5 +23,6 @@ test:
 checkstyle:
     stage: code-analysis
     script:
-    - mvn post-site
+    - mvn  post-site -f "./client/pom.xml"
+    - mvn  post-site -f "./server/pom.xml"
     allow_failure: true
