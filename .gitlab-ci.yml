@@ -1,25 +1,25 @@
 image: maven:latest
 stages:
-    - build
-    - test
-    - code-analysis
+- build
+- test
+- code-analysis
 
 build:
-    stage: build
-    script:
-    - echo "Building"
-    - mkdir build
-    - touch build/info.txt
-    artifacts:
-      paths:
-      - build/
+  stage: build
+  script:
+  - echo "Building"
+  - mkdir build
+  - touch build/info.txt
+  artifacts:
+    paths:
+    - build/
 
 test:
-    stage: test
-    script:
-    - mvn  test -f "./server/pom.xml"
-    - mvn  test -f "./client/pom.xml"
-
+  stage: test
+  script:
+  - echo "Testing"
+  - test -f "./client/pom.xml"
+  - test -f "./server/pom.xml"
 
 checkstyle:
     stage: code-analysis
