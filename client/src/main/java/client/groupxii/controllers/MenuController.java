@@ -48,7 +48,7 @@ public class MenuController {
     @FXML
     public void btnLocalProducts(MouseEvent event) throws Exception {
         Main main = new Main();
-        main.changeScene("VegetarianMeal.fxml", event);
+        main.changeScene("LocalProducts.fxml", event);
     }
 
     @FXML

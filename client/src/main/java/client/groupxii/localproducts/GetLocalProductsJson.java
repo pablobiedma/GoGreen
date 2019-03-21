@@ -1,6 +1,4 @@
-package groupxii.localproducts;
-
-import com.google.maps.StaticMapsRequest;
+package client.groupxii.localproducts;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -9,7 +7,7 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 
-public class getLocalProducts {
+public class GetLocalProductsJson {
 
     private URL url;
 
