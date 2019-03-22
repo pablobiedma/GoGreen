@@ -1,10 +1,10 @@
-<!-- An example of how you can do a sprint review -->
+
 
 # Sprint Review
 
 ## Group XII
 
-### Progress in this week:
+### Goals for this week:
 For this week we have worked on the server and the client and the connection between them.
 As there was said before, we have made a plan to split the tasks of server and client seperately
 to improve teamwork and to deliver faster.  The progress has been made pretty good and we hope to
