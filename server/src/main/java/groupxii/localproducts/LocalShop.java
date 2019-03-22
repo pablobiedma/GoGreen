@@ -1,4 +1,4 @@
-package client.groupxii.localproducts;
+package groupxii.localproducts;
 
 public class LocalShop {
 

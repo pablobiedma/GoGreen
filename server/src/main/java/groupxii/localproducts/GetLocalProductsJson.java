@@ -1,4 +1,4 @@
-package client.groupxii.localproducts;
+package groupxii.localproducts;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -21,11 +21,12 @@ public class GetLocalProductsJson {
         } catch (IOException e){
             e.printStackTrace();
         }
+        System.out.println(localShopDataJson);
         return localShopDataJson;
     }
 
     public String readJson() throws IOException {
-        String readLine;
+        String readLine = "";
         HttpURLConnection connection = (HttpURLConnection) url.openConnection();
         connection.setRequestMethod("GET");
         connection.setRequestProperty("Accept", "application/json");

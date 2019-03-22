@@ -1,21 +1,17 @@
 package client.groupxii.controllers;
 
-import client.groupxii.vegetarianmeal.EatenMealList;
-import client.groupxii.vegetarianmeal.SafeMeal;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.scene.control.ChoiceBox;
+import javafx.fxml.Initializable;
 import javafx.scene.control.ListView;
-import javafx.scene.control.Slider;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Text;
 
 import java.io.IOException;
 import java.net.URL;
 import java.util.*;
 
-public class LocalProductsController {
+public class LocalProductsController implements Initializable {
 
     @FXML
     private Text textfield = new Text();
@@ -25,6 +21,7 @@ public class LocalProductsController {
 
     private List<String> listViewItems = new ArrayList<String>();
     private ObservableList<String> listViewObservable;
+    private String listItemsStr = "";
 
     public void setListViewItems(List<String> listViewItems) {
         this.listViewItems = listViewItems;
@@ -32,15 +29,16 @@ public class LocalProductsController {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        ObservableList<String> list = FXCollections.observableArrayList();
+
+        try {
+            listItemsStr = new Scanner(new URL("http://localhost:8080/localshops").openStream(),"UTF-8").nextLine();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        listViewItems = Arrays.asList(listItemsStr.split(", "));
+        listViewObservable = FXCollections.observableArrayList(listViewItems);
+        System.out.println(listItemsStr);
+        localShops.getItems().addAll(listViewObservable);
 
     }
-
-    /**
-     * updates the listview with all the items from the database.
-     */
-    @FXML
-    public void updateListView() {
-    }
-
 }
