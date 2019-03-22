@@ -1,0 +1,17 @@
+[
+{
+"panelname": "Monocrystalline",
+"grams_co2_by_panel": "39.28884932",
+"efficiencyrate_in_%":"27.8"
+},
+{
+"panelname": "Polycrystalline",
+"grams_co2_by_panel": "32.392998774",
+"efficiencyrate_in_%":"23.5"
+},
+{
+"panelname": "Thin-Film",
+"grams_co2_by_panel": "29.84762514",
+"efficiencyrate_in_%":"22.4"
+}
+]

@@ -30,7 +30,6 @@ public class VegetarianMealController {
     this has only to be done once the server starts.
     in the future we will load this also on the boot of the server.
      */
-    @RequestMapping(method = RequestMethod.GET, value = "/getMealData")
     public void getMealData() throws IOException {
         getMealData.readMealListData();
         this.mealList = getMealData.getMealList();
@@ -40,7 +39,6 @@ public class VegetarianMealController {
     This method will transform the data from the mealList into one string, which then can be used
     by the client, so the choiceboxes/listviews in the GUI are able to show all the meal names.
      */
-    @RequestMapping(method = RequestMethod.GET, value = "/mealNameList")
     public String getNameList() {
         MealNameList mealNameList = new MealNameList();
         mealNameList.setGetMealData(this.mealList);
@@ -52,7 +50,6 @@ public class VegetarianMealController {
     the client can send data to the server with the right values as parameter,
     then this method will store the data in the database.
      */
-    @RequestMapping(method = RequestMethod.GET, value = "/saveMealData")
     public MealEntry saveMealData(@RequestParam(value = "goodFoodName",
             defaultValue = "Unknown") String goodFoodName,
                                   @RequestParam(value = "goodServingSize",

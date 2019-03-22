@@ -21,6 +21,7 @@ public class Database extends Thread {
 
     private DBCollection vehicleTrackerCollection;
     private DBCollection vegetarianMealCollection;
+    private DBCollection solarPanelCollection;
 
     private boolean running;
     private boolean active;
@@ -74,6 +75,7 @@ public class Database extends Thread {
             mongodb = this.mongoClient.getDB(this.getDbName());
             vehicleTrackerCollection = mongodb.getCollection("vehicleTrackerCollection");
             vegetarianMealCollection = mongodb.getCollection("vegetarianMealCollection");
+            solarPanelCollection = mongodb.getCollection("solarPanelCollection");
             running = true;
         } catch (MongoException e) {
             // I don't think this state is reachable.
@@ -106,6 +108,9 @@ public class Database extends Thread {
         if (entry instanceof VehicleEntry) {
             this.vehicleTrackerCollection.insert(entry.toDbObject());
         }
+        if (entry instanceof PanelEntry) {
+            this.solarPanelCollection.insert(entry.toDbObject());
+        }
         this.active = false;
     }
 
@@ -134,6 +139,15 @@ public class Database extends Thread {
     public DBObject findMealEntry(MealEntry entry) {
         while (this.isActive()) {}
         DBCursor cursor = vegetarianMealCollection.find(entry.toDbObject());
+        return cursor.one();
+    }
+
+    /**
+     * Given a panel entry, find it in the collection.
+     */
+    public DBObject findPanelEntry(VehicleEntry entry) {
+        while (this.isActive()) {}
+        DBCursor cursor = solarPanelCollection.find(entry.toDbObject());
         return cursor.one();
     }
 }
