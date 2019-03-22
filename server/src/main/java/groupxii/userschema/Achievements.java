@@ -11,11 +11,11 @@ public class Achievements {
     }
 
     public String getType() {
-        return this.type;
+        return type;
     }
 
     public String getDescription() {
-        return this.description;
+        return description;
     }
 
     public void setType(String type) {

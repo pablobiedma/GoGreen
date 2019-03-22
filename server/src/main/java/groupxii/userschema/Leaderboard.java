@@ -13,11 +13,11 @@ public class Leaderboard {
     }
 
     public String getType() {
-        return this.type;
+        return type;
     }
 
     public List<User> getCompetitors() {
-        return this.competitors = competitors;
+        return competitors;
     }
 
     public void setType(String type) {

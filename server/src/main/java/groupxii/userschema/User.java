@@ -24,7 +24,7 @@ public class User {
     }
 
     public int getId() {
-        return this.id;
+        return id;
     }
 
     public String getUsername() {
@@ -32,22 +32,22 @@ public class User {
     }
 
     public int getPoints() {
-        return this.points;
+        return points;
     }
 
     public List<User> getFriendList() {
-        return this.friendList;
+        return friendList;
     }
 
     public int getBadge() {
-        return this.badge;
+        return badge;
     }
 
     public List<Achievements> getAchievements() {
-        return this.achievements;
+        return achievements;
     }
 
     public int getReducedCo2() {
-        return this.reducedCo2;
+        return reducedCo2;
     }
 }

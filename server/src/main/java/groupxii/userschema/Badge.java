@@ -11,11 +11,11 @@ public class Badge {
     }
 
     public String getIcon() {
-        return this.icon;
+        return icon;
     }
 
     public int getLevel() {
-        return this.level;
+        return level;
     }
 
     public void setIcon(String icon) {
