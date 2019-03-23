@@ -1,6 +1,6 @@
 package groupxii.userschema;
 
-import com.sun.tools.javac.util.List;
+import java.util.List;
 
 public class Leaderboard {
 
