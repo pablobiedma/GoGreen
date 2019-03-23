@@ -1,6 +1,7 @@
 package groupxii.server;
 
 import groupxii.database.MealEntry;
+import groupxii.server.controllers.VegetarianMealController;
 import org.junit.Test;
 
 import java.io.IOException;
