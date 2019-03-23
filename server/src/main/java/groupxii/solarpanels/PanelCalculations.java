@@ -38,8 +38,8 @@ public class PanelCalculations {
     /**this is the second calculation that is done, people also choose
      * a bad efficiency rate, so the reduced CO2 can be calculated.
      */
-    public int reducedCO2(String badpanel, int chosenEfficiencyrate, int goodpanel) throws IOException {
-        this.reducedCO2 = (int) (calculateCO2(badpanel,chosenEfficiencyrate) - goodpanel);
+    public int reducedCO2(String badpanel, int chosenEfficiencyrate, String goodpanel) throws IOException {
+        this.reducedCO2 =  calculateCO2(badpanel,chosenEfficiencyrate) - calculateCO2(goodpanel,chosenEfficiencyrate);
         return this.reducedCO2;
     }
 

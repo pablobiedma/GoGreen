@@ -9,36 +9,38 @@ public class PanelEntry extends Entry {
      * which solarpanel each request indicates.
      */
     private long userid;
-    private String goodpanelname;
-    private String badpanelname;
-    private int goodefficiencyrate;
-    private int badefficiencyrate;
+    private String panelA;
+    private String panelB;
+    private int highefficiencyrate;
+    private int lowefficiencyrate;
     private int reducedco2;
 
     /**
      * Constructor of PanelEntry
      */
-    public PanelEntry(long userid, String goodpanelname, String badpanelname, int goodefficiencyrate,
-                      int badefficiencyrate, int reducedco2) {
+    public PanelEntry(long userid, String panelA, String panelB, int highefficiencyrate,
+                      int lowefficiencyrate, int reducedco2) {
         this.userid = userid;
-        this.goodpanelname = goodpanelname;
-        this.badpanelname = badpanelname;
-        this.goodefficiencyrate = goodefficiencyrate;
-        this.badefficiencyrate = badefficiencyrate;
+        this.panelA = panelA;
+        this.panelB = panelB;
+        this.highefficiencyrate = highefficiencyrate;
+        this.lowefficiencyrate = lowefficiencyrate;
         this.reducedco2 = reducedco2;
     }
     public long getUserid() {
         return  userid;
     }
-    public String getGoodpanelname() {
-        return goodpanelname;
+    public String getPanelA() {
+        return panelA;
     }
-    public String getBadpanelname() { return badpanelname;}
-    public int getGoodefficiencyrate() {
-        return  goodefficiencyrate;
+    public String getPanelB() {
+        return panelB;
     }
-    public int getBadefficiencyrate() {
-        return badefficiencyrate;
+    public int getHighefficiencyrate() {
+        return  highefficiencyrate;
+    }
+    public int getLowefficiencyrate() {
+        return lowefficiencyrate;
     }
     public int getReducedco2() {
         return reducedco2;
@@ -46,15 +48,17 @@ public class PanelEntry extends Entry {
     public void setUserid(long userid) {
         this.userid = userid;
     }
-    public void setGoodPanelname(String goodpanelname) {
-        this.goodpanelname = goodpanelname;
+    public void setPanelA(String panelA) {
+        this.panelA = panelA;
     }
-    public void setBadpanelname(String badpanelname) { this.badpanelname = badpanelname;}
-    public void setGoodefficiencyrate(int goodefficiencyrate) {
-        this.goodefficiencyrate = goodefficiencyrate;
+    public void setPanelB(String panelB) {
+        this.panelB = panelB;
     }
-    public void setBadefficiencyrate(int badefficiencyrate) {
-        this.badefficiencyrate = badefficiencyrate;
+    public void setHighefficiencyrate(int highefficiencyrate) {
+        this.highefficiencyrate = highefficiencyrate;
+    }
+    public void setLowefficiencyrate(int lowefficiencyrate) {
+        this.lowefficiencyrate = lowefficiencyrate;
     }
     public void setReducedco2(int reducedco2) {
         this.reducedco2 = reducedco2;
@@ -65,10 +69,10 @@ public class PanelEntry extends Entry {
     public final DBObject toDbObject() {
         return super.toBasicDbObject()
                 .append("userid", this.userid)
-                .append("goodpanelname",this.goodpanelname)
-                .append("badpanelname",this.badpanelname)
-                .append("goodefficiencyrate",this.goodefficiencyrate)
-                .append("badefficiencyrate",this.badefficiencyrate)
+                .append("goodpanelname",this.panelA)
+                .append("badpanelname",this.panelB)
+                .append("goodefficiencyrate",this.highefficiencyrate)
+                .append("badefficiencyrate",this.lowefficiencyrate)
                 .append("reducedco2", this.reducedco2);
     }
 }

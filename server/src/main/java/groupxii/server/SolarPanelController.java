@@ -45,16 +45,34 @@ public class SolarPanelController {
      the client can send data to the server with the right values as parameter,
      then this method will store the data in the database.
      */
-    public PanelEntry savePanelData(@RequestParam(value = "panelA",
+    public void savePanelData(@RequestParam(value = "panelA",
+            defaultValue = "Unknown") String panelA, @RequestParam(value = "highefficiencyrate",
+            defaultValue = "Unknown") int highefficiencyrate, @RequestParam(value = "panelB",
+            defaultValue = "Unknown") String panelB, @RequestParam(value = "lowefficiencyrate",
+            defaultValue = "Unknown") int lowefficiencyrate) throws IOException {
+        int reducedCO2 = getReducedCO2(panelA,highefficiencyrate,panelB,lowefficiencyrate);
+        savePanel.setPanelList(this.panelList);
+        savePanel.savePanelData(counter.incrementAndGet(), panelA,panelB,highefficiencyrate,lowefficiencyrate,reducedCO2);
+
+    }
+
+    public PanelEntry getPanelData(@RequestParam(value = "panelA",
+            defaultValue = "Unknown") String panelA, @RequestParam(value = "highefficiencyrate",
+            defaultValue = "Unknown") int highefficiencyrate, @RequestParam(value = "panelB",
+            defaultValue = "Unknown") String panelB, @RequestParam(value = "lowefficiencyrate",
+            defaultValue = "Unknown") int lowefficiencyrate) throws IOException {
+        savePanelData(panelA,highefficiencyrate,panelB,lowefficiencyrate);
+        return savePanel.getPanelEntry();
+    }
+    public int getReducedCO2(@RequestParam(value = "panelA",
             defaultValue = "Unknown") String panelA, @RequestParam(value = "highefficiencyrate",
             defaultValue = "Unknown") int highefficiencyrate, @RequestParam(value = "panelB",
             defaultValue = "Unknown") String panelB, @RequestParam(value = "lowefficiencyrate",
             defaultValue = "Unknown") int lowefficiencyrate) throws IOException {
         panelCalculations.setPanelList(this.panelList);
+
         int reducedCO2 = panelCalculations.reducedCO2(panelB, lowefficiencyrate,
-                panelCalculations.calculateCO2(panelA,highefficiencyrate));
-        savePanel.setPanelList(this.panelList);
-        savePanel.savePanelData(counter.incrementAndGet(), panelA,panelB,highefficiencyrate,lowefficiencyrate,reducedCO2);
-        return savePanel.getPanelEntry();
+                panelA);
+        return reducedCO2;
     }
 }
