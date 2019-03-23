@@ -1,4 +1,4 @@
-##### **018/03/2019  |  Sprint Planning  |  week 5**
+##### **018/03/2019  |  Sprint Planning  |  week 6**
 
 #### - Sprint Goal
  Finish implementing the features and user schema and user authentication to be prepared for the next demo.
