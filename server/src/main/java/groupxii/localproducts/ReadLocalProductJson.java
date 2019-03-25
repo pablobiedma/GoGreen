@@ -32,7 +32,7 @@ public class ReadLocalProductJson {
             JsonNode node = elements.next();
             String icon = node.get("icon").asText();
             String name = node.get("name").asText();
-            Boolean openingHours = true; //node.get("open_now").asBoolean();
+            boolean openingHours = node.get("open_now").asBoolean();
             int rating = node.get("rating").asInt();
             localShopList.add(new LocalShop(name, icon, rating, openingHours));
             elements.next();
@@ -42,7 +42,7 @@ public class ReadLocalProductJson {
     public String localShopToString(){
         String result = "";
         for(int i = 0; i < localShopList.size(); i++){
-            result = result + "  " +  localShopList.get(i).getName() + "  " + localShopList.get(i).getRating() + ", ";
+            result = result + "  " +  localShopList.get(i).getName() + "  " + localShopList.get(i).getIcon() + "  " + localShopList.get(i).isOpenNow() + "  " + localShopList.get(i).getRating() + ", ";
         }
         System.out.println(result);
         return result;

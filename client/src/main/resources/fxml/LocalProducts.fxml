@@ -8,6 +8,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
+<?import javafx.scene.web.WebView?>
 
 <AnchorPane id="AnchorPane" style="-fx-background-color: #fff;" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.groupxii.controllers.LocalProductsController">
    <children>
@@ -35,7 +36,8 @@
       </Pane>
       <Pane layoutY="125.0" prefHeight="534.0" prefWidth="904.0">
          <children>
-            <ListView fx:id="localShops" layoutX="20.0" layoutY="14.0" prefHeight="460.0" prefWidth="864.0" />
+            <ListView fx:id="localShops" layoutX="478.0" layoutY="14.0" prefHeight="460.0" prefWidth="406.0" />
+            <WebView layoutX="14.0" layoutY="14.0" prefHeight="460.0" prefWidth="455.0" />
          </children></Pane>
    </children>
 </AnchorPane>

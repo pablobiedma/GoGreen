@@ -14,7 +14,7 @@ public class GetLocalProductsJson {
     public String getLocalShopJson(){
         String localShopDataJson = "";
         try {
-            url = new URL("https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=52.00247,4.35814&radius=10000&rankby=prominence&keyword=supermarkt&key=AIzaSyAx468de0kVfaSUaksLjRhjPyXdTjnuYZQ");
+            url = new URL("https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=52.00247,4.35814&radius=10000&rankby=prominence&keyword=local+produce&key=AIzaSyAx468de0kVfaSUaksLjRhjPyXdTjnuYZQ");
             localShopDataJson = readJson();
         } catch (MalformedURLException e) {
             e.printStackTrace();

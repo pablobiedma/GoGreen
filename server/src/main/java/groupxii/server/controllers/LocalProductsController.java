@@ -1,4 +1,4 @@
-package groupxii.server;
+package groupxii.server.controllers;
 
 import groupxii.localproducts.LocalShop;
 import groupxii.localproducts.ReadLocalProductJson;
