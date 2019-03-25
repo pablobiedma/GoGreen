@@ -15,14 +15,15 @@ build:
     - build/
 
 test:
+  services:
+  - mongo:latest
   stage: test
   script:
-  - mvn test -f "./client/pom.xml"
-  - mvn test -f "./server/pom.xml"
+  - mvn test 
+
 
 checkstyle:
   stage: code-analysis
   script:
-  - mvn  post-site -f "./client/pom.xml"
-  - mvn  post-site -f "./server/pom.xml"
+  - mvn  post-site
   allow_failure: true
