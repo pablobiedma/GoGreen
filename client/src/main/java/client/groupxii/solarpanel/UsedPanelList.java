@@ -16,7 +16,7 @@ public class UsedPanelList {
     private MongoDatabase db = client.getDatabase("GoGreen");
     private MongoCollection<Document> collection = db.getCollection("solarPanelCollection");
 
-    public List<String> getEatenMealList() {
+    public List<String> getUsedPanelList() {
         return usedPanelList;
     }
 
@@ -27,25 +27,24 @@ public class UsedPanelList {
 
         documents = (List<Document>) collection.find().into(new ArrayList<Document>());
         for (Document document : documents) {
-            String panelA = document.getString("panelA");
-            String panelB = document.getString("panelB");
-            int highefficiencyrate = document.getInteger("highefficiencyrate");
-            int lowefficiencyrate = document.getInteger("lowefficiencyrate");
+            String paneltype = document.getString("paneltype");
             int reducedCo2 = document.getInteger("reducedCo2");
+            int efficiencyrate = document.getInteger("efficiencyrate");
+            int amount = document.getInteger("amount");
 
-            usedPanelList.add(toString(panelA, panelB,
-                    highefficiencyrate, lowefficiencyrate, reducedCo2));
+            usedPanelList.add(toString(paneltype,reducedCo2, efficiencyrate,
+                    amount));
         }
     }
 
     /**
      * create strings of the used panels from the database.
      */
-    public String toString(String panelA, String panelB,
-                           int highefficiencyrate, int lowefficiencyrate, int reducedCo2) {
-        String result = "You used " + panelA + " with " + highefficiencyrate
-                + " instead of " + panelB + " with " + lowefficiencyrate
-                + " , by doing so you reduced your carbon footprint with "
+    public String toString(String paneltype,
+                           int efficiencyrate, int reducedCo2, int amount) {
+        String result = "You used " + paneltype + " with an amount of " + amount
+                + "and with an efficiencyrate of" + efficiencyrate
+                + "%, by doing so you reduced your carbon footprint with "
                 + reducedCo2 + " grams of CO2";
         return result;
     }
@@ -56,10 +55,10 @@ public class UsedPanelList {
      */
     public String getLatestMeal() {
         Document document = collection.find().sort(new Document("_id", -1)).first();
-        String result = toString(document.getString("panelA"),
-                document.getString("panelB"),
-                document.getInteger("highefficiencyrate"), document.getInteger("lowefficiencyrate"),
-                document.getInteger("reducedCo2"));
+        String result = toString(document.getString("paneltype"),
+                document.getInteger("reducedCo2"),
+                document.getInteger("efficiencyrate"),
+                document.getInteger("amount"));
         return result;
     }
 

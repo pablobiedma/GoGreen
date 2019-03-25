@@ -19,13 +19,12 @@ public class SafePanel {
      * getRequest - Sends and interprets requests to GoGreen server.
      * @throws IOException if it receives unexpected response
      */
-    public String safePanel(String panelA, String panelB,
-                           int highefficiencyrate, int lowefficiencyrate) throws IOException {
+    public String safePanel(String paneltype,
+                           int efficiencyrate, int amount) throws IOException {
         // Url were to get the JSON data from, "transport" is now hardcoded
         // but will be a variable in the future.
-        URL url = new URL("http://" + host + ":" + port + "/savePanelData?panelA="
-                + panelA + "&highefficiencyrate=" + highefficiencyrate + "&panelB="
-                + panelB + "&lowefficiencyrate=" + lowefficiencyrate );
+        URL url = new URL("http://" + host + ":" + port + "/savePanelData?paneltype="
+                + paneltype + "&efficiencyrate=" + efficiencyrate + "&amount=" + amount );
         String readLine;
         // opens a http connection with the URL.
         HttpURLConnection connection = (HttpURLConnection) url.openConnection();

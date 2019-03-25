@@ -25,10 +25,8 @@ public class SavePanel {
     /**
      * Save the existing solarPanel data
      */
-    public void savePanelData(long userid, String panelA, String panelB, int highefficiencyrate,
-                              int lowefficiencyrate, int reducedco2) throws IOException {
-        PanelEntry entry = new PanelEntry(userid,panelA,panelB,highefficiencyrate,
-                lowefficiencyrate,reducedco2);
+    public void savePanelData(long userid, String paneltype, int efficiencyrate, int reducedco2 , int amount) throws IOException {
+        PanelEntry entry = new PanelEntry(userid,paneltype, efficiencyrate, reducedco2, amount);
         Database.instance.saveNonBlocking(entry);
         this.panelEntry = entry;
     }
