@@ -1,4 +1,5 @@
-image: maven:latest mongodb:latest
+image: maven:latest
+       mongo:latest
 stages:
 - build
 - test
