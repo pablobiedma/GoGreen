@@ -1,4 +1,4 @@
-package groupxii.server;
+package groupxii.server.controllers;
 
 import groupxii.database.PanelEntry;
 import groupxii.solarpanels.*;
