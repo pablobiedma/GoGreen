@@ -22,6 +22,7 @@ public class TransportationController {
      * Creates the /transport endpoint which accepts vehicle
      * as an argument and returns suggested alternative transportation method.
      */
+    @RequestMapping(method = RequestMethod.GET, value = "/transport")
     public Transportation transportation(@RequestParam(value = "vehicle",
             defaultValue = "Unknown") String vehicleType) {
         Transportation trans = new Transportation(counter.incrementAndGet(), vehicleType);
