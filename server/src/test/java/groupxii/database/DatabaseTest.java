@@ -27,13 +27,15 @@ public class DatabaseTest {
 		assertEquals(db.getDbName(), "testDB");
 	}
 
-//	@Test
-//	public void testConstructor() {
-//		Database db = new Database();
-//		assertEquals(db.getDbAddr(), "localhost");
-//		assertEquals(db.getDbPort(), 27017);
-//		assertEquals(db.getDbName(), "GoGreen");
-//	}
+	/*
+	@Test
+	public void testConstructor() {
+		Database db = new Database();
+		assertEquals(db.getDbAddr(), "localhost");
+		assertEquals(db.getDbPort(), 27017);
+		assertEquals(db.getDbName(), "GoGreen");
+	}
+	*/
 
 	@Test
 	public void testNotRunning() {
@@ -67,16 +69,18 @@ public class DatabaseTest {
 		//TODO Drop the test DB
 	}
 
-//	@Test
-//	public void testSaveNonBlocking() {
-//		Database.instance.setDbName("test");
-//		Database.instance.startDb();
-//		VehicleEntry entry = new VehicleEntry(1337, "car");
-//		Database.instance.saveNonBlocking(entry);
-//
-//		assertEquals(entry.toDbObject(), Database.instance.findVehicleEntry(entry));
-//		//TODO Drop the test DB
-//	}
+	/*
+	@Test
+	public void testSaveNonBlocking() {
+		Database.instance.setDbName("test");
+		Database.instance.startDb();
+		VehicleEntry entry = new VehicleEntry(1337, "car");
+		Database.instance.saveNonBlocking(entry);
+
+		assertEquals(entry.toDbObject(), Database.instance.findVehicleEntry(entry));
+		//TODO Drop the test DB
+	}
+	*/
 
 	@Test
 	public void testSaveMeal() {
@@ -87,17 +91,18 @@ public class DatabaseTest {
 		assertEquals(entry.toDbObject(), Database.instance.findMealEntry(entry));
 		//TODO Drop the test DB
 	}
-}
 
-//	@Test
-//	public void testSaveMealNonBlocking() {
-//		Database.instance.setDbName("test");
-//		Database.instance.startDb();
-//		MealEntry entry = new MealEntry(1, "apple", "pizza", 100, 100, 200);
-//		Database.instance.saveNonBlocking(entry);
-//
-//		assertEquals(entry.toDbObject(), Database.instance.findMealEntry(entry));
-//		//TODO Drop the test DB
-//	}
-//
-//}
+	/*
+	@Test
+	public void testSaveMealNonBlocking() {
+		Database.instance.setDbName("test");
+		Database.instance.startDb();
+		MealEntry entry = new MealEntry(1, "apple", "pizza", 100, 100, 200);
+		Database.instance.saveNonBlocking(entry);
+
+		assertEquals(entry.toDbObject(), Database.instance.findMealEntry(entry));
+		//TODO Drop the test DB
+	}
+	*/
+
+}

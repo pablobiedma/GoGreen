@@ -7,6 +7,10 @@ import com.mongodb.DBObject;
 import com.mongodb.MongoClient;
 import com.mongodb.MongoException;
 
+import java.lang.System;
+import java.lang.NullPointerException;
+import java.lang.NumberFormatException;
+
 /**
  * Manages all database related operations between the server logic and MongoDB.
  */
@@ -27,20 +31,19 @@ public class Database extends Thread {
 
     Database() {
         dbAddr = System.getenv("DB_ADDRESS");
-        if(dbAddr.equals(null)){
+        if (dbAddr == null) {
             dbAddr = "localhost";
         }
         try {
             dbPort = Integer.parseInt(System.getenv("DB_PORT"));
-        }catch (NullPointerException e){
+        } catch (NullPointerException e) {
             dbPort = 27017;
-        }catch (NumberFormatException e){
+        } catch (NumberFormatException e) {
             dbPort = 27017;
         }
         dbName = "GoGreen";
         running = false;
         active = false;
-
     }
 
     public boolean isRunning() {
