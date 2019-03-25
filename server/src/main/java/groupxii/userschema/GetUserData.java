@@ -16,6 +16,10 @@ public class GetUserData {
         return userList;
     }
 
+    public void setUserList(List<User> userList) {
+        this.userList = userList;
+    }
+
     /**
      * Read the data from the meallist.
      */
