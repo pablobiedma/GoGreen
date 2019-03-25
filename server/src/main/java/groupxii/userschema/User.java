@@ -4,7 +4,6 @@ import java.util.List;
 
 public class User {
 
-    private int id;
     private String username;
     private int points;
     private List<User> friendList;
@@ -12,19 +11,14 @@ public class User {
     private List<Achievements> achievements;
     private int reducedCo2;
 
-    public User(int id, String username, int points, List<User> friendList,
+    public User( String username, int points, List<User> friendList,
                 int badge, List<Achievements> achievements, int reducedCo2) {
-        this.id = id;
         this.username = username;
         this.points = points;
         this.friendList = friendList;
         this.badge = badge;
         this.achievements = achievements;
         this.reducedCo2 = reducedCo2;
-    }
-
-    public int getId() {
-        return id;
     }
 
     public String getUsername() {
