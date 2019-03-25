@@ -26,11 +26,21 @@ public class Database extends Thread {
     private boolean active;
 
     Database() {
-        dbAddr = "localhost";
-        dbPort = 27017;
+        dbAddr = System.getenv("DB_ADDRESS");
+        if(dbAddr.equals(null)){
+            dbAddr = "localhost";
+        }
+        try {
+            dbPort = Integer.parseInt(System.getenv("DB_PORT"));
+        }catch (NullPointerException e){
+            dbPort = 27017;
+        }catch (NumberFormatException e){
+            dbPort = 27017;
+        }
         dbName = "GoGreen";
         running = false;
         active = false;
+
     }
 
     public boolean isRunning() {
