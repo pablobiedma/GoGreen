@@ -17,13 +17,12 @@ build:
 test:
   stage: test
   script:
-  - echo "Testing"
-  - test -f "./client/pom.xml"
-  - test -f "./server/pom.xml"
+  - mvn test -f "./client/pom.xml"
+  - mvn test -f "./server/pom.xml"
 
 checkstyle:
-    stage: code-analysis
-    script:
-    - mvn  post-site -f "./client/pom.xml"
-    - mvn  post-site -f "./server/pom.xml"
-    allow_failure: true
+  stage: code-analysis
+  script:
+  - mvn  post-site -f "./client/pom.xml"
+  - mvn  post-site -f "./server/pom.xml"
+  allow_failure: true
