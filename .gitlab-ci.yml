@@ -5,7 +5,8 @@ image:   maven:latest
 
 stages:
 - build
-- test
+- test-server
+- test-client
 - code-analysis
 
 build:
@@ -13,12 +14,19 @@ build:
   script:
   - mvn package -Dmaven.test.skip=true
 
-test:
+test-server:
   services:
   - mongo:latest
   stage: test
   script:
-  - mvn test
+  - cd server; mvn test
+
+test-client:
+    services:
+    - mongo:latest
+    stage: test
+    script:
+    - cd client; mvn test
 
 
 checkstyle:
