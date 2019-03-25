@@ -17,14 +17,14 @@ build:
 test-server:
   services:
   - mongo:latest
-  stage: test
+  stage: test-server
   script:
   - cd server; mvn test
 
 test-client:
     services:
     - mongo:latest
-    stage: test
+    stage: test-client
     script:
     - cd client; mvn test
 
