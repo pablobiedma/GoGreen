@@ -27,13 +27,13 @@ public class DatabaseTest {
 		assertEquals(db.getDbName(), "testDB");
 	}
 
-	@Test
-	public void testConstructor() {
-		Database db = new Database();
-		assertEquals(db.getDbAddr(), "localhost");
-		assertEquals(db.getDbPort(), 27017);
-		assertEquals(db.getDbName(), "GoGreen");
-	}
+//	@Test
+//	public void testConstructor() {
+//		Database db = new Database();
+//		assertEquals(db.getDbAddr(), "localhost");
+//		assertEquals(db.getDbPort(), 27017);
+//		assertEquals(db.getDbName(), "GoGreen");
+//	}
 
 	@Test
 	public void testNotRunning() {
