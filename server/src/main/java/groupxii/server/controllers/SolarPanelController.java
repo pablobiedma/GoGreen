@@ -49,34 +49,25 @@ public class SolarPanelController {
      then this method will store the data in the database.
      */
     @RequestMapping(method = RequestMethod.GET, value = "/savePanelData")
-    public void savePanelData(@RequestParam(value = "panelA",
-            defaultValue = "Unknown") String panelA, @RequestParam(value = "highefficiencyrate",
-            defaultValue = "0") int highefficiencyrate, @RequestParam(value = "panelB",
-            defaultValue = "Unknown") String panelB, @RequestParam(value = "lowefficiencyrate",
-            defaultValue = "0") int lowefficiencyrate) throws IOException {
-        int reducedCO2 = getReducedCO2(panelA,highefficiencyrate,panelB,lowefficiencyrate);
+    public void savePanelData(@RequestParam(value = "paneltype",
+            defaultValue = "Unknown") String paneltype, @RequestParam(value = "efficiencyrate",
+            defaultValue = "0") int efficiencyrate, @RequestParam(value = "amount",
+            defaultValue = "0") int amount) throws IOException {
+        int reducedCO2 = getReducedCO2(paneltype);
         savePanel.setPanelList(this.panelList);
-        savePanel.savePanelData(counter.incrementAndGet(), panelA,panelB,highefficiencyrate,lowefficiencyrate,reducedCO2);
+        savePanel.savePanelData(counter.incrementAndGet(), paneltype,efficiencyrate,reducedCO2, amount);
 
     }
 
-//    public PanelEntry getPanelData(@RequestParam(value = "panelA",
-//            defaultValue = "Unknown") String panelA, @RequestParam(value = "highefficiencyrate",
-//            defaultValue = "0") int highefficiencyrate, @RequestParam(value = "panelB",
-//            defaultValue = "Unknown") String panelB, @RequestParam(value = "lowefficiencyrate",
-//            defaultValue = "0") int lowefficiencyrate) throws IOException {
-//        savePanelData(panelA,highefficiencyrate,panelB,lowefficiencyrate);
-//        return savePanel.getPanelEntry();
-//    }
-@RequestMapping(method = RequestMethod.GET, value = "/getReducedCO2")
-    public int getReducedCO2(@RequestParam(value = "panelA",
-            defaultValue = "Unknown") String panelA, @RequestParam(value = "highefficiencyrate",
-            defaultValue = "0") int highefficiencyrate, @RequestParam(value = "panelB",
-            defaultValue = "Unknown") String panelB, @RequestParam(value = "lowefficiencyrate",
-            defaultValue = "0") int lowefficiencyrate) throws IOException {
+    /**
+     * get method for the reduced co2.
+     */
+    @RequestMapping(method = RequestMethod.GET, value = "/getReducedCO2")
+    public int getReducedCO2(@RequestParam(value = "paneltype",
+            defaultValue = "Unknown") String paneltype) throws IOException {
         panelCalculations.setPanelList(this.panelList);
 
-        int reducedCO2 =  panelCalculations.reducedCO2(panelB, lowefficiencyrate, panelCalculations.calculateCO2(panelA,highefficiencyrate));
+        int reducedCO2 =  panelCalculations.calculateCO2(paneltype);
         return reducedCO2;
     }
 }

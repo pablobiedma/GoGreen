@@ -31,8 +31,8 @@ public class PanelData {
             String name = node.get("panelname").asText();
             int co2 = node.get("grams_co2_by_panel").asInt();
             int efficiencyrate = node.get("efficiencyrate_in_%").asInt();
-
-            panelList.add(new Panel(name, co2, efficiencyrate));
+            int amount = node.get("amount").asInt();
+            panelList.add(new Panel(name, co2, efficiencyrate, amount));
             elements.next();
         }
     }
