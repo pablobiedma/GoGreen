@@ -1,4 +1,4 @@
-package groupxii.server;
+package groupxii.server.controllers;
 
 import groupxii.database.PanelEntry;
 import groupxii.solarpanels.*;
@@ -68,7 +68,7 @@ public class SolarPanelController {
 //        savePanelData(panelA,highefficiencyrate,panelB,lowefficiencyrate);
 //        return savePanel.getPanelEntry();
 //    }
-@RequestMapping(method = RequestMethod.GET, value = "/getReducedCO2")
+    @RequestMapping(method = RequestMethod.GET, value = "/getReducedCO2")
     public int getReducedCO2(@RequestParam(value = "panelA",
             defaultValue = "Unknown") String panelA, @RequestParam(value = "highefficiencyrate",
             defaultValue = "0") int highefficiencyrate, @RequestParam(value = "panelB",
