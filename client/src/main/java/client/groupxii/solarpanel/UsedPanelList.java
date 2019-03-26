@@ -41,7 +41,7 @@ public class UsedPanelList {
      * create strings of the used panels from the database.
      */
     public String toString(String paneltype,
-                           int efficiencyrate, int reducedCo2, int amount) {
+                           int reducedCo2,int efficiencyrate, int amount) {
         String result = "You used " + paneltype + " with an amount of " + amount
                 + "and with an efficiencyrate of" + efficiencyrate
                 + "%, by doing so you reduced your carbon footprint with "

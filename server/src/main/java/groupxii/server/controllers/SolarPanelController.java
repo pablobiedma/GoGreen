@@ -55,7 +55,7 @@ public class SolarPanelController {
             defaultValue = "0") int amount) throws IOException {
         int reducedCO2 = getReducedCO2(paneltype);
         savePanel.setPanelList(this.panelList);
-        savePanel.savePanelData(counter.incrementAndGet(), paneltype,efficiencyrate,reducedCO2, amount);
+        savePanel.savePanelData(counter.incrementAndGet(), paneltype, reducedCO2 , efficiencyrate, amount);
 
     }
 

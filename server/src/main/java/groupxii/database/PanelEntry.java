@@ -17,7 +17,7 @@ public class PanelEntry extends Entry {
     /**
      * Constructor of PanelEntry
      */
-    public PanelEntry(long userid, String paneltype, int efficiencyrate, int reducedco2, int amount) {
+    public PanelEntry(long userid, String paneltype,int reducedco2, int efficiencyrate, int amount) {
         this.userid = userid;
         this.paneltype = paneltype;
         this.efficiencyrate = efficiencyrate;
@@ -61,8 +61,8 @@ public class PanelEntry extends Entry {
         return super.toBasicDbObject()
                 .append("userid", this.userid)
                 .append("paneltype",this.paneltype)
-                .append("efficiencyrate",this.efficiencyrate)
                 .append("reducedco2", this.reducedco2)
+                .append("efficiencyrate",this.efficiencyrate)
                 .append("amount",this.amount);
 
     }
