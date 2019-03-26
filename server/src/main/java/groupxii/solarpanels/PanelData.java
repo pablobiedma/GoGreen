@@ -33,7 +33,7 @@ public class PanelData {
             int efficiencyrate = node.get("efficiencyrate_in_%").asInt();
             int amount = node.get("amount").asInt();
             panelList.add(new Panel(name, co2, efficiencyrate, amount));
-            elements.next();
+            //elements.next();
         }
     }
 }

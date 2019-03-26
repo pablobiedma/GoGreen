@@ -26,10 +26,26 @@ public class SolarPanelController {
      this has only to be done once the server starts.
      in the future we will load this also on the boot of the server.
      */
-    @RequestMapping(method = RequestMethod.GET, value = "/getPanelData")
-    public void getPanelData() throws IOException {
+    @RequestMapping(method = RequestMethod.GET, value = "/setPanelData")
+    public void setPanelData() throws IOException {
         panelData.readPanelListData();
         this.panelList = panelData.getPanelList();
+    }
+
+    /**
+     *This method will return the List of panels which are requested.
+     */
+    @RequestMapping(method = RequestMethod.GET, value = "/getPanelData")
+    public List<Panel> getPanelData() {
+        return panelData.getPanelList();
+    }
+
+    /**
+     * This method returns the panelEntry which is saved.
+     */
+    @RequestMapping(method = RequestMethod.GET, value = "/getPanelData")
+    public PanelEntry getPanelEntry() {
+        return savePanel.getPanelEntry();
     }
 
     /**

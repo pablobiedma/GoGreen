@@ -1,5 +1,6 @@
-package groupxii.server;
+package groupxii.server.controllers;
 
+import groupxii.server.Transportation;
 import groupxii.server.controllers.TransportationController;
 import org.junit.Test;
 import static org.junit.Assert.assertEquals;

@@ -38,7 +38,7 @@ public class PanelCalculations {
     /**
      *     this is the last calculation that is done, the points for the user are calculated.
      */
-    public int calculatePoints() {
-        return (int) this.totalco2perpaneltype * 5;
+    public int calculatePoints() throws IOException {
+        return  this.totalco2perpaneltype * 5;
     }
 }
