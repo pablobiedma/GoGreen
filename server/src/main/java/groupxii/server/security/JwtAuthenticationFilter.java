@@ -1,14 +1,14 @@
 package groupxii.server.security;
 
-//import io.jsonwebtoken.Jwts;
-//import io.jsonwebtoken.security.Keys;
-//import io.jsonwebtoken.SignatureAlgorithm;
+import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.security.Keys;
+import io.jsonwebtoken.SignatureAlgorithm;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 //import org.springframework.security.core.GrantedAuthority;
-//import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 import javax.servlet.FilterChain;
@@ -32,8 +32,10 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
     public Authentication attemptAuthentication(HttpServletRequest request,
                                                 HttpServletResponse response) throws AuthenticationException { //LOOOONG
 	    //TODO read those from the request body
-        String username = request.getParameter("username"); //BAD
-        String password = request.getParameter("password"); //VERY VERY BAD
+        //String username = request.getParameter("username"); //BAD
+        //String password = request.getParameter("password"); //VERY VERY BAD
+	String username = new String("user");
+	String password = new String("pass");
         UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(username, password); // JAVA IS SHIT LANGUAGE
 
         return authenticationManager.authenticate(authenticationToken);
@@ -44,8 +46,12 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
                                             FilterChain filterChain, Authentication authentication) {
         //TODO
         //figure out this MESS
+//        User user = (User)authentication.getPrincipal();
+	//TODO generate those, or read them from a file
+	String key = new String("aNdRgUkXp2s5v8y/B?E(H+MbQeShVmYq3t6w9z$C&F)J@NcRfUjWnZr4u7x!A%D*");
+	//TODO figure out a good value for this
+	int expirationTime = 86400000;
     /*
-        var user = ((User) authentication.getPrincipal());
 
         var roles = user.getAuthorities()
             .stream()
@@ -64,7 +70,13 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
             .claim("rol", roles)
             .compact();
 
-        response.addHeader(SecurityConstants.TOKEN_HEADER, SecurityConstants.TOKEN_PREFIX + token);
     */
+	String jws = Jwts.builder()
+//		.setSubject(user.getUsername())
+		.signWith(Keys.hmacShaKeyFor(key.getBytes()))
+		.setExpiration(new Date(System.currentTimeMillis() + expirationTime))
+		.compact();
+
+        response.addHeader("Authorization", "Bearer " + jws);
     }
 }
