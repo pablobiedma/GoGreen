@@ -15,8 +15,8 @@ build:
   - mvn package -Dmaven.test.skip=true
 
 test-server:
-#  services:
-#  - mongo:latest
+  services:
+  - mongo:latest
   stage: test-server
   script:
   - cd server; mvn test
