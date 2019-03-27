@@ -32,5 +32,4 @@ test-client:
 checkstyle:
   stage: code-analysis
   script:
-  - mvn  post-site
-  allow_failure: true
+  - mvn  checkstyle:check
