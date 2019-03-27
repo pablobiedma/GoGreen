@@ -23,11 +23,11 @@ import java.util.Date;
 import java.io.IOException;
 import java.util.stream.Collectors;
 
-public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilter {
+public class JwtGeneratingFilter extends UsernamePasswordAuthenticationFilter {
 
     private final AuthenticationManager authenticationManager;
 
-    public JwtAuthenticationFilter(AuthenticationManager authenticationManager) {
+    public JwtGeneratingFilter(AuthenticationManager authenticationManager) {
         this.authenticationManager = authenticationManager;
 
         setFilterProcessesUrl("/login"); //BAD
@@ -72,8 +72,7 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
     @Override
     protected void successfulAuthentication(HttpServletRequest request, HttpServletResponse response,
                                             FilterChain filterChain, Authentication authentication) {
-        //TODO
-        //figure out this MESS
+        //figured out this MESS for the most part
         String username = authentication.getPrincipal().toString();
 	//TODO generate those, or read them from a file
 	String key = new String("aNdRgUkXp2s5v8y/B?E(H+MbQeShVmYq3t6w9z$C&F)J@NcRfUjWnZr4u7x!A%D*");
