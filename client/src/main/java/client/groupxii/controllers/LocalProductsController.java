@@ -7,16 +7,16 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Text;
 
 import java.io.IOException;
 import java.net.URL;
 import java.util.*;
+
+import java.awt.Desktop;
+import java.net.URI;
 
 public class LocalProductsController implements Initializable {
 
@@ -25,9 +25,6 @@ public class LocalProductsController implements Initializable {
 
     @FXML
     private ListView<String> localShops = new ListView();
-
-    @FXML
-
 
     private List<String> listViewItems = new ArrayList<String>();
     private ObservableList<String> listViewObservable;
@@ -47,6 +44,18 @@ public class LocalProductsController implements Initializable {
         listViewObservable = FXCollections.observableArrayList(listViewItems);
         System.out.println(listItemsStr);
         localShops.getItems().addAll(listViewObservable);
+    }
+
+    @FXML
+    public void navigate(MouseEvent event) throws Exception {
+        String url = localShops.getSelectionModel().getSelectedItem().substring(8 , localShops.getSelectionModel().getSelectedItem().indexOf(" - "));
+        url = url.replace(' ', '+');
+        Desktop.getDesktop().browse(URI.create("https://www.google.com/maps/search/?api=1&query=" + url));
+    }
+
+    @FXML
+    public void boughtLocalProduct(MouseEvent event) throws Exception {
+
     }
 
     @FXML

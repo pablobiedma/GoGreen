@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Rectangle2D?>
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
 <?import javafx.scene.image.Image?>
@@ -40,7 +41,9 @@
       </Pane>
       <Pane layoutY="125.0" prefHeight="534.0" prefWidth="904.0">
          <children>
-            <ListView fx:id="localShops" layoutX="20.0" layoutY="14.0" prefHeight="425.0" prefWidth="850.0" style="-fx-font-size: 14px; -fx-cell-size: 15px; -fx-font-weight: bold" />
+            <ListView fx:id="localShops" layoutX="20.0" layoutY="14.0" prefHeight="382.0" prefWidth="865.0" style="-fx-font-size: 14px; -fx-cell-size: 15px; -fx-font-weight: bold" />
+            <Button fx:id="navigate" onMouseClicked="#navigate" layoutX="139.0" layoutY="431.0" mnemonicParsing="false" prefHeight="67.0" prefWidth="206.0" stylesheets="@../fullpackstyling.css" text="NAVIGATE TO SHOP" />
+            <Button fx:id="boughtLocalProduct" onMouseClicked="#boughtLocalProduct" layoutX="544.0" layoutY="431.0" mnemonicParsing="false" prefHeight="67.0" prefWidth="206.0" stylesheets="@../fullpackstyling.css" text="I BOUGHT A LOCAL PRODUCT" />
          </children></Pane>
    </children>
 </AnchorPane>
