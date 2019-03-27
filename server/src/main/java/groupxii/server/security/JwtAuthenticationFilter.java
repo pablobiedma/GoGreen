@@ -32,10 +32,8 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
     public Authentication attemptAuthentication(HttpServletRequest request,
                                                 HttpServletResponse response) throws AuthenticationException { //LOOOONG
 	    //TODO read those from the request body
-        //String username = request.getParameter("username"); //BAD
-        //String password = request.getParameter("password"); //VERY VERY BAD
-	String username = new String("user");
-	String password = new String("pass");
+        String username = request.getParameter("username"); //BAD
+        String password = request.getParameter("password"); //VERY VERY BAD
         UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(username, password); // JAVA IS SHIT LANGUAGE
 
         return authenticationManager.authenticate(authenticationToken);
@@ -74,6 +72,7 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
 	String jws = Jwts.builder()
 //		.setSubject(user.getUsername())
 		.signWith(Keys.hmacShaKeyFor(key.getBytes()))
+		.setIssuer("goGreen-server")
 		.setExpiration(new Date(System.currentTimeMillis() + expirationTime))
 		.compact();
 

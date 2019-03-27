@@ -3,6 +3,7 @@ package groupxii.server.security;
 //TODO imports(Database, compare passwords, etc)
 
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
@@ -15,8 +16,14 @@ public class CustomAuthenticationManager implements AuthenticationManager {
     @Override
     public Authentication authenticate(Authentication authentication)
                                            throws AuthenticationException { 
-        String username = authentication.getName();
-        String password = authentication.getCredentials().toString();
+	Object principal = authentication.getPrincipal();
+	Object credentials = authentication.getCredentials();
+	if (principal == null || credentials == null)
+		throw new BadCredentialsException("Username or password are null");
+
+        String username = principal.toString();
+        String password = credentials.toString();
+
 
         //TODO fetch users from DB
         if (username.equals("user")) {
@@ -25,6 +32,6 @@ public class CustomAuthenticationManager implements AuthenticationManager {
             return new UsernamePasswordAuthenticationToken(username, password, grantedAuths);
         }
     
-        return null;
+	throw new BadCredentialsException("Authentication failed");
     }
 }
