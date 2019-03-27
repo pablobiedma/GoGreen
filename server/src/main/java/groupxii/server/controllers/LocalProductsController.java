@@ -4,6 +4,7 @@ import groupxii.localproducts.LocalShop;
 import groupxii.localproducts.ReadLocalProductJson;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.io.IOException;
@@ -22,7 +23,8 @@ public class LocalProductsController {
     }
 
     @RequestMapping(method = RequestMethod.GET, value = "/localshops")
-    public String localShopData() throws IOException {
+    public String localShopData(@RequestParam(value = "location", defaultValue = "52.011578,4.357068") String location) throws IOException {
+        readLocalProductJson.setLocation(location);
         readLocalProductJson.readLocalProductJson();
         //setLocalShopList(readLocalProductJson.getLocalShopList());
         responseString = readLocalProductJson.localShopToString();

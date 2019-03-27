@@ -11,6 +11,11 @@ import java.util.List;
 public class ReadLocalProductJson {
 
     private List<LocalShop> localShopList = new ArrayList<>();
+    private String location = "";
+
+    public void setLocation(String location) {
+        this.location = location;
+    }
 
     public void setLocalShopList(List<LocalShop> localShopList) {
         this.localShopList = localShopList;
@@ -23,7 +28,7 @@ public class ReadLocalProductJson {
     public void readLocalProductJson() throws IOException {
         GetLocalProductsJson getLocalProductsJson = new GetLocalProductsJson();
         ObjectMapper obj = new ObjectMapper();
-        JsonNode rootNode = obj.readTree(getLocalProductsJson.getLocalShopJson());
+        JsonNode rootNode = obj.readTree(getLocalProductsJson.getLocalShopJson(location));
 
         //iterates over all the elements in the JsonNode and stores the data we need
         JsonNode results = rootNode.path("results");
@@ -32,7 +37,8 @@ public class ReadLocalProductJson {
             JsonNode node = elements.next();
             String icon = node.get("icon").asText();
             String name = node.get("name").asText();
-            boolean openingHours = node.get("open_now").asBoolean();
+            //boolean openingHours = node.get("open_now").asBoolean();
+            boolean openingHours = true;
             int rating = node.get("rating").asInt();
             localShopList.add(new LocalShop(name, icon, rating, openingHours));
             elements.next();
