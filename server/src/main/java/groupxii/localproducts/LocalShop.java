@@ -3,43 +3,33 @@ package groupxii.localproducts;
 public class LocalShop {
 
     private String name;
-    private String icon;
-    private int rating;
-    private boolean openNow;
+    private double rating;
+    private String location;
 
-    public LocalShop(String name, String icon, int rating, boolean openNow){
+    public LocalShop(String name, double rating, String location){
         this.name = name;
-        this.icon = icon;
         this.rating = rating;
-        this.openNow = openNow;
-    }
-
-    public void setIcon(String icon) {
-        this.icon = icon;
+        this.location = location;
     }
 
     public void setName(String name) {
         this.name = name;
     }
 
-    public void setOpenNow(boolean openNow) {
-        this.openNow = openNow;
+    public void setLocation(String location) {
+        this.location = location;
     }
 
-    public void setRating(int rating) {
+    public void setRating(double rating) {
         this.rating = rating;
     }
 
-    public boolean isOpenNow() {
-        return openNow;
+    public String getLocation() {
+        return location;
     }
 
-    public int getRating() {
+    public double getRating() {
         return rating;
-    }
-
-    public String getIcon() {
-        return icon;
     }
 
     public String getName() {

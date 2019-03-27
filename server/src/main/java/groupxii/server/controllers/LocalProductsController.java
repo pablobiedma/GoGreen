@@ -28,6 +28,7 @@ public class LocalProductsController {
         readLocalProductJson.readLocalProductJson();
         //setLocalShopList(readLocalProductJson.getLocalShopList());
         responseString = readLocalProductJson.localShopToString();
+        readLocalProductJson.clearList();
         return responseString;
     }
 }

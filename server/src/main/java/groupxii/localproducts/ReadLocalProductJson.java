@@ -35,12 +35,11 @@ public class ReadLocalProductJson {
         Iterator<JsonNode> elements = results.elements();
         while (elements.hasNext()) {
             JsonNode node = elements.next();
-            String icon = node.get("icon").asText();
             String name = node.get("name").asText();
-            //boolean openingHours = node.get("open_now").asBoolean();
-            boolean openingHours = true;
-            int rating = node.get("rating").asInt();
-            localShopList.add(new LocalShop(name, icon, rating, openingHours));
+            String location = node.get("vicinity").asText();
+            location = location.replaceAll(", ", " - ");
+            double rating = node.get("rating").asDouble();
+            localShopList.add(new LocalShop(name, rating, location));
             elements.next();
         }
     }
@@ -48,9 +47,13 @@ public class ReadLocalProductJson {
     public String localShopToString(){
         String result = "";
         for(int i = 0; i < localShopList.size(); i++){
-            result = result + "  " +  localShopList.get(i).getName() + "  " + localShopList.get(i).getIcon() + "  " + localShopList.get(i).isOpenNow() + "  " + localShopList.get(i).getRating() + ", ";
+            result = result + " SHOP:  " +  localShopList.get(i).getName() + "  - LOCATED AT:  " + localShopList.get(i).getLocation() + "  - RATING:  " + localShopList.get(i).getRating() + ", ";
         }
         System.out.println(result);
         return result;
+    }
+
+    public void clearList(){
+        localShopList.clear();
     }
 }
