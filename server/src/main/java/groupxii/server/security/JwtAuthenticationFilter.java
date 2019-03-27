@@ -44,7 +44,7 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
                                             FilterChain filterChain, Authentication authentication) {
         //TODO
         //figure out this MESS
-//        User user = (User)authentication.getPrincipal();
+        String username = authentication.getPrincipal().toString();
 	//TODO generate those, or read them from a file
 	String key = new String("aNdRgUkXp2s5v8y/B?E(H+MbQeShVmYq3t6w9z$C&F)J@NcRfUjWnZr4u7x!A%D*");
 	//TODO figure out a good value for this
@@ -70,9 +70,10 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
 
     */
 	String jws = Jwts.builder()
-//		.setSubject(user.getUsername())
+		.setSubject(username)
 		.signWith(Keys.hmacShaKeyFor(key.getBytes()))
 		.setIssuer("goGreen-server")
+		.setIssuedAt(new Date(System.currentTimeMillis()))
 		.setExpiration(new Date(System.currentTimeMillis() + expirationTime))
 		.compact();
 
