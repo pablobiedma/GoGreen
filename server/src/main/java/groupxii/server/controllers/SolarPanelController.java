@@ -1,7 +1,11 @@
 package groupxii.server.controllers;
 
 import groupxii.database.PanelEntry;
-import groupxii.solarpanels.*;
+import groupxii.solarpanels.Panel;
+import groupxii.solarpanels.PanelCalculations;
+import groupxii.solarpanels.PanelData;
+import groupxii.solarpanels.PanelNameList;
+import groupxii.solarpanels.SavePanel;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -33,7 +37,7 @@ public class SolarPanelController {
     }
 
     /**
-     *This method will return the List of panels which are requested.
+     * This method will return the List of panels which are requested.
      */
     @RequestMapping(method = RequestMethod.GET, value = "/getPanelData")
     public List<Panel> getPanelData() {
@@ -41,7 +45,7 @@ public class SolarPanelController {
     }
 
     /**
-     * This method returns the panelEntry which is saved.
+     * This method will return the panelEntry which is saved.
      */
     @RequestMapping(method = RequestMethod.GET, value = "/getPanelData")
     public PanelEntry getPanelEntry() {
@@ -71,7 +75,8 @@ public class SolarPanelController {
             defaultValue = "0") int amount) throws IOException {
         int reducedCO2 = getReducedCO2(paneltype);
         savePanel.setPanelList(this.panelList);
-        savePanel.savePanelData(counter.incrementAndGet(), paneltype, reducedCO2 , efficiencyrate, amount);
+        savePanel.savePanelData(counter.incrementAndGet(), paneltype,
+                reducedCO2 , efficiencyrate, amount);
 
     }
 

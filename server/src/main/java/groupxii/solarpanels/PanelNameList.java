@@ -19,7 +19,7 @@ public class PanelNameList {
      * Human-friendly String representation of PanelNameList.
      */
     public String getPanelNameList() {
-        for(int i = 0; i < panelList.size(); i++) {
+        for (int i = 0; i < panelList.size(); i++) {
             result = result + panelList.get(i).getPanelname() + ", ";
         }
         result = result.substring(0, result.length() - 2);
