@@ -1,6 +1,6 @@
 before_script:
-#- export DB_ADDRESS=mongo
-#- export DB_PORT=27017
+- export DB_ADDRESS=mongo
+- export DB_PORT=27017
 image:   maven:latest
 
 stages:
