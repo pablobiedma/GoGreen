@@ -1,6 +1,5 @@
 package client.groupxii.controllers;
 
-import client.groupxii.vegetarianmeal.EatenMealList;
 import client.groupxii.vegetarianmeal.SafeMeal;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -40,7 +39,7 @@ public class VegetarianMealController implements Initializable {
     private Text textfield = new Text();
 
     @FXML
-    private ListView<String> eatenMeals = new ListView();
+    private ListView<String> eatenMealsListView = new ListView();
 
     private String goodFoodName = "";
     private String badFoodName = "";
@@ -48,12 +47,6 @@ public class VegetarianMealController implements Initializable {
     private String listItems = "";
     private SafeMeal safeMeal = new SafeMeal();
     private List<String> listViewItems = new ArrayList<String>();
-    private EatenMealList eatenMealList = new EatenMealList();
-    private ObservableList<String> listViewObservable;
-
-    public void setListViewItems(List<String> listViewItems) {
-        this.listViewItems = listViewItems;
-    }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -76,14 +69,14 @@ public class VegetarianMealController implements Initializable {
     @FXML
     public void updateListView() {
         try {
-            eatenMealList.readDatabase();
+            String eatenMeals = new Scanner(new URL(host + "eatenMealList").openStream(),
+                    "UTF-8").nextLine();
+            List<String> items = Arrays.asList(eatenMeals.split(" - "));
+            ObservableList<String> eatenMealsObservable = FXCollections.observableArrayList(items);
+            eatenMealsListView.getItems().addAll(eatenMealsObservable);
         } catch (IOException e) {
             e.printStackTrace();
         }
-        setListViewItems(eatenMealList.getEatenMealList());
-        listViewObservable = FXCollections.observableArrayList(listViewItems);
-        eatenMeals.getItems().addAll(listViewObservable);
-        //eatenMeals.setItems(listViewObservable);
     }
 
 
@@ -101,7 +94,6 @@ public class VegetarianMealController implements Initializable {
         int goodServingSize = (int) slider.getValue();
         int badServingSize = (int) slider1.getValue();
         safeMeal.safeMeal(goodFoodName, badFoodName, goodServingSize, badServingSize);
-        //textfield.setText(enteredMeal);
-        eatenMeals.getItems().add(eatenMealList.getLatestMeal());
+        updateListView();
     }
 }
