@@ -70,7 +70,7 @@
                </font>
             </Text>
             <Text fx:id="textfield" layoutX="212.0" layoutY="410.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="478.13665771484375" />
-            <ListView fx:id="eatenMeals" layoutX="48.0" layoutY="229.0" prefHeight="255.0" prefWidth="328.0" />
+            <ListView fx:id="eatenMealsListView" layoutX="48.0" layoutY="229.0" prefHeight="255.0" prefWidth="328.0" />
          </children>
       </Pane>
    </children>
