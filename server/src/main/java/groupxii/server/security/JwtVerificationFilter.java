@@ -44,14 +44,11 @@ public class JwtVerificationFilter extends BasicAuthenticationFilter{
 	}
 
 	private UsernamePasswordAuthenticationToken getAuthenticaion(String jwsString) {
-
-		String key = new String("aNdRgUkXp2s5v8y/B?E(H+MbQeShVmYq3t6w9z$C&F)J@NcRfUjWnZr4u7x!A%D*");
-
 		Jws<Claims> jws;
 
 		try {
 			jws = Jwts.parser()
-				.setSigningKey(key.getBytes())
+				.setSigningKey(SecurityKey.instance.getKey())
 				.parseClaimsJws(jwsString.replace("Bearer ", ""));
 			String username = new String(jws.getBody().getSubject());
 			return new UsernamePasswordAuthenticationToken(username, null);

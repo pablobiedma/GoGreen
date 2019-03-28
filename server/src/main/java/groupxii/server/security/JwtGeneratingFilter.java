@@ -74,8 +74,6 @@ public class JwtGeneratingFilter extends UsernamePasswordAuthenticationFilter {
                                             FilterChain filterChain, Authentication authentication) {
         //figured out this MESS for the most part
         String username = authentication.getPrincipal().toString();
-	//TODO generate those, or read them from a file
-	String key = new String("aNdRgUkXp2s5v8y/B?E(H+MbQeShVmYq3t6w9z$C&F)J@NcRfUjWnZr4u7x!A%D*");
 	//TODO figure out a good value for this
 	int expirationTime = 86400000;
     /*
@@ -100,7 +98,7 @@ public class JwtGeneratingFilter extends UsernamePasswordAuthenticationFilter {
     */
 	String jws = Jwts.builder()
 		.setSubject(username)
-		.signWith(Keys.hmacShaKeyFor(key.getBytes()))
+		.signWith(Keys.hmacShaKeyFor(SecurityKey.instance.getKey()))
 		.setHeaderParam("typ", "JWT")
 		.setIssuer("goGreen-server")
 		.setIssuedAt(new Date(System.currentTimeMillis()))
