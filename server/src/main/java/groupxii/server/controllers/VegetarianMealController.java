@@ -1,7 +1,12 @@
 package groupxii.server.controllers;
 
 import groupxii.database.MealEntry;
+import groupxii.server.ServerApplication;
 import groupxii.vegetarianmeal.*;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.context.event.ApplicationReadyEvent;
+import org.springframework.context.event.EventListener;
+import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -27,7 +32,7 @@ public class VegetarianMealController {
     this has only to be done once the server starts.
     in the future we will load this also on the boot of the server.
      */
-    @RequestMapping(method = RequestMethod.GET, value = "/getMealData")
+    @EventListener(ApplicationReadyEvent.class)
     public void getMealData() throws IOException {
         getMealData.readMealListData();
         this.mealList = getMealData.getMealList();
