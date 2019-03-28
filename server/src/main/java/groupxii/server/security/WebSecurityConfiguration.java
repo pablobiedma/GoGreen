@@ -5,6 +5,7 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
@@ -13,7 +14,8 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 @EnableWebSecurity
 public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
 
-    private final AuthenticationManager authenticationManager = new CustomAuthenticationManager();
+    private final AuthenticationManager credentialsAuthenticationManager = new CredentialsDbAuthenticationManager();
+    protected final AuthenticationManager usernameAuthenticationManager = new UsernameAuthenticationManager();
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
@@ -23,9 +25,12 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
         //Block protected endpoints
         http
             .csrf().disable() // Unecessary in REST
+	    .sessionManagement()
+	                .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+	    .and()
 	    .httpBasic().disable()
-	    .addFilter(new JwtGeneratingFilter(authenticationManager))
-	    .addFilter(new JwtVerificationFilter(authenticationManager))
+	    .addFilter(new JwtGeneratingFilter(credentialsAuthenticationManager))
+	    .addFilter(new JwtVerificationFilter(usernameAuthenticationManager))
 	    ;
 	http.authorizeRequests()
 		.antMatchers("/free").permitAll()

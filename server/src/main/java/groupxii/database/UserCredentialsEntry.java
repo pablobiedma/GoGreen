@@ -1,4 +1,4 @@
-package groupxii.server.database;
+package groupxii.database;
 
 import com.mongodb.DBObject;
 
@@ -26,8 +26,8 @@ public class UserCredentialsEntry extends Entry {
       return this.recoveryEmail;
    }
 
-   public toDbObject() {
-      super.toBasicDbObject()
+   public DBObject toDbObject() {
+      return super.toBasicDbObject()
          .append("username", this.username)
          .append("password", this.password)
          .append("recoveryEmail", this.recoveryEmail);

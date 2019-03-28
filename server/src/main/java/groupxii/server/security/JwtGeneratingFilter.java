@@ -101,6 +101,7 @@ public class JwtGeneratingFilter extends UsernamePasswordAuthenticationFilter {
 	String jws = Jwts.builder()
 		.setSubject(username)
 		.signWith(Keys.hmacShaKeyFor(key.getBytes()))
+		.setHeaderParam("typ", "JWT")
 		.setIssuer("goGreen-server")
 		.setIssuedAt(new Date(System.currentTimeMillis()))
 		.setExpiration(new Date(System.currentTimeMillis() + expirationTime))
