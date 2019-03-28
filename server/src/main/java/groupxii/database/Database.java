@@ -25,6 +25,7 @@ public class Database extends Thread {
 
     private DBCollection vehicleTrackerCollection;
     private DBCollection vegetarianMealCollection;
+    private DBCollection userCredentialsCollection;
 
     private boolean running;
     private boolean active;
@@ -87,6 +88,7 @@ public class Database extends Thread {
             mongodb = this.mongoClient.getDB(this.getDbName());
             vehicleTrackerCollection = mongodb.getCollection("vehicleTrackerCollection");
             vegetarianMealCollection = mongodb.getCollection("vegetarianMealCollection");
+	    userCredentialsCollection = mongodb.getCollection("userCredentialsCollection");
             running = true;
         } catch (MongoException e) {
             // I don't think this state is reachable.
@@ -119,6 +121,9 @@ public class Database extends Thread {
         if (entry instanceof VehicleEntry) {
             this.vehicleTrackerCollection.insert(entry.toDbObject());
         }
+	if (entry instanceof UserCredentialsEntry) {
+		this.userCredentialsCollection.insert(entry.toDbObject());
+	}
         this.active = false;
     }
 
