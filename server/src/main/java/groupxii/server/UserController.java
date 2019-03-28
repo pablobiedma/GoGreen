@@ -7,12 +7,14 @@ import groupxii.userschema.User;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicLong;
 
+@RestController
 public class UserController {
 
     private GetUserData userData = new GetUserData();
@@ -20,7 +22,7 @@ public class UserController {
     private SaveUser saveUser = new SaveUser();
     private final AtomicLong counter = new AtomicLong();
 
-    @RequestMapping(method = RequestMethod.GET, value = "/saveUserData")
+    @RequestMapping(method = RequestMethod.POST, value = "/saveUserData")
     public UserEntry saveUserData(@RequestParam(value = "username",
             defaultValue = "Unknown") String username,
                                   @RequestParam(value = "points",

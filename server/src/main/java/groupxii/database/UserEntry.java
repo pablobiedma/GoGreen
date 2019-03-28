@@ -3,7 +3,7 @@ package groupxii.database;
 
 import com.mongodb.DBObject;
 
-public class UserEntry extends Entry{
+public class UserEntry extends Entry {
 
     private long userId;
     private String username;
