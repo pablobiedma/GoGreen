@@ -23,7 +23,14 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
         //Block protected endpoints
         http
             .csrf().disable() // Unecessary in REST
-	    .addFilter(new JwtGeneratingFilter(authenticationManager));
+	    .httpBasic().disable()
+	    .addFilter(new JwtGeneratingFilter(authenticationManager))
+	    .addFilter(new JwtVerificationFilter(authenticationManager))
+	    ;
+	http.authorizeRequests()
+		.antMatchers("/free").permitAll()
+		.antMatchers("/protected").authenticated()
+	;
     }
 
     @Bean
