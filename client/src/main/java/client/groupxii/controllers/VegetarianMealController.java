@@ -59,7 +59,7 @@ public class VegetarianMealController implements Initializable {
         }
         eatenMealListViewItems = Arrays.asList(eatenMealListStr.split(" - "));
         ObservableList<String> eatenMealsObservable = FXCollections.observableArrayList(eatenMealListViewItems);
-        eatenMealsListView.getItems().addAll(eatenMealsObservable);
+        eatenMealsListView.setItems(eatenMealsObservable);
         List<String> items = Arrays.asList(foodNameListStr.split(", "));
         ObservableList<String> listObservable = FXCollections.observableArrayList(items);
         cb.getItems().addAll(listObservable);
@@ -79,7 +79,7 @@ public class VegetarianMealController implements Initializable {
         }
         eatenMealListViewItems = Arrays.asList(eatenMealListStr.split(" - "));
         ObservableList<String> eatenMealsObservable = FXCollections.observableArrayList(eatenMealListViewItems);
-        eatenMealsListView.getItems().addAll(eatenMealsObservable);
+        eatenMealsListView.setItems(eatenMealsObservable);
     }
 
     /**
