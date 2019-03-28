@@ -31,10 +31,13 @@ public class UserController {
                                           defaultValue = "Unknown") int badge,
                                   @RequestParam(value = "reducedCo2",
                                           defaultValue = "Unknown")
-                                          int reducedCo2) throws IOException {
+                                          int reducedCo2 ,
+                                  @RequestParam(value = "friendsId",
+                                          defaultValue = "Unknown")
+                                          List<Integer> friendsId) throws IOException {
         saveUser.setUserList(this.userList);
         saveUser.saveUser(counter.incrementAndGet(), username,points,
-                badge, reducedCo2);
+                badge, reducedCo2,friendsId);
         return saveUser.getUserEntry();
     }
 }

@@ -24,8 +24,8 @@ public class SaveUser {
         return userEntry;
     }
 
-    public void saveUser(long userId,String username,int points,int badge,int reducedCo2) throws IOException {
-        UserEntry userEntry = new UserEntry(userId,username,points,badge,reducedCo2);
+    public void saveUser(long userId,String username,int points,int badge,int reducedCo2,List<Integer> friendsId) throws IOException {
+        UserEntry userEntry = new UserEntry(userId,username,points,badge,reducedCo2,friendsId);
         Database.instance.saveNonBlocking(userEntry);
         this.userEntry = userEntry;
     }
