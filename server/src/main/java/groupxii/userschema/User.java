@@ -6,9 +6,7 @@ public class User {
 
     private String username;
     private int points;
-//    private List<User> friendList;
     private int badge;
-//    private List<Achievements> achievements;
     private int reducedCo2;
 
     public User( String username, int points,
