@@ -26,7 +26,6 @@ public class LocalProductsController {
     public String localShopData(@RequestParam(value = "location", defaultValue = "52.011578,4.357068") String location) throws IOException {
         readLocalProductJson.setLocation(location);
         readLocalProductJson.readLocalProductJson();
-        //setLocalShopList(readLocalProductJson.getLocalShopList());
         responseString = readLocalProductJson.localShopToString();
         readLocalProductJson.clearList();
         return responseString;

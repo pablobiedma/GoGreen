@@ -59,16 +59,21 @@ public class LocalProductsController implements Initializable {
             String location = getUserLocation.getUserLocation();
             String url = localShops.getSelectionModel().getSelectedItem().substring(8 , localShops.getSelectionModel().getSelectedItem().indexOf(" - "));
             url = url.replace(' ', '+').substring(0, url.length() - 1);
-            mapsImage.setImage(new Image("https://maps.googleapis.com/maps/api/staticmap?center=" + url + "&zoom=12&size=865x190&maptype=roadmap&markers=color:red%7Clabel:Shop%7C" + url + "&key=AIzaSyBvn_zZpLGUjLJBxIUoGHgJjzo2VlZm3jg"));
+            mapsImage.setImage(new Image("https://maps.googleapis.com/maps/api/staticmap?center=" + url + "&zoom=12&size=900x150&maptype=roadmap&markers=color:red%7Clabel:Shop%7C" + url + "&key=AIzaSyBvn_zZpLGUjLJBxIUoGHgJjzo2VlZm3jg"));
         }
     }
 
 
     @FXML
     public void navigate(MouseEvent event) throws Exception {
-        String url = localShops.getSelectionModel().getSelectedItem().substring(8 , localShops.getSelectionModel().getSelectedItem().indexOf(" - "));
-        url = url.replace(' ', '+');
-        Desktop.getDesktop().browse(URI.create("https://www.google.com/maps/search/?api=1&query=" + url));
+        if (localShops.getSelectionModel().getSelectedItem() == null) {
+            textfield.setText("Please choose a shop first");
+        }
+        else {
+            String url = localShops.getSelectionModel().getSelectedItem().substring(8, localShops.getSelectionModel().getSelectedItem().indexOf(" - "));
+            url = url.replace(' ', '+');
+            Desktop.getDesktop().browse(URI.create("https://www.google.com/maps/search/?api=1&query=" + url));
+        }
     }
 
     @FXML
