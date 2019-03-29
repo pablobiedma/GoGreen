@@ -1,11 +1,6 @@
 package groupxii.database;
 
-import com.mongodb.DB;
-import com.mongodb.DBCollection;
-import com.mongodb.DBCursor;
-import com.mongodb.DBObject;
-import com.mongodb.MongoClient;
-import com.mongodb.MongoException;
+import com.mongodb.*;
 
 /**
  * Manages all database related operations between the server logic and MongoDB.
@@ -147,4 +142,13 @@ public class Database extends Thread {
         DBCursor cursor = userCollection.find(entry.toDbObject());
         return cursor.one();
     }
+
+
+    public DBObject findDocumentById(long id) {
+        BasicDBObject query = new BasicDBObject();
+        query.put("userId", id);
+        DBObject dbObj = userCollection.findOne(query);
+        return dbObj;
+    }
+
 }
