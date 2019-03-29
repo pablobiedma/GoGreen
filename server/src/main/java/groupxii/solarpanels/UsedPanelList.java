@@ -1,4 +1,4 @@
-package client.groupxii.solarpanel;
+package groupxii.solarpanels;
 
 import com.mongodb.MongoClient;
 import com.mongodb.client.MongoCollection;

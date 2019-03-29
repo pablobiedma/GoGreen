@@ -22,7 +22,7 @@ public class SafePanel {
     public String safePanel(String paneltype, int amount) throws IOException {
         // Url were to get the JSON data from, "transport" is now hardcoded
         // but will be a variable in the future.
-        URL url = new URL("http://" + host + ":" + port + "/getPanelData?paneltype="
+        URL url = new URL("http://" + host + ":" + port + "/savePanelData?paneltype="
                 + paneltype +  "&amount=" + amount );
         String readLine;
         // opens a http connection with the URL.

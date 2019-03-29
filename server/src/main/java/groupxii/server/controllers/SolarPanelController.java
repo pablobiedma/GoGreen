@@ -6,6 +6,7 @@ import groupxii.solarpanels.PanelCalculations;
 import groupxii.solarpanels.PanelData;
 import groupxii.solarpanels.PanelNameList;
 import groupxii.solarpanels.SavePanel;
+import groupxii.solarpanels.UsedPanelList;
 import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.context.event.EventListener;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -26,6 +27,7 @@ public class SolarPanelController {
     private PanelData panelData = new PanelData();
     private List<Panel> panelList = new ArrayList<Panel>();
     private final AtomicLong counter = new AtomicLong();
+    private List<String> usedPanelList = new ArrayList<String>();
 
     /**
      First run this to load in the PanelDataList on the server,
@@ -80,6 +82,18 @@ public class SolarPanelController {
         savePanel.savePanelData(counter.incrementAndGet(), paneltype,
                 reducedCO2 , efficiencyrate, amount);
 
+    }
+
+    @RequestMapping(method = RequestMethod.GET, value = "/usedPanelList")
+    public String getUsedPanelList() throws IOException {
+        UsedPanelList usedPanelListclass = new UsedPanelList();
+        usedPanelListclass.readDatabase();
+        String jsonReturn = "";
+        usedPanelList = usedPanelListclass.getUsedPanelList();
+        for (int i = 0; i < usedPanelList.size(); i++ ){
+            jsonReturn += usedPanelList.get(i) + " - ";
+        }
+        return jsonReturn;
     }
 
     /**

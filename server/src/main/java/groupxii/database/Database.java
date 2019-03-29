@@ -158,7 +158,7 @@ public class Database extends Thread {
     /**
      * Given a panel entry, find it in the collection.
      */
-    public DBObject findPanelEntry(VehicleEntry entry) {
+    public DBObject findPanelEntry(PanelEntry entry) {
         while (this.isActive()) {}
         DBCursor cursor = solarPanelCollection.find(entry.toDbObject());
         return cursor.one();
