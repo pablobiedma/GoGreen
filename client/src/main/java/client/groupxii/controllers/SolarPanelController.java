@@ -40,8 +40,6 @@ public class SolarPanelController implements Initializable {
         catch (IOException e) {
             e.printStackTrace();
         }
-        System.out.println(usedpanelListStr);
-        System.out.println("TEST");
         List<String> usedpanelListitems = Arrays.asList(usedpanelListStr.split(", "));
         ObservableList<String> listObservable = FXCollections.observableArrayList(usedpanelListitems);
         chosenSolarPanel.getItems().addAll(listObservable);
