@@ -1,29 +1,41 @@
-image: maven:latest
+cache:
+  paths:
+  - .m2/
+
+variables:
+  MAVEN_OPTS: "-Dmaven.repo.local=.m2"
+  DB_ADDRESS: "mongo"
+  DB_PORT: "27017"
+
+image:   maven:latest
+
 stages:
 - build
-- test
+- test-server
+- test-client
 - code-analysis
 
 build:
   stage: build
   script:
-  - echo "Building"
-  - mkdir build
-  - touch build/info.txt
-  artifacts:
-    paths:
-    - build/
+  - mvn clean install -Dmaven.test.skip=true
 
-test:
-  stage: test
+test-server:
+  services:
+  - mongo:latest
+  stage: test-server
   script:
-  - echo "Testing"
-  - test -f "./client/pom.xml"
-  - test -f "./server/pom.xml"
+  - cd server; mvn test
+
+test-client:
+    services:
+    - mongo:latest
+    stage: test-client
+    script:
+    - cd client; mvn test
+
 
 checkstyle:
-    stage: code-analysis
-    script:
-    - mvn  post-site -f "./client/pom.xml"
-    - mvn  post-site -f "./server/pom.xml"
-    allow_failure: true
+  stage: code-analysis
+  script:
+  - mvn  checkstyle:check
