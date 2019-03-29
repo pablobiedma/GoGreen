@@ -1,6 +1,13 @@
 package groupxii.database;
 
-import com.mongodb.*;
+import com.mongodb.BasicDBObject;
+import com.mongodb.DB;
+import com.mongodb.DBCollection;
+import com.mongodb.DBCursor;
+import com.mongodb.DBObject;
+import com.mongodb.MongoClient;
+import com.mongodb.MongoException;
+
 
 /**
  * Manages all database related operations between the server logic and MongoDB.
@@ -137,18 +144,24 @@ public class Database extends Thread {
         return cursor.one();
     }
 
+    /** Finds user entry.
+     * @param entry returns this.
+     * @return returns the first user entry.
+     */
     public DBObject findUserEntry(UserEntry entry) {
         while (this.isActive()) {}
         DBCursor cursor = userCollection.find(entry.toDbObject());
         return cursor.one();
     }
 
-
+    /** Finds an UserEntry by id.
+     * @param id parameter by which is searched.
+     * @return returns userEntry.
+     */
     public DBObject findDocumentById(long id) {
         BasicDBObject query = new BasicDBObject();
         query.put("userId", id);
         DBObject dbObj = userCollection.findOne(query);
         return dbObj;
     }
-
 }

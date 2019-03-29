@@ -6,13 +6,11 @@ import groupxii.database.UserEntry;
 import groupxii.userschema.GetUserData;
 import groupxii.userschema.SaveUser;
 import groupxii.userschema.User;
-import org.bson.types.ObjectId;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import javax.xml.crypto.Data;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -27,7 +25,17 @@ public class UserController {
     private final AtomicLong counter = new AtomicLong();
     private UserEntry userEntry;
 
+    /** Receives data and creates a user entry in the user collection.
+     * @param username username of the User.
+     * @param points points of the User.
+     * @param badge badge(level) of User.
+     * @param reducedCo2 reducedCo2 by the User.
+     * @param friendsId list of friends' id's.
+     * @return UserEntry in UserCollection
+     * @throws IOException IOException.
+     */
     @RequestMapping(method = RequestMethod.POST, value = "/saveUserData")
+
     public UserEntry saveUserData(@RequestParam(value = "username",
             defaultValue = "Unknown") String username,
                                   @RequestParam(value = "points",
@@ -46,18 +54,26 @@ public class UserController {
         return saveUser.getUserEntry();
     }
 
+    /** Receives user's id and returns the list
+     of his/her friends.
+     * @param userId receives User's userId.
+     * @return  returns list of friends
+     * @throws IOException IOException
+     */
     @RequestMapping(method = RequestMethod.GET, value = "/getFriends")
     public List<DBObject> getFriends(@RequestParam(value = "Id",
             defaultValue = "Unknown") long userId) throws IOException {
-            DBObject a =  Database.instance.findDocumentById(userId);
-            List<Integer> list = (ArrayList<Integer>) a.get("friendsId");
+            DBObject user =  Database.instance.findDocumentById(userId);
+            List<Integer> list = (ArrayList<Integer>) user.get("friendsId");
             List<DBObject> friends = new ArrayList<>();
-            for(int i = 0; i < list.size();i++) {
-                DBObject b = Database.instance.findDocumentById(list.get(i));
-                friends.add(b);
+            for (int i = 0; i < list.size();i++) {
+                DBObject friend = Database.instance.findDocumentById(list.get(i));
+                friends.add(friend);
             }
             return friends;
     }
+
+
 }
 
 
