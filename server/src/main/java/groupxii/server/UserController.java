@@ -12,9 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.concurrent.atomic.AtomicLong;
 
 @RestController
@@ -65,7 +63,7 @@ public class UserController {
     /** returns all users sorted by points
      */
     @RequestMapping(method = RequestMethod.GET, value = "/Leaderboard")
-    public List<DBObject> leaderboard() throws IOException {
+    public List<DBObject> leaderboard() {
             List<DBObject> users = Database.instance.sortUsersByPoints();
             return users;
     }

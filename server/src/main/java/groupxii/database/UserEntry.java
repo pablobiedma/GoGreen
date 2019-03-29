@@ -3,7 +3,6 @@ package groupxii.database;
 
 import com.mongodb.DBObject;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class UserEntry extends Entry {
@@ -13,7 +12,7 @@ public class UserEntry extends Entry {
     private int points;
     private int badge;
     private int reducedCo2;
-    private List<Integer> friendsId = new ArrayList<>();
+    private List<Integer> friendsId ;
 
     public UserEntry(long userId, String username, int points,int badge, int reducedCo2,List<Integer> friendsId) {
         this.userId = userId;
