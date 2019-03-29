@@ -25,7 +25,6 @@ public class UserController {
     /** Receives data and creates a user entry in the user collection.
      */
     @RequestMapping(method = RequestMethod.POST, value = "/saveUserData")
-
     public UserEntry saveUserData(@RequestParam(value = "username",
             defaultValue = "Unknown") String username,
                                   @RequestParam(value = "points",
