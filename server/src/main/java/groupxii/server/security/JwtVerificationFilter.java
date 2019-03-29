@@ -9,12 +9,15 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.www.BasicAuthenticationFilter;
+import org.springframework.security.core.Authentication;
 
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+
+import org.springframework.stereotype.Component;
 
 public class JwtVerificationFilter extends BasicAuthenticationFilter{
 
@@ -24,8 +27,11 @@ public class JwtVerificationFilter extends BasicAuthenticationFilter{
 
 
 	@Override
-	protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response,
+	protected void doFilterInternal(HttpServletRequest servletRequest, HttpServletResponse servletResponse,
 					FilterChain filterChain) throws IOException, ServletException {
+		HttpServletRequest request = (HttpServletRequest)servletRequest;
+		HttpServletResponse response = (HttpServletResponse)servletResponse;
+
 		String token = request.getHeader(HttpHeaders.AUTHORIZATION);
 
 		if (token == null || !token.startsWith("Bearer ")) {//also not good
@@ -41,6 +47,7 @@ public class JwtVerificationFilter extends BasicAuthenticationFilter{
 		}
 
 		SecurityContextHolder.getContext().setAuthentication(authentication);
+		super.doFilter(request, response, filterChain);
 	}
 
 	private UsernamePasswordAuthenticationToken getAuthenticaion(String jwsString) {

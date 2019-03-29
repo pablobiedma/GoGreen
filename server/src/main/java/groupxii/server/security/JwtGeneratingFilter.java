@@ -72,31 +72,10 @@ public class JwtGeneratingFilter extends UsernamePasswordAuthenticationFilter {
     @Override
     protected void successfulAuthentication(HttpServletRequest request, HttpServletResponse response,
                                             FilterChain filterChain, Authentication authentication) {
-        //figured out this MESS for the most part
         String username = authentication.getPrincipal().toString();
 	//TODO figure out a good value for this
 	int expirationTime = 86400000;
-    /*
-
-        var roles = user.getAuthorities()
-            .stream()
-            .map(GrantedAuthority::getAuthority)
-            .collect(Collectors.toList());
-
-        var signingKey = SecurityConstants.JWT_SECRET.getBytes();
-
-        var token = Jwts.builder()
-            .signWith(Keys.hmacShaKeyFor(signingKey), SignatureAlgorithm.HS512)
-            .setHeaderParam("typ", SecurityConstants.TOKEN_TYPE)
-            .setIssuer(SecurityConstants.TOKEN_ISSUER)
-            .setAudience(SecurityConstants.TOKEN_AUDIENCE)
-            .setSubject(user.getUsername())
-            .setExpiration(new Date(System.currentTimeMillis() + 864000000))
-            .claim("rol", roles)
-            .compact();
-
-    */
-	String jws = Jwts.builder()
+    	String jws = Jwts.builder()
 		.setSubject(username)
 		.signWith(Keys.hmacShaKeyFor(SecurityKey.instance.getKey()))
 		.setHeaderParam("typ", "JWT")

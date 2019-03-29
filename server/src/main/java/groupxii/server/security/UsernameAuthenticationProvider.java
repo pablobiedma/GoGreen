@@ -10,12 +10,15 @@ import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 
+import org.springframework.stereotype.Service;
+import org.springframework.security.authentication.AuthenticationProvider;
 import java.util.ArrayList;
 
 /**
  * Verifies that the username exists in the database.
  */
-public class UsernameAuthenticationManager implements AuthenticationManager {
+@Service
+public class UsernameAuthenticationProvider implements AuthenticationProvider {
     @Override
     public Authentication authenticate(Authentication authentication)
                                            throws AuthenticationException { 
@@ -35,4 +38,10 @@ public class UsernameAuthenticationManager implements AuthenticationManager {
     
 	throw new BadCredentialsException("Username verification failed");
     }
+
+	@Override
+	public boolean supports(Class<?> authentication) {
+		return authentication.equals(
+		       UsernamePasswordAuthenticationToken.class);
+	}
 }

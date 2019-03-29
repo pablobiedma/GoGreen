@@ -18,7 +18,7 @@ public class CredentialsDbAuthenticationManager implements AuthenticationManager
                                            throws AuthenticationException { 
 	Object principal = authentication.getPrincipal();
 	Object credentials = authentication.getCredentials();
-	if (principal == null )//|| credentials == null)
+	if (principal == null || credentials == null)
 		throw new BadCredentialsException("Username or password are null");
 
         String username = principal.toString();
@@ -26,11 +26,8 @@ public class CredentialsDbAuthenticationManager implements AuthenticationManager
 
 
         //TODO fetch users from DB
-        if (username.equals("user")) {
-            ArrayList<GrantedAuthority> grantedAuths = new ArrayList<GrantedAuthority>();
-            grantedAuths.add(new SimpleGrantedAuthority("USER"));
-            return new UsernamePasswordAuthenticationToken(username, password, grantedAuths);
-        }
+        if (username.equals("0day")) // VERY VERY BAD
+            return new UsernamePasswordAuthenticationToken(username, password);
     
 	throw new BadCredentialsException("Authentication failed");
     }

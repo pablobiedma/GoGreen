@@ -9,37 +9,44 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
-//TODO imports (maybe done?) 
+import org.springframework.beans.factory.annotation.Autowired;
 
+import org.springframework.security.authentication.ProviderManager;
+import org.springframework.security.authentication.AuthenticationProvider;
+import org.springframework.context.annotation.Configuration;
+
+import org.springframework.security.web.authentication.AnonymousAuthenticationFilter;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Arrays;
+
+//TODO imports (maybe done?)  HAHAHAAHHAH
+
+@Configuration
 @EnableWebSecurity
 public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
-
-    private final AuthenticationManager credentialsAuthenticationManager = new CredentialsDbAuthenticationManager();
-    protected final AuthenticationManager usernameAuthenticationManager = new UsernameAuthenticationManager();
-
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         //TODO
-        //Disable CSRF
-        //Add the JWT Filter
-        //Block protected endpoints
         http
+	    .addFilterBefore(new JwtVerificationFilter(new UsernameAuthenticationManager()), AnonymousAuthenticationFilter.class)
             .csrf().disable() // Unecessary in REST
 	    .sessionManagement()
 	                .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
 	    .and()
 	    .httpBasic().disable()
-	    .addFilter(new JwtGeneratingFilter(credentialsAuthenticationManager))
-	    .addFilter(new JwtVerificationFilter(usernameAuthenticationManager))
+	    .addFilter(new JwtGeneratingFilter(new CredentialsDbAuthenticationManager()))
+	    .authorizeRequests()
+            .anyRequest().authenticated()
+	    .antMatchers("/login").permitAll()
 	    ;
-	http.authorizeRequests()
-		.antMatchers("/free").permitAll()
-		.antMatchers("/protected").authenticated()
-	;
     }
 
+    /*
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
+    */
 }
