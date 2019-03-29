@@ -6,6 +6,8 @@ import groupxii.solarpanels.PanelCalculations;
 import groupxii.solarpanels.PanelData;
 import groupxii.solarpanels.PanelNameList;
 import groupxii.solarpanels.SavePanel;
+import org.springframework.boot.context.event.ApplicationReadyEvent;
+import org.springframework.context.event.EventListener;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -30,7 +32,7 @@ public class SolarPanelController {
      this has only to be done once the server starts.
      in the future we will load this also on the boot of the server.
      */
-    @RequestMapping(method = RequestMethod.GET, value = "/setPanelData")
+    @EventListener(ApplicationReadyEvent.class)
     public void setPanelData() throws IOException {
         panelData.readPanelListData();
         this.panelList = panelData.getPanelList();

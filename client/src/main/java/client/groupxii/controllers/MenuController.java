@@ -23,7 +23,7 @@ public class MenuController {
 
     @FXML
     public void btnSolarPanels(MouseEvent event) throws Exception {
-        SolarPanelControllerDemo spc = new SolarPanelControllerDemo();
+        SolarPanelController spc = new SolarPanelController();
         Main main = new Main();
         main.changeScene("SolarPanels.fxml", event);
     }
