@@ -47,7 +47,7 @@ public class SolarPanelController {
     /**
      * This method will return the panelEntry which is saved.
      */
-    @RequestMapping(method = RequestMethod.GET, value = "/getPanelData")
+    @RequestMapping(method = RequestMethod.GET, value = "/getPanelEntry")
     public PanelEntry getPanelEntry() {
         return savePanel.getPanelEntry();
     }
@@ -68,7 +68,7 @@ public class SolarPanelController {
      the client can send data to the server with the right values as parameter,
      then this method will store the data in the database.
      */
-    @RequestMapping(method = RequestMethod.GET, value = "/savePanelData")
+    @RequestMapping(method = RequestMethod.POST, value = "/savePanelData")
     public void savePanelData(@RequestParam(value = "paneltype",
             defaultValue = "Unknown") String paneltype, @RequestParam(value = "efficiencyrate",
             defaultValue = "0") int efficiencyrate, @RequestParam(value = "amount",
