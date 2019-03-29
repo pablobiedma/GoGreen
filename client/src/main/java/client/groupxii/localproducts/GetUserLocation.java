@@ -28,6 +28,12 @@ public class GetUserLocation {
         String longitude = rootNode.get("longitude").asText();
         String latitude = rootNode.get("latitude").asText();
 
-        return latitude + "," + longitude;
+        if(longitude != "" && latitude != ""){
+            return latitude + "," + longitude;
+        }
+        else{
+            return "52.011578,4.357068";
+        }
+
     }
 }
