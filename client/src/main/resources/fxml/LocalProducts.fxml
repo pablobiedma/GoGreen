@@ -41,9 +41,10 @@
       </Pane>
       <Pane layoutY="125.0" prefHeight="534.0" prefWidth="904.0">
          <children>
-            <ListView fx:id="localShops" layoutX="20.0" layoutY="14.0" prefHeight="382.0" prefWidth="865.0" style="-fx-font-size: 14px; -fx-cell-size: 15px; -fx-font-weight: bold" />
-            <Button fx:id="navigate" onMouseClicked="#navigate" layoutX="139.0" layoutY="431.0" mnemonicParsing="false" prefHeight="67.0" prefWidth="206.0" stylesheets="@../fullpackstyling.css" text="NAVIGATE TO SHOP" />
-            <Button fx:id="boughtLocalProduct" onMouseClicked="#boughtLocalProduct" layoutX="544.0" layoutY="431.0" mnemonicParsing="false" prefHeight="67.0" prefWidth="206.0" stylesheets="@../fullpackstyling.css" text="I BOUGHT A LOCAL PRODUCT" />
+            <ListView fx:id="localShops" layoutX="20.0" layoutY="14.0" prefHeight="206.0" prefWidth="865.0" style="-fx-font-size: 14px; -fx-cell-size: 15px; -fx-font-weight: bold" />
+            <Button fx:id="navigate" layoutX="139.0" layoutY="431.0" mnemonicParsing="false" onMouseClicked="#navigate" prefHeight="67.0" prefWidth="206.0" stylesheets="@../fullpackstyling.css" text="NAVIGATE TO SHOP" />
+            <Button fx:id="boughtLocalProduct" layoutX="544.0" layoutY="431.0" mnemonicParsing="false" onMouseClicked="#boughtLocalProduct" prefHeight="67.0" prefWidth="206.0" stylesheets="@../fullpackstyling.css" text="I BOUGHT A LOCAL PRODUCT" />
+            <ImageView fx:id="mapsImage" fitHeight="190.0" fitWidth="865.0" layoutX="17.0" layoutY="227.0" pickOnBounds="true" preserveRatio="true" />
          </children></Pane>
    </children>
 </AnchorPane>
