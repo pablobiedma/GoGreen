@@ -3,7 +3,6 @@ package groupxii.server;
 import com.mongodb.DBObject;
 import groupxii.database.Database;
 import groupxii.database.UserEntry;
-import groupxii.userschema.GetUserData;
 import groupxii.userschema.SaveUser;
 import groupxii.userschema.User;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -13,26 +12,19 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.concurrent.atomic.AtomicLong;
 
 @RestController
 public class UserController {
 
-    private GetUserData userData = new GetUserData();
     private List<User> userList = new ArrayList<>();
     private SaveUser saveUser = new SaveUser();
     private final AtomicLong counter = new AtomicLong();
-    private UserEntry userEntry;
 
     /** Receives data and creates a user entry in the user collection.
-     * @param username username of the User.
-     * @param points points of the User.
-     * @param badge badge(level) of User.
-     * @param reducedCo2 reducedCo2 by the User.
-     * @param friendsId list of friends' id's.
-     * @return UserEntry in UserCollection
-     * @throws IOException IOException.
      */
     @RequestMapping(method = RequestMethod.POST, value = "/saveUserData")
 
@@ -56,9 +48,6 @@ public class UserController {
 
     /** Receives user's id and returns the list
      of his/her friends.
-     * @param userId receives User's userId.
-     * @return  returns list of friends
-     * @throws IOException IOException
      */
     @RequestMapping(method = RequestMethod.GET, value = "/getFriends")
     public List<DBObject> getFriends(@RequestParam(value = "Id",
@@ -73,7 +62,13 @@ public class UserController {
             return friends;
     }
 
-
+    /** returns all users sorted by points
+     */
+    @RequestMapping(method = RequestMethod.GET, value = "/Leaderboard")
+    public List<DBObject> leaderboard() throws IOException {
+            List<DBObject> users = Database.instance.sortUsersByPoints();
+            return users;
+    }
 }
 
 

@@ -8,6 +8,10 @@ import com.mongodb.DBObject;
 import com.mongodb.MongoClient;
 import com.mongodb.MongoException;
 
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+
 
 /**
  * Manages all database related operations between the server logic and MongoDB.
@@ -145,8 +149,6 @@ public class Database extends Thread {
     }
 
     /** Finds user entry.
-     * @param entry returns this.
-     * @return returns the first user entry.
      */
     public DBObject findUserEntry(UserEntry entry) {
         while (this.isActive()) {}
@@ -155,13 +157,23 @@ public class Database extends Thread {
     }
 
     /** Finds an UserEntry by id.
-     * @param id parameter by which is searched.
-     * @return returns userEntry.
      */
     public DBObject findDocumentById(long id) {
         BasicDBObject query = new BasicDBObject();
         query.put("userId", id);
-        DBObject dbObj = userCollection.findOne(query);
-        return dbObj;
+        DBObject dbObject = userCollection.findOne(query);
+        return dbObject;
+    }
+
+    /** returns all users sorted by points
+     */
+    public List<DBObject> sortUsersByPoints() {
+        List<DBObject> list = new ArrayList<>();
+        Iterator<DBObject> cursor = userCollection.find().sort(new BasicDBObject("points",-1));
+        while (cursor.hasNext()) {
+            DBObject obj = cursor.next();
+            list.add(obj);
+        }
+        return list;
     }
 }
