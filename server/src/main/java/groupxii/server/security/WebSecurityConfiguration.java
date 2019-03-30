@@ -26,11 +26,21 @@ import java.util.Arrays;
 @Configuration
 @EnableWebSecurity
 public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
+    public WebSecurityConfiguration() {
+	    super(false);
+    }
+
+    @Override
+    protected AuthenticationManager authenticationManager() throws Exception {
+	    ArrayList<AuthenticationProvider> allCustomProviders = new ArrayList<>();
+	    allCustomProviders.add(new UsernameAuthenticationProvider());
+	    return new  ProviderManager(allCustomProviders);
+    }
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         //TODO
         http
-	    .addFilterBefore(new JwtVerificationFilter(new UsernameAuthenticationManager()), AnonymousAuthenticationFilter.class)
+	    .addFilterBefore(new JwtVerificationFilter(authenticationManager()), AnonymousAuthenticationFilter.class)
             .csrf().disable() // Unecessary in REST
 	    .sessionManagement()
 	                .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
