@@ -5,6 +5,7 @@ package groupxii.server.security;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.authentication.InsufficientAuthenticationException;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.GrantedAuthority;
@@ -21,7 +22,7 @@ public class CredentialsDbAuthenticationProvider implements AuthenticationProvid
 	Object principal = authentication.getPrincipal();
 	Object credentials = authentication.getCredentials();
 	if (principal == null || credentials == null)
-		throw new BadCredentialsException("Username or password are null");
+		throw new InsufficientAuthenticationException("Username or password are null");
 
         String username = principal.toString();
         String password = credentials.toString();

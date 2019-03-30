@@ -37,6 +37,7 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
 	    allCustomProviders.add(new CredentialsDbAuthenticationProvider());
 	    return new  ProviderManager(allCustomProviders);
     }
+
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         //TODO
@@ -54,10 +55,8 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
 	    ;
     }
 
-    /*
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
-    */
 }
