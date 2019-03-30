@@ -1,4 +1,4 @@
-package groupxii.server;
+package groupxii.server.controllers;
 
 import com.mongodb.DBObject;
 import groupxii.database.Database;
