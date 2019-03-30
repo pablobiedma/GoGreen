@@ -1,5 +1,6 @@
 package client.groupxii.controllers;
 
+import client.groupxii.Main;
 import client.groupxii.vegetarianmeal.EatenMealList;
 import client.groupxii.vegetarianmeal.SafeMeal;
 import javafx.collections.FXCollections;
@@ -103,5 +104,11 @@ public class VegetarianMealController implements Initializable {
         safeMeal.safeMeal(goodFoodName, badFoodName, goodServingSize, badServingSize);
         //textfield.setText(enteredMeal);
         eatenMeals.getItems().add(eatenMealList.getLatestMeal());
+    }
+
+    @FXML
+    public void btnBack(MouseEvent event) throws IOException{
+        Main main = new Main();
+        main.changeScene("Menu.fxml", event);
     }
 }
