@@ -66,6 +66,16 @@ public class UserController {
             List<DBObject> users = Database.instance.sortUsersByPoints();
             return users;
     }
+
+    /** receives two id's and adds the second one as a friend to the first one.
+     */
+    @RequestMapping(method = RequestMethod.GET, value = "/addFriend")
+    public DBObject addFriend(@RequestParam(value= "Id", defaultValue = "Unknown") long userId,
+                              @RequestParam(value = "newFriend" , defaultValue = "Unknown") long friendsId) throws IOException {
+        Database.instance.addFriendId(friendsId,userId);
+        DBObject user =  Database.instance.findDocumentById(userId);
+        return user;
+    }
 }
 
 

@@ -176,4 +176,14 @@ public class Database extends Thread {
         }
         return list;
     }
+
+    /** receives two id's and adds the first one as a friend to the first one.
+     */
+    public void addFriendId(long id1,long id2) {
+        BasicDBObject newDocument = new BasicDBObject();
+        newDocument.append("$addToSet", new BasicDBObject().append("friendsId", id1));
+        BasicDBObject searchQuery = new BasicDBObject().append("userId", id2);
+        userCollection.update(searchQuery, newDocument);
+
+    }
 }
