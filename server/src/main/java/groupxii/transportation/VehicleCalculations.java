@@ -48,13 +48,12 @@ public class VehicleCalculations {
                 if (chosenFuel.equals("LPG")) {
                     calculatedco2 = (chosenConsumption/100) * 1665;
                 }
-                if (chosenFuel.equals("Electric_wires")) {
+                if (chosenConsumption == 0) {
+                    throw new ArithmeticException();
+                }
                     double co2perliter = co2/avgconsumption;
                     calculatedco2 = (int) co2perliter * chosenConsumption;
-                }
-                else {
-                    calculatedco2 = 0;
-                }
+
             }
         }
         return calculatedco2;

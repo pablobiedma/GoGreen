@@ -12,7 +12,7 @@
 "ss_unit" : "grams",
 "vehiclename": "metro",
 "grams_co2_by_vehicle_per_km": "65",
-"fuel:"Electric_wires",
+"fuel":"Electric_wires",
 "average_consumption_liter/100km":"10"
 },
 {

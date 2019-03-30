@@ -23,7 +23,7 @@ public class VehicleData {
     /**
      * Read the given data from the txt file.
      */
-    public void readPanelListData() throws IOException {
+    public void readVehicleListData() throws IOException {
         ObjectMapper objectMapper = new ObjectMapper();
         JsonNode rootNode = objectMapper.readTree(getClass().getClassLoader().getResource(
                 "transportationList.txt"));

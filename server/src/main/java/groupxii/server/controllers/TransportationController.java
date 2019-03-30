@@ -1,8 +1,8 @@
 package groupxii.server.controllers;
 
-import groupxii.database.Database;
+//import groupxii.database.Database;
 import groupxii.database.VehicleEntry;
-import groupxii.server.Transportation;
+//import groupxii.server.Transportation;
 import groupxii.transportation.*;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -32,7 +32,7 @@ public class TransportationController {
      */
     @RequestMapping(method = RequestMethod.GET, value = "/setVehicleData")
     public void setVehicleData() throws IOException {
-        vehicleData.readPanelListData();
+        vehicleData.readVehicleListData();
         this.vehicleList = vehicleData.getVehicles();
     }
 
