@@ -29,8 +29,9 @@ public class MenuController {
 
     @FXML
     public void btnTransport(MouseEvent event) throws Exception {
+        TransportationController tpc = new TransportationController();
         Main main = new Main();
-        main.changeScene("VegetarianMeal.fxml", event);
+        main.changeScene("Transportation.fxml", event);
     }
 
     @FXML

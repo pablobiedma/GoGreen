@@ -4,6 +4,8 @@ package groupxii.server.controllers;
 import groupxii.database.VehicleEntry;
 //import groupxii.server.Transportation;
 import groupxii.transportation.*;
+import org.springframework.boot.context.event.ApplicationReadyEvent;
+import org.springframework.context.event.EventListener;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -30,7 +32,8 @@ public class TransportationController {
      * Setter for the VehicleData.
      * @throws IOException
      */
-    @RequestMapping(method = RequestMethod.GET, value = "/setVehicleData")
+//    @RequestMapping(method = RequestMethod.GET, value = "/setVehicleData")
+    @EventListener(ApplicationReadyEvent.class)
     public void setVehicleData() throws IOException {
         vehicleData.readVehicleListData();
         this.vehicleList = vehicleData.getVehicles();
