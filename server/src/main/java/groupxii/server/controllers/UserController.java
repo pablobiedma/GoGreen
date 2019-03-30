@@ -47,16 +47,18 @@ public class UserController {
      of his/her friends.
      */
     @RequestMapping(method = RequestMethod.GET, value = "/getFriends")
-    public List<DBObject> getFriends(@RequestParam(value = "Id",
+    public List<String> getFriends(@RequestParam(value = "Id",
             defaultValue = "Unknown") int userId) throws IOException {
             DBObject user =  Database.instance.findDocumentById(userId);
             List<Integer> list = (ArrayList<Integer>) user.get("friendsId");
-            List<DBObject> friends = new ArrayList<>();
+            List<String> friends = new ArrayList<>();
             for (int i = 0; i < list.size();i++) {
                 DBObject friend =  Database.instance.findDocumentById(list.get(i));
-                friends.add(friend);
+                String name = (String) friend.get("username");
+                friends.add(name);
             }
             return friends;
+
     }
 
     /** returns all users sorted by points.
