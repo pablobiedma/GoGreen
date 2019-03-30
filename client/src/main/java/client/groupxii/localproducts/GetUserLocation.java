@@ -17,8 +17,8 @@ public class GetUserLocation {
     public String getUserLocation() throws IOException, GeoIp2Exception {
         String ip = "";
         try {
-            Scanner s = new Scanner(new URL("http://eth0.me/").openStream(), "UTF-8");
-            ipAddress = s.next();
+            Scanner scanner = new Scanner(new URL("http://eth0.me/").openStream(), "UTF-8");
+            ipAddress = scanner.next();
         } catch (java.io.IOException e) {
             e.printStackTrace();
         }
@@ -28,10 +28,9 @@ public class GetUserLocation {
         String longitude = rootNode.get("longitude").asText();
         String latitude = rootNode.get("latitude").asText();
 
-        if(longitude != "" && latitude != ""){
+        if (!longitude.equals("") && !latitude.equals("")) {
             return latitude + "," + longitude;
-        }
-        else{
+        } else {
             return "52.011578,4.357068";
         }
 

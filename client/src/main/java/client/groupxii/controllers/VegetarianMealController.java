@@ -107,7 +107,7 @@ public class VegetarianMealController implements Initializable {
     }
 
     @FXML
-    public void btnBack(MouseEvent event) throws IOException{
+    public void btnBack(MouseEvent event) throws IOException {
         Main main = new Main();
         main.changeScene("Menu.fxml", event);
     }

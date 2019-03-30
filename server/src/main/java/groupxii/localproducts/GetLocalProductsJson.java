@@ -11,14 +11,14 @@ public class GetLocalProductsJson {
 
     private URL url;
 
-    public String getLocalShopJson(String location){
+    public String getLocalShopJson(String location) {
         String localShopDataJson = "";
         try {
             url = new URL("https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=" + location + "&radius=49000&rankby=prominence&keyword=local+produce&key=AIzaSyAx468de0kVfaSUaksLjRhjPyXdTjnuYZQ");
             localShopDataJson = readJson();
         } catch (MalformedURLException e) {
             e.printStackTrace();
-        } catch (IOException e){
+        } catch (IOException e) {
             e.printStackTrace();
         }
         System.out.println(localShopDataJson);

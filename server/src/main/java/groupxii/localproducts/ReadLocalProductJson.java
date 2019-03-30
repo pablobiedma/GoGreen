@@ -13,7 +13,9 @@ public class ReadLocalProductJson {
     private List<LocalShop> localShopList = new ArrayList<>();
     private String location = "";
 
-    public String getLocation() { return this.location; }
+    public String getLocation() {
+        return this.location;
+    }
 
     public void setLocation(String location) {
         this.location = location;
@@ -46,16 +48,18 @@ public class ReadLocalProductJson {
         }
     }
 
-    public String localShopToString(){
+    public String localShopToString() {
         String result = "";
-        for(int i = 0; i < localShopList.size(); i++){
-            result = result + " SHOP:  " +  localShopList.get(i).getName() + "  - LOCATED AT:  " + localShopList.get(i).getLocation() + "  - RATING:  " + localShopList.get(i).getRating() + ", ";
+        for (int i = 0; i < localShopList.size(); i++) {
+            result = result + " SHOP:  " +  localShopList.get(i).getName() + "  - LOCATED AT:  "
+                    + localShopList.get(i).getLocation() + "  - RATING:  "
+                    + localShopList.get(i).getRating() + ", ";
         }
         System.out.println(result);
         return result;
     }
 
-    public void clearList(){
+    public void clearList() {
         localShopList.clear();
     }
 }
