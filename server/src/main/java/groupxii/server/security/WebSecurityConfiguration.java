@@ -34,6 +34,7 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
     protected AuthenticationManager authenticationManager() throws Exception {
 	    ArrayList<AuthenticationProvider> allCustomProviders = new ArrayList<>();
 	    allCustomProviders.add(new UsernameAuthenticationProvider());
+	    allCustomProviders.add(new CredentialsDbAuthenticationProvider());
 	    return new  ProviderManager(allCustomProviders);
     }
     @Override
@@ -46,7 +47,7 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
 	                .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
 	    .and()
 	    .httpBasic().disable()
-	    .addFilter(new JwtGeneratingFilter(new CredentialsDbAuthenticationManager()))
+	    .addFilter(new JwtGeneratingFilter(authenticationManager()))
 	    .authorizeRequests()
             .anyRequest().authenticated()
 	    .antMatchers("/login").permitAll()

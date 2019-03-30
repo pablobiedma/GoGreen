@@ -10,9 +10,11 @@ import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 
+import org.springframework.security.authentication.AuthenticationProvider;
+
 import java.util.ArrayList;
 
-public class CredentialsDbAuthenticationManager implements AuthenticationManager {
+public class CredentialsDbAuthenticationProvider implements AuthenticationProvider {
     @Override
     public Authentication authenticate(Authentication authentication)
                                            throws AuthenticationException { 
@@ -31,4 +33,10 @@ public class CredentialsDbAuthenticationManager implements AuthenticationManager
     
 	throw new BadCredentialsException("Authentication failed");
     }
+
+	@Override
+	public boolean supports(Class<?> authentication) {
+		return authentication.equals(
+		       UsernamePasswordAuthenticationToken.class);
+	}
 }
