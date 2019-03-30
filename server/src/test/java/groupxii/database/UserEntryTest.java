@@ -34,7 +34,7 @@ public class UserEntryTest {
     public void getBadge() {
         List<Integer> list = new ArrayList<>();
         UserEntry usr = new UserEntry(1,"Ivan",100,1,9,list);
-        assertEquals(usr.getBadge(),1);
+        assertEquals(1,usr.getBadge());
     }
 
     @Test

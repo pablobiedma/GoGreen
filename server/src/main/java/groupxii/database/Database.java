@@ -165,7 +165,7 @@ public class Database extends Thread {
         return dbObject;
     }
 
-    /** returns all users sorted by points
+    /** returns all users sorted by points.
      */
     public List<DBObject> sortUsersByPoints() {
         List<DBObject> list = new ArrayList<>();
