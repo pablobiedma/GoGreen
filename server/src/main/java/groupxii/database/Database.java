@@ -7,9 +7,11 @@ import com.mongodb.DBObject;
 import com.mongodb.MongoClient;
 import com.mongodb.MongoException;
 
+/* Apparently those are unneded
 import java.lang.System;
 import java.lang.NullPointerException;
 import java.lang.NumberFormatException;
+*/
 
 /**
  * Manages all database related operations between the server logic and MongoDB.

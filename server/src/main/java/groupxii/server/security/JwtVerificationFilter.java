@@ -16,12 +16,14 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+/**
+ * Security filter that ensures that the provided JSON Web Token is valid.
+ */
 public class JwtVerificationFilter extends BasicAuthenticationFilter {
 
     public JwtVerificationFilter(AuthenticationManager authenticationManager) {
         super(authenticationManager);
     }
-
 
     @Override
     protected void doFilterInternal(HttpServletRequest servletRequest, 

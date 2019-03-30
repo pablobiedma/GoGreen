@@ -20,11 +20,17 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+/**
+ * Security filter that's responsible for generating JSON Web Tokens.
+ */
 public class JwtGeneratingFilter extends UsernamePasswordAuthenticationFilter {
 
     private final AuthenticationManager authenticationManager;
     private final String path;
 
+    /**
+     * Creates a filter with the provided AuthenticationManager on the /login location.
+     */
     public JwtGeneratingFilter(AuthenticationManager authenticationManager) {
         this.authenticationManager = authenticationManager;
 
@@ -32,6 +38,9 @@ public class JwtGeneratingFilter extends UsernamePasswordAuthenticationFilter {
         setFilterProcessesUrl(path);
     }
 
+    /**
+     * Attempts to read a POST request for credentials in JSON format.
+     */
     @Override
     public Authentication attemptAuthentication(HttpServletRequest request,
                                                 HttpServletResponse response) 
@@ -69,6 +78,10 @@ public class JwtGeneratingFilter extends UsernamePasswordAuthenticationFilter {
         return authenticationManager.authenticate(authenticationToken);
     }
 
+    /**
+     * Generates and sends back a valid and signed JSON Web Token. 
+     * Note that SecurityKey should have read a valid and secure key.
+     */
     @Override
     protected void successfulAuthentication(HttpServletRequest request, 
                                             HttpServletResponse response,
@@ -89,6 +102,9 @@ public class JwtGeneratingFilter extends UsernamePasswordAuthenticationFilter {
         response.addHeader("Authorization", "Bearer " + jws);
     }
 
+    /**
+     * Sends an appropriate response when the authentication fails.
+     */
     @Override
     protected void unsuccessfulAuthentication(HttpServletRequest request, 
                                               HttpServletResponse response,
