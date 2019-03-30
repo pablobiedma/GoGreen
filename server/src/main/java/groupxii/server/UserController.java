@@ -59,7 +59,7 @@ public class UserController {
             return friends;
     }
 
-    /** returns all users sorted by points
+    /** returns all users sorted by points.
      */
     @RequestMapping(method = RequestMethod.GET, value = "/Leaderboard")
     public List<DBObject> leaderboard() {

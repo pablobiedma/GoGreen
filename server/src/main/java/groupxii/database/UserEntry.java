@@ -1,6 +1,5 @@
 package groupxii.database;
 
-
 import com.mongodb.DBObject;
 
 import java.util.List;
@@ -14,7 +13,10 @@ public class UserEntry extends Entry {
     private int reducedCo2;
     private List<Integer> friendsId ;
 
-    public UserEntry(long userId, String username, int points,int badge, int reducedCo2,List<Integer> friendsId) {
+    /** Constructor for the UserEntry class.
+     */
+    public UserEntry(long userId, String username,
+                     int points,int badge, int reducedCo2,List<Integer> friendsId) {
         this.userId = userId;
         this.username = username;
         this.points = points;
@@ -43,7 +45,9 @@ public class UserEntry extends Entry {
         return reducedCo2;
     }
 
-    public List<Integer> getFriendsId() { return this.friendsId; }
+    public List<Integer> getFriendsId() {
+        return this.friendsId;
+    }
 
     /**
      * Translates into a MongoDB JSON object.

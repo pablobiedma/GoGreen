@@ -8,6 +8,8 @@ public class User {
     private int badge;
     private int reducedCo2;
 
+    /** Constructor for the User class.
+     */
     public User( String username, int points,
                 int badge, int reducedCo2) {
         this.username = username;
