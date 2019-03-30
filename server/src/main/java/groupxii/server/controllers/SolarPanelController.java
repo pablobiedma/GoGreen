@@ -47,7 +47,7 @@ public class SolarPanelController {
     /**
      * This method will return the panelEntry which is saved.
      */
-    @RequestMapping(method = RequestMethod.GET, value = "/getPanelData")
+    @RequestMapping(method = RequestMethod.GET, value = "/getPanelEntry")
     public PanelEntry getPanelEntry() {
         return savePanel.getPanelEntry();
     }
@@ -73,7 +73,7 @@ public class SolarPanelController {
             defaultValue = "Unknown") String paneltype, @RequestParam(value = "efficiencyrate",
             defaultValue = "0") int efficiencyrate, @RequestParam(value = "amount",
             defaultValue = "0") int amount) throws IOException {
-        int reducedCO2 = getReducedCO2(paneltype);
+        int reducedCO2 = getCalculatedCO2(paneltype);
         savePanel.setPanelList(this.panelList);
         savePanel.savePanelData(counter.incrementAndGet(), paneltype,
                 reducedCO2 , efficiencyrate, amount);
@@ -83,8 +83,8 @@ public class SolarPanelController {
     /**
      * get method for the reduced co2.
      */
-    @RequestMapping(method = RequestMethod.GET, value = "/getReducedCO2")
-    public int getReducedCO2(@RequestParam(value = "paneltype",
+    @RequestMapping(method = RequestMethod.GET, value = "/getCalculatedCO2")
+    public int getCalculatedCO2(@RequestParam(value = "paneltype",
             defaultValue = "Unknown") String paneltype) throws IOException {
         panelCalculations.setPanelList(this.panelList);
 

@@ -49,7 +49,7 @@ public class TransportationController {
      * This method will return the vehicleEntry which is saved.
      */
     @RequestMapping(method = RequestMethod.GET, value = "/getVehicleEntry")
-    public VehicleEntry getPanelEntry() {
+    public VehicleEntry getVehicleEntry() {
         return saveVehicle.getVehicleEntry();
     }
 

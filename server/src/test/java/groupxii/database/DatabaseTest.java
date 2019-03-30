@@ -61,7 +61,7 @@ public class DatabaseTest {
 	public void testSave() {
 		Database.instance.setDbName("test");
 		Database.instance.startDb();
-		VehicleEntry entry = new VehicleEntry(1337, "car");
+		VehicleEntry entry = new VehicleEntry(1337, "bike","car",40,"Petrol","Diesel",4,8);
 		Database.instance.save(entry);
 		assertEquals(entry.toDbObject(), Database.instance.findVehicleEntry(entry));
 		//TODO Drop the test DB
@@ -71,7 +71,7 @@ public class DatabaseTest {
 	public void testSaveNonBlocking() {
 		Database.instance.setDbName("test");
 		Database.instance.startDb();
-		VehicleEntry entry = new VehicleEntry(1337, "car");
+		VehicleEntry entry = new VehicleEntry(1337, "bike","car",40,"Petrol","Diesel",4,8);
 		Database.instance.saveNonBlocking(entry);
 
 		assertEquals(entry.toDbObject(), Database.instance.findVehicleEntry(entry));
