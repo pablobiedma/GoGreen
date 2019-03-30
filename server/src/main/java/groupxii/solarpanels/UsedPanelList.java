@@ -43,7 +43,7 @@ public class UsedPanelList {
     public String toString(String paneltype,
                            int reducedCo2,int efficiencyrate, int amount) {
         String result = "You used " + paneltype + " with an amount of " + amount
-                + "and with an efficiencyrate of" + efficiencyrate
+                + " and with an efficiencyrate of " + efficiencyrate
                 + "%, by doing so you reduced your carbon footprint with "
                 + reducedCo2 + " grams of CO2";
         return result;
