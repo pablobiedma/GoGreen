@@ -23,7 +23,8 @@ public class LocalProductsController {
     }
 
     @RequestMapping(method = RequestMethod.GET, value = "/localshops")
-    public String localShopData(@RequestParam(value = "location", defaultValue = "52.011578,4.357068") String location) throws IOException {
+    public String localShopData(@RequestParam(value = "location",
+            defaultValue = "52.011578,4.357068") String location) throws IOException {
         readLocalProductJson.setLocation(location);
         readLocalProductJson.readLocalProductJson();
         responseString = readLocalProductJson.localShopToString();

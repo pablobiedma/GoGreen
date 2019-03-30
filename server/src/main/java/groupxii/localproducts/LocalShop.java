@@ -6,7 +6,7 @@ public class LocalShop {
     private double rating;
     private String location;
 
-    public LocalShop(String name, double rating, String location){
+    public LocalShop(String name, double rating, String location) {
         this.name = name;
         this.rating = rating;
         this.location = location;

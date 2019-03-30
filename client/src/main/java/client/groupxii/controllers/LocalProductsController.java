@@ -13,12 +13,12 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Text;
 
+import java.awt.Desktop;
 import java.io.IOException;
+import java.net.URI;
 import java.net.URL;
 import java.util.*;
 
-import java.awt.Desktop;
-import java.net.URI;
 
 public class LocalProductsController implements Initializable {
 
@@ -39,7 +39,7 @@ public class LocalProductsController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         try {
-            listItemsStr = new Scanner(new URL("http://localhost:8080/localshops?location="+ getUserLocation.getUserLocation()).openStream(),"UTF-8").nextLine();
+            listItemsStr = new Scanner(new URL("http://localhost:8080/localshops?location=" + getUserLocation.getUserLocation()).openStream(),"UTF-8").nextLine();
         } catch (IOException e) {
             e.printStackTrace();
         } catch (GeoIp2Exception e) {
@@ -52,12 +52,12 @@ public class LocalProductsController implements Initializable {
     }
 
     public void map() throws GeoIp2Exception, IOException {
-        if (localShops.getSelectionModel().getSelectedItem() == null){
+        if (localShops.getSelectionModel().getSelectedItem() == null) {
             textfield.setText("Please choose a shop first");
-        }
-        else{
+        }  else {
             String location = getUserLocation.getUserLocation();
-            String url = localShops.getSelectionModel().getSelectedItem().substring(8 , localShops.getSelectionModel().getSelectedItem().indexOf(" - "));
+            String url = localShops.getSelectionModel().getSelectedItem()
+                    .substring(8 , localShops.getSelectionModel().getSelectedItem().indexOf(" - "));
             url = url.replace(' ', '+').substring(0, url.length() - 1);
             mapsImage.setImage(new Image("https://maps.googleapis.com/maps/api/staticmap?center=" + url + "&zoom=12&size=900x150&maptype=roadmap&markers=color:red%7Clabel:Shop%7C" + url + "&key=AIzaSyBvn_zZpLGUjLJBxIUoGHgJjzo2VlZm3jg"));
         }
@@ -68,9 +68,9 @@ public class LocalProductsController implements Initializable {
     public void navigate(MouseEvent event) throws Exception {
         if (localShops.getSelectionModel().getSelectedItem() == null) {
             textfield.setText("Please choose a shop first");
-        }
-        else {
-            String url = localShops.getSelectionModel().getSelectedItem().substring(8, localShops.getSelectionModel().getSelectedItem().indexOf(" - "));
+        } else {
+            String url = localShops.getSelectionModel().getSelectedItem()
+                    .substring(8, localShops.getSelectionModel().getSelectedItem().indexOf(" - "));
             url = url.replace(' ', '+');
             Desktop.getDesktop().browse(URI.create("https://www.google.com/maps/search/?api=1&query=" + url));
         }
@@ -88,7 +88,7 @@ public class LocalProductsController implements Initializable {
     }
 
     @FXML
-    public void btnBack(MouseEvent event) throws IOException{
+    public void btnBack(MouseEvent event) throws IOException {
         Main main = new Main();
         main.changeScene("Menu.fxml", event);
     }
