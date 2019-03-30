@@ -42,13 +42,13 @@ public class MenuController {
     @FXML
     public void btnLeaderBoard(MouseEvent event) throws Exception {
         Main main = new Main();
-        main.changeScene("Leaderboard.fxml", event);
+        main.changeScene("VegetarianMeal.fxml", event);
     }
 
     @FXML
     public void btnLocalProducts(MouseEvent event) throws Exception {
         Main main = new Main();
-        main.changeScene("LocalProducts.fxml", event);
+        main.changeScene("VegetarianMeal.fxml", event);
     }
 
     @FXML

@@ -1,8 +1,7 @@
-package groupxii.server.controllers;
+package groupxii.server;
 
 import groupxii.database.Database;
 import groupxii.database.VehicleEntry;
-import groupxii.server.Transportation;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
