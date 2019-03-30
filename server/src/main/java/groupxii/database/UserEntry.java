@@ -6,7 +6,7 @@ import java.util.List;
 
 public class UserEntry extends Entry {
 
-    private long userId;
+    private int userId;
     private String username;
     private int points;
     private int badge;
@@ -15,7 +15,7 @@ public class UserEntry extends Entry {
 
     /** Constructor for the UserEntry class.
      */
-    public UserEntry(long userId, String username,
+    public UserEntry(int userId, String username,
                      int points,int badge, int reducedCo2,List<Integer> friendsId) {
         this.userId = userId;
         this.username = username;

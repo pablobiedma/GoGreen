@@ -20,7 +20,7 @@ public class UserController {
 
     private List<User> userList = new ArrayList<>();
     private SaveUser saveUser = new SaveUser();
-    private final AtomicLong counter = new AtomicLong();
+    private  int counter = 1;
 
     /** Receives data and creates a user entry in the user collection.
      */
@@ -38,7 +38,7 @@ public class UserController {
                                           defaultValue = "Unknown")
                                           List<Integer> friendsId) throws IOException {
         saveUser.setUserList(this.userList);
-        saveUser.saveUser(counter.incrementAndGet(), username, points,
+        saveUser.saveUser(counter++, username, points,
                 badge, reducedCo2, friendsId);
         return saveUser.getUserEntry();
     }
@@ -48,12 +48,12 @@ public class UserController {
      */
     @RequestMapping(method = RequestMethod.GET, value = "/getFriends")
     public List<DBObject> getFriends(@RequestParam(value = "Id",
-            defaultValue = "Unknown") long userId) throws IOException {
+            defaultValue = "Unknown") int userId) throws IOException {
             DBObject user =  Database.instance.findDocumentById(userId);
             List<Integer> list = (ArrayList<Integer>) user.get("friendsId");
             List<DBObject> friends = new ArrayList<>();
             for (int i = 0; i < list.size();i++) {
-                DBObject friend = Database.instance.findDocumentById(list.get(i));
+                DBObject friend =  Database.instance.findDocumentById(list.get(i));
                 friends.add(friend);
             }
             return friends;
@@ -70,9 +70,9 @@ public class UserController {
     /** receives two id's and adds the second one as a friend to the first one.
      */
     @RequestMapping(method = RequestMethod.GET, value = "/addFriend")
-    public DBObject addFriend(@RequestParam(value = "Id", defaultValue = "Unknown") long userId,
+    public DBObject addFriend(@RequestParam(value = "Id", defaultValue = "Unknown") int userId,
                               @RequestParam(value = "newFriend" ,
-                                      defaultValue = "Unknown") long friendsId) {
+                                      defaultValue = "Unknown") int friendsId) {
         Database.instance.addFriendId(friendsId,userId);
         DBObject user =  Database.instance.findDocumentById(userId);
         return user;

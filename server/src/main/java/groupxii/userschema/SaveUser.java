@@ -26,7 +26,7 @@ public class SaveUser {
 
     /** This method saves an User as an entry in the database.
      */
-    public void saveUser(long userId,String username,int points,int badge,
+    public void saveUser(int userId,String username,int points,int badge,
                          int reducedCo2,List<Integer> friendsId) throws IOException {
         UserEntry userEntry = new UserEntry(userId,username,points,badge,reducedCo2,friendsId);
         Database.instance.saveNonBlocking(userEntry);
