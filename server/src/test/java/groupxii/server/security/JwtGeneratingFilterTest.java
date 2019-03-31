@@ -7,6 +7,7 @@ import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.ProviderManager;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.authentication.InsufficientAuthenticationException;
 import org.springframework.security.authentication.BadCredentialsException;
 
@@ -158,18 +159,11 @@ public class JwtGeneratingFilterTest {
 		// no exception => test passes
 	}
 
-
-
-
+	@Test
+	public void unreachableConditionTest() throws IOException, ServletException {
+		ByteArrayOutputStream responseMessage = new ByteArrayOutputStream();
+		PrintWriter writer = new PrintWriter(responseMessage);
+		when(response.getWriter()).thenReturn(writer);
+		breakEncapsulation.unsuccessfulAuthentication(request, response, new UsernameNotFoundException("unknow"));
+	}
 }
-
-/*
-import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.config.http.SessionCreationPolicy;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.web.authentication.AnonymousAuthenticationFilter;
-
-*/
