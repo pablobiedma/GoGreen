@@ -1,4 +1,4 @@
-package client.groupxii.vegetarianmeal;
+package groupxii.vegetarianmeal;
 
 import com.mongodb.MongoClient;
 import com.mongodb.client.MongoCollection;
@@ -64,5 +64,4 @@ public class EatenMealList {
                 document.getInteger("reducedCo2"));
         return result;
     }
-
 }
