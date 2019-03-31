@@ -84,13 +84,16 @@ public class SolarPanelController {
 
     }
 
+    /**
+     * This method will return a String with used Panels in json format.
+     */
     @RequestMapping(method = RequestMethod.GET, value = "/usedPanelList")
     public String getUsedPanelList() throws IOException {
         UsedPanelList usedPanelListclass = new UsedPanelList();
         usedPanelListclass.readDatabase();
         String jsonReturn = "";
         usedPanelList = usedPanelListclass.getUsedPanelList();
-        for (int i = 0; i < usedPanelList.size(); i++ ){
+        for (int i = 0; i < usedPanelList.size(); i++ ) {
             jsonReturn += usedPanelList.get(i) + " - ";
         }
         return jsonReturn;

@@ -21,6 +21,9 @@ public class MenuController {
 
     }
 
+    /**
+     * This method will change the scene to SolarPanels.
+     */
     @FXML
     public void btnSolarPanels(MouseEvent event) throws Exception {
         SolarPanelController spc = new SolarPanelController();

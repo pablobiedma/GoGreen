@@ -8,13 +8,17 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.ListView;
 import javafx.scene.control.Slider;
-import javafx.scene.text.Text;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.text.Text;
 
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.ResourceBundle;
+import java.util.Scanner;
 
 public class SolarPanelController implements Initializable {
 
@@ -42,17 +46,13 @@ public class SolarPanelController implements Initializable {
         try {
             usedpanelListStr = new Scanner(new URL(host + "panelNameList").openStream(),
                     "UTF-8").nextLine();
-//            usedpanelListStr2 = new Scanner(new URL(host + "usedPanelList").openStream(),
-//                    "UTF-8").nextLine();
-        }
-        catch (IOException e) {
+        } catch (IOException e) {
             e.printStackTrace();
         }
-//        usedPanelListViewItems = Arrays.asList(usedpanelListStr2.split(" - "));
-//        ObservableList<String> usedPanelsObservable = FXCollections.observableArrayList(usedPanelListViewItems);
-//        usedPanelsListView.setItems(usedPanelsObservable);
+
         List<String> usedpanelListitems = Arrays.asList(usedpanelListStr.split(", "));
-        ObservableList<String> listObservable = FXCollections.observableArrayList(usedpanelListitems);
+        ObservableList<String> listObservable =
+                FXCollections.observableArrayList(usedpanelListitems);
         chosenSolarPanel.getItems().addAll(listObservable);
     }
 
@@ -68,13 +68,15 @@ public class SolarPanelController implements Initializable {
             e.printStackTrace();
         }
         usedPanelListViewItems = Arrays.asList(usedpanelListStr2.split(" - "));
-        ObservableList<String> usedPanelsObservable = FXCollections.observableArrayList(usedPanelListViewItems);
+        ObservableList<String> usedPanelsObservable =
+                FXCollections.observableArrayList(usedPanelListViewItems);
         usedPanelsListView.setItems(usedPanelsObservable);
     }
 
     /**
      * Calculates the co2 reduced emission when the user clicks the calculate button.
      * it also calculates the amount of points the user earned.
+     *
      * @param event mouse click
      * @throws Exception throws exception when something went wrong
      */
@@ -82,7 +84,7 @@ public class SolarPanelController implements Initializable {
     void safePanel(MouseEvent event) throws Exception {
         panel = chosenSolarPanel.getValue();
         int amount = (int) amountOfSolarPanels.getValue();
-        safePanel.safePanel(panel,amount);
+        safePanel.safePanel(panel, amount);
         updateListView();
     }
 }
