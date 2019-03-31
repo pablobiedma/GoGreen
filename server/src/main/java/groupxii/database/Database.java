@@ -167,9 +167,9 @@ public class Database extends Thread {
 
     /** returns all users sorted by points.
      */
-    public List<DBObject> sortUsersByPoints() {
+    public List<DBObject> sortUsersByReducedCo2() {
         List<DBObject> list = new ArrayList<>();
-        Iterator<DBObject> cursor = userCollection.find().sort(new BasicDBObject("points",-1));
+        Iterator<DBObject> cursor = userCollection.find().sort(new BasicDBObject("reducedCo2",-1));
         while (cursor.hasNext()) {
             DBObject obj = cursor.next();
             list.add(obj);

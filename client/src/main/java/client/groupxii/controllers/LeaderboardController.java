@@ -64,7 +64,7 @@ public class LeaderboardController implements Initializable {
         for (int i = 0; i < overallLeaderboardList.size(); i++){
             overallList.add(new HBoxCell(overallLeaderboardList.get(i), "ADD FRIEND"));
         }
-        ObservableList<HBoxCell> overallLeaderboardObservableList = FXCollections.observableArrayList(list);
+        ObservableList<HBoxCell> overallLeaderboardObservableList = FXCollections.observableArrayList(overallList);
         overallLeaderboard.setItems(overallLeaderboardObservableList);
 
         List<String> friendsLeaderboardList = Arrays.asList(friendListStr.split(", "));

@@ -65,7 +65,7 @@ public class UserController {
      */
     @RequestMapping(method = RequestMethod.GET, value = "/Leaderboard")
     public String leaderboard() {
-            List<DBObject> users = Database.instance.sortUsersByPoints();
+            List<DBObject> users = Database.instance.sortUsersByReducedCo2();
             return jsonConverter.LeaderboardToString(users);
     }
 
