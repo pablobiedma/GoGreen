@@ -47,8 +47,8 @@
                 </Button>
                 <Slider fx:id="slider" layoutX="422.0" layoutY="246.0" majorTickUnit="50.0" max="1000.0" prefHeight="37.0" prefWidth="415.0" showTickLabels="true" showTickMarks="true" />
                 <Slider fx:id="slider1" layoutX="422.0" layoutY="357.0" majorTickUnit="50.0" max="1000.0" prefHeight="37.0" prefWidth="415.0" showTickLabels="true" showTickMarks="true" />
-                <ChoiceBox fx:id="cb" layoutX="77.0" layoutY="159.0" prefHeight="20" prefWidth="200" />
-                <ChoiceBox fx:id="cb1" layoutX="630.0" layoutY="159.0" prefHeight="20" prefWidth="200" />
+                <ChoiceBox fx:id="cb" layoutX="77.0" layoutY="124.0" prefHeight="20" prefWidth="200" />
+                <ChoiceBox fx:id="cb1" layoutX="630.0" layoutY="124.0" prefHeight="20" prefWidth="200" />
                 <Text layoutX="80.0" layoutY="112.0" strokeType="OUTSIDE" strokeWidth="0.0" text="I used..." textAlignment="CENTER" wrappingWidth="193.93243408203125">
                     <font>
                         <Font name="Segoe UI Bold" size="46.0" />
@@ -71,6 +71,19 @@
                 </Text>
                 <Text fx:id="textfield" layoutX="212.0" layoutY="410.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="478.13665771484375" />
                 <ListView fx:id="usedTransportListView" layoutX="48.0" layoutY="229.0" prefHeight="255.0" prefWidth="328.0" />
+                <ListView fx:id="usedFuelListView" layoutX="48.0" layoutY="229.0" prefHeight="255.0" prefWidth="328.0" />
+                <ChoiceBox fx:id="cb3" layoutX="102.0" layoutY="180.0" prefWidth="150.0" />
+                <ChoiceBox fx:id="cb4" layoutX="681.0" layoutY="177.0" prefWidth="150.0" />
+                <Text layoutX="136.0" layoutY="172.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Bad Fuel " textAlignment="CENTER" wrappingWidth="81.60003662109375">
+                    <font>
+                        <Font name="Segoe UI Bold" size="14.0" />
+                    </font>
+                </Text>
+                <Text layoutX="739.0" layoutY="172.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Good Fuel" textAlignment="CENTER" wrappingWidth="81.60003662109375">
+                    <font>
+                        <Font name="Segoe UI Bold" size="14.0" />
+                    </font>
+                </Text>
             </children>
         </Pane>
     </children>

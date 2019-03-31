@@ -10,6 +10,7 @@ import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.ListView;
 import javafx.scene.control.Slider;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.text.Text;
 //import javafx.scene.text.Text;
 
 import java.io.IOException;
@@ -46,8 +47,21 @@ public class TransportationController implements Initializable {
     private Slider slider1 = new Slider();
 
     @FXML
+    private Text savedCo2 = new Text();
+
+    @FXML
     private ListView<String> usedTransportListView = new ListView();
 
+    private String A = "car";
+    private String B = "bike";
+    private String C = "taxi";
+    private String D = "metro";
+    private String E = "train";
+    private String F = "airplane";
+    private String P = "Diesel";
+    private String Q = "Petrol";
+    private String R = "Electric_Wires";
+    private String S = "none";
     private String goodTransportName = "";
     private String badTransportName = "";
     private String goodfuel = "";
@@ -57,6 +71,8 @@ public class TransportationController implements Initializable {
     private String usedTransportListStr = "";
     private SafeVehicle safeTransport = new SafeVehicle();
     private List<String> usedTransportListViewItems = new ArrayList<String>();
+    private List<String> l = new ArrayList<>();
+    private List<String> l2 = new ArrayList<>();
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -69,16 +85,33 @@ public class TransportationController implements Initializable {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        System.out.println(transportNameListStr);
+        System.out.println("TEST");
+
         usedTransportListViewItems = Arrays.asList(usedTransportListStr.split(" - "));
         ObservableList<String> usedTransportObservable =
                 FXCollections.observableArrayList(usedTransportListViewItems);
         usedTransportListView.setItems(usedTransportObservable);
         List<String> items = Arrays.asList(transportNameListStr.split(", "));
         ObservableList<String> listObservable = FXCollections.observableArrayList(items);
+        l.add(A);
+        l.add(B);
+        l.add(C);
+        l.add(D);
+        l.add(E);
+        l.add(F);
+        l2.add(P);
+        l2.add(Q);
+        l2.add(R);
+        l2.add(S);
         cb.getItems().addAll(listObservable);
+        cb.getItems().addAll(l);
         cb1.getItems().addAll(listObservable);
+        cb1.getItems().addAll(l);
         cb3.getItems().addAll(listObservable);
+        cb3.getItems().addAll(l2);
         cb4.getItems().addAll(listObservable);
+        cb4.getItems().addAll(l2);
         updateListView();
     }
 
