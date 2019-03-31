@@ -71,12 +71,10 @@ public class UserController {
     /** receives two id's and adds the second one as a friend to the first one.
      */
     @RequestMapping(method = RequestMethod.GET, value = "/addFriend")
-    public DBObject addFriend(@RequestParam(value = "Id", defaultValue = "Unknown") int userId,
+    public void addFriend(@RequestParam(value = "Id", defaultValue = "Unknown") int userId,
                               @RequestParam(value = "newFriend" ,
                                       defaultValue = "Unknown") int friendsId) {
         Database.instance.addFriendId(friendsId,userId);
-        DBObject user =  Database.instance.findDocumentById(userId);
-        return user;
     }
 }
 
