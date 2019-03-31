@@ -3,6 +3,7 @@ package groupxii.server.controllers;
 import com.mongodb.DBObject;
 import groupxii.database.Database;
 import groupxii.database.UserEntry;
+import groupxii.userschema.JsonConverter;
 import groupxii.userschema.SaveUser;
 import groupxii.userschema.User;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,6 +21,7 @@ public class UserController {
 
     private List<User> userList = new ArrayList<>();
     private SaveUser saveUser = new SaveUser();
+    private JsonConverter jsonConverter = new JsonConverter();
     private  int counter = 1;
 
     /** Receives data and creates a user entry in the user collection.
@@ -47,7 +49,7 @@ public class UserController {
      of his/her friends.
      */
     @RequestMapping(method = RequestMethod.GET, value = "/getFriends")
-    public List<DBObject> getFriends(@RequestParam(value = "Id",
+    public String getFriends(@RequestParam(value = "Id",
             defaultValue = "Unknown") int userId) throws IOException {
             DBObject user =  Database.instance.findDocumentById(userId);
             List<Integer> list = (ArrayList<Integer>) user.get("friendsId");
@@ -56,15 +58,15 @@ public class UserController {
                 DBObject friend =  Database.instance.findDocumentById(list.get(i));
                 friends.add(friend);
             }
-            return friends;
+            return jsonConverter.LeaderboardToString(friends);
     }
 
     /** returns all users sorted by points.
      */
     @RequestMapping(method = RequestMethod.GET, value = "/Leaderboard")
-    public List<DBObject> leaderboard() {
+    public String leaderboard() {
             List<DBObject> users = Database.instance.sortUsersByPoints();
-            return users;
+            return jsonConverter.LeaderboardToString(users);
     }
 
     /** receives two id's and adds the second one as a friend to the first one.
