@@ -25,7 +25,9 @@ test-server:
   - mongo:latest
   stage: test-server
   script:
-  - cd server; mvn test
+  - cd server;
+    echo "JUrhwXKThxBj0F3BJ1slCvta4qRQAoZEo/98TabGIHES+BLp/ok3+nsvzF8h/X+9K7gjn6VbYv6OrNiGxuGofLaZg1yqeptSK5L0lx2QWPC+AhT/iebxiqVESXM3RrSro+KfA4fk6bQJ0aL0bfF3QU4AjlqV4gl7/aDA9nv7I+EKIWqb0utDitd5VPyLNQ8tpRue4W0fhAx7btdgj5kebPjGDHL+Q9gEMX6ZJCq8wHzsPF8KyRnhl20n8wA+8" >key;
+    mvn test;
 
 test-client:
     services:
