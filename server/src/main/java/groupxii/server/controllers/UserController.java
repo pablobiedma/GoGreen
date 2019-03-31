@@ -1,6 +1,5 @@
 package groupxii.server.controllers;
 
-import com.mongodb.DB;
 import com.mongodb.DBObject;
 import groupxii.database.Database;
 import groupxii.database.UserEntry;
@@ -15,7 +14,6 @@ import org.springframework.web.bind.annotation.RestController;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.atomic.AtomicLong;
 
 @RestController
 public class UserController {
@@ -59,7 +57,7 @@ public class UserController {
                 DBObject friend =  Database.instance.findDocumentById(list.get(i));
                 friends.add(friend);
             }
-            return jsonConverter.LeaderboardToString(friends);
+            return jsonConverter.leaderboardToString(friends);
     }
 
     /** returns all users sorted by points.
@@ -67,7 +65,7 @@ public class UserController {
     @RequestMapping(method = RequestMethod.GET, value = "/Leaderboard")
     public String leaderboard() {
             List<DBObject> users = Database.instance.sortUsersByReducedCo2();
-            return jsonConverter.LeaderboardToString(users);
+            return jsonConverter.leaderboardToString(users);
     }
 
     /** receives two id's and adds the second one as a friend to the first one.
@@ -85,7 +83,8 @@ public class UserController {
      */
     @RequestMapping(method = RequestMethod.GET, value = "increaseReducedCO2")
     public DBObject incReducedCO2(@RequestParam(value = "Id",defaultValue = "Unknown") int userId,
-                              @RequestParam(value = "ReducedCO2",defaultValue = "Unknown") int reducedCo2) {
+                              @RequestParam(value = "ReducedCO2",
+                                      defaultValue = "Unknown") int reducedCo2) {
         Database.instance.incrementReducedCo2(userId,reducedCo2);
         DBObject user = Database.instance.findDocumentById(userId);
         return user;
