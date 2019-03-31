@@ -48,7 +48,7 @@ public class JwtVerificationFilter extends BasicAuthenticationFilter {
         }
 
         SecurityContextHolder.getContext().setAuthentication(authentication);
-        super.doFilter(request, response, filterChain);
+        filterChain.doFilter(request, response);
     }
 
     private UsernamePasswordAuthenticationToken getAuthenticaion(String jwsString) {
