@@ -131,9 +131,27 @@ public class DatabaseTest {
 		List<Integer> list = new ArrayList<>();
 		UserEntry entry = new UserEntry(1, "Ivan",100,1,6,list);
 		Database.instance.saveNonBlocking(entry);
-
 		assertNotEquals(entry.toDbObject(),Database.instance.findDocumentById(2));
 	}
 
+	@Test
+	public void testSortUsersByPoints() {
+		Database.instance.setDbName("test");
+		Database.instance.startDb();
+		List<Integer> list = new ArrayList<>();
+		UserEntry entry = new UserEntry(1, "Ivan",100,1,6,list);
+		Database.instance.saveNonBlocking(entry);
+		assertNotEquals(entry.toDbObject(),Database.instance.sortUsersByPoints());
+	}
+
+	@Test
+	public void testAddFriendId() {
+		Database.instance.setDbName("test");
+		Database.instance.startDb();
+		List<Integer> list = new ArrayList<>();
+		UserEntry entry = new UserEntry(1, "Ivan",100,1,6,list);
+		Database.instance.saveNonBlocking(entry);
+		Database.instance.addFriendId(1,2);
+	}
 
 }

@@ -13,21 +13,21 @@ public class UserEntryTest {
     public void getUserId() {
         List<Integer> list = new ArrayList<>();
         UserEntry usr = new UserEntry(1,"Ivan",100,1,9,list);
-        assertEquals(usr.getUserId(),1);
+        assertEquals(1,usr.getUserId());
     }
 
     @Test
     public void getUsername() {
         List<Integer> list = new ArrayList<>();
         UserEntry usr = new UserEntry(1,"Ivan",100,1,9,list);
-        assertEquals(usr.getUsername(),"Ivan");
+        assertEquals("Ivan",usr.getUsername());
     }
 
     @Test
     public void getPoints() {
         List<Integer> list = new ArrayList<>();
         UserEntry usr = new UserEntry(1,"Ivan",100,1,9,list);
-        assertEquals(usr.getPoints(),100);
+        assertEquals(100,usr.getPoints());
     }
 
     @Test
@@ -41,14 +41,14 @@ public class UserEntryTest {
     public void getReducedCo2() {
         List<Integer> list = new ArrayList<>();
         UserEntry usr = new UserEntry(1,"Ivan",100,1,9,list);
-        assertEquals(usr.getReducedCo2(),9);
+        assertEquals(9,usr.getReducedCo2());
     }
 
     @Test
     public void getFriendsId() {
         List<Integer> list = new ArrayList<>();
         UserEntry usr = new UserEntry(1,"Ivan",100,1,9,list);
-        assertEquals(usr.getFriendsId(),list);
+        assertEquals(list,usr.getFriendsId());
     }
 
     //not sure how to test that

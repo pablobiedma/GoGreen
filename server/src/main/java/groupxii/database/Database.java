@@ -1,12 +1,6 @@
 package groupxii.database;
 
-import com.mongodb.BasicDBObject;
-import com.mongodb.DB;
-import com.mongodb.DBCollection;
-import com.mongodb.DBCursor;
-import com.mongodb.DBObject;
-import com.mongodb.MongoClient;
-import com.mongodb.MongoException;
+import com.mongodb.*;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -184,6 +178,5 @@ public class Database extends Thread {
         newDocument.append("$addToSet", new BasicDBObject().append("friendsId", id1));
         BasicDBObject searchQuery = new BasicDBObject().append("userId", id2);
         userCollection.update(searchQuery, newDocument);
-
     }
 }
