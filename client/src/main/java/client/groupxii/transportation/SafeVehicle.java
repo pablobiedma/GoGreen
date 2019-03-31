@@ -15,12 +15,17 @@ public class SafeVehicle {
      * @throws IOException if it receives unexpected response
      */
     public String safeVehicle(String goodTransportName, String badTransportName,
-                                String goodFuel, String badFuel, int goodAvgConsumption, int badAvgConsumption) throws IOException {
+                                String goodFuel, String badFuel,
+                              int goodAvgConsumption, int badAvgConsumption)
+            throws IOException {
         // Url were to get the JSON data from, "transport" is now hardcoded
         // but will be a variable in the future.
-        URL url = new URL("http://" + host + ":" + port + "/saveTransportData?goodTransportName="
-                + goodTransportName + "&goodFuel=" + goodFuel + "&goodAvgConsumption=" + goodAvgConsumption  + "&badTransportName="
-                + badTransportName + "&badFuel=" + badFuel + "&badAvgConsumption=" + badAvgConsumption );
+        URL url = new URL("http://" + host + ":" + port
+                + "/saveTransportData?goodTransportName="
+                + goodTransportName + "&goodFuel=" + goodFuel + "&goodAvgConsumption="
+                + goodAvgConsumption  + "&badTransportName="
+                + badTransportName + "&badFuel=" + badFuel
+                + "&badAvgConsumption=" + badAvgConsumption );
         String readLine;
         // opens a http connection with the URL.
         HttpURLConnection connection = (HttpURLConnection) url.openConnection();

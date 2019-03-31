@@ -27,6 +27,9 @@ public class MenuController {
         main.changeScene("SolarPanels.fxml", event);
     }
 
+    /**
+     *Change the scene to Transportation.
+     */
     @FXML
     public void btnTransport(MouseEvent event) throws Exception {
         TransportationController tpc = new TransportationController();

@@ -79,6 +79,6 @@ public class VehicleCalculationsTest {
         vehicles.add(0,vehicle);
         vehicles.add(1,vehicle2);
         vehicleCalculations.setVehicles(vehicles);
-        assertEquals(vehicleCalculations.reducedCO2("car","Diesel",9,vehicleCalculations.calculateCO2("bike","Petrol",4))*5,vehicleCalculations.CalculatePoints());
+        assertEquals(vehicleCalculations.reducedCO2("car","Diesel",9,vehicleCalculations.calculateCO2("bike","Petrol",4))*5,vehicleCalculations.calculatePoints());
     }
 }

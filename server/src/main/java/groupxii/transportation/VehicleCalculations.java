@@ -24,15 +24,10 @@ public class VehicleCalculations {
 
     /**
      * Here we calculate the amount of co2 emission by hard.
-     * @param chosenVehicle
-     * @param chosenFuel
-     * @param chosenConsumption
-     * @return
-     * @throws IOException
      */
     public int calculateCO2(String chosenVehicle, String chosenFuel, int chosenConsumption)
             throws IOException {
-        for (int i = 0;i<vehicles.size(); i++) {
+        for (int i = 0; i < vehicles.size(); i++) {
             if (chosenVehicle.equals(vehicles.get(i).getVehiclename())) {
                 this.vehicle = vehicles.get(i).getVehiclename();
                 this.co2 = vehicles.get(i).getCo2();
@@ -40,19 +35,19 @@ public class VehicleCalculations {
                 this.avgconsumption = vehicles.get(i).getAvgconsumption();
 
                 if (chosenFuel.equals("Diesel")) {
-                    calculatedco2 = (chosenConsumption/100) * 2640;
+                    calculatedco2 = (chosenConsumption / 100) * 2640;
                 }
                 if (chosenFuel.equals("Petrol")) {
-                    calculatedco2 = (chosenConsumption/100) * 2392;
+                    calculatedco2 = (chosenConsumption / 100) * 2392;
                 }
                 if (chosenFuel.equals("LPG")) {
-                    calculatedco2 = (chosenConsumption/100) * 1665;
+                    calculatedco2 = (chosenConsumption / 100) * 1665;
                 }
                 if (chosenConsumption == 0) {
                     throw new ArithmeticException();
                 }
-                    double co2perliter = co2/avgconsumption;
-                    calculatedco2 = (int) co2perliter * chosenConsumption;
+                double co2perliter = co2 / avgconsumption;
+                calculatedco2 = (int) co2perliter * chosenConsumption;
 
             }
         }
@@ -60,21 +55,16 @@ public class VehicleCalculations {
     }
 
     /**
-     * This is where we will calculate the difference of co2 emission between car and the chosen public transport.
-     * @param car
-     * @param chosenFuel
-     * @param chosenConsumption
-     * @param publictransport
-     * @return
-     * @throws IOException
+     * This is where we will calculate the difference of co2 emission between car and the
+     * chosen public transport.
      */
     public int reducedCO2(String car, String chosenFuel, int chosenConsumption, int publictransport)
             throws IOException {
-        this.reducedco2 = calculateCO2(car,chosenFuel,chosenConsumption) - publictransport;
+        this.reducedco2 = calculateCO2(car, chosenFuel, chosenConsumption) - publictransport;
         return this.reducedco2;
     }
 
-    public int CalculatePoints() {
+    public int calculatePoints() {
         return this.reducedco2 * 5;
     }
 }

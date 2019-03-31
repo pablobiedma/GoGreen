@@ -53,7 +53,7 @@ public class TransportationController implements Initializable {
     private String goodfuel = "";
     private String badfuel = "";
     private String host = "http://localhost:8080/";
-    private String TransportNameListStr = "";
+    private String transportNameListStr = "";
     private String usedTransportListStr = "";
     private SafeVehicle safeTransport = new SafeVehicle();
     private List<String> usedTransportListViewItems = new ArrayList<String>();
@@ -61,7 +61,7 @@ public class TransportationController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         try {
-            TransportNameListStr = new Scanner(new URL(host + "TransportNameList").openStream(),
+            transportNameListStr = new Scanner(new URL(host + "TransportNameList").openStream(),
                     "UTF-8").nextLine();
             usedTransportListStr = new Scanner(new URL(host + "usedTransportList").openStream(),
                     "UTF-8").nextLine();
@@ -70,9 +70,10 @@ public class TransportationController implements Initializable {
             e.printStackTrace();
         }
         usedTransportListViewItems = Arrays.asList(usedTransportListStr.split(" - "));
-        ObservableList<String> usedTransportObservable = FXCollections.observableArrayList(usedTransportListViewItems);
+        ObservableList<String> usedTransportObservable =
+                FXCollections.observableArrayList(usedTransportListViewItems);
         usedTransportListView.setItems(usedTransportObservable);
-        List<String> items = Arrays.asList(TransportNameListStr.split(", "));
+        List<String> items = Arrays.asList(transportNameListStr.split(", "));
         ObservableList<String> listObservable = FXCollections.observableArrayList(items);
         cb.getItems().addAll(listObservable);
         cb1.getItems().addAll(listObservable);
@@ -93,7 +94,8 @@ public class TransportationController implements Initializable {
             e.printStackTrace();
         }
         usedTransportListViewItems = Arrays.asList(usedTransportListStr.split(" - "));
-        ObservableList<String> usedTransportObservable = FXCollections.observableArrayList(usedTransportListViewItems);
+        ObservableList<String> usedTransportObservable =
+                FXCollections.observableArrayList(usedTransportListViewItems);
         usedTransportListView.setItems(usedTransportObservable);
     }
 
@@ -111,7 +113,8 @@ public class TransportationController implements Initializable {
         badfuel = cb4.getValue();
         int goodConsumption = (int) slider.getValue();
         int badConsumption = (int) slider1.getValue();
-        safeTransport.safeVehicle(goodTransportName, badTransportName,goodfuel, badfuel,goodConsumption , badConsumption);
+        safeTransport.safeVehicle(goodTransportName, badTransportName,goodfuel,
+                badfuel,goodConsumption , badConsumption);
         updateListView();
     }
 }

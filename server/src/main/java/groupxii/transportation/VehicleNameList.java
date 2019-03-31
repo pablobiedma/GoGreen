@@ -15,8 +15,11 @@ public class VehicleNameList {
         this.vehicles = vehicles;
     }
 
+    /**
+     * Human-friendly String representation for vehicle names.
+     */
     public String getVehicleNameList() {
-        for (int i = 0; i<vehicles.size(); i++) {
+        for (int i = 0; i < vehicles.size(); i++) {
             result = result + vehicles.get(i).getVehiclename() + ", ";
         }
         result = result.substring(0, result.length() - 2);

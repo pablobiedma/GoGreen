@@ -8,11 +8,7 @@ public class Vehicle {
     private int avgconsumption;
 
     /**
-     * This is the constructor of a Vehicle
-     * @param vehiclename
-     * @param co2 in grams/kilometres
-     * @param fuel
-     * @param avgconsumption in litres/100kilometres
+     * This is the constructor of a Vehicle.
      */
     public Vehicle(String vehiclename, int co2, String fuel, int avgconsumption) {
         this.vehiclename = vehiclename;
