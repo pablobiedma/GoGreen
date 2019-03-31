@@ -110,34 +110,16 @@ public class JwtGeneratingFilter extends UsernamePasswordAuthenticationFilter {
                                               HttpServletResponse response,
                                               AuthenticationException failed) 
                                                   throws IOException, ServletException {
-        int sc;
+        int sc = -1;
         if (failed instanceof InsufficientAuthenticationException) {
             sc = HttpServletResponse.SC_BAD_REQUEST;
-            response.setStatus(sc);
-            response.setContentType("application/json");
-            response.getWriter().append(jsonErrorMessage(sc, failed.getMessage()));
         } else if (failed instanceof BadCredentialsException) {
             sc = HttpServletResponse.SC_UNAUTHORIZED;
-            response.setStatus(sc);
-            response.setContentType("application/json");
-            response.getWriter().append(jsonErrorMessage(sc, failed.getMessage()));
         }
+        response.setStatus(sc);
+        response.setContentType("application/json");
+        response.getWriter().append(
+            JsonErrorResponseGenerator.createMessage(sc, failed.getMessage(), path));
 
-    }
-
-    private String jsonErrorMessage(int sc, String message) {
-        long date = new Date().getTime();
-        String errType = "Error";
-        if (sc == 400) {
-            errType = "Bad Request";
-        } else if (sc == 401) {
-            errType = "Unauthorized";
-        }
-
-        return "{\"timestamp\": " + date + ", "
-            + "\"status\": " + sc + ", "
-            + "\"error\": \"" + errType + "\", "
-            + "\"message\": \"" + message + "\", "
-            + "\"path\": \"" + path + "\"}";
     }
 }
