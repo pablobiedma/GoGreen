@@ -25,7 +25,7 @@ public class UserEntry extends Entry {
         this.friendsId = friendsId;
     }
 
-    public long getUserId() {
+    public int getUserId() {
         return userId;
     }
 
