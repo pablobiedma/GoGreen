@@ -1,3 +1,5 @@
+before_script:
+  - base64 /dev/urandom | head -c 256 > key
 cache:
   paths:
   - .m2/
