@@ -23,7 +23,6 @@ public class LeaderboardController implements Initializable {
     private String host = "http://localhost:8080/";
     //Should be the userId that is assigned to the user when he/she registers
     private String userId = "1";
-    private Button button = new Button("ADD FRIEND");
 
     @FXML
     private ListView<HBoxCell> overallLeaderboard = new ListView();
@@ -69,11 +68,15 @@ public class LeaderboardController implements Initializable {
 
         List<String> friendsLeaderboardList = Arrays.asList(friendListStr.split(", "));
         List<HBoxCell> list = new ArrayList<>();
-        for (int i = 0; i < friendsLeaderboardList.size(); i++){
+        for (int i = 0; i < friendsLeaderboardList.size(); i++) {
             list.add(new HBoxCell(friendsLeaderboardList.get(i), "UNFOLLOW"));
         }
         ObservableList<HBoxCell> friendsLeaderboardObservableList = FXCollections.observableArrayList(list);
         friendsLeaderboard.setItems(friendsLeaderboardObservableList);
+    }
+
+    public void addFriend(){
+
     }
 
     @FXML

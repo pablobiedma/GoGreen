@@ -9,7 +9,7 @@ public class JsonConverter {
     public String LeaderboardToString(List<DBObject> jsonList) {
         String result = "";
         for (int i = 0; i < jsonList.size(); i++){
-            result  = result + jsonList.get(i).get("username").toString() + " - " + jsonList.get(i).get("reducedCo2") + ", ";
+            result  = result + jsonList.get(i).get("username").toString() + " - " + jsonList.get(i).get("reducedCo2") + " CO2 Reduction, ";
         }
         return result;
     }
