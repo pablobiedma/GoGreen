@@ -112,12 +112,12 @@ public class JwtGeneratingFilter extends UsernamePasswordAuthenticationFilter {
                                                   throws IOException, ServletException {
         int sc;
         if (failed instanceof InsufficientAuthenticationException) {
-            sc = response.SC_BAD_REQUEST;
+            sc = HttpServletResponse.SC_BAD_REQUEST;
             response.setStatus(sc);
             response.setContentType("application/json");
             response.getWriter().append(jsonErrorMessage(sc, failed.getMessage()));
         } else if (failed instanceof BadCredentialsException) {
-            sc = response.SC_UNAUTHORIZED;
+            sc = HttpServletResponse.SC_UNAUTHORIZED;
             response.setStatus(sc);
             response.setContentType("application/json");
             response.getWriter().append(jsonErrorMessage(sc, failed.getMessage()));
