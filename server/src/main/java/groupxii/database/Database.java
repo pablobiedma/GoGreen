@@ -179,4 +179,13 @@ public class Database extends Thread {
         BasicDBObject searchQuery = new BasicDBObject().append("userId", id2);
         userCollection.update(searchQuery, newDocument);
     }
+
+    /** Increments the reducedCo2 
+     */
+    public void incrementReducedCo2(int userId,int reducedCo2) {
+        BasicDBObject newDocument = new BasicDBObject();
+        newDocument.append("$inc", new BasicDBObject().append("reducedCo2", reducedCo2));
+        BasicDBObject searchQuery = new BasicDBObject().append("userId", userId);
+        userCollection.update(searchQuery, newDocument);
+    }
 }

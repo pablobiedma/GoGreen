@@ -1,5 +1,6 @@
 package groupxii.server.controllers;
 
+import com.mongodb.DB;
 import com.mongodb.DBObject;
 import groupxii.database.Database;
 import groupxii.database.UserEntry;
@@ -77,6 +78,16 @@ public class UserController {
                                       defaultValue = "Unknown") int friendsId) {
         Database.instance.addFriendId(friendsId,userId);
         DBObject user =  Database.instance.findDocumentById(userId);
+        return user;
+    }
+
+    /** Increments reducedCO2 with some reducedCo2 dependant on the meal.
+     */
+    @RequestMapping(method = RequestMethod.GET, value = "increaseReducedCO2")
+    public DBObject incReducedCO2(@RequestParam(value = "Id",defaultValue = "Unknown") int userId,
+                              @RequestParam(value = "ReducedCO2",defaultValue = "Unknown") int reducedCo2) {
+        Database.instance.incrementReducedCo2(userId,reducedCo2);
+        DBObject user = Database.instance.findDocumentById(userId);
         return user;
     }
 }

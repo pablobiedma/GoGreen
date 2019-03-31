@@ -141,7 +141,7 @@ public class DatabaseTest {
 		List<Integer> list = new ArrayList<>();
 		UserEntry entry = new UserEntry(1, "Ivan",100,1,6,list);
 		Database.instance.saveNonBlocking(entry);
-		assertNotEquals(entry.toDbObject(),Database.instance.sortUsersByPoints());
+		assertNotEquals(entry.toDbObject(),Database.instance.sortUsersByReducedCo2());
 	}
 
 	@Test
