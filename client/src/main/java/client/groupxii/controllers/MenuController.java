@@ -41,10 +41,10 @@ public class MenuController implements Initializable {
      */
     @FXML
     public void btnTransport(MouseEvent event) throws Exception {
-<<<<<<< client/src/main/java/client/groupxii/controllers/MenuController.java
+        client/src/main/java/client/groupxii/controllers/MenuController.java
         main.changeScene("Transportation.fxml", event);
-=======
->>>>>>> client/src/main/java/client/groupxii/controllers/MenuController.java
+
+        client/src/main/java/client/groupxii/controllers/MenuController.java
     }
 
     @FXML
