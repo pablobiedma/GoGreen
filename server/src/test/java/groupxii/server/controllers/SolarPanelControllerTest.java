@@ -45,7 +45,7 @@ public class SolarPanelControllerTest {
         List<Panel> panelList = new ArrayList<>();
         panelList.add(0,p);
         solarPanelController.setPanelData();
-        assertEquals(solarPanelController.getReducedCO2("Monocrystalline"),1560);
+        assertEquals(solarPanelController.getCalculatedCO2("Monocrystalline"),1560);
     }
     @Test
     public void getPanelEntry() {

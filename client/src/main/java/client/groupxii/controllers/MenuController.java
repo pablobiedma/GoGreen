@@ -36,9 +36,15 @@ public class MenuController implements Initializable {
         main.changeScene("SolarPanels.fxml", event);
     }
 
+    /**
+     *Change the scene to Transportation.
+     */
     @FXML
     public void btnTransport(MouseEvent event) throws Exception {
-        main.changeScene("VegetarianMeal.fxml", event);
+        client/src/main/java/client/groupxii/controllers/MenuController.java
+        main.changeScene("Transportation.fxml", event);
+
+        client/src/main/java/client/groupxii/controllers/MenuController.java
     }
 
     @FXML
