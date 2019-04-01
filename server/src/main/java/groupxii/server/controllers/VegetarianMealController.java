@@ -2,10 +2,13 @@ package groupxii.server.controllers;
 
 import groupxii.database.MealEntry;
 import groupxii.vegetarianmeal.Calculations;
+import groupxii.vegetarianmeal.EatenMealList;
 import groupxii.vegetarianmeal.GetMealData;
 import groupxii.vegetarianmeal.Meal;
 import groupxii.vegetarianmeal.MealNameList;
 import groupxii.vegetarianmeal.SaveMeal;
+import org.springframework.boot.context.event.ApplicationReadyEvent;
+import org.springframework.context.event.EventListener;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -24,13 +27,15 @@ public class VegetarianMealController {
     private GetMealData getMealData = new GetMealData();
     private List<Meal> mealList = new ArrayList<Meal>();
     private final AtomicLong counter = new AtomicLong();
+    private int reducedCo2 = 0;
+    private List<String> eatenMealList = new ArrayList<>();
 
     /**
     First run this to load in the MealDataList on the server,
     this has only to be done once the server starts.
     in the future we will load this also on the boot of the server.
      */
-    @RequestMapping(method = RequestMethod.GET, value = "/getMealData")
+    @EventListener(ApplicationReadyEvent.class)
     public void getMealData() throws IOException {
         getMealData.readMealListData();
         this.mealList = getMealData.getMealList();
@@ -52,7 +57,6 @@ public class VegetarianMealController {
     the client can send data to the server with the right values as parameter,
     then this method will store the data in the database.
      */
-
     @RequestMapping(method = RequestMethod.GET, value = "/saveMealData")
     public MealEntry saveMealData(@RequestParam(value = "goodFoodName",
             defaultValue = "Unknown") String goodFoodName,
@@ -64,12 +68,30 @@ public class VegetarianMealController {
                                           defaultValue = "Unknown")
                                               int badServingSize) throws IOException {
         calculations.setMealList(this.mealList);
-        int reducedCo2 = calculations.reducedCO2(badFoodName, badServingSize,
+        reducedCo2 = calculations.reducedCO2(badFoodName, badServingSize,
                 calculations.calculateCO2(goodFoodName, goodServingSize));
         saveMeal.setMealList(this.mealList);
         saveMeal.saveMealData(counter.incrementAndGet(), goodFoodName, badFoodName,
                 goodServingSize, badServingSize, reducedCo2);
         return saveMeal.getMealEntry();
+    }
+
+    @RequestMapping(method = RequestMethod.GET, value = "/eatenMealList")
+    public String getEatenMealList() throws IOException {
+        EatenMealList eatenMealListClass = new EatenMealList();
+        eatenMealListClass.readDatabase();
+        String jsonReturn = "";
+        eatenMealList = eatenMealListClass.getEatenMealList();
+        for (int i = 0; i < eatenMealList.size(); i++ ) {
+            jsonReturn += eatenMealList.get(i) + " - ";
+        }
+        return jsonReturn;
+    }
+
+
+    @RequestMapping(method = RequestMethod.GET, value = "/getReducedCo2")
+    public String getReducedCo2() {
+        return Integer.toString(reducedCo2);
     }
 }
 

@@ -6,6 +6,9 @@ import groupxii.solarpanels.PanelCalculations;
 import groupxii.solarpanels.PanelData;
 import groupxii.solarpanels.PanelNameList;
 import groupxii.solarpanels.SavePanel;
+import groupxii.solarpanels.UsedPanelList;
+import org.springframework.boot.context.event.ApplicationReadyEvent;
+import org.springframework.context.event.EventListener;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -24,13 +27,14 @@ public class SolarPanelController {
     private PanelData panelData = new PanelData();
     private List<Panel> panelList = new ArrayList<Panel>();
     private final AtomicLong counter = new AtomicLong();
+    private List<String> usedPanelList = new ArrayList<String>();
 
     /**
      First run this to load in the PanelDataList on the server,
      this has only to be done once the server starts.
      in the future we will load this also on the boot of the server.
      */
-    @RequestMapping(method = RequestMethod.GET, value = "/setPanelData")
+    @EventListener(ApplicationReadyEvent.class)
     public void setPanelData() throws IOException {
         panelData.readPanelListData();
         this.panelList = panelData.getPanelList();
@@ -68,7 +72,7 @@ public class SolarPanelController {
      the client can send data to the server with the right values as parameter,
      then this method will store the data in the database.
      */
-    @RequestMapping(method = RequestMethod.GET, value = "/savePanelData")
+    @RequestMapping(method = RequestMethod.POST, value = "/savePanelData")
     public void savePanelData(@RequestParam(value = "paneltype",
             defaultValue = "Unknown") String paneltype, @RequestParam(value = "efficiencyrate",
             defaultValue = "0") int efficiencyrate, @RequestParam(value = "amount",
@@ -78,6 +82,21 @@ public class SolarPanelController {
         savePanel.savePanelData(counter.incrementAndGet(), paneltype,
                 reducedCO2 , efficiencyrate, amount);
 
+    }
+
+    /**
+     * This method will return a String with used Panels in json format.
+     */
+    @RequestMapping(method = RequestMethod.GET, value = "/usedPanelList")
+    public String getUsedPanelList() throws IOException {
+        UsedPanelList usedPanelListclass = new UsedPanelList();
+        usedPanelListclass.readDatabase();
+        String jsonReturn = "";
+        usedPanelList = usedPanelListclass.getUsedPanelList();
+        for (int i = 0; i < usedPanelList.size(); i++ ) {
+            jsonReturn += usedPanelList.get(i) + " - ";
+        }
+        return jsonReturn;
     }
 
     /**

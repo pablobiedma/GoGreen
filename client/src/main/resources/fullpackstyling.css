@@ -31,3 +31,22 @@
 -fx-background-color : #2b8e00 ;
 -fx-text-fill: #FFF;
 }
+
+#redbutton
+{
+-fx-background-color : #e8131f;
+-fx-border-color: #FFF;
+-fx-text-fill:  #FFF;
+}
+
+#redbutton:hover
+{
+-fx-background-color : #f61e00;
+-fx-text-fill:  #FFF;
+}
+
+#redbutton:pressed
+{
+-fx-background-color : #e8131f;
+-fx-text-fill:  #FFF;
+}

@@ -1,11 +1,17 @@
 package groupxii.database;
 
+import com.mongodb.BasicDBObject;
 import com.mongodb.DB;
 import com.mongodb.DBCollection;
 import com.mongodb.DBCursor;
 import com.mongodb.DBObject;
 import com.mongodb.MongoClient;
 import com.mongodb.MongoException;
+
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+
 
 /**
  * Manages all database related operations between the server logic and MongoDB.
@@ -20,8 +26,9 @@ public class Database extends Thread {
     private DB mongodb;
 
     private DBCollection vehicleTrackerCollection;
-    private DBCollection vegetarianMealCollection;
     private DBCollection solarPanelCollection;
+    private DBCollection vegetarianMealCollection;
+    private DBCollection userCollection;
 
     private boolean running;
     private boolean active;
@@ -74,8 +81,9 @@ public class Database extends Thread {
             mongoClient = new MongoClient(this.getDbAddr(), this.getDbPort());
             mongodb = this.mongoClient.getDB(this.getDbName());
             vehicleTrackerCollection = mongodb.getCollection("vehicleTrackerCollection");
-            vegetarianMealCollection = mongodb.getCollection("vegetarianMealCollection");
             solarPanelCollection = mongodb.getCollection("solarPanelCollection");
+            vegetarianMealCollection = mongodb.getCollection("vegetarianMealCollection");
+            userCollection = mongodb.getCollection("userCollection");
             running = true;
         } catch (MongoException e) {
             // I don't think this state is reachable.
@@ -104,11 +112,11 @@ public class Database extends Thread {
 
         if (entry instanceof MealEntry) {
             this.vegetarianMealCollection.insert(entry.toDbObject());
-        }
-        if (entry instanceof VehicleEntry) {
+        } else if (entry instanceof VehicleEntry) {
             this.vehicleTrackerCollection.insert(entry.toDbObject());
-        }
-        if (entry instanceof PanelEntry) {
+        } else if (entry instanceof UserEntry) {
+            this.userCollection.insert(entry.toDbObject());
+        } else if (entry instanceof PanelEntry) {
             this.solarPanelCollection.insert(entry.toDbObject());
         }
         this.active = false;
@@ -142,12 +150,58 @@ public class Database extends Thread {
         return cursor.one();
     }
 
-    /**
-     * Given a panel entry, find it in the collection.
+    /** Finds user entry.
      */
-    public DBObject findPanelEntry(VehicleEntry entry) {
+    public DBObject findUserEntry(UserEntry entry) {
+        while (this.isActive()) {}
+        DBCursor cursor = userCollection.find(entry.toDbObject());
+        return cursor.one();
+    }
+    /** Finds Panel entry.
+     * @param entry
+     */
+    public DBObject findPanelEntry(PanelEntry entry) {
         while (this.isActive()) {}
         DBCursor cursor = solarPanelCollection.find(entry.toDbObject());
         return cursor.one();
+    }
+
+    /** Finds an UserEntry by id.
+     */
+    public DBObject findDocumentById(int id) {
+        BasicDBObject query = new BasicDBObject();
+        query.put("userId", id);
+        DBObject dbObject = userCollection.findOne(query);
+        return dbObject;
+    }
+
+    /** returns all users sorted by points.
+     */
+    public List<DBObject> sortUsersByReducedCo2() {
+        List<DBObject> list = new ArrayList<>();
+        Iterator<DBObject> cursor = userCollection.find().sort(new BasicDBObject("reducedCo2",-1));
+        while (cursor.hasNext()) {
+            DBObject obj = cursor.next();
+            list.add(obj);
+        }
+        return list;
+    }
+
+    /** receives two id's and adds the first one as a friend to the first one.
+     */
+    public void addFriendId(int id1,int id2) {
+        BasicDBObject newDocument = new BasicDBObject();
+        newDocument.append("$addToSet", new BasicDBObject().append("friendsId", id1));
+        BasicDBObject searchQuery = new BasicDBObject().append("userId", id2);
+        userCollection.update(searchQuery, newDocument);
+    }
+
+    /** Increments the reducedCo2.
+     */
+    public void incrementReducedCo2(int id,int amount) {
+        BasicDBObject newDocument = new BasicDBObject();
+        newDocument.append("$inc", new BasicDBObject().append("reducedCo2", amount));
+        BasicDBObject searchQuery = new BasicDBObject().append("userId", id);
+        userCollection.update(searchQuery, newDocument);
     }
 }
