@@ -1,7 +1,12 @@
 package groupxii.server.controllers;
 
 import groupxii.database.MealEntry;
-import groupxii.vegetarianmeal.*;
+import groupxii.vegetarianmeal.Calculations;
+import groupxii.vegetarianmeal.EatenMealList;
+import groupxii.vegetarianmeal.GetMealData;
+import groupxii.vegetarianmeal.Meal;
+import groupxii.vegetarianmeal.MealNameList;
+import groupxii.vegetarianmeal.SaveMeal;
 import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.context.event.EventListener;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -85,7 +90,7 @@ public class VegetarianMealController {
 
 
     @RequestMapping(method = RequestMethod.GET, value = "/getReducedCo2")
-    public String getReducedCo2(){
+    public String getReducedCo2() {
         return Integer.toString(reducedCo2);
     }
 }

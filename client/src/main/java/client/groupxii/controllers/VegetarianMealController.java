@@ -62,7 +62,8 @@ public class VegetarianMealController implements Initializable {
             e.printStackTrace();
         }
         eatenMealListViewItems = Arrays.asList(eatenMealListStr.split(" - "));
-        ObservableList<String> eatenMealsObservable = FXCollections.observableArrayList(eatenMealListViewItems);
+        ObservableList<String> eatenMealsObservable =
+                FXCollections.observableArrayList(eatenMealListViewItems);
         eatenMealsListView.setItems(eatenMealsObservable);
         List<String> items = Arrays.asList(foodNameListStr.split(", "));
         ObservableList<String> listObservable = FXCollections.observableArrayList(items);
@@ -102,7 +103,7 @@ public class VegetarianMealController implements Initializable {
         safeMeal.safeMeal(goodFoodName, badFoodName, goodServingSize, badServingSize);
         updateListView();
         String reducedCo2 = new Scanner(new URL(host + "getReducedCo2").openStream()).nextLine();
-        URL url = new URL(host + "increaseReducedCO2?Id=" + userId + "&ReducedCO2="+ reducedCo2);
+        URL url = new URL(host + "increaseReducedCO2?Id=" + userId + "&ReducedCO2=" + reducedCo2);
         String readLine;
         // opens a http connection with the URL.
         HttpURLConnection connection = (HttpURLConnection) url.openConnection();

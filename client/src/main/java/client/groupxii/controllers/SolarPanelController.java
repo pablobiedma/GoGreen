@@ -12,7 +12,6 @@ import javafx.scene.control.Slider;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Text;
 
-
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;

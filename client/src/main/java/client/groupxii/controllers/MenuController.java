@@ -72,7 +72,7 @@ public class MenuController implements Initializable {
         reducedCo2Text.setText(reducedCo2);
     }
 
-    public Main getMain(){
+    public Main getMain() {
         return this.main;
     }
 

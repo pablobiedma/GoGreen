@@ -86,7 +86,7 @@ public class LeaderboardController implements Initializable {
 
     }
 
-    public void setUserId(String userId){
+    public void setUserId(String userId) {
         this.userId = userId;
     }
 

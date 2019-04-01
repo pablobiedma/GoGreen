@@ -98,10 +98,12 @@ public class LocalProductsController implements Initializable {
     }
 
     public String safeLocalProduct() throws IOException {
-        //URL url = new URL(localhost + "increaseReducedCO2?Id=" + userId + "&ReducedCO2="+ reducedCo2PerLocalProduct);
+        //URL url = new URL(localhost + "increaseReducedCO2?Id=" + userId
+        // + "&ReducedCO2="+ reducedCo2PerLocalProduct);
         //HttpURLConnection con = (HttpURLConnection) url.openConnection();
 
-        URL url = new URL(localhost + "increaseReducedCO2?Id=" + userId + "&ReducedCO2="+ reducedCo2PerLocalProduct);
+        URL url = new URL(localhost + "increaseReducedCO2?Id="
+                + userId + "&ReducedCO2=" + reducedCo2PerLocalProduct);
         String readLine;
         // opens a http connection with the URL.
         HttpURLConnection connection = (HttpURLConnection) url.openConnection();
@@ -126,7 +128,7 @@ public class LocalProductsController implements Initializable {
         }
     }
 
-    public void setUserId(String userId){
+    public void setUserId(String userId) {
         this.userId = userId;
     }
 

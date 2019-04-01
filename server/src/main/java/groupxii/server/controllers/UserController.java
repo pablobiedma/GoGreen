@@ -50,22 +50,22 @@ public class UserController {
     @RequestMapping(method = RequestMethod.GET, value = "/getFriends")
     public String getFriends(@RequestParam(value = "Id",
             defaultValue = "Unknown") int userId) throws IOException {
-            DBObject user =  Database.instance.findDocumentById(userId);
-            List<Integer> list = (ArrayList<Integer>) user.get("friendsId");
-            List<DBObject> friends = new ArrayList<>();
-            for (int i = 0; i < list.size();i++) {
-                DBObject friend =  Database.instance.findDocumentById(list.get(i));
-                friends.add(friend);
-            }
-            return jsonConverter.leaderboardToString(friends);
+        DBObject user =  Database.instance.findDocumentById(userId);
+        List<Integer> list = (ArrayList<Integer>) user.get("friendsId");
+        List<DBObject> friends = new ArrayList<>();
+        for (int i = 0; i < list.size();i++) {
+            DBObject friend =  Database.instance.findDocumentById(list.get(i));
+            friends.add(friend);
+        }
+        return jsonConverter.leaderboardToString(friends);
     }
 
     /** returns all users sorted by points.
      */
     @RequestMapping(method = RequestMethod.GET, value = "/Leaderboard")
     public String leaderboard() {
-            List<DBObject> users = Database.instance.sortUsersByReducedCo2();
-            return jsonConverter.leaderboardToString(users);
+        List<DBObject> users = Database.instance.sortUsersByReducedCo2();
+        return jsonConverter.leaderboardToString(users);
     }
 
     /** receives two id's and adds the second one as a friend to the first one.
@@ -90,8 +90,11 @@ public class UserController {
         return user;
     }
 
+    /** Updates the reducedCo2 by an user.
+     */
     @RequestMapping(method = RequestMethod.GET, value = "/getReducedCo2OfUser")
-    public String getReducedCo2OfUser(@RequestParam(value = "Id", defaultValue = "Unknown") String userId) {
+    public String getReducedCo2OfUser(@RequestParam(value = "Id", defaultValue = "Unknown")
+                                                  String userId) {
         DBObject dbObject = Database.instance.findDocumentById(Integer.parseInt(userId));
         String reducedCo2 = dbObject.get("reducedCo2").toString();
         return reducedCo2;
