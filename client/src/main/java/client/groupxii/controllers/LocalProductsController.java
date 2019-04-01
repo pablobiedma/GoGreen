@@ -40,7 +40,7 @@ public class LocalProductsController implements Initializable {
     private ObservableList<String> listViewObservable;
     private GetUserLocation getUserLocation = new GetUserLocation();
     private String listItemsStr = "";
-    private String localhost = "http://localhsot;8080/";
+    private String localhost = "http://localhost:8080/";
     private String userId = "1";
     private String reducedCo2PerLocalProduct = "350";
 
@@ -97,7 +97,8 @@ public class LocalProductsController implements Initializable {
 
     public void safeLocalProduct() throws IOException {
         URL url = new URL(localhost + "increaseReducedCO2?Id=" + userId + "&ReducedCO2="+ reducedCo2PerLocalProduct);
-        url.openConnection();
+        HttpURLConnection con = (HttpURLConnection) url.openConnection();
+
     }
 
     public void setUserId(String userId){

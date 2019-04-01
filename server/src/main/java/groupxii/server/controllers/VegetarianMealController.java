@@ -1,11 +1,7 @@
 package groupxii.server.controllers;
 
 import groupxii.database.MealEntry;
-import groupxii.vegetarianmeal.Calculations;
-import groupxii.vegetarianmeal.GetMealData;
-import groupxii.vegetarianmeal.Meal;
-import groupxii.vegetarianmeal.MealNameList;
-import groupxii.vegetarianmeal.SaveMeal;
+import groupxii.vegetarianmeal.*;
 import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.context.event.EventListener;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -27,6 +23,7 @@ public class VegetarianMealController {
     private List<Meal> mealList = new ArrayList<Meal>();
     private final AtomicLong counter = new AtomicLong();
     private int reducedCo2 = 0;
+    private List<String> eatenMealList = new ArrayList<>();
 
     /**
     First run this to load in the MealDataList on the server,
@@ -73,6 +70,19 @@ public class VegetarianMealController {
                 goodServingSize, badServingSize, reducedCo2);
         return saveMeal.getMealEntry();
     }
+
+    @RequestMapping(method = RequestMethod.GET, value = "/eatenMealList")
+    public String getEatenMealList() throws IOException {
+        EatenMealList eatenMealListClass = new EatenMealList();
+        eatenMealListClass.readDatabase();
+        String jsonReturn = "";
+        eatenMealList = eatenMealListClass.getEatenMealList();
+        for (int i = 0; i < eatenMealList.size(); i++ ) {
+            jsonReturn += eatenMealList.get(i) + " - ";
+        }
+        return jsonReturn;
+    }
+
 
     @RequestMapping(method = RequestMethod.GET, value = "/getReducedCo2")
     public String getReducedCo2(){
