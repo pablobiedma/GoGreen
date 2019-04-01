@@ -26,6 +26,7 @@ public class Database extends Thread {
     private DB mongodb;
 
     private DBCollection vehicleTrackerCollection;
+    private DBCollection solarPanelCollection;
     private DBCollection vegetarianMealCollection;
     private DBCollection userCollection;
 
@@ -80,6 +81,7 @@ public class Database extends Thread {
             mongoClient = new MongoClient(this.getDbAddr(), this.getDbPort());
             mongodb = this.mongoClient.getDB(this.getDbName());
             vehicleTrackerCollection = mongodb.getCollection("vehicleTrackerCollection");
+            solarPanelCollection = mongodb.getCollection("solarPanelCollection");
             vegetarianMealCollection = mongodb.getCollection("vegetarianMealCollection");
             userCollection = mongodb.getCollection("userCollection");
             running = true;
@@ -114,6 +116,8 @@ public class Database extends Thread {
             this.vehicleTrackerCollection.insert(entry.toDbObject());
         } else if (entry instanceof UserEntry) {
             this.userCollection.insert(entry.toDbObject());
+        } else if (entry instanceof PanelEntry) {
+            this.solarPanelCollection.insert(entry.toDbObject());
         }
         this.active = false;
     }
@@ -151,6 +155,14 @@ public class Database extends Thread {
     public DBObject findUserEntry(UserEntry entry) {
         while (this.isActive()) {}
         DBCursor cursor = userCollection.find(entry.toDbObject());
+        return cursor.one();
+    }
+    /** Finds Panel entry.
+     * @param entry
+     */
+    public DBObject findPanelEntry(PanelEntry entry) {
+        while (this.isActive()) {}
+        DBCursor cursor = solarPanelCollection.find(entry.toDbObject());
         return cursor.one();
     }
 

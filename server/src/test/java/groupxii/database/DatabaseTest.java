@@ -117,6 +117,16 @@ public class DatabaseTest {
 		assertEquals(entry.toDbObject(), Database.instance.findUserEntry(entry));
 		//TODO Drop the test DB
 	}
+	@Test
+	public void testSavePanel() {
+		Database.instance.setDbName("test");
+		Database.instance.startDb();
+		List<Integer> list = new ArrayList<>();
+		PanelEntry entry = new PanelEntry(1, "Monocrystalline",100,45,33);
+		Database.instance.save(entry);
+		assertEquals(entry.toDbObject(), Database.instance.findPanelEntry(entry));
+		//TODO Drop the test DB
+	}
 
 	/*
 	@Test
