@@ -135,9 +135,9 @@ public class DatabaseTest {
 		Database.instance.setDbName("test");
 		Database.instance.startDb();
 		List<Integer> list = new ArrayList<>();
-		UserEntry entry = new UserEntry(1, "Ivan",100,1,6,list);
+		UserEntry entry = new UserEntry(2, "Ivan",100,1,6,list);
 		Database.instance.saveNonBlocking(entry);
-		assertEquals(entry.toDbObject(),Database.instance.findDocumentById(1));
+		assertEquals(entry.toDbObject(),Database.instance.findDocumentById(2));
 	}
 
 	@Test
