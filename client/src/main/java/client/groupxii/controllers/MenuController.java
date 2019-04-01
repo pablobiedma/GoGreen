@@ -21,10 +21,14 @@ public class MenuController {
 
     }
 
+    /**
+     * This method will change the scene to SolarPanels.
+     */
     @FXML
     public void btnSolarPanels(MouseEvent event) throws Exception {
+        SolarPanelController spc = new SolarPanelController();
         Main main = new Main();
-        main.changeScene("VegetarianMeal.fxml", event);
+        main.changeScene("SolarPanels.fxml", event);
     }
 
     @FXML

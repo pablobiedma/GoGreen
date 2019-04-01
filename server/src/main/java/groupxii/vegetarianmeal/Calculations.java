@@ -22,7 +22,7 @@ public class Calculations {
     }
 
     /**this is the first calculation that is done. the Chosen food is looked up in the mealList and
-     * than the private values are updated and the CO2 emmision is calculated.
+     * than the private values are updated and the CO2 emission is calculated.
      */
     public int calculateCO2(String chosenFood, int chosenServingSize) throws IOException {
         for (int i = 0; i < mealList.size(); i++) {

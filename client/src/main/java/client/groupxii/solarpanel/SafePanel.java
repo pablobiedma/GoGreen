@@ -1,4 +1,4 @@
-package client.groupxii.vegetarianmeal;
+package client.groupxii.solarpanel;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -10,7 +10,7 @@ import java.net.URL;
  * Resuests - Sends and interprets requests to GoGreen server.
  * @throws IOException if it receives unexpected response
  */
-public class SafeMeal {
+public class SafePanel {
 
     private String host = "localhost";
     private String port = "8080";
@@ -19,13 +19,11 @@ public class SafeMeal {
      * getRequest - Sends and interprets requests to GoGreen server.
      * @throws IOException if it receives unexpected response
      */
-    public String safeMeal(String goodFoodName, String badFoodName,
-                           int goodServingSize, int badServingSize) throws IOException {
+    public String safePanel(String paneltype, int amount) throws IOException {
         // Url were to get the JSON data from, "transport" is now hardcoded
         // but will be a variable in the future.
-        URL url = new URL("http://" + host + ":" + port + "/saveMealData?goodFoodName="
-                + goodFoodName + "&goodServingSize=" + goodServingSize + "&badFoodName="
-                + badFoodName + "&badServingSize=" + badServingSize );
+        URL url = new URL("http://" + host + ":" + port + "/savePanelData?paneltype="
+                + paneltype +  "&amount=" + amount );
         String readLine;
         // opens a http connection with the URL.
         HttpURLConnection connection = (HttpURLConnection) url.openConnection();

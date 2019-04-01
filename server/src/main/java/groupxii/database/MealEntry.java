@@ -6,7 +6,7 @@ public class MealEntry extends Entry {
 
     /**
      * Represents entries in the database which tracks
-     * which vehicle each request indicates.
+     * which meal each request indicates.
      */
     private long userId;
     private String goodFoodName;

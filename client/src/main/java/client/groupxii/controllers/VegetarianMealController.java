@@ -9,7 +9,7 @@ import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.ListView;
 import javafx.scene.control.Slider;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.text.Text;
+//import javafx.scene.text.Text;
 
 import java.io.IOException;
 import java.net.URL;
@@ -58,7 +58,8 @@ public class VegetarianMealController implements Initializable {
             e.printStackTrace();
         }
         eatenMealListViewItems = Arrays.asList(eatenMealListStr.split(" - "));
-        ObservableList<String> eatenMealsObservable = FXCollections.observableArrayList(eatenMealListViewItems);
+        ObservableList<String> eatenMealsObservable =
+                FXCollections.observableArrayList(eatenMealListViewItems);
         eatenMealsListView.setItems(eatenMealsObservable);
         List<String> items = Arrays.asList(foodNameListStr.split(", "));
         ObservableList<String> listObservable = FXCollections.observableArrayList(items);
@@ -78,7 +79,8 @@ public class VegetarianMealController implements Initializable {
             e.printStackTrace();
         }
         eatenMealListViewItems = Arrays.asList(eatenMealListStr.split(" - "));
-        ObservableList<String> eatenMealsObservable = FXCollections.observableArrayList(eatenMealListViewItems);
+        ObservableList<String> eatenMealsObservable =
+                FXCollections.observableArrayList(eatenMealListViewItems);
         eatenMealsListView.setItems(eatenMealsObservable);
     }
 
