@@ -15,9 +15,14 @@ import javafx.scene.text.Text;
 
 import java.awt.Desktop;
 import java.io.IOException;
+import java.net.HttpURLConnection;
 import java.net.URI;
 import java.net.URL;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.ResourceBundle;
+import java.util.Scanner;
 
 
 public class LocalProductsController implements Initializable {
@@ -35,6 +40,9 @@ public class LocalProductsController implements Initializable {
     private ObservableList<String> listViewObservable;
     private GetUserLocation getUserLocation = new GetUserLocation();
     private String listItemsStr = "";
+    private String localhost = "http://localhsot;8080/";
+    private String userId = "1";
+    private String reducedCo2PerLocalProduct = "350";
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -54,7 +62,7 @@ public class LocalProductsController implements Initializable {
     public void map() throws GeoIp2Exception, IOException {
         if (localShops.getSelectionModel().getSelectedItem() == null) {
             textfield.setText("Please choose a shop first");
-        }  else {
+        } else {
             String location = getUserLocation.getUserLocation();
             String url = localShops.getSelectionModel().getSelectedItem()
                     .substring(8 , localShops.getSelectionModel().getSelectedItem().indexOf(" - "));
@@ -85,6 +93,15 @@ public class LocalProductsController implements Initializable {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    public void safeLocalProduct() throws IOException {
+        URL url = new URL(localhost + "increaseReducedCO2?Id=" + userId + "&ReducedCO2="+ reducedCo2PerLocalProduct);
+        url.openConnection();
+    }
+
+    public void setUserId(String userId){
+        this.userId = userId;
     }
 
     @FXML

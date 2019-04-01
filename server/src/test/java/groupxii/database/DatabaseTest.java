@@ -1,9 +1,11 @@
 package groupxii.database;
 
 import org.junit.Test;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import static org.junit.Assert.*;
 
 public class DatabaseTest {
 	@Test
@@ -105,4 +107,58 @@ public class DatabaseTest {
 	}
 	*/
 
+	@Test
+	public void testSaveUser() {
+		Database.instance.setDbName("test");
+		Database.instance.startDb();
+		List<Integer> list = new ArrayList<>();
+		UserEntry entry = new UserEntry(1, "Ivan",100,1,6,list);
+		Database.instance.save(entry);
+		assertEquals(entry.toDbObject(), Database.instance.findUserEntry(entry));
+		//TODO Drop the test DB
+	}
+
+	@Test
+	public void testSaveUserNonBlocking() {
+		Database.instance.setDbName("test");
+		Database.instance.startDb();
+		List<Integer> list = new ArrayList<>();
+		UserEntry entry = new UserEntry(1, "Ivan",100,1,6,list);
+		Database.instance.saveNonBlocking(entry);
+
+		assertEquals(entry.toDbObject(), Database.instance.findUserEntry(entry));
+		//TODO Drop the test DB
+	}
+
+	@Test
+	public void testFindDocumentById() {
+		Database.instance.setDbName("test");
+		Database.instance.startDb();
+		List<Integer> list = new ArrayList<>();
+		UserEntry entry = new UserEntry(1, "Ivan",100,1,6,list);
+		Database.instance.saveNonBlocking(entry);
+		assertEquals(entry.toDbObject(),Database.instance.findDocumentById(1));
+	}
+
+	@Test
+	public void testSortUsersByPoints() {
+		Database.instance.setDbName("test");
+		Database.instance.startDb();
+		List<Integer> list = new ArrayList<>();
+		UserEntry entry = new UserEntry(1, "Ivan",100,1,6,list);
+		Database.instance.saveNonBlocking(entry);
+		assertNotEquals(entry.toDbObject(),Database.instance.sortUsersByReducedCo2());
+	}
+
+	@Test
+	public void testAddFriendId() {
+		Database.instance.setDbName("test");
+		Database.instance.startDb();
+		List<Integer> list = new ArrayList<>();
+		UserEntry entry = new UserEntry(1, "Ivan",100,1,6,list);
+		Database.instance.saveNonBlocking(entry);
+		Database.instance.addFriendId(1,2);
+		assertEquals(entry.getFriendsId(),list);
+	}
+	
 }

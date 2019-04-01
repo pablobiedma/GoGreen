@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Rectangle2D?>
-<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
 <?import javafx.scene.image.Image?>
@@ -11,7 +10,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane id="AnchorPane" style="-fx-background-color: #fff;" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.groupxii.controllers.LocalProductsController">
+<AnchorPane id="AnchorPane" style="-fx-background-color: #fff;" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.groupxii.controllers.LeaderboardController">
    <children>
       <Pane prefHeight="127.0" prefWidth="904.0" style="-fx-background-color: #2B8E00;">
          <children>
@@ -42,15 +41,18 @@
       </Pane>
       <Pane layoutY="125.0" prefHeight="534.0" prefWidth="904.0">
          <children>
-            <ListView fx:id="localShops" layoutX="20.0" layoutY="14.0" prefHeight="206.0" prefWidth="865.0" style="-fx-font-size: 14px; -fx-cell-size: 15px; -fx-font-weight: bold" />
-            <Button fx:id="navigate" layoutX="20.0" layoutY="443.0" mnemonicParsing="false" onMouseClicked="#navigate" prefHeight="67.0" prefWidth="206.0" stylesheets="@../fullpackstyling.css" text="NAVIGATE TO SHOP" />
-            <Button id="redbutton" fx:id="getLocation" layoutX="350.0" layoutY="443.0" mnemonicParsing="false" onMouseClicked="#getLocation" prefHeight="67.0" prefWidth="206.0" stylesheets="@../fullpackstyling.css" text="SHOW LOCATION OF SHOP" />
-            <ImageView fx:id="mapsImage" fitHeight="186.0" fitWidth="865.0" layoutX="17.0" layoutY="227.0" pickOnBounds="true" preserveRatio="true" />
-            <Button fx:id="boughtLocalProduct" layoutX="679.0" layoutY="443.0" mnemonicParsing="false" onMouseClicked="#safeLocalProduct" prefHeight="67.0" prefWidth="206.0" stylesheets="@../fullpackstyling.css" text="I BOUGHT A LOCAL PRODUCT" />
-            <Text fx:id="textfield" layoutX="262.0" layoutY="439.0" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="374.93670654296875">
+            <ListView fx:id="overallLeaderboard" layoutX="14.0" layoutY="71.0" prefHeight="440.0" prefWidth="419.0" style="-fx-font-size: 14px; -fx-cell-size: 15px; -fx-font-weight: bold" />
+            <ListView fx:id="friendsLeaderboard" layoutX="471.0" layoutY="71.0" prefHeight="440.0" prefWidth="419.0" style="-fx-font-size: 14px; -fx-cell-size: 15px; -fx-font-weight: bold" />
+            <Text layoutX="32.0" layoutY="50.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Overall Leaderboard" textAlignment="CENTER">
                <font>
-                  <Font name="System Bold" size="14.0" />
-               </font></Text>
+                  <Font name="System Bold" size="40.0" />
+               </font>
+            </Text>
+            <Text layoutX="489.0" layoutY="49.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Friends Leaderboard" textAlignment="CENTER">
+               <font>
+                  <Font name="System Bold" size="40.0" />
+               </font>
+            </Text>
          </children></Pane>
    </children>
 </AnchorPane>

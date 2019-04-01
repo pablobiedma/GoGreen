@@ -1,5 +1,7 @@
 package client.groupxii.controllers;
 
+import client.groupxii.Main;
+import client.groupxii.vegetarianmeal.EatenMealList;
 import client.groupxii.vegetarianmeal.SafeMeal;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -9,7 +11,7 @@ import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.ListView;
 import javafx.scene.control.Slider;
 import javafx.scene.input.MouseEvent;
-//import javafx.scene.text.Text;
+import javafx.scene.text.Text;
 
 import java.io.IOException;
 import java.net.URL;
@@ -36,35 +38,39 @@ public class VegetarianMealController implements Initializable {
     private Slider slider1 = new Slider();
 
     @FXML
-    private ListView<String> eatenMealsListView = new ListView();
+    private Text textfield = new Text();
+
+    @FXML
+    private ListView<String> eatenMeals = new ListView();
 
     private String goodFoodName = "";
     private String badFoodName = "";
     private String host = "http://localhost:8080/";
-    private String foodNameListStr = "";
-    private String eatenMealListStr = "";
+    private String listItems = "";
     private SafeMeal safeMeal = new SafeMeal();
-    private List<String> eatenMealListViewItems = new ArrayList<String>();
+    private List<String> listViewItems = new ArrayList<String>();
+    private EatenMealList eatenMealList = new EatenMealList();
+    private ObservableList<String> listViewObservable;
+    private String userId = "1";
+    private Main main = new Main();
+
+    public void setListViewItems(List<String> listViewItems) {
+        this.listViewItems = listViewItems;
+    }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         try {
-            foodNameListStr = new Scanner(new URL(host + "mealNameList").openStream(),
+            listItems = new Scanner(new URL(host + "mealNameList").openStream(),
                     "UTF-8").nextLine();
-            eatenMealListStr = new Scanner(new URL(host + "eatenMealList").openStream(),
-                    "UTF-8").nextLine();
-
         } catch (IOException e) {
             e.printStackTrace();
         }
-        eatenMealListViewItems = Arrays.asList(eatenMealListStr.split(" - "));
-        ObservableList<String> eatenMealsObservable =
-                FXCollections.observableArrayList(eatenMealListViewItems);
-        eatenMealsListView.setItems(eatenMealsObservable);
-        List<String> items = Arrays.asList(foodNameListStr.split(", "));
-        ObservableList<String> listObservable = FXCollections.observableArrayList(items);
-        cb.getItems().addAll(listObservable);
-        cb1.getItems().addAll(listObservable);
+        List<String> items = Arrays.asList(listItems.split(", "));
+        ObservableList<String> list = FXCollections.observableArrayList(items);
+        cb.getItems().addAll(list);
+        cb1.getItems().addAll(list);
+        updateListView();
     }
 
     /**
@@ -73,16 +79,16 @@ public class VegetarianMealController implements Initializable {
     @FXML
     public void updateListView() {
         try {
-            eatenMealListStr = new Scanner(new URL(host + "eatenMealList").openStream(),
-                    "UTF-8").nextLine();
+            eatenMealList.readDatabase();
         } catch (IOException e) {
             e.printStackTrace();
         }
-        eatenMealListViewItems = Arrays.asList(eatenMealListStr.split(" - "));
-        ObservableList<String> eatenMealsObservable =
-                FXCollections.observableArrayList(eatenMealListViewItems);
-        eatenMealsListView.setItems(eatenMealsObservable);
+        setListViewItems(eatenMealList.getEatenMealList());
+        listViewObservable = FXCollections.observableArrayList(listViewItems);
+        eatenMeals.getItems().addAll(listViewObservable);
+        //eatenMeals.setItems(listViewObservable);
     }
+
 
     /**
      * Calculates the co2 reduced emmision when the user clicks the calculate button.
@@ -90,6 +96,7 @@ public class VegetarianMealController implements Initializable {
      * @param event mouse click
      * @throws Exception throws exception when something went wrong
      */
+
     @FXML
     public void safeMeal(MouseEvent event) throws Exception {
         badFoodName = cb1.getValue();
@@ -97,6 +104,18 @@ public class VegetarianMealController implements Initializable {
         int goodServingSize = (int) slider.getValue();
         int badServingSize = (int) slider1.getValue();
         safeMeal.safeMeal(goodFoodName, badFoodName, goodServingSize, badServingSize);
-        updateListView();
+        //textfield.setText(enteredMeal);
+        eatenMeals.getItems().add(eatenMealList.getLatestMeal());
+        URL url = new URL(host + "increaseReducedCO2?Id=" + userId + "&ReducedCO2="+ new Scanner(new URL(host + "getReducedCo2").openStream(),"UTF-8").nextLine());
+        url.openConnection();
+    }
+
+    public void setUserId(String userId){
+        this.userId = userId;
+    }
+
+    @FXML
+    public void btnBack(MouseEvent event) throws IOException {
+        main.changeScene("Menu.fxml", event);
     }
 }
