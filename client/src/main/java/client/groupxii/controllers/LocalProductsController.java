@@ -14,7 +14,9 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Text;
 
 import java.awt.Desktop;
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URI;
 import java.net.URL;
@@ -95,10 +97,33 @@ public class LocalProductsController implements Initializable {
         }
     }
 
-    public void safeLocalProduct() throws IOException {
-        URL url = new URL(localhost + "increaseReducedCO2?Id=" + userId + "&ReducedCO2="+ reducedCo2PerLocalProduct);
-        HttpURLConnection con = (HttpURLConnection) url.openConnection();
+    public String safeLocalProduct() throws IOException {
+        //URL url = new URL(localhost + "increaseReducedCO2?Id=" + userId + "&ReducedCO2="+ reducedCo2PerLocalProduct);
+        //HttpURLConnection con = (HttpURLConnection) url.openConnection();
 
+        URL url = new URL(localhost + "increaseReducedCO2?Id=" + userId + "&ReducedCO2="+ reducedCo2PerLocalProduct);
+        String readLine;
+        // opens a http connection with the URL.
+        HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+        // sets request method and properties.
+        connection.setRequestMethod("GET");
+        connection.setRequestProperty("Accept", "application/json");
+        int responseCode = connection.getResponseCode();
+        if (responseCode == HttpURLConnection.HTTP_OK) {
+            //Reads in all the data from the request
+            BufferedReader in = new BufferedReader(
+                    new InputStreamReader(connection.getInputStream()));
+            StringBuffer response = new StringBuffer();
+            while ((readLine = in.readLine()) != null) {
+                response.append(readLine);
+            }
+            in.close();
+            // print result
+            System.out.println(response.toString());
+            return response.toString();
+        } else {
+            return "GET NOT WORKED";
+        }
     }
 
     public void setUserId(String userId){
