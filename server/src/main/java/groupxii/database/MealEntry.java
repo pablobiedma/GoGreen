@@ -1,5 +1,6 @@
 package groupxii.database;
 
+import groupxii.vegetarianmeal.CalculatedMeal;
 import com.mongodb.DBObject;
 
 public class MealEntry extends Entry {
@@ -19,13 +20,14 @@ public class MealEntry extends Entry {
      * Constructor of MealEntry.
      */
     public MealEntry(long userId, String goodFoodName, String badFoodName,
-                     int goodServingSize, int badServingSize, int reducedCo2) {
+                     int goodServingSize, int badServingSize) {
+        this.userId = userId;
         this.badFoodName = badFoodName;
         this.badServingSize = badServingSize;
         this.goodFoodName = goodFoodName;
         this.goodServingSize = goodServingSize;
-        this.reducedCo2 = reducedCo2;
-        this.userId = userId;
+        this.reducedCo2 = new CalculatedMeal(goodFoodName, goodServingSize,
+			                     badFoodName, badServingSize).getReducedCO2();
     }
 
     public long getUserId() {

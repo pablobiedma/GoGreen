@@ -7,8 +7,12 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+/* can be replaced with a nice constructor in the MealEntry class
+ * and then the controller will make the call to the Database
+ */
 public class SaveMeal {
 
+	/*
     private MealEntry mealEntry;
     private List<Meal> mealList = new ArrayList<Meal>();
 
@@ -26,7 +30,6 @@ public class SaveMeal {
 
     /**
      * Save the existing MealData.
-     */
     public void saveMealData(long userId, String goodFoodName, String badFoodName,
                              int goodServingSize, int badServingSize,
                              int reducedCo2) throws IOException {
@@ -36,4 +39,6 @@ public class SaveMeal {
         Database.instance.saveNonBlocking(entry);
         this.mealEntry = entry;
     }
+    */
 }
+
