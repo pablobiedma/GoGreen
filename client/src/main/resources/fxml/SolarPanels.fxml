@@ -11,6 +11,9 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
+<?import javafx.scene.image.Image?>
+<?import javafx.geometry.Rectangle2D?>
+<?import javafx.scene.image.ImageView?>
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.groupxii.controllers.SolarPanelController">
    <children>
       <Pane layoutX="-2.0" layoutY="81.0" prefHeight="494.0" prefWidth="904.0">
@@ -36,16 +39,29 @@
             <ListView fx:id="usedPanelsListView" layoutX="49.0" layoutY="212.0" prefHeight="255.0" prefWidth="328.0"></ListView>
          </children>
       </Pane>
-      <Pane prefHeight="124.0" prefWidth="900.0" style="-fx-background-color: #2B8E00;">
+      <Pane prefHeight="127.0" prefWidth="904.0" style="-fx-background-color: #2B8E00;">
          <children>
-            <Label layoutX="202.0" layoutY="62.0" text="The change starts with you!" textFill="WHITE">
-               <font>
-                  <Font name="Segoe UI" size="12.0" />
-               </font>
-            </Label>
-            <Label layoutX="201.0" layoutY="39.0" text="For a better planet" textFill="WHITE">
+            <ImageView fitHeight="103.0" fitWidth="120.0" layoutX="10.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/gogreen logo groter.png" />
+               </image>
+               <viewport>
+                  <Rectangle2D />
+               </viewport>
+            </ImageView>
+            <Label alignment="CENTER" layoutX="161.0" layoutY="50.0" prefHeight="23.0" prefWidth="173.0" text="For a better planet" textFill="WHITE">
                <font>
                   <Font name="Segoe UI" size="18.0" />
+               </font>
+            </Label>
+            <ImageView fitHeight="56.0" fitWidth="52.0" layoutX="799.0" layoutY="35.0" onMouseClicked="#btnBack" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/icons8-home-64.png" />
+               </image>
+            </ImageView>
+            <Label alignment="CENTER" layoutX="144.0" layoutY="64.0" prefHeight="23.0" prefWidth="206.0" text="The change starts with you!" textFill="WHITE">
+               <font>
+                  <Font name="Segoe UI" size="12.0" />
                </font>
             </Label>
          </children>

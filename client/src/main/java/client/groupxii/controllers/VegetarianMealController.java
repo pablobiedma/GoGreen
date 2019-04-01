@@ -11,7 +11,10 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.Slider;
 import javafx.scene.input.MouseEvent;
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -45,6 +48,7 @@ public class VegetarianMealController implements Initializable {
     private String eatenMealListStr = "";
     private SafeMeal safeMeal = new SafeMeal();
     private List<String> eatenMealListViewItems = new ArrayList<String>();
+    private String userId = "1";
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -78,7 +82,8 @@ public class VegetarianMealController implements Initializable {
             e.printStackTrace();
         }
         eatenMealListViewItems = Arrays.asList(eatenMealListStr.split(" - "));
-        ObservableList<String> eatenMealsObservable = FXCollections.observableArrayList(eatenMealListViewItems);
+        ObservableList<String> eatenMealsObservable =
+                FXCollections.observableArrayList(eatenMealListViewItems);
         eatenMealsListView.setItems(eatenMealsObservable);
     }
 
@@ -89,13 +94,37 @@ public class VegetarianMealController implements Initializable {
      * @throws Exception throws exception when something went wrong
      */
     @FXML
-    public void safeMeal(MouseEvent event) throws Exception {
+    public String safeMeal(MouseEvent event) throws Exception {
         badFoodName = cb1.getValue();
         goodFoodName = cb.getValue();
         int goodServingSize = (int) slider.getValue();
         int badServingSize = (int) slider1.getValue();
         safeMeal.safeMeal(goodFoodName, badFoodName, goodServingSize, badServingSize);
         updateListView();
+        String reducedCo2 = new Scanner(new URL(host + "getReducedCo2").openStream()).nextLine();
+        URL url = new URL(host + "increaseReducedCO2?Id=" + userId + "&ReducedCO2="+ reducedCo2);
+        String readLine;
+        // opens a http connection with the URL.
+        HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+        // sets request method and properties.
+        connection.setRequestMethod("GET");
+        connection.setRequestProperty("Accept", "application/json");
+        int responseCode = connection.getResponseCode();
+        if (responseCode == HttpURLConnection.HTTP_OK) {
+            //Reads in all the data from the request
+            BufferedReader in = new BufferedReader(
+                    new InputStreamReader(connection.getInputStream()));
+            StringBuffer response = new StringBuffer();
+            while ((readLine = in.readLine()) != null) {
+                response.append(readLine);
+            }
+            in.close();
+            // print result
+            System.out.println(response.toString());
+            return response.toString();
+        } else {
+            return "GET NOT WORKED";
+        }
     }
 
     @FXML
