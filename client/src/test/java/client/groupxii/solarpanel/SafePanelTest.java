@@ -12,7 +12,7 @@ public class SafePanelTest {
 
     @Test
     public void safePanel() throws IOException {
-        assertTrue(safePanel.safePanel("Hello", 50).contains("Hello"));
 
+        assertTrue(safePanel.safePanel("Hello", 50).contains("Hello"));
     }
 }

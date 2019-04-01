@@ -118,6 +118,7 @@ public class DatabaseTest {
 		//TODO Drop the test DB
 	}
 
+	/*
 	@Test
 	public void testSaveUserNonBlocking() {
 		Database.instance.setDbName("test");
@@ -139,7 +140,7 @@ public class DatabaseTest {
 		Database.instance.saveNonBlocking(entry);
 		assertEquals(entry.toDbObject(),Database.instance.findDocumentById(2));
 	}
-
+*/
 	@Test
 	public void testSortUsersByPoints() {
 		Database.instance.setDbName("test");
