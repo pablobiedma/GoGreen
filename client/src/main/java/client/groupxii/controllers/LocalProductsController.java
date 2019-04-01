@@ -15,6 +15,7 @@ import javafx.scene.text.Text;
 
 import java.awt.Desktop;
 import java.io.IOException;
+import java.net.HttpURLConnection;
 import java.net.URI;
 import java.net.URL;
 import java.util.ArrayList;
@@ -39,6 +40,9 @@ public class LocalProductsController implements Initializable {
     private ObservableList<String> listViewObservable;
     private GetUserLocation getUserLocation = new GetUserLocation();
     private String listItemsStr = "";
+    private String localhost = "http://localhsot;8080/";
+    private String userId = "1";
+    private String reducedCo2PerLocalProduct = "350";
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -89,6 +93,15 @@ public class LocalProductsController implements Initializable {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    public void safeLocalProduct() throws IOException {
+        URL url = new URL(localhost + "increaseReducedCO2?Id=" + userId + "&ReducedCO2="+ reducedCo2PerLocalProduct);
+        url.openConnection();
+    }
+
+    public void setUserId(String userId){
+        this.userId = userId;
     }
 
     @FXML

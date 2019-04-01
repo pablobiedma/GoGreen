@@ -89,6 +89,13 @@ public class UserController {
         DBObject user = Database.instance.findDocumentById(userId);
         return user;
     }
+
+    @RequestMapping(method = RequestMethod.GET, value = "/getReducedCo2OfUser")
+    public String getReducedCo2OfUser(@RequestParam(value = "Id", defaultValue = "Unknown") String userId) {
+        DBObject dbObject = Database.instance.findDocumentById(Integer.parseInt(userId));
+        String reducedCo2 = dbObject.get("reducedCo2").toString();
+        return reducedCo2;
+    }
 }
 
 

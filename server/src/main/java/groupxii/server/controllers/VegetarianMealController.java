@@ -6,6 +6,8 @@ import groupxii.vegetarianmeal.GetMealData;
 import groupxii.vegetarianmeal.Meal;
 import groupxii.vegetarianmeal.MealNameList;
 import groupxii.vegetarianmeal.SaveMeal;
+import org.springframework.boot.context.event.ApplicationReadyEvent;
+import org.springframework.context.event.EventListener;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -24,13 +26,14 @@ public class VegetarianMealController {
     private GetMealData getMealData = new GetMealData();
     private List<Meal> mealList = new ArrayList<Meal>();
     private final AtomicLong counter = new AtomicLong();
+    private int reducedCo2 = 0;
 
     /**
     First run this to load in the MealDataList on the server,
     this has only to be done once the server starts.
     in the future we will load this also on the boot of the server.
      */
-    @RequestMapping(method = RequestMethod.GET, value = "/getMealData")
+    @EventListener(ApplicationReadyEvent.class)
     public void getMealData() throws IOException {
         getMealData.readMealListData();
         this.mealList = getMealData.getMealList();
@@ -63,12 +66,17 @@ public class VegetarianMealController {
                                           defaultValue = "Unknown")
                                               int badServingSize) throws IOException {
         calculations.setMealList(this.mealList);
-        int reducedCo2 = calculations.reducedCO2(badFoodName, badServingSize,
+        reducedCo2 = calculations.reducedCO2(badFoodName, badServingSize,
                 calculations.calculateCO2(goodFoodName, goodServingSize));
         saveMeal.setMealList(this.mealList);
         saveMeal.saveMealData(counter.incrementAndGet(), goodFoodName, badFoodName,
                 goodServingSize, badServingSize, reducedCo2);
         return saveMeal.getMealEntry();
+    }
+
+    @RequestMapping(method = RequestMethod.GET, value = "/getReducedCo2")
+    public String getReducedCo2(){
+        return Integer.toString(reducedCo2);
     }
 }
 

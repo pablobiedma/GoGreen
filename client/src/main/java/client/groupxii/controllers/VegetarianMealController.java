@@ -51,6 +51,8 @@ public class VegetarianMealController implements Initializable {
     private List<String> listViewItems = new ArrayList<String>();
     private EatenMealList eatenMealList = new EatenMealList();
     private ObservableList<String> listViewObservable;
+    private String userId = "1";
+    private Main main = new Main();
 
     public void setListViewItems(List<String> listViewItems) {
         this.listViewItems = listViewItems;
@@ -104,11 +106,16 @@ public class VegetarianMealController implements Initializable {
         safeMeal.safeMeal(goodFoodName, badFoodName, goodServingSize, badServingSize);
         //textfield.setText(enteredMeal);
         eatenMeals.getItems().add(eatenMealList.getLatestMeal());
+        URL url = new URL(host + "increaseReducedCO2?Id=" + userId + "&ReducedCO2="+ new Scanner(new URL(host + "getReducedCo2").openStream(),"UTF-8").nextLine());
+        url.openConnection();
+    }
+
+    public void setUserId(String userId){
+        this.userId = userId;
     }
 
     @FXML
     public void btnBack(MouseEvent event) throws IOException {
-        Main main = new Main();
         main.changeScene("Menu.fxml", event);
     }
 }
