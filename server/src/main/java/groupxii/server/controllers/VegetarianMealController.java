@@ -76,9 +76,10 @@ public class VegetarianMealController {
                                            Principal principal) {
             //TODO find the userID and append the CalculatedCO2
         int userID = -1;
-        MealEntry saveMeal = new MealEntry(userID, goodFoodName, badFoodName, 
-                                         goodServingSize, badServingSize);
-	Database.instance.saveNonBlocking(saveMeal);
+        MealEntry saveMeal = new MealEntry(goodFoodName, goodServingSize, 
+                                           badFoodName, badServingSize);
+	//TODO append the entry to the user's document
+//	Database.instance.saveNonBlocking(saveMeal);
     }
 
     /*
