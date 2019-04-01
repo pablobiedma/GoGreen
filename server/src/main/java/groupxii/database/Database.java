@@ -110,11 +110,9 @@ public class Database extends Thread {
 
         if (entry instanceof MealEntry) {
             this.vegetarianMealCollection.insert(entry.toDbObject());
-        }
-        if (entry instanceof VehicleEntry) {
+        } else if (entry instanceof VehicleEntry) {
             this.vehicleTrackerCollection.insert(entry.toDbObject());
-        }
-        if (entry instanceof UserEntry) {
+        } else if (entry instanceof UserEntry) {
             this.userCollection.insert(entry.toDbObject());
         }
         this.active = false;
