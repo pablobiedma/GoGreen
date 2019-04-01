@@ -1,6 +1,7 @@
 package groupxii.solarpanels;
 
 
+import groupxii.database.PanelEntry;
 import org.junit.Test;
 
 import java.io.IOException;
@@ -23,14 +24,13 @@ public class UsedPanelListTest {
         assertEquals(savePanel.getPanelList(),savePanel2.getPanelList());
     }
 
-//    @Test
-//    public void readDatabaseTest() throws IOException {
-//        SavePanel savePanel = new SavePanel();
-//        //SavePanel savePanel2 = new SavePanel();
-//        savePanel.savePanelData(1, "Monocrystalline", 40, 50, 50);
-//        usedPanelList.readDatabase();
-//        assertTrue(usedPanelList.getUsedPanelList().toString().contains("Monocrystalline"));
-//    }
+    @Test
+    public void readDatabaseTest() throws IOException {
+        //SavePanel savePanel2 = new SavePanel();
+        usedPanelList.readDatabase();
+        //System.out.println(usedPanelList.getUsedPanelList().toString());
+        assertTrue(usedPanelList.getUsedPanelList().toString().contains("[]"));
+    }
 
 
         @Test

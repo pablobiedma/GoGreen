@@ -1,7 +1,9 @@
-package groupxii.server.controllers;
+package groupxii.server;
 
 import groupxii.database.PanelEntry;
+import groupxii.server.controllers.SolarPanelController;
 import groupxii.solarpanels.Panel;
+import groupxii.solarpanels.UsedPanelList;
 import org.junit.Test;
 
 import java.io.IOException;
@@ -13,6 +15,7 @@ import static org.junit.Assert.*;
 public class SolarPanelControllerTest {
 
     SolarPanelController solarPanelController = new SolarPanelController();
+    private List<String> usedPanelList;
 
     @Test
     public void setPanelData() throws IOException {
@@ -52,5 +55,17 @@ public class SolarPanelControllerTest {
         PanelEntry p = solarPanelController.getPanelEntry();
         PanelEntry p2 = solarPanelController.getPanelEntry();
         assertEquals(p,p2);
+    }
+    @Test
+    public void getUsedPanelList() throws IOException {
+        UsedPanelList usedPanelListclass = new UsedPanelList();
+        usedPanelListclass.readDatabase();
+        String jsonReturn = "[";
+        usedPanelList = usedPanelListclass.getUsedPanelList();
+        for (int i = 0; i < usedPanelList.size(); i++ ) {
+            jsonReturn += usedPanelList.get(i) + " - ";
+        }
+        jsonReturn+="]";
+        assertEquals(jsonReturn,usedPanelListclass.getUsedPanelList().toString());
     }
 }

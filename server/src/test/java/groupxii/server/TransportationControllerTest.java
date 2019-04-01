@@ -1,4 +1,4 @@
-package groupxii.server.controllers;
+package groupxii.server;
 
 import groupxii.server.Transportation;
 import groupxii.server.controllers.TransportationController;

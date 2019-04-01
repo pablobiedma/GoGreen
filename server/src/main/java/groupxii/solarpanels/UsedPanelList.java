@@ -49,17 +49,4 @@ public class UsedPanelList {
         return result;
     }
 
-    /**
-     * reads the latest added panel from the database.
-     * @return string from the latest meal
-     */
-    public String getLatestMeal() {
-        Document document = collection.find().sort(new Document("_id", -1)).first();
-        String result = toString(document.getString("paneltype"),
-                document.getInteger("reducedCo2"),
-                document.getInteger("efficiencyrate"),
-                document.getInteger("amount"));
-        return result;
-    }
-
 }

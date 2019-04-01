@@ -1,4 +1,4 @@
-package groupxii.server.controllers;
+package groupxii.server;
 
 import groupxii.database.MealEntry;
 import groupxii.server.controllers.VegetarianMealController;
