@@ -33,7 +33,7 @@ public class MenuController implements Initializable {
 
     @FXML
     public void btnSolarPanels(MouseEvent event) throws Exception {
-        main.changeScene("VegetarianMeal.fxml", event);
+        main.changeScene("SolarPanels.fxml", event);
     }
 
     @FXML

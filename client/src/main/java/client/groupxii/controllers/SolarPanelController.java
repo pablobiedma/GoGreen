@@ -1,5 +1,6 @@
 package client.groupxii.controllers;
 
+import client.groupxii.Main;
 import client.groupxii.solarpanel.SafePanel;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -86,5 +87,11 @@ public class SolarPanelController implements Initializable {
         int amount = (int) amountOfSolarPanels.getValue();
         safePanel.safePanel(panel, amount);
         updateListView();
+    }
+
+    @FXML
+    public void btnBack(MouseEvent event) throws IOException {
+        Main main = new Main();
+        main.changeScene("Menu.fxml", event);
     }
 }

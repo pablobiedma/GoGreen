@@ -27,7 +27,6 @@ public class LeaderboardController implements Initializable {
     private String host = "http://localhost:8080/";
     //Should be the userId that is assigned to the user when he/she registers
     private String userId = "1";
-    private Main main = new Main();
 
     @FXML
     private ListView<HBoxCell> overallLeaderboard = new ListView();
@@ -93,7 +92,7 @@ public class LeaderboardController implements Initializable {
 
     @FXML
     public void btnBack(MouseEvent event) throws IOException {
-
+        Main main = new Main();
         main.changeScene("Menu.fxml", event);
     }
 }
