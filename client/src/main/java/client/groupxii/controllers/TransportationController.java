@@ -1,5 +1,6 @@
 package client.groupxii.controllers;
 
+import client.groupxii.Main;
 import client.groupxii.transportation.SafeVehicle;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -149,6 +150,15 @@ public class TransportationController implements Initializable {
         safeTransport.safeVehicle(goodTransportName, badTransportName,goodfuel,
                 badfuel,goodConsumption , badConsumption);
         updateListView();
+
     }
+
+    @FXML
+    public void btnBack(MouseEvent event) throws IOException {
+        Main main = new Main();
+        main.changeScene("Menu.fxml", event);
+    }
+
+
 }
 

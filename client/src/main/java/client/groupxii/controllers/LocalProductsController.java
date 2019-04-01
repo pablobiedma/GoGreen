@@ -49,7 +49,7 @@ public class LocalProductsController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         try {
-            listItemsStr = new Scanner(new URL("http://localhost:8080/localshops?location=" + getUserLocation.getUserLocation()).openStream(),"UTF-8").nextLine();
+            listItemsStr = new Scanner(new URL(localhost + "localshops?location=" + getUserLocation.getUserLocation()).openStream(),"UTF-8").nextLine();
         } catch (IOException e) {
             e.printStackTrace();
         } catch (GeoIp2Exception e) {

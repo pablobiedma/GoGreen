@@ -16,7 +16,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicLong;
@@ -29,6 +33,7 @@ public class TransportationController {
     private SaveVehicle saveVehicle = new SaveVehicle();
     private VehicleData vehicleData = new VehicleData();
     private List<Vehicle> vehicleList = new ArrayList<>();
+    private int reducedCo2Transportation = 0;
 
     /**
      * Setter for the VehicleData.
@@ -86,8 +91,8 @@ public class TransportationController {
                                 @RequestParam(value = "badavgconsumption", defaultValue = "0")
                                             int badavgconsumption)
             throws IOException {
-        int reducedco2 = getReducedCO2(publictransport, goodfuel, goodavgconsumption,
-                car, badfuel, badavgconsumption);
+        int reducedco2 = vehicleCalculations.reducedCO2(car, badfuel, badavgconsumption,
+                vehicleCalculations.calculateCO2(publictransport, goodfuel, goodavgconsumption));
         saveVehicle.setVehicles(this.vehicleList);
         saveVehicle.saveVehicleData(counter.incrementAndGet(), publictransport, car,
                 reducedco2, goodfuel, badfuel, goodavgconsumption, badavgconsumption);
@@ -97,7 +102,7 @@ public class TransportationController {
      * get method for the reduced co2.
      */
     @RequestMapping(method = RequestMethod.GET, value = "/getReducedCO2")
-    public int getReducedCO2(@RequestParam(value = "publictransport", defaultValue = "Unknown")
+    public String getReducedCO2(@RequestParam(value = "publictransport", defaultValue = "Unknown")
                                          String publictransport,
                              @RequestParam(value = "goodfuel", defaultValue = "Unknown")
                                      String goodfuel,
@@ -112,7 +117,35 @@ public class TransportationController {
         vehicleCalculations.setVehicles(this.vehicleList);
         int reducedCO2 = vehicleCalculations.reducedCO2(car, badfuel, badavgconsumption,
                 vehicleCalculations.calculateCO2(publictransport, goodfuel, goodavgconsumption));
-        return reducedCO2;
+        this.reducedCo2Transportation = reducedCO2;
+        URL url = new URL("http://localhost:8080/increaseReducedCO2?Id=1&ReducedCO2=" + reducedCO2);
+        String readLine;
+        // opens a http connection with the URL.
+        HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+        // sets request method and properties.
+        connection.setRequestMethod("GET");
+        connection.setRequestProperty("Accept", "application/json");
+        int responseCode = connection.getResponseCode();
+        if (responseCode == HttpURLConnection.HTTP_OK) {
+            //Reads in all the data from the request
+            BufferedReader in = new BufferedReader(
+                    new InputStreamReader(connection.getInputStream()));
+            StringBuffer response = new StringBuffer();
+            while ((readLine = in.readLine()) != null) {
+                response.append(readLine);
+            }
+            in.close();
+            // print result
+            System.out.println(response.toString());
+        }
+        return "{\"reducedCO2\":\"" + reducedCO2 + "\"}";
     }
+
+    @RequestMapping(method = RequestMethod.GET, value = "/getReducedCalculationTransportation")
+    public int getReducedCalculationTransportation(){
+        return reducedCo2Transportation;
+    }
+
+
 
 }
