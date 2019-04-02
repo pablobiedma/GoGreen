@@ -1,7 +1,7 @@
 package groupxii.database;
 
-import groupxii.vegetarianmeal.CalculatedMeal;
 import com.mongodb.DBObject;
+import groupxii.vegetarianmeal.CalculatedMeal;
 
 public class MealEntry extends Entry {
 

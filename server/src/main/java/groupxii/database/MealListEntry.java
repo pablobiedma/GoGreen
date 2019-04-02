@@ -4,7 +4,7 @@ import com.mongodb.DBObject;
 import org.bson.BSONObject;
 
 /**
- * Representation of a single entry from the MealList file
+ * Representation of a single entry from the MealList file.
  */
 public class MealListEntry extends Entry {
     private String foodName;
@@ -12,6 +12,9 @@ public class MealListEntry extends Entry {
     private double calPerServing;
     private double servingSize;
 
+    /**
+     * Creates a MealList entry representation for the database.
+     */
     public MealListEntry(String foodName, double co2PerServing,
                              double calPerServing, double servingSize) {
         super();
@@ -21,22 +24,25 @@ public class MealListEntry extends Entry {
         this.servingSize = servingSize;
     }
 
+    /**
+     * Constructs a MealListEntry from a BSONObject, usually a result from query.
+     */
     public MealListEntry(BSONObject obj) {
-	if (obj == null) {
-		return;
-	}
+        if (obj == null) {
+            return;
+        }
         if (obj.containsField("foodName")) {
             this.foodName = (String)obj.get("foodName");
-	}
+        }
         if (obj.containsField("co2PerServing")) {
             this.co2PerServing = (double)obj.get("co2PerServing");
-	}
+        }
         if (obj.containsField("calPerServing")) {
             this.calPerServing = (double)obj.get("calPerServing");
-	}
+        }
         if (obj.containsField("servingSize")) {
             this.servingSize = (double)obj.get("servingSize");
-	}
+        }
     }
 
     public String getFoodName() {
@@ -56,7 +62,7 @@ public class MealListEntry extends Entry {
     }
 
     /**
-     * Translate into a MongoDB JSON object
+     * Translate into a MongoDB JSON object.
      */
     public DBObject toDbObject() {
         return super.toBasicDbObject()

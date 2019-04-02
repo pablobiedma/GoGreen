@@ -11,8 +11,8 @@ import com.mongodb.MongoClient;
 import com.mongodb.MongoException;
 import org.bson.BSONObject;
 
-import java.util.Iterator;
 import java.io.IOException;
+import java.util.Iterator;
 /* Apparently those are unneded
 import java.lang.System;
 import java.lang.NullPointerException;
@@ -98,27 +98,27 @@ public class Database extends Thread {
 
             vehicleTrackerCollection = mongodb.getCollection("vehicleTrackerCollection");
             vegetarianMealCollection = mongodb.getCollection("vegetarianMealCollection");
-	    mealEntryListCollection = mongodb.getCollection("mealEntryListCollection");
+            mealEntryListCollection = mongodb.getCollection("mealEntryListCollection");
             userCredentialsCollection = mongodb.getCollection("userCredentialsCollection");
 
-	    mealEntryListCollection.drop();
-	    ObjectMapper objectMapper = new ObjectMapper();
-	    JsonNode rootNode = objectMapper.readTree(
-			            getClass().getClassLoader().getResource("mealList.txt"));
-	    Iterator<JsonNode> elements;
-	    for (elements = rootNode.elements(); elements.hasNext(); elements.next()) {
-		    JsonNode node = elements.next();
-		    String food  = node.get("food").asText();
-		    double co2PerServing = node.get("grams_co2e_per_serving").asDouble();
-		    double calPerServing = node.get("calories_per_serving").asDouble();
-		    double sizeServing = node.get("serving_size").asDouble();
-		    MealListEntry mealListEntry = new MealListEntry(
-                                                          food,
-							  co2PerServing,
-							  calPerServing,
-							  sizeServing);
-		    mealEntryListCollection.insert(mealListEntry.toDbObject());
-	    }
+            mealEntryListCollection.drop();
+            ObjectMapper objectMapper = new ObjectMapper();
+            JsonNode rootNode = objectMapper.readTree(
+                                    getClass().getClassLoader().getResource("mealList.txt"));
+            Iterator<JsonNode> elements;
+            for (elements = rootNode.elements(); elements.hasNext(); elements.next()) {
+                JsonNode node = elements.next();
+                String food  = node.get("food").asText();
+                double co2PerServing = node.get("grams_co2e_per_serving").asDouble();
+                double calPerServing = node.get("calories_per_serving").asDouble();
+                double sizeServing = node.get("serving_size").asDouble();
+                MealListEntry mealListEntry = new MealListEntry(
+                                                      food,
+                                                      co2PerServing,
+                                                      calPerServing,
+                                                      sizeServing);
+                mealEntryListCollection.insert(mealListEntry.toDbObject());
+            }
             running = true;
         } catch (MongoException e) {
             // I don't think this state is reachable.
@@ -186,12 +186,13 @@ public class Database extends Thread {
         DBCursor cursor = vegetarianMealCollection.find(entry.toDbObject());
         return cursor.one();
     }
+
     /**
      * Given a food name, return the MealListEntry.
      */
     public MealListEntry findMealListEntry(String name) {
         BasicDBObject query = new BasicDBObject("foodName", name);
         DBCursor cursor = mealEntryListCollection.find(query);
-	return new MealListEntry((BSONObject)cursor.one());
+        return new MealListEntry((BSONObject)cursor.one());
     }
 }
