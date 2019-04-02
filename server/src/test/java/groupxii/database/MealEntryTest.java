@@ -8,12 +8,21 @@ import org.junit.Before;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
+import java.io.IOException;
+
 public class MealEntryTest {
 	MealEntry me;
 	@Before
 	public void createEntry() {
+		//needed to fetch  info for calculating CO2
+		try {
+			Database.instance.startDb();
+		} catch (IOException e) {
+			assertTrue(false);
+		}
 		me = new MealEntry("GRAPEFRUIT", 100, "BUTTER", 120);
 	}
+
 	@Test
 	public void testGoodFodName() {
 		assertEquals(me.getGoodFoodName(), "GRAPEFRUIT");
