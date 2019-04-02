@@ -104,7 +104,7 @@ public class Database extends Thread {
             mealEntryListCollection.drop();
             ObjectMapper objectMapper = new ObjectMapper();
             JsonNode rootNode = objectMapper.readTree(
-                                    getClass().getClassLoader().getResource("mealList.txt"));
+                                    getClass().getClassLoader().getResource("mealList.json"));
             Iterator<JsonNode> elements;
             for (elements = rootNode.elements(); elements.hasNext(); elements.next()) {
                 JsonNode node = elements.next();
