@@ -65,4 +65,18 @@ public class MealListEntryTest {
 		assertEquals(mle.getCalPerServing(), 0.0, 0);
 		assertEquals(mle.getServingSize(), 0.0, 0);
 	}
+
+	@Test
+	public void testFromBadDBObject() {
+		DBObject obj = new BasicDBObject()
+					.append("fodName", "CAT")
+					.append("co2PerServng", 23)
+					.append("calerServing", "boat")
+					.append("servingMass", 60.0);
+		mle = new MealListEntry(obj);
+		assertNull(mle.getFoodName());
+		assertEquals(mle.getCO2PerServing(), 0.0, 0);
+		assertEquals(mle.getCalPerServing(), 0.0, 0);
+		assertEquals(mle.getServingSize(), 0.0, 0);
+	}
 }
