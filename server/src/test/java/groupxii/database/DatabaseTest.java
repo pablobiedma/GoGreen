@@ -89,7 +89,7 @@ public class DatabaseTest {
 	public void testSaveMeal() {
 		Database.instance.setDbName("test");
 		Database.instance.startDb();
-		MealEntry entry = new MealEntry(1, "apple", "pizza", 100, 100, 200);
+		MealEntry entry = new MealEntry("GRAPEFRUIT", 100, "GRAPEFRUIT", 100);
 		Database.instance.save(entry);
 		assertEquals(entry.toDbObject(), Database.instance.findMealEntry(entry));
 		//TODO Drop the test DB
