@@ -12,7 +12,10 @@ import com.mongodb.MongoException;
 import org.bson.BSONObject;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
+
 /* Apparently those are unneded
 import java.lang.System;
 import java.lang.NullPointerException;
@@ -195,4 +198,19 @@ public class Database extends Thread {
         DBCursor cursor = mealEntryListCollection.find(query);
         return new MealListEntry((BSONObject)cursor.one());
     }
+
+    /**
+     * Return the complete internal meal list
+     */
+    public List<?> getMealListFoodNames() {
+        List<String> mealList = new ArrayList<>();
+        DBCursor cursor = mealEntryListCollection.find();
+	// Kinda slow :/
+        while (cursor.hasNext()) {
+	    mealList.add((String)cursor.next().get("foodName"));
+        }
+
+        return mealList;
+    }
+
 }
