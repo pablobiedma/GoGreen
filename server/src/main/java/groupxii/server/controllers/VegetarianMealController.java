@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.security.Principal;
+import java.util.List;
 
 @RestController
 public class VegetarianMealController {
@@ -21,7 +22,7 @@ public class VegetarianMealController {
      * Return a list of all available food entries that the vegetarian meal feature can process.
      */
     @RequestMapping(method = RequestMethod.GET, value = "/getMealList")
-    public MealListPublic getNameList() {
+    public List<String> getNameList() {
         return Database.instance.getMealListFoodNames();
     }
 

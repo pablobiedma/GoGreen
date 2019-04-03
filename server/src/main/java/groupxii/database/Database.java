@@ -13,6 +13,7 @@ import org.bson.BSONObject;
 
 import java.io.IOException;
 import java.util.Iterator;
+import java.util.List;
 
 /* Apparently those are unneded
 import java.lang.System;
@@ -204,8 +205,8 @@ public class Database extends Thread {
     /**
      * Return the food names from the meal list.
      */
-    public MealListPublic getMealListFoodNames() {
-        return this.mealListPublic;
+    public List<String> getMealListFoodNames() {
+        return this.mealListPublic.getMealList();
     }
 
 }

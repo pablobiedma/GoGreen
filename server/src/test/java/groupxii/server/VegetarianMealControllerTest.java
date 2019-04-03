@@ -34,7 +34,7 @@ public class VegetarianMealControllerTest {
 
     @Test
     public void getNameList() {
-        MealListPublic nameList = vmc.getNameList();
-        assertFalse(nameList.getMealList().isEmpty());
+        List<String> nameList = vmc.getNameList();
+        assertFalse(nameList.isEmpty());
     }
 }
