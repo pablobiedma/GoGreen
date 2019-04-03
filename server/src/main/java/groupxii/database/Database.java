@@ -12,9 +12,7 @@ import com.mongodb.MongoException;
 import org.bson.BSONObject;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Iterator;
-import java.util.List;
 
 /* Apparently those are unneded
 import java.lang.System;
@@ -38,6 +36,8 @@ public class Database extends Thread {
     private DBCollection vegetarianMealCollection;
     private DBCollection mealEntryListCollection;
     private DBCollection userCredentialsCollection;
+
+    private MealListPublic mealListPublic;
 
     private boolean running;
     private boolean active;
@@ -105,6 +105,7 @@ public class Database extends Thread {
             userCredentialsCollection = mongodb.getCollection("userCredentialsCollection");
 
             mealEntryListCollection.drop();
+            mealListPublic = new MealListPublic();
             ObjectMapper objectMapper = new ObjectMapper();
             JsonNode rootNode = objectMapper.readTree(
                                     getClass().getClassLoader().getResource("mealList.json"));
@@ -121,6 +122,7 @@ public class Database extends Thread {
                                                       calPerServing,
                                                       sizeServing);
                 mealEntryListCollection.insert(mealListEntry.toDbObject());
+                mealListPublic.addFoodName(food);
             }
             running = true;
         } catch (MongoException e) {
@@ -200,17 +202,10 @@ public class Database extends Thread {
     }
 
     /**
-     * Return the complete internal meal list
+     * Return the food names from the meal list.
      */
-    public List<?> getMealListFoodNames() {
-        List<String> mealList = new ArrayList<>();
-        DBCursor cursor = mealEntryListCollection.find();
-	// Kinda slow :/
-        while (cursor.hasNext()) {
-	    mealList.add((String)cursor.next().get("foodName"));
-        }
-
-        return mealList;
+    public MealListPublic getMealListFoodNames() {
+        return this.mealListPublic;
     }
 
 }

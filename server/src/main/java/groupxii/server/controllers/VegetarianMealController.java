@@ -2,7 +2,7 @@ package groupxii.server.controllers;
 
 import groupxii.database.Database;
 import groupxii.database.MealEntry;
-import groupxii.database.MealListEntry;
+import groupxii.database.MealListPublic;
 import groupxii.vegetarianmeal.CalculatedMeal;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.security.Principal;
-import java.util.List;
 
 @RestController
 public class VegetarianMealController {
@@ -18,10 +17,11 @@ public class VegetarianMealController {
     This method will transform the data from the mealList into one string, which then can be used
     by the client, so the choiceboxes/listviews in the GUI are able to show all the meal names.
      */
-    @RequestMapping(method = RequestMethod.GET, value = "/mealNameList")
-    //maybe change to something else TODO
-    //TODO json-ify
-    public List<?> getNameList() {
+    /**
+     * Return a list of all available food entries that the vegetarian meal feature can process.
+     */
+    @RequestMapping(method = RequestMethod.GET, value = "/getMealList")
+    public MealListPublic getNameList() {
         return Database.instance.getMealListFoodNames();
     }
 
