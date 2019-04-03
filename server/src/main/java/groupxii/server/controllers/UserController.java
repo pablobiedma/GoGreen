@@ -84,7 +84,7 @@ public class UserController {
 //    }
 
     @RequestMapping(method = RequestMethod.GET, value = "/getReducedCo2OfUser")
-    public String getReducedCo2OfUser(@RequestParam(value = "Id", defaultValue = "Unknown") int userId) {
+    public String getReducedCo2OfUser(@RequestParam(value = "Id", defaultValue = "-1") int userId) {
         DBObject dbObject = Database.instance.findUserById(userId);
         String reducedCo2 = dbObject.get("reducedCo2").toString();
         return reducedCo2;
