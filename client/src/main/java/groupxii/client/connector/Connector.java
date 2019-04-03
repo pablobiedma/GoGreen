@@ -14,13 +14,12 @@ import java.util.*;
  * Connects to the target server, sends requests and returns
  * the response, which should be a JSON string.
  */
-public class Connector {
+class Connector {
 	public static Connector instance = new Connector();
 
-	ObjectMapper mapper = new ObjectMapper();
-	HttpURLConnection connection;
 
-	protected String getRequest(String resource) {
+	public static String getRequest(String resource) {
+		HttpURLConnection connection;
 		try {
 			URL url = new URL(Target.getHost() + resource);
 			connection = (HttpURLConnection)url.openConnection();
@@ -36,16 +35,17 @@ public class Connector {
 				response.append(responseLine);
 			in.close();
 
-			return response.toString();//mapper.readTree(response.toString());
+			return response.toString();
 		} catch (Exception e) {
 			System.err.println("An error has occured");
 		}
 
 		return null;
 	}
-
+/*
 	public MealList getMealList() {
 		String resource = "/getMealList";
 		return new MealList(getRequest(resource));
 	}
+	*/
 }

@@ -1,6 +1,6 @@
 package groupxii.client.controllers;
 
-import groupxii.client.connector.Connector;
+import groupxii.client.connector.VegetarianMealConnector;
 import groupxii.client.vegetarianmeal.MealList;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -64,7 +64,7 @@ public class VegetarianMealController implements Initializable {
 //        eatenMealListViewItems = Arrays.asList(eatenMealListStr.split(" - "));
  //       ObservableList<String> eatenMealsObservable = FXCollections.observableArrayList(eatenMealListViewItems);
   //      eatenMealsListView.setItems(eatenMealsObservable);
-        MealList mealList = Connector.instance.getMealList();
+        MealList mealList = VegetarianMealConnector.retrieveMealList();
         ObservableList<String> listObservable = FXCollections.observableArrayList(mealList.getMealList());
         choiceBoxGoodFood.getItems().addAll(listObservable);
         choiceBoxBadFood.getItems().addAll(listObservable);
