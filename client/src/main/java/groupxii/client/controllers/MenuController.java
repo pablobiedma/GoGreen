@@ -56,5 +56,4 @@ public class MenuController {
         Main main = new Main();
         main.changeScene("VegetarianMeal.fxml", event);
     }
-
 }

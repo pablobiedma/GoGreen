@@ -1,6 +1,7 @@
 package groupxii.client.controllers;
 
-import groupxii.client.vegetarianmeal.SafeMeal;
+import groupxii.client.connector.Connector;
+import groupxii.client.vegetarianmeal.MealList;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -24,30 +25,32 @@ import java.util.Scanner;
 public class VegetarianMealController implements Initializable {
 
     @FXML
-    private ChoiceBox<String> cb = new ChoiceBox();
+    private ChoiceBox<String> choiceBoxGoodFood = new ChoiceBox();
 
     @FXML
-    private ChoiceBox<String> cb1 = new ChoiceBox();
+    private ChoiceBox<String> choiceBoxBadFood = new ChoiceBox();
 
     @FXML
-    private Slider slider = new Slider();
+    private Slider sliderGoodFood = new Slider();
 
     @FXML
-    private Slider slider1 = new Slider();
+    private Slider sliderBadFood = new Slider();
 
     @FXML
     private ListView<String> eatenMealsListView = new ListView();
 
     private String goodFoodName = "";
     private String badFoodName = "";
-    private String host = "http://localhost:8080/";
+//    private String host = "http://localhost:8080/";
     private String foodNameListStr = "";
     private String eatenMealListStr = "";
-    private SafeMeal safeMeal = new SafeMeal();
-    private List<String> eatenMealListViewItems = new ArrayList<String>();
+ //   private SafeMeal safeMeal = new SafeMeal();
+  //  private List<String> eatenMealListViewItems = new ArrayList<String>();
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+
+		/*
         try {
             foodNameListStr = new Scanner(new URL(host + "mealNameList").openStream(),
                     "UTF-8").nextLine();
@@ -57,13 +60,14 @@ public class VegetarianMealController implements Initializable {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        eatenMealListViewItems = Arrays.asList(eatenMealListStr.split(" - "));
-        ObservableList<String> eatenMealsObservable = FXCollections.observableArrayList(eatenMealListViewItems);
-        eatenMealsListView.setItems(eatenMealsObservable);
-        List<String> items = Arrays.asList(foodNameListStr.split(", "));
-        ObservableList<String> listObservable = FXCollections.observableArrayList(items);
-        cb.getItems().addAll(listObservable);
-        cb1.getItems().addAll(listObservable);
+		*/
+//        eatenMealListViewItems = Arrays.asList(eatenMealListStr.split(" - "));
+ //       ObservableList<String> eatenMealsObservable = FXCollections.observableArrayList(eatenMealListViewItems);
+  //      eatenMealsListView.setItems(eatenMealsObservable);
+        MealList mealList = Connector.instance.getMealList();
+        ObservableList<String> listObservable = FXCollections.observableArrayList(mealList.getMealList());
+        choiceBoxGoodFood.getItems().addAll(listObservable);
+        choiceBoxBadFood.getItems().addAll(listObservable);
     }
 
     /**
@@ -71,6 +75,7 @@ public class VegetarianMealController implements Initializable {
      */
     @FXML
     public void updateListView() {
+		/*
         try {
             eatenMealListStr = new Scanner(new URL(host + "eatenMealList").openStream(),
                     "UTF-8").nextLine();
@@ -80,6 +85,7 @@ public class VegetarianMealController implements Initializable {
         eatenMealListViewItems = Arrays.asList(eatenMealListStr.split(" - "));
         ObservableList<String> eatenMealsObservable = FXCollections.observableArrayList(eatenMealListViewItems);
         eatenMealsListView.setItems(eatenMealsObservable);
+		*/
     }
 
     /**
@@ -90,11 +96,11 @@ public class VegetarianMealController implements Initializable {
      */
     @FXML
     public void safeMeal(MouseEvent event) throws Exception {
-        badFoodName = cb1.getValue();
-        goodFoodName = cb.getValue();
-        int goodServingSize = (int) slider.getValue();
-        int badServingSize = (int) slider1.getValue();
-        safeMeal.safeMeal(goodFoodName, badFoodName, goodServingSize, badServingSize);
+        //badFoodName = cb1.getValue();
+        //goodFoodName = cb.getValue();
+        //int goodServingSize = (int) slider.getValue();
+        //int badServingSize = (int) slider1.getValue();
+    //    safeMeal.safeMeal(goodFoodName, badFoodName, goodServingSize, badServingSize);
         updateListView();
     }
 }
