@@ -158,7 +158,7 @@ public class Database extends Thread {
 
     /** Finds an UserEntry by id.
      */
-    public DBObject findDocumentById(int id) {
+    public DBObject findUserById(int id) {
         BasicDBObject query = new BasicDBObject();
         query.put("userId", id);
         DBObject dbObject = userCollection.findOne(query);
@@ -179,10 +179,10 @@ public class Database extends Thread {
 
     /** receives two id's and adds the first one as a friend to the first one.
      */
-    public void addFriendId(int id1,int id2) {
+    public void addFriend(String userString,int friendId) {
         BasicDBObject newDocument = new BasicDBObject();
-        newDocument.append("$addToSet", new BasicDBObject().append("friendsId", id1));
-        BasicDBObject searchQuery = new BasicDBObject().append("userId", id2);
+        newDocument.append("$addToSet", new BasicDBObject().append("friendsId", friendId));
+        BasicDBObject searchQuery = new BasicDBObject().append("username", userString);
         userCollection.update(searchQuery, newDocument);
     }
 

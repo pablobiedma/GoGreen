@@ -131,7 +131,7 @@ public class DatabaseTest {
 		List<Integer> list = new ArrayList<>();
 		UserEntry entry = new UserEntry(1, "Ivan",100,1,6,list);
 		Database.instance.saveNonBlocking(entry);
-		assertEquals(entry.toDbObject(),Database.instance.findDocumentById(1));
+		assertEquals(entry.toDbObject(),Database.instance.findUserById(1));
 	}
 
 	@Test
@@ -151,7 +151,7 @@ public class DatabaseTest {
 		List<Integer> list = new ArrayList<>();
 		UserEntry entry = new UserEntry(1, "Ivan",100,1,6,list);
 		Database.instance.saveNonBlocking(entry);
-		Database.instance.addFriendId(1,2);
+		Database.instance.addFriend("Ivan",2);
 		assertEquals(entry.getFriendsId(),list);
 	}
 	
