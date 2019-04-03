@@ -1,6 +1,6 @@
-package client.groupxii.controllers;
+package groupxii.client.controllers;
 
-import client.groupxii.vegetarianmeal.SafeMeal;
+import groupxii.client.vegetarianmeal.SafeMeal;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
