@@ -8,10 +8,11 @@ import com.mongodb.DBObject;
 import com.mongodb.MongoClient;
 import com.mongodb.MongoException;
 
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-
+/* Apparently those are unneded
+import java.lang.System;
+import java.lang.NullPointerException;
+import java.lang.NumberFormatException;
+*/
 
 /**
  * Manages all database related operations between the server logic and MongoDB.
@@ -27,14 +28,23 @@ public class Database extends Thread {
 
     private DBCollection vehicleTrackerCollection;
     private DBCollection vegetarianMealCollection;
-    private DBCollection userCollection;
+    private DBCollection userCredentialsCollection;
 
     private boolean running;
     private boolean active;
 
     Database() {
-        dbAddr = "localhost";
-        dbPort = 27017;
+        dbAddr = System.getenv("DB_ADDRESS");
+        if (dbAddr == null) {
+            dbAddr = "localhost";
+        }
+        try {
+            dbPort = Integer.parseInt(System.getenv("DB_PORT"));
+        } catch (NullPointerException e) {
+            dbPort = 27017;
+        } catch (NumberFormatException e) {
+            dbPort = 27017;
+        }
         dbName = "GoGreen";
         running = false;
         active = false;
@@ -81,7 +91,7 @@ public class Database extends Thread {
             mongodb = this.mongoClient.getDB(this.getDbName());
             vehicleTrackerCollection = mongodb.getCollection("vehicleTrackerCollection");
             vegetarianMealCollection = mongodb.getCollection("vegetarianMealCollection");
-            userCollection = mongodb.getCollection("userCollection");
+            userCredentialsCollection = mongodb.getCollection("userCredentialsCollection");
             running = true;
         } catch (MongoException e) {
             // I don't think this state is reachable.
@@ -114,9 +124,11 @@ public class Database extends Thread {
         if (entry instanceof VehicleEntry) {
             this.vehicleTrackerCollection.insert(entry.toDbObject());
         }
-        if (entry instanceof UserEntry) {
-            this.userCollection.insert(entry.toDbObject());
+        /*
+        if (entry instanceof UserCredentialsEntry) {
+            this.userCredentialsCollection.insert(entry.toDbObject());
         }
+        */
         this.active = false;
     }
 
