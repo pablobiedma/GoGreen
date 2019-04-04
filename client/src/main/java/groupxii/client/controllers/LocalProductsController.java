@@ -3,6 +3,7 @@ package groupxii.client.controllers;
 import groupxii.client.Main;
 import client.groupxii.localproducts.GetUserLocation;
 import com.maxmind.geoip2.exception.GeoIp2Exception;
+import groupxii.client.connector.Connector;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -31,23 +32,25 @@ public class LocalProductsController implements Initializable {
     @FXML
     private ImageView mapsImage = new ImageView();
 
-    private List<String> listViewItems = new ArrayList<String>();
-    private ObservableList<String> listViewObservable;
-    private GetUserLocation getUserLocation = new GetUserLocation();
+    //private List<String> listViewItems = new ArrayList<String>();
+    //private ObservableList<String> listViewObservable;
     private String listItemsStr = "";
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         try {
-            listItemsStr = new Scanner(new URL("http://localhost:8080/localshops?location=" + getUserLocation.getUserLocation()).openStream(),"UTF-8").nextLine();
+            GetUserLocation getUserLocation = new GetUserLocation();
+            listItemsStr = Connector.instance.getLocalShops("/localshops?location=" + getUserLocation.getUserLocation());
         } catch (IOException e) {
             e.printStackTrace();
         } catch (GeoIp2Exception e) {
             e.printStackTrace();
         }
+        //listItemsStr = new Scanner(new URL("/localshops?location=" + getUserLocation.getUserLocation()).openStream(),"UTF-8").nextLine();
+        List<String> listViewItems = new ArrayList<>();
         listViewItems = Arrays.asList(listItemsStr.split(", "));
-        listViewObservable = FXCollections.observableArrayList(listViewItems);
-        System.out.println(listItemsStr);
+        ObservableList<String> listViewObservable = FXCollections.observableArrayList(listViewItems);
+        //listViewObservable = FXCollections.observableArrayList(listViewItems);
         localShops.setItems(listViewObservable);
     }
 
@@ -56,6 +59,7 @@ public class LocalProductsController implements Initializable {
         if (localShops.getSelectionModel().getSelectedItem() == null) {
             textfield.setText("Please choose a shop first");
         }  else {
+            GetUserLocation getUserLocation = new GetUserLocation();
             String location = getUserLocation.getUserLocation();
             String url = localShops.getSelectionModel().getSelectedItem()
                     .substring(8 , localShops.getSelectionModel().getSelectedItem().indexOf(" - "));

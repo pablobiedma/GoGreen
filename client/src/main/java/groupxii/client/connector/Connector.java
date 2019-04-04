@@ -48,4 +48,8 @@ public class Connector {
 		String resource = "/getMealList";
 		return new MealList(getRequest(resource));
 	}
+
+	public String getLocalShops(String resource){
+		return getRequest(resource);
+	}
 }
