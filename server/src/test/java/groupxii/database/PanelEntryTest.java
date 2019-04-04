@@ -2,78 +2,60 @@ package groupxii.database;
 
 
 
+import com.mongodb.DBObject;
+import groupxii.solarpanels.CalculatedPanel;
+import org.junit.Before;
 import org.junit.Test;
+
+import java.io.IOException;
 
 import static org.junit.Assert.*;
 
 
 public class PanelEntryTest {
 
-    @Test
-    public void getUserid() {
-        PanelEntry p = new PanelEntry(1,"Monocrystalline",  39, 27, 40);
-        assertEquals(1,p.getUserid());
-    }
-    @Test
-    public void getPanelname() {
-        PanelEntry p = new PanelEntry(1,"Monocrystalline",  39, 27, 40);
-        assertEquals("Monocrystalline",p.getPaneltype());
+    PanelEntry panelEntry;
+    @Before
+    public void createEntry() {
+        try {
+            Database.instance.startDb();
+        }
+        catch (IOException e) {
+            assertTrue(false);
+        }
+        panelEntry = new PanelEntry("Monocrystalline", 45,23);
+
     }
 
     @Test
-    public void getReducedco2() {
-        PanelEntry p = new PanelEntry(1,"Monocrystalline",  39, 27, 40);
-        assertEquals(39,p.getReducedco2());
+    public void testPaneltype() {
+        assertEquals("Monocrystalline", panelEntry.getPaneltype());
     }
 
     @Test
-    public void getEfficiencyrate() {
-        PanelEntry p = new PanelEntry(1,"Monocrystalline",  39, 27, 40);
-        assertEquals(27,p.getEfficiencyrate());
+    public void testEfficiencyrate() {
+        assertEquals(45, panelEntry.getEfficiencyrate());
     }
 
     @Test
-    public void getAmount() {
-        PanelEntry p = new PanelEntry(1,"Monocrystalline",  39, 27, 40);
-        assertEquals(40,p.getAmount());
+    public void testAmount() {
+        assertEquals(23, panelEntry.getAmount());
     }
 
     @Test
-    public void setUserid() {
-        PanelEntry p = new PanelEntry(1,"Monocrystalline",  39, 27, 40);
-        PanelEntry p2 = new PanelEntry(3,"Monocrystalline",  39, 27, 40);
-        p2.setUserid(1);
-        assertEquals(p.getUserid(),p2.getUserid());
-    }
-    @Test
-    public void setPanelname() {
-        PanelEntry p = new PanelEntry(1,"Monocrystalline",  39, 27, 40);
-        PanelEntry p2 = new PanelEntry(1,"Thin-Film",  39, 27, 40);
-        p2.setPaneltype("Monocrystalline");
-        assertEquals(p.getPaneltype(),p2.getPaneltype());
+    public void testReducedCO2() {
+        CalculatedPanel calculatedPanel = new CalculatedPanel("Monocrystalline", 23);
+        assertEquals(calculatedPanel.getReducedCO2(),panelEntry.getReducedco2());
     }
 
     @Test
-    public void setCo2() {
-        PanelEntry p = new PanelEntry(1,"Monocrystalline",  39, 27, 40);
-        PanelEntry p2 = new PanelEntry(1,"Monocrystalline",  50, 27, 40);
-        p2.setReducedco2(39);
-        assertEquals(p.getReducedco2(),p2.getReducedco2());
+    public void testToDBObject() {
+        DBObject obj = panelEntry.toDbObject();
+        assertTrue(obj.containsField("paneltype"));
+        assertTrue(obj.containsField("reducedco2"));
+        assertTrue(obj.containsField("efficiencyrate"));
+        assertTrue(obj.containsField("amount"));
     }
 
-    @Test
-    public void setEfficiencyrate() {
-        PanelEntry p = new PanelEntry(1,"Monocrystalline",  39, 27, 40);
-        PanelEntry p2 = new PanelEntry(1,"Monocrystalline",  39, 30, 40);
-        p2.setEfficiencyrate(27);
-        assertEquals(p.getEfficiencyrate(),p2.getEfficiencyrate());
-    }
 
-    @Test
-    public void setAmount() {
-        PanelEntry p = new PanelEntry(1,"Monocrystalline",  39, 27, 40);
-        PanelEntry p2 = new PanelEntry(1,"Monocrystalline",  39, 27, 41);
-        p2.setAmount(40);
-        assertEquals(p.getAmount(),p2.getAmount());
-    }
 }

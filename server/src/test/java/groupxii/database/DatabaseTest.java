@@ -1,6 +1,9 @@
 package groupxii.database;
 
 import org.junit.Test;
+
+import java.io.IOException;
+
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
@@ -44,7 +47,7 @@ public class DatabaseTest {
 	}
 
 	@Test
-	public void testRunning() {
+	public void testRunning() throws IOException {
 		Database db = new Database();
 		db.startDb();
 		assertTrue(db.isRunning());
@@ -60,7 +63,7 @@ public class DatabaseTest {
 	*/
 
 	@Test
-	public void testSave() {
+	public void testSave() throws IOException {
 		Database.instance.setDbName("test");
 		Database.instance.startDb();
 		VehicleEntry entry = new VehicleEntry(1337, "car");
@@ -83,7 +86,7 @@ public class DatabaseTest {
 	*/
 
 	@Test
-	public void testSaveMeal() {
+	public void testSaveMeal() throws IOException {
 		Database.instance.setDbName("test");
 		Database.instance.startDb();
 		MealEntry entry = new MealEntry(1, "apple", "pizza", 100, 100, 200);

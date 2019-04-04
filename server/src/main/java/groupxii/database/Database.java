@@ -1,11 +1,13 @@
 package groupxii.database;
 
-import com.mongodb.DB;
-import com.mongodb.DBCollection;
-import com.mongodb.DBCursor;
-import com.mongodb.DBObject;
-import com.mongodb.MongoClient;
-import com.mongodb.MongoException;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.mongodb.*;
+import org.bson.BSONObject;
+
+import java.io.IOException;
+import java.util.Iterator;
+import java.util.List;
 
 //import java.lang.System;
 //import java.lang.NullPointerException;
@@ -26,6 +28,9 @@ public class Database extends Thread {
     private DBCollection vehicleTrackerCollection;
     private DBCollection vegetarianMealCollection;
     private DBCollection solarPanelCollection;
+    private DBCollection panelListEntryCollection;
+
+    private PanelListPublic panelListPublic;
 
     private boolean running;
     private boolean active;
@@ -82,13 +87,30 @@ public class Database extends Thread {
     /**
      * Starts instance of Database.
      */
-    public void startDb() {
+    public void startDb() throws IOException {
         try {
             mongoClient = new MongoClient(this.getDbAddr(), this.getDbPort());
             mongodb = this.mongoClient.getDB(this.getDbName());
             vehicleTrackerCollection = mongodb.getCollection("vehicleTrackerCollection");
             vegetarianMealCollection = mongodb.getCollection("vegetarianMealCollection");
             solarPanelCollection = mongodb.getCollection("solarPanelCollection");
+            panelListEntryCollection = mongodb.getCollection("panelListEntryCollection");
+
+            panelListEntryCollection.drop();
+            panelListPublic = new PanelListPublic();
+            ObjectMapper objectMapper = new ObjectMapper();
+            JsonNode rootnode = objectMapper.readTree(getClass().getClassLoader().getResource("panelList.json"));
+            Iterator<JsonNode> elements = rootnode.elements();
+            while (elements.hasNext()){
+                JsonNode node = elements.next();
+                String paneltype = node.get("panelname").asText();
+                double co2PerPanel =  node.get("grams_co2_by_panel").asDouble();
+                int efficiencyrate = node.get("efficiencyrate_in_%").asInt();
+                int amount = node.get("amount").asInt();
+                PanelListEntry panelListEntry = new PanelListEntry(paneltype,co2PerPanel, efficiencyrate,amount);
+                panelListEntryCollection.insert(panelListEntry.toDbObject());
+                panelListPublic.addPaneltype(paneltype);
+            }
             running = true;
         } catch (MongoException e) {
             // I don't think this state is reachable.
@@ -162,5 +184,21 @@ public class Database extends Thread {
         while (this.isActive()) {}
         DBCursor cursor = solarPanelCollection.find(entry.toDbObject());
         return cursor.one();
+    }
+
+    /**
+     * Given a paneltype, return the panelListEntry.
+     */
+    public  PanelListEntry findPanelListEntry(String name) {
+        BasicDBObject query = new BasicDBObject("paneltype", name);
+        DBCursor cursor = panelListEntryCollection.find(query);
+        return new PanelListEntry((BSONObject)cursor.one());
+    }
+
+    /**
+     * Return the paneltypes from the panel list.
+     */
+    public List<String> getPanelListPanelNames() {
+        return this.panelListPublic.getPanelList();
     }
 }
