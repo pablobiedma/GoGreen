@@ -26,7 +26,6 @@ public class VegetarianMealController {
     private GetMealData getMealData = new GetMealData();
     private List<Meal> mealList = new ArrayList<Meal>();
     private final AtomicLong counter = new AtomicLong();
-    private int reducedCo2 = 0;
 
     /**
     First run this to load in the MealDataList on the server,
@@ -66,17 +65,12 @@ public class VegetarianMealController {
                                           defaultValue = "Unknown")
                                               int badServingSize) throws IOException {
         calculations.setMealList(this.mealList);
-        reducedCo2 = calculations.reducedCO2(badFoodName, badServingSize,
+        int reducedCo2 = calculations.reducedCO2(badFoodName, badServingSize,
                 calculations.calculateCO2(goodFoodName, goodServingSize));
         saveMeal.setMealList(this.mealList);
         saveMeal.saveMealData(counter.incrementAndGet(), goodFoodName, badFoodName,
                 goodServingSize, badServingSize, reducedCo2);
         return saveMeal.getMealEntry();
-    }
-
-    @RequestMapping(method = RequestMethod.GET, value = "/getReducedCo2")
-    public String getReducedCo2(){
-        return Integer.toString(reducedCo2);
     }
 }
 
