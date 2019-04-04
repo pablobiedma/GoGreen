@@ -1,6 +1,6 @@
-package client.groupxii.controllers;
+package groupxii.client.controllers;
 
-import client.groupxii.Main;
+import groupxii.client.Main;
 import javafx.fxml.FXML;
 import javafx.scene.input.MouseEvent;
 
@@ -56,5 +56,4 @@ public class MenuController {
         Main main = new Main();
         main.changeScene("VegetarianMeal.fxml", event);
     }
-
 }

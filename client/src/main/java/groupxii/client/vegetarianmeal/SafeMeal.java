@@ -1,4 +1,4 @@
-package client.groupxii.vegetarianmeal;
+package groupxii.client.vegetarianmeal;
 
 import java.io.BufferedReader;
 import java.io.IOException;

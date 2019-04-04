@@ -1,4 +1,4 @@
-package client.groupxii;
+package groupxii.client;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -10,12 +10,17 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
+import groupxii.client.connector.Connector;
+import groupxii.client.vegetarianmeal.MealList;
+
 public class Main extends Application {
     private Stage primaryStage;
     private Scene primaryScene;
 
     // This will start a stage (program window)
     public static void main(String[] args) {
+//		Connector c = new Connector();
+
         launch(args);
     }
 
@@ -51,6 +56,5 @@ public class Main extends Application {
     public Scene getPrimaryScene() {
         return this.primaryScene;
     }
-
 }
 
