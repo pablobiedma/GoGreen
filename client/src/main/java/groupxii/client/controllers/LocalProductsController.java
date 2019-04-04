@@ -1,8 +1,8 @@
 package groupxii.client.controllers;
 
-import groupxii.client.Main;
 import client.groupxii.localproducts.GetUserLocation;
 import com.maxmind.geoip2.exception.GeoIp2Exception;
+import groupxii.client.Main;
 import groupxii.client.connector.Connector;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -18,7 +18,10 @@ import java.awt.Desktop;
 import java.io.IOException;
 import java.net.URI;
 import java.net.URL;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.ResourceBundle;
 
 
 public class LocalProductsController implements Initializable {
@@ -40,20 +43,29 @@ public class LocalProductsController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         try {
             GetUserLocation getUserLocation = new GetUserLocation();
-            listItemsStr = Connector.instance.getLocalShops("/localshops?location=" + getUserLocation.getUserLocation());
+            listItemsStr = Connector.instance.getLocalShops("/localshops?location="
+                    + getUserLocation.getUserLocation());
         } catch (IOException e) {
             e.printStackTrace();
         } catch (GeoIp2Exception e) {
             e.printStackTrace();
         }
-        //listItemsStr = new Scanner(new URL("/localshops?location=" + getUserLocation.getUserLocation()).openStream(),"UTF-8").nextLine();
+        //listItemsStr = new Scanner(new URL("/localshops?location=" +
+        // getUserLocation.getUserLocation()).openStream(),"UTF-8").nextLine();
         List<String> listViewItems = new ArrayList<>();
         listViewItems = Arrays.asList(listItemsStr.split(", "));
-        ObservableList<String> listViewObservable = FXCollections.observableArrayList(listViewItems);
+        ObservableList<String> listViewObservable =
+                FXCollections.observableArrayList(listViewItems);
         //listViewObservable = FXCollections.observableArrayList(listViewItems);
         localShops.setItems(listViewObservable);
     }
 
+    /**
+     * gets an image of the location of the shop.
+     * @param event mouse click.
+     * @throws GeoIp2Exception if the location can not be initialized.
+     * @throws IOException if the connection cannot be made.
+     */
     @FXML
     public void getLocation(MouseEvent event) throws GeoIp2Exception, IOException {
         String url = getShopLocation();
@@ -66,7 +78,11 @@ public class LocalProductsController implements Initializable {
         }
     }
 
-
+    /**
+     * opens the browser and navigates the user to the shop.
+     * @param event mouse click.
+     * @throws Exception if the connection to the url cannot be made.
+     */
     @FXML
     public void navigate(MouseEvent event) throws Exception {
         String url = getShopLocation();
@@ -77,9 +93,14 @@ public class LocalProductsController implements Initializable {
         }
     }
 
-    public String getShopLocation(){
+    /**
+     * gets the adress of the shop from the listview.
+     * @return String with the adress of the shop.
+     */
+    public String getShopLocation() {
         String locationStr = localShops.getSelectionModel().getSelectedItem();
-        locationStr = locationStr.substring(locationStr.indexOf("LOCATED AT: "), locationStr.indexOf(" - RATING:"));
+        locationStr = locationStr.substring(locationStr.indexOf("LOCATED AT: "),
+                locationStr.indexOf(" - RATING:"));
         locationStr = locationStr.replace(' ', '+').substring(0, locationStr.length() - 1);
         return locationStr;
     }

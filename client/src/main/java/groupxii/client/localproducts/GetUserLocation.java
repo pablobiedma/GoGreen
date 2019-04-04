@@ -14,6 +14,12 @@ public class GetUserLocation {
     private String ipAddress = "";
     private String location = "";
 
+    /**
+     * gets the location of the user by using his IP adress in combination with the eth0.com API.
+     * @return String with the latitude and longitude of the user.
+     * @throws IOException if it is not able to connect to the api.
+     * @throws GeoIp2Exception if ip cannot be turned into a location.
+     */
     public String getUserLocation() throws IOException, GeoIp2Exception {
         String ip = "";
         try {

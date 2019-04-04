@@ -22,6 +22,13 @@ public class LocalProductsController {
         this.localShopList = localShopList;
     }
 
+    /**
+     * Retrieves location of user, connects to google api and
+     * and transforms the required json data into a String.
+     * @param location longitude and latitude of user.
+     * @return string of the localshops nearby.
+     * @throws IOException if a connection to an API fails.
+     */
     @RequestMapping(method = RequestMethod.GET, value = "/localshops")
     public String localShopData(@RequestParam(value = "location",
             defaultValue = "52.011578,4.357068") String location) throws IOException {

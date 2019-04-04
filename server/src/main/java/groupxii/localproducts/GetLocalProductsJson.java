@@ -11,6 +11,11 @@ public class GetLocalProductsJson {
 
     private URL url;
 
+    /**
+     * gets the data from the google maps API.
+     * @param location longitude and latitude of the user location.
+     * @return google maps api json.
+     */
     public String getLocalShopJson(String location) {
         String localShopDataJson = "";
         try {
@@ -21,10 +26,15 @@ public class GetLocalProductsJson {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        System.out.println(localShopDataJson);
+        //System.out.println(localShopDataJson);
         return localShopDataJson;
     }
 
+    /**
+     * connects to url.
+     * @return data from url.
+     * @throws IOException if connection fails.
+     */
     public String readJson() throws IOException {
         String readLine = "";
         HttpURLConnection connection = (HttpURLConnection) url.openConnection();
@@ -36,7 +46,8 @@ public class GetLocalProductsJson {
             response.append(readLine);
         }
         in.close();
-        System.out.println(response.toString());
+        //System.out.println(response.toString());
         return response.toString();
     }
+
 }

@@ -10,9 +10,6 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
-import groupxii.client.connector.Connector;
-import groupxii.client.vegetarianmeal.MealList;
-
 public class Main extends Application {
     private Stage primaryStage;
     private Scene primaryScene;

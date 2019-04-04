@@ -6,6 +6,12 @@ public class LocalShop {
     private double rating;
     private String location;
 
+    /**
+     * constructor of LocalShop class.
+     * @param name name of the shop.
+     * @param rating rating of the shop.
+     * @param location location of the shop.
+     */
     public LocalShop(String name, double rating, String location) {
         this.name = name;
         this.rating = rating;

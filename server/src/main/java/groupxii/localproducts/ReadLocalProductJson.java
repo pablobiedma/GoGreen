@@ -29,6 +29,10 @@ public class ReadLocalProductJson {
         return localShopList;
     }
 
+    /**
+     * reads the json from the goolge API and retrieves the required data for our LocalShopList.
+     * @throws IOException if the reading of the json fails.
+     */
     public void readLocalProductJson() throws IOException {
         GetLocalProductsJson getLocalProductsJson = new GetLocalProductsJson();
         ObjectMapper obj = new ObjectMapper();
@@ -48,6 +52,10 @@ public class ReadLocalProductJson {
         }
     }
 
+    /**
+     * turns the localShopList into a string which can be used for the Listview.
+     * @return String of all the shops nearby.
+     */
     public String localShopToString() {
         String result = "";
         for (int i = 0; i < localShopList.size(); i++) {

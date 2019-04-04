@@ -2,7 +2,6 @@ package groupxii.server.controllers;
 
 import groupxii.database.Database;
 import groupxii.database.MealEntry;
-import groupxii.database.MealListPublic;
 import groupxii.vegetarianmeal.CalculatedMeal;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
