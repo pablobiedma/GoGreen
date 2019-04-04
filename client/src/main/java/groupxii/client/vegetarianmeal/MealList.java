@@ -1,6 +1,7 @@
 package groupxii.client.vegetarianmeal;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import groupxii.client.connector.VegetarianMealConnector;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -13,9 +14,18 @@ public class MealList {
     private List<String> mealList;
 
 	/**
-	 * Takes a json string array and parses it into MealList.
+	 * Asks the connector to retrieve the meal list and parses it
 	 */
-    public MealList(String json) {
+	public MealList() {
+		String json = VegetarianMealConnector.retrieveMealList();
+		this.parseJson(json);
+	}
+
+	public MealList(String json) {
+		this.parseJson(json);
+	}
+
+    private void parseJson(String json) {
         ObjectMapper mapper = new ObjectMapper();
         try {
 			//Does this has to be like this?
@@ -26,7 +36,7 @@ public class MealList {
                                 .constructCollectionType(List.class,
                                                          String.class));
         } catch (IOException e) {
-            mealList = new ArrayList<>();
+            this.mealList = new ArrayList<>();
             System.err.println(e.getMessage());
         }
     }

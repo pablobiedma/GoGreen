@@ -1,10 +1,19 @@
 package groupxii.client.connector;
 
-import groupxii.client.vegetarianmeal.MealList;
-
 public class VegetarianMealConnector {
-	public static MealList retrieveMealList() {
+	public static String retrieveMealList() {
 		String resource = "/getMealList";
-		return new MealList(Connector.getRequest(resource));
+		return Connector.getRequest(resource);
+	}
+
+	public static String calculateCO2Reduction(String goodFoodName, int goodServingSize,
+											String badFoodName, int badServingSize) {
+		String resource = "/calculaeMeal"
+							+ "?" + goodFoodName
+							+ "&" + goodServingSize
+							+ "&" + badFoodName
+							+ "&" + badServingSize;
+
+		return Connector.getRequest(resource);
 	}
 }
