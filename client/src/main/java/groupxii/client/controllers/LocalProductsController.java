@@ -56,14 +56,12 @@ public class LocalProductsController implements Initializable {
 
     @FXML
     public void getLocation(MouseEvent event) throws GeoIp2Exception, IOException {
-        if (localShops.getSelectionModel().getSelectedItem() == null) {
+        String url = getShopLocation();
+        if (url == null) {
             textfield.setText("Please choose a shop first");
         }  else {
-            GetUserLocation getUserLocation = new GetUserLocation();
-            String location = getUserLocation.getUserLocation();
-            String url = localShops.getSelectionModel().getSelectedItem()
-                    .substring(8 , localShops.getSelectionModel().getSelectedItem().indexOf(" - "));
-            url = url.replace(' ', '+').substring(0, url.length() - 1);
+            //GetUserLocation getUserLocation = new GetUserLocation();
+            //String location = getUserLocation.getUserLocation();
             mapsImage.setImage(new Image("https://maps.googleapis.com/maps/api/staticmap?center=" + url + "&zoom=12&size=900x150&maptype=roadmap&markers=color:red%7Clabel:Shop%7C" + url + "&key=AIzaSyBvn_zZpLGUjLJBxIUoGHgJjzo2VlZm3jg"));
         }
     }
@@ -71,14 +69,19 @@ public class LocalProductsController implements Initializable {
 
     @FXML
     public void navigate(MouseEvent event) throws Exception {
+        String url = getShopLocation();
         if (localShops.getSelectionModel().getSelectedItem() == null) {
             textfield.setText("Please choose a shop first");
         } else {
-            String url = localShops.getSelectionModel().getSelectedItem()
-                    .substring(8, localShops.getSelectionModel().getSelectedItem().indexOf(" - "));
-            url = url.replace(' ', '+');
             Desktop.getDesktop().browse(URI.create("https://www.google.com/maps/search/?api=1&query=" + url));
         }
+    }
+
+    public String getShopLocation(){
+        String locationStr = localShops.getSelectionModel().getSelectedItem();
+        locationStr = locationStr.substring(locationStr.indexOf("LOCATED AT: "), locationStr.indexOf(" - RATING:"));
+        locationStr = locationStr.replace(' ', '+').substring(0, locationStr.length() - 1);
+        return locationStr;
     }
 
     @FXML
