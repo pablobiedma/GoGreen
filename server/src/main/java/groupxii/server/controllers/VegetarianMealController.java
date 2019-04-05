@@ -2,6 +2,7 @@ package groupxii.server.controllers;
 
 import groupxii.database.MealEntry;
 import groupxii.vegetarianmeal.Calculations;
+import groupxii.vegetarianmeal.EatenMealList;
 import groupxii.vegetarianmeal.GetMealData;
 import groupxii.vegetarianmeal.Meal;
 import groupxii.vegetarianmeal.MealNameList;
@@ -26,6 +27,7 @@ public class VegetarianMealController {
     private GetMealData getMealData = new GetMealData();
     private List<Meal> mealList = new ArrayList<Meal>();
     private final AtomicLong counter = new AtomicLong();
+    private List<String> eatenMealList = new ArrayList<String>();
 
     /**
     First run this to load in the MealDataList on the server,
@@ -72,5 +74,23 @@ public class VegetarianMealController {
                 goodServingSize, badServingSize, reducedCo2);
         return saveMeal.getMealEntry();
     }
+
+    @RequestMapping(method = RequestMethod.GET, value = "/eatenMealList")
+    public String getEatenMealList() throws IOException {
+        EatenMealList eatenMealListClass = new EatenMealList();
+        eatenMealListClass.readDatabase();
+        String jsonReturn = "";
+        eatenMealList = eatenMealListClass.getEatenMealList();
+        for (int i = 0; i < eatenMealList.size(); i++ ) {
+            jsonReturn += eatenMealList.get(i) + " - ";
+        }
+        return jsonReturn;
+    }
+
+    /*
+    @RequestMapping(method = RequestMethod.GET, value = "/latestMeal")
+    public String getLatestMeal() {
+    }
+    */
 }
 
