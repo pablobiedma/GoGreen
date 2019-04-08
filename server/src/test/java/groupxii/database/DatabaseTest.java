@@ -138,35 +138,35 @@ public class DatabaseTest {
 	}
 	*/
 
-	@Test
-	public void testUserById() throws IOException {
-		Database.instance.setDbName("test");
-		Database.instance.startDb();
-		List<Integer> list = new ArrayList<>();
-		UserEntry entry = new UserEntry(1, "Ivan",100,1,6,list);
-		Database.instance.saveNonBlocking(entry);
-		assertNotEquals(entry.toDbObject(),Database.instance.findUserById(2));
-	}
-
-	@Test
-	public void testSortUsersByPoints() throws IOException {
-		Database.instance.setDbName("test");
-		Database.instance.startDb();
-		List<Integer> list = new ArrayList<>();
-		UserEntry entry = new UserEntry(1, "Ivan",100,1,6,list);
-		Database.instance.saveNonBlocking(entry);
-		assertNotEquals(entry.toDbObject(),Database.instance.sortUsersByReducedCo2());
-	}
-
-	@Test
-	public void testAddFriend() throws IOException {
-		Database.instance.setDbName("test");
-		Database.instance.startDb();
-		List<Integer> list = new ArrayList<>();
-		UserEntry entry = new UserEntry(1, "Ivan",100,1,6,list);
-		Database.instance.saveNonBlocking(entry);
-		Database.instance.addFriend("Ivan",2);
-		assertEquals(entry.getFriendsId(),list);
-	}
+//	@Test
+//	public void testUserById() throws IOException {
+//		Database.instance.setDbName("test");
+//		Database.instance.startDb();
+//		List<Integer> list = new ArrayList<>();
+//		UserEntry entry = new UserEntry(1, "Ivan",100,1,6,list);
+//		Database.instance.saveNonBlocking(entry);
+//		assertNotEquals(entry.toDbObject(),Database.instance.findUserById(2));
+//	}
+//
+//	@Test
+//	public void testSortUsersByPoints() throws IOException {
+//		Database.instance.setDbName("test");
+//		Database.instance.startDb();
+//		List<Integer> list = new ArrayList<>();
+//		UserEntry entry = new UserEntry(1, "Ivan",100,1,6,list);
+//		Database.instance.saveNonBlocking(entry);
+//		assertNotEquals(entry.toDbObject(),Database.instance.sortUsersByReducedCo2());
+//	}
+//
+//	@Test
+//	public void testAddFriend() throws IOException {
+//		Database.instance.setDbName("test");
+//		Database.instance.startDb();
+//		List<Integer> list = new ArrayList<>();
+//		UserEntry entry = new UserEntry(1, "Ivan",100,1,6,list);
+//		Database.instance.saveNonBlocking(entry);
+//		Database.instance.addFriend("Ivan",2);
+//		assertEquals(entry.getFriendsId(),list);
+//	}
 	
 }

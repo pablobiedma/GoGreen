@@ -1,5 +1,6 @@
 package groupxii.server.controllers;
 
+import com.mongodb.DBObject;
 import groupxii.database.Database;
 import groupxii.database.MealEntry;
 import groupxii.database.MealListPublic;
@@ -10,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.security.Principal;
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -64,31 +66,17 @@ public class VegetarianMealController {
                                                          defaultValue = "-1")
                                            Integer badServingSize,
                                            Principal principal) {
-        //TODO find the userID and append the CalculatedCO2
-        int userId = -1;
-        MealEntry saveMeal = new MealEntry(goodFoodName, goodServingSize, 
+        String username = principal.getName();
+        MealEntry saveMeal = new MealEntry(goodFoodName, goodServingSize,
                                            badFoodName, badServingSize);
-        //TODO append the entry to the user's document
-        //Database.instance.saveNonBlocking(saveMeal);
+        Database.instance.addEatenMeal(username,saveMeal);
     }
 
-    /*
-    @RequestMapping(method = RequestMethod.GET, value = "/eatenMealList")
-    public String getEatenMealList() throws IOException {
-        EatenMealList eatenMealListClass = new EatenMealList();
-        eatenMealListClass.readDatabase();
-        String jsonReturn = "";
-        eatenMealList = eatenMealListClass.getEatenMealList();
-        for (int i = 0; i < eatenMealList.size(); i++ ) {
-            jsonReturn += eatenMealList.get(i) + " - ";
-        }
-        return jsonReturn;
+    @RequestMapping(method = RequestMethod.GET, value = "/getEatenMealList")
+    public List<DBObject> getEatenMealList(Principal principal) {
+        String username = principal.getName();
+        DBObject user =  Database.instance.findUserByName(username);
+        List<DBObject> list = (ArrayList<DBObject>) user.get("eatenMeals");
+        return list;
     }
-    */
-
-    /*
-    @RequestMapping(method = RequestMethod.GET, value = "/latestMeal")
-    public String getLatestMeal() {
-    }
-    */
 }

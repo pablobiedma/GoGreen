@@ -222,6 +222,13 @@ public class Database extends Thread {
         return dbObject;
     }
 
+    public DBObject findUserByName(String username) {
+        BasicDBObject query = new BasicDBObject();
+        query.put("username", username);
+        DBObject dbObject = userCollection.findOne(query);
+        return dbObject;
+    }
+
     /** returns all users sorted by points.
      */
     public List<DBObject> sortUsersByReducedCo2() {
@@ -249,6 +256,13 @@ public class Database extends Thread {
         BasicDBObject newDocument = new BasicDBObject();
         newDocument.append("$inc", new BasicDBObject().append("reducedCo2", amount));
         BasicDBObject searchQuery = new BasicDBObject().append("userId", id);
+        userCollection.update(searchQuery, newDocument);
+    }
+
+    public void addEatenMeal(String userString, MealEntry mealEntry) {
+        BasicDBObject newDocument = new BasicDBObject();
+        newDocument.append("$addToSet", new BasicDBObject().append("eatenMeals", mealEntry.toDbObject()));
+        BasicDBObject searchQuery = new BasicDBObject().append("username", userString);
         userCollection.update(searchQuery, newDocument);
     }
 }
