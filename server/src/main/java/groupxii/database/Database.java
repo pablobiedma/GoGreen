@@ -8,11 +8,9 @@ import com.mongodb.DBObject;
 import com.mongodb.MongoClient;
 import com.mongodb.MongoException;
 
-/* Apparently those are unneded
-import java.lang.System;
-import java.lang.NullPointerException;
-import java.lang.NumberFormatException;
-*/
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
 
 /**
  * Manages all database related operations between the server logic and MongoDB.
@@ -28,6 +26,7 @@ public class Database extends Thread {
 
     private DBCollection vehicleTrackerCollection;
     private DBCollection vegetarianMealCollection;
+    private DBCollection userCollection;
     private DBCollection userCredentialsCollection;
 
     private boolean running;
@@ -91,6 +90,7 @@ public class Database extends Thread {
             mongodb = this.mongoClient.getDB(this.getDbName());
             vehicleTrackerCollection = mongodb.getCollection("vehicleTrackerCollection");
             vegetarianMealCollection = mongodb.getCollection("vegetarianMealCollection");
+            userCollection = mongodb.getCollection("userCollection");
             userCredentialsCollection = mongodb.getCollection("userCredentialsCollection");
             running = true;
         } catch (MongoException e) {
@@ -123,6 +123,9 @@ public class Database extends Thread {
         }
         if (entry instanceof VehicleEntry) {
             this.vehicleTrackerCollection.insert(entry.toDbObject());
+        }
+        if (entry instanceof UserEntry) {
+            this.userCollection.insert(entry.toDbObject());
         }
         /*
         if (entry instanceof UserCredentialsEntry) {

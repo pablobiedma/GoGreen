@@ -82,6 +82,7 @@ public class DatabaseTest {
 //		//TODO Drop the test DB
 //	}
 
+	/*
 	@Test
 	public void testSaveMeal() {
 		Database.instance.setDbName("test");

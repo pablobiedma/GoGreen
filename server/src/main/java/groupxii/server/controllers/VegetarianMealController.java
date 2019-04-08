@@ -2,6 +2,7 @@ package groupxii.server.controllers;
 
 import groupxii.database.MealEntry;
 import groupxii.vegetarianmeal.Calculations;
+import groupxii.vegetarianmeal.EatenMealList;
 import groupxii.vegetarianmeal.GetMealData;
 import groupxii.vegetarianmeal.Meal;
 import groupxii.vegetarianmeal.MealNameList;
@@ -80,7 +81,7 @@ public class VegetarianMealController {
         eatenMealListClass.readDatabase();
         String jsonReturn = "";
         eatenMealList = eatenMealListClass.getEatenMealList();
-        for (int i = 0; i < eatenMealList.size(); i++ ){
+        for (int i = 0; i < eatenMealList.size(); i++ ) {
             jsonReturn += eatenMealList.get(i) + " - ";
         }
         return jsonReturn;

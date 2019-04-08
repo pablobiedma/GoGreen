@@ -1,7 +1,5 @@
 package client.groupxii.controllers;
 
-import client.groupxii.Main;
-import client.groupxii.vegetarianmeal.EatenMealList;
 import client.groupxii.vegetarianmeal.SafeMeal;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -20,8 +18,6 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.Scanner;
-
-
 
 public class VegetarianMealController implements Initializable {
 
@@ -46,14 +42,7 @@ public class VegetarianMealController implements Initializable {
     private String foodNameListStr = "";
     private String eatenMealListStr = "";
     private SafeMeal safeMeal = new SafeMeal();
-    private List<String> listViewItems = new ArrayList<String>();
-    private EatenMealList eatenMealList = new EatenMealList();
-    private ObservableList<String> listViewObservable;
-    private Main main = new Main();
-
-    public void setListViewItems(List<String> listViewItems) {
-        this.listViewItems = listViewItems;
-    }
+    private List<String> eatenMealListViewItems = new ArrayList<String>();
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
