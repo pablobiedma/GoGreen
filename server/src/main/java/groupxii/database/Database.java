@@ -36,7 +36,6 @@ public class Database extends Thread {
     private DB mongodb;
 
     private DBCollection vehicleTrackerCollection;
-    private DBCollection vegetarianMealCollection;
     private DBCollection mealEntryListCollection;
     private DBCollection userCollection;
 
@@ -62,40 +61,10 @@ public class Database extends Thread {
             dbPort = 27017;
         }
         dbName = "GoGreen";
-        running = false;
-        active = false;
-    }
-
-    public boolean isRunning() {
-        return this.running;
-    }
-
-    public boolean isActive() {
-        return active;
-    }
-
-    public void setDbAddr(String dbAddr) {
-        this.dbAddr = dbAddr;
-    }
-
-    public void setDbPort(int dbPort) {
-        this.dbPort = dbPort;
     }
 
     public void setDbName(String dbName) {
         this.dbName = dbName;
-    }
-
-    public String getDbAddr() {
-        return this.dbAddr;
-    }
-
-    public int getDbPort() {
-        return this.dbPort;
-    }
-
-    public String getDbName() {
-        return this.dbName;
     }
 
     /**
@@ -103,11 +72,12 @@ public class Database extends Thread {
      */
     public void startDb() throws IOException {
         try {
-            mongoClient = new MongoClient(this.getDbAddr(), this.getDbPort());
-            mongodb = this.mongoClient.getDB(this.getDbName());
+            mongoClient = new MongoClient(this.dbAddr, this.dbPort);
+            mongodb = this.mongoClient.getDB(this.dbName);
 
             vehicleTrackerCollection = mongodb.getCollection("vehicleTrackerCollection");
-            vegetarianMealCollection = mongodb.getCollection("vegetarianMealCollection");
+	    // no longer needed
+            //vegetarianMealCollection = mongodb.getCollection("vegetarianMealCollection");
             mealEntryListCollection = mongodb.getCollection("mealEntryListCollection");
             userCollection = mongodb.getCollection("userCollection");
 
@@ -131,12 +101,9 @@ public class Database extends Thread {
                 mealEntryListCollection.insert(mealListEntry.toDbObject());
                 mealListPublic.addFoodName(food);
             }
-
-            running = true;
         } catch (MongoException e) {
             // I don't think this state is reachable.
             // -L
-            running = false;
         }
     }
 
@@ -181,17 +148,11 @@ public class Database extends Thread {
      * Determine in which collection to put an entry.
      */
     public void save(Entry entry) {
-        this.active = true;
-
-        if (entry instanceof MealEntry) {
-            this.vegetarianMealCollection.insert(entry.toDbObject());
-        } else if (entry instanceof VehicleEntry) {
+        if (entry instanceof VehicleEntry) {
             this.vehicleTrackerCollection.insert(entry.toDbObject());
         } else if (entry instanceof UserEntry) {
             this.userCollection.insert(entry.toDbObject());
         }
-
-        this.active = false;
     }
 
     /**
@@ -206,14 +167,6 @@ public class Database extends Thread {
      */
     public DBObject findVehicleEntry(VehicleEntry entry) {
         DBCursor cursor = vehicleTrackerCollection.find(entry.toDbObject());
-        return cursor.one();
-    }
-
-    /**
-     * Given a meal entry, find it in the collection.
-     */
-    public DBObject findMealEntry(MealEntry entry) {
-        DBCursor cursor = vegetarianMealCollection.find(entry.toDbObject());
         return cursor.one();
     }
 
