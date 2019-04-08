@@ -79,7 +79,7 @@ public class DatabaseTest {
 	public void testSave() throws IOException {
 		Database.instance.setDbName("test");
 		Database.instance.startDb();
-		VehicleEntry entry = new VehicleEntry(1337, "car");
+		VehicleEntry entry = new VehicleEntry("bike", "car", 4,8);
 		Database.instance.save(entry);
 		assertEquals(entry.toDbObject(), Database.instance.findVehicleEntry(entry));
 		//TODO Drop the test DB
