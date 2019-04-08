@@ -11,19 +11,23 @@ import com.mongodb.MongoClient;
 import com.mongodb.MongoException;
 import org.bson.BSONObject;
 
+import java.lang.InterruptedException;
 import java.io.IOException;
 import java.util.Iterator;
 import java.util.List;
-
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.Queue;
 
 /**
  * Manages all database related operations between the server logic and MongoDB.
  */
 public class Database extends Thread {
     public static final Database instance = new Database();
+    private Queue<Entry> queue;
+    private SaveNonBlocking worker;
 
     private String dbAddr;
     private int dbPort;
@@ -42,6 +46,10 @@ public class Database extends Thread {
     private boolean active;
 
     Database() {
+        worker = new SaveNonBlocking();
+	worker.start();
+        queue = new LinkedList<>();
+
         dbAddr = System.getenv("DB_ADDRESS");
         if (dbAddr == null) {
             dbAddr = "localhost";
@@ -132,15 +140,40 @@ public class Database extends Thread {
         }
     }
 
-    private class SaveNonBlocking extends Thread {
-        private Entry entry;
+    public void addEntry(Entry entry) {
+        queue.add(entry);
+    }
 
-        SaveNonBlocking(Entry entry) {
-            this.entry = entry;
+    private class SaveNonBlocking extends Thread {
+	private boolean busy;
+
+        SaveNonBlocking() {
+		this.busy = false;
         }
 
+	public boolean isBusy() {
+		return this.busy;
+	}
+
+	private void processEntries() {
+            while (true) {
+                while (!queue.isEmpty()) {
+                    this.busy = true;
+                    Database.instance.save(queue.remove());
+                }
+		while (queue.isEmpty()) {
+	            this.busy = false;
+		    try {
+                        Thread.sleep(1000);
+		    } catch (InterruptedException e) {
+			    //dunno
+		    }
+		}
+	    }
+	}
+
         public void run() {
-            Database.instance.save(entry);
+            processEntries();
         }
     }
 
@@ -165,16 +198,13 @@ public class Database extends Thread {
      * Call save(Entry) on a new thread.
      */
     public void saveNonBlocking(Entry entry) {
-        this.active = true;
-        SaveNonBlocking worker = new SaveNonBlocking(entry);
-        worker.start();
+        addEntry(entry);
     }
 
     /**
      * Given a vehicle entry, find it in the collection.
      */
     public DBObject findVehicleEntry(VehicleEntry entry) {
-        while (this.isActive()) {}
         DBCursor cursor = vehicleTrackerCollection.find(entry.toDbObject());
         return cursor.one();
     }
@@ -183,7 +213,6 @@ public class Database extends Thread {
      * Given a meal entry, find it in the collection.
      */
     public DBObject findMealEntry(MealEntry entry) {
-        while (this.isActive()) {}
         DBCursor cursor = vegetarianMealCollection.find(entry.toDbObject());
         return cursor.one();
     }
