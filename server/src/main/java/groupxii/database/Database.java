@@ -32,10 +32,12 @@ public class Database extends Thread {
     private DB mongodb;
 
     private DBCollection vehicleTrackerCollection;
+    private DBCollection vehicleEntryListCollection;
     private DBCollection vegetarianMealCollection;
     private DBCollection mealEntryListCollection;
     private DBCollection userCollection;
 
+    private VehicleListPublic vehicleListPublic;
     private MealListPublic mealListPublic;
 
     private boolean running;
@@ -107,7 +109,7 @@ public class Database extends Thread {
             mealListPublic = new MealListPublic();
             ObjectMapper objectMapper = new ObjectMapper();
             JsonNode rootNode = objectMapper.readTree(
-                                    getClass().getClassLoader().getResource("mealList.json"));
+                    getClass().getClassLoader().getResource("mealList.json"));
             Iterator<JsonNode> elements;
             for (elements = rootNode.elements(); elements.hasNext(); elements.next()) {
                 JsonNode node = elements.next();
@@ -116,12 +118,41 @@ public class Database extends Thread {
                 double calPerServing = node.get("calories_per_serving").asDouble();
                 double sizeServing = node.get("serving_size").asDouble();
                 MealListEntry mealListEntry = new MealListEntry(
-                                                      food,
-                                                      co2PerServing,
-                                                      calPerServing,
-                                                      sizeServing);
+                        food,
+                        co2PerServing,
+                        calPerServing,
+                        sizeServing);
                 mealEntryListCollection.insert(mealListEntry.toDbObject());
                 mealListPublic.addFoodName(food);
+            }
+
+        } catch (MongoException e) {
+            running = false;
+        }
+        try {
+            mongoClient = new MongoClient(this.getDbAddr(), this.getDbPort());
+            mongodb = this.mongoClient.getDB(this.getDbName());
+
+            vehicleTrackerCollection = mongodb.getCollection("vehicleTrackerCollection");
+            vegetarianMealCollection = mongodb.getCollection("vegetarianMealCollection");
+            vehicleEntryListCollection = mongodb.getCollection("vehicleEntryListCollection");
+            userCollection = mongodb.getCollection("userCollection");
+
+            vehicleEntryListCollection.drop();
+            vehicleListPublic = new VehicleListPublic();
+            ObjectMapper objectMapper2 = new ObjectMapper();
+            JsonNode rootNode2 = objectMapper2.readTree(
+                    getClass().getClassLoader().getResource("transportationList.json"));
+            Iterator<JsonNode> elements2 = rootNode2.elements();
+            while (elements2.hasNext()) {
+                JsonNode node = elements2.next();
+                String panel = node.get("vehiclename").asText();
+                double co2 = node.get("grams_co2_by_vehicle_per_km").asDouble();
+                String fuel = node.get("fuel").asText();
+                int avgConsumption = node.get("average_consumption_liter/100km").asInt();
+                VehicleListEntry vehicleListEntry = new VehicleListEntry(panel,co2,fuel,avgConsumption);
+                vehicleEntryListCollection.insert(vehicleListEntry.toDbObject());
+                vehicleListPublic.addVehicleName(panel);
             }
             running = true;
         } catch (MongoException e) {
@@ -199,10 +230,26 @@ public class Database extends Thread {
     }
 
     /**
+     * Given a vehicle name, return the VehicleListEntry.
+     */
+    public VehicleListEntry findVehicleListEntry(String name) {
+        BasicDBObject query = new BasicDBObject("vehicletype", name);
+        DBCursor cursor = mealEntryListCollection.find(query);
+        return new VehicleListEntry((BSONObject)cursor.one());
+    }
+
+    /**
      * Return the food names from the meal list.
      */
     public List<String> getMealListFoodNames() {
         return this.mealListPublic.getMealList();
+    }
+
+    /**
+     * Return the vehicle names from the vehicle list.
+     */
+    public List<String> getVehicleListVehicleNames() {
+        return this.vehicleListPublic.getVehicleList();
     }
 
     /** Finds user entry.
@@ -270,6 +317,16 @@ public class Database extends Thread {
     public void addEatenMeal(String userString, MealEntry mealEntry) {
         BasicDBObject newDocument = new BasicDBObject();
         newDocument.append("$addToSet", new BasicDBObject().append("eatenMeals", mealEntry.toDbObject()));
+        BasicDBObject searchQuery = new BasicDBObject().append("username", userString);
+        userCollection.update(searchQuery, newDocument);
+    }
+
+    /**
+     * Add a used vehicle to the collection.
+     */
+    public void addUsedVehicle(String userString, VehicleEntry vehicleEntry) {
+        BasicDBObject newDocument = new BasicDBObject();
+        newDocument.append("$addToSet", new BasicDBObject().append("usedPanels", vehicleEntry.toDbObject()));
         BasicDBObject searchQuery = new BasicDBObject().append("username", userString);
         userCollection.update(searchQuery, newDocument);
     }
