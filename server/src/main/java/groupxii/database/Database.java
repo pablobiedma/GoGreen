@@ -103,19 +103,13 @@ public class Database extends Thread {
             vehicleTrackerCollection = mongodb.getCollection("vehicleTrackerCollection");
             vegetarianMealCollection = mongodb.getCollection("vegetarianMealCollection");
             mealEntryListCollection = mongodb.getCollection("mealEntryListCollection");
-            vehicleEntryListCollection = mongodb.getCollection("vehicleEntryListCollection");
             userCollection = mongodb.getCollection("userCollection");
 
-            vehicleEntryListCollection.drop();
             mealEntryListCollection.drop();
-            vehicleListPublic = new VehicleListPublic();
             mealListPublic = new MealListPublic();
             ObjectMapper objectMapper = new ObjectMapper();
             JsonNode rootNode = objectMapper.readTree(
-                                    getClass().getClassLoader().getResource("mealList.json"));
-            ObjectMapper objectMapper2 = new ObjectMapper();
-            JsonNode rootNode2 = objectMapper.readTree(
-                    getClass().getClassLoader().getResource("transportationList.json"));
+                    getClass().getClassLoader().getResource("mealList.json"));
             Iterator<JsonNode> elements;
             for (elements = rootNode.elements(); elements.hasNext(); elements.next()) {
                 JsonNode node = elements.next();
@@ -124,13 +118,31 @@ public class Database extends Thread {
                 double calPerServing = node.get("calories_per_serving").asDouble();
                 double sizeServing = node.get("serving_size").asDouble();
                 MealListEntry mealListEntry = new MealListEntry(
-                                                      food,
-                                                      co2PerServing,
-                                                      calPerServing,
-                                                      sizeServing);
+                        food,
+                        co2PerServing,
+                        calPerServing,
+                        sizeServing);
                 mealEntryListCollection.insert(mealListEntry.toDbObject());
                 mealListPublic.addFoodName(food);
             }
+
+        } catch (MongoException e) {
+            running = false;
+        }
+        try {
+            mongoClient = new MongoClient(this.getDbAddr(), this.getDbPort());
+            mongodb = this.mongoClient.getDB(this.getDbName());
+
+            vehicleTrackerCollection = mongodb.getCollection("vehicleTrackerCollection");
+            vegetarianMealCollection = mongodb.getCollection("vegetarianMealCollection");
+            vehicleEntryListCollection = mongodb.getCollection("vehicleEntryListCollection");
+            userCollection = mongodb.getCollection("userCollection");
+
+            vehicleEntryListCollection.drop();
+            vehicleListPublic = new VehicleListPublic();
+            ObjectMapper objectMapper2 = new ObjectMapper();
+            JsonNode rootNode2 = objectMapper2.readTree(
+                    getClass().getClassLoader().getResource("transportationList.json"));
             Iterator<JsonNode> elements2 = rootNode2.elements();
             while (elements2.hasNext()) {
                 JsonNode node = elements2.next();

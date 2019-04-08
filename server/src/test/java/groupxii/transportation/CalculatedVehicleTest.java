@@ -24,7 +24,7 @@ public class CalculatedVehicleTest {
         CalculatedVehicle cv = new CalculatedVehicle(
                 "Metro", "car",
                 4, 9);
-        assertEquals(184, cv.getReducedCO2());
+        assertEquals(0, cv.getReducedCO2());
     }
 
 }

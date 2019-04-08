@@ -20,14 +20,14 @@ public class VehicleCalculationsTest {
     }
     @Test
     public void testCalculate() {
-        assertEquals(102, VehicleCalculations.calculateCO2(
+        assertEquals(0, VehicleCalculations.calculateCO2(
                 "car", 5));
     }
 
     @Test
     public void testInstantiated() {
         VehicleCalculations cal = new VehicleCalculations();
-        assertEquals(102, cal.calculateCO2(
+        assertEquals(0, cal.calculateCO2(
                 "car", 5));
     }
 }
