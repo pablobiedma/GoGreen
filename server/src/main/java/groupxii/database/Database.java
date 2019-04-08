@@ -259,6 +259,14 @@ public class Database extends Thread {
         userCollection.update(searchQuery, newDocument);
     }
 
+    /* counts how many entries there are in the database and increments the number by one for the userId.
+     */
+    public int getUserCount() {
+        return (int) userCollection.count();
+    }
+
+    /* receives username and a MealEntry and adds the eaten meal to the eaten meal list of the user.
+     */
     public void addEatenMeal(String userString, MealEntry mealEntry) {
         BasicDBObject newDocument = new BasicDBObject();
         newDocument.append("$addToSet", new BasicDBObject().append("eatenMeals", mealEntry.toDbObject()));
