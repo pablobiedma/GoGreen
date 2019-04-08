@@ -32,10 +32,12 @@ public class Database extends Thread {
     private DB mongodb;
 
     private DBCollection vehicleTrackerCollection;
+    private DBCollection vehicleEntryListCollection;
     private DBCollection vegetarianMealCollection;
     private DBCollection mealEntryListCollection;
     private DBCollection userCollection;
 
+    private VehicleListPublic vehicleListPublic;
     private MealListPublic mealListPublic;
 
     private boolean running;
@@ -101,13 +103,19 @@ public class Database extends Thread {
             vehicleTrackerCollection = mongodb.getCollection("vehicleTrackerCollection");
             vegetarianMealCollection = mongodb.getCollection("vegetarianMealCollection");
             mealEntryListCollection = mongodb.getCollection("mealEntryListCollection");
+            vehicleEntryListCollection = mongodb.getCollection("vehicleEntryListCollection");
             userCollection = mongodb.getCollection("userCollection");
 
+            vehicleEntryListCollection.drop();
             mealEntryListCollection.drop();
+            vehicleListPublic = new VehicleListPublic();
             mealListPublic = new MealListPublic();
             ObjectMapper objectMapper = new ObjectMapper();
             JsonNode rootNode = objectMapper.readTree(
                                     getClass().getClassLoader().getResource("mealList.json"));
+            ObjectMapper objectMapper2 = new ObjectMapper();
+            JsonNode rootNode2 = objectMapper.readTree(
+                    getClass().getClassLoader().getResource("transportationList.json"));
             Iterator<JsonNode> elements;
             for (elements = rootNode.elements(); elements.hasNext(); elements.next()) {
                 JsonNode node = elements.next();
@@ -123,6 +131,11 @@ public class Database extends Thread {
                 mealEntryListCollection.insert(mealListEntry.toDbObject());
                 mealListPublic.addFoodName(food);
             }
+            Iterator<JsonNode> elements2 = rootNode2.elements();
+            while (elements2.hasNext()) {
+
+            }
+
             running = true;
         } catch (MongoException e) {
             // I don't think this state is reachable.
