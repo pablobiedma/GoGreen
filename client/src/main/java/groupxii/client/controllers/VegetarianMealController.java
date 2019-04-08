@@ -3,10 +3,12 @@ package groupxii.client.controllers;
 import groupxii.client.connector.VegetarianMealConnector;
 import groupxii.client.vegetarianmeal.EatenMealList;
 import groupxii.client.vegetarianmeal.MealList;
+import groupxii.client.vegetarianmeal.ReducedCo2;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.ListView;
 import javafx.scene.control.Slider;
@@ -36,6 +38,9 @@ public class VegetarianMealController implements Initializable {
 
     @FXML
     private Slider sliderBadFood = new Slider();
+
+    @FXML
+    private Text reducedCo2Text = new Text();
 
     @FXML
     private ListView<String> eatenMealsListView = new ListView();
