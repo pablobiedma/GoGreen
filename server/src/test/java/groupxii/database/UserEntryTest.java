@@ -50,7 +50,7 @@ public class UserEntryTest {
     }
 
     @Test
-    public void getEateanMealsTest() {
+    public void getEatenMealsTest() {
 	    assertEquals(eatenMeals, usr.getEatenMeals());
     }
 }

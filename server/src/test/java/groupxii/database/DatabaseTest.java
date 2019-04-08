@@ -1,5 +1,6 @@
 package groupxii.database;
 
+import org.junit.Before;
 import org.junit.Test;
 
 import java.util.ArrayList;
@@ -10,6 +11,17 @@ import static org.junit.Assert.*;
 import java.io.IOException;
 
 public class DatabaseTest {
+	List<Integer> friendsId;
+	List<MealEntry> eatenMeals;
+	UserEntry usr;
+
+	@Before
+	public void createusr() {
+		friendsId = new ArrayList<>();
+		eatenMeals = new ArrayList<>();
+		usr = new UserEntry(1,"Ivan","pass",100,1,9,friendsId, eatenMeals);
+	}
+
 	@Test
 	public void testDbAddr() {
 		Database db = new Database();
@@ -84,123 +96,85 @@ public class DatabaseTest {
 //		//TODO Drop the test DB
 //	}
 
-	/*
+
 	@Test
-	public void testSaveMeal() {
+	public void testSaveMeal() throws IOException{
 		Database.instance.setDbName("test");
 		Database.instance.startDb();
-		MealEntry entry = new MealEntry(1, "apple", "pizza", 100, 100, 200);
+		MealEntry entry = new MealEntry("apple",10 , "pizza", 100);
 		Database.instance.save(entry);
 		assertEquals(entry.toDbObject(), Database.instance.findMealEntry(entry));
 		//TODO Drop the test DB
 	}
 
+//	@Test
+//	public void testSaveMealNonBlocking() throws IOException{
+//		Database.instance.setDbName("test");
+//		Database.instance.startDb();
+//		MealEntry entry = new MealEntry( "apple",10, "pizza", 100 );
+//		Database.instance.saveNonBlocking(entry);
+//
+//		assertEquals(entry.toDbObject(), Database.instance.findMealEntry(entry));
+//		//TODO Drop the test DB
+//	}
+
 	@Test
-	public void testSaveMealNonBlocking() {
+	public void testSaveUser() throws IOException{
 		Database.instance.setDbName("test");
 		Database.instance.startDb();
-		MealEntry entry = new MealEntry(1, "apple", "pizza", 100, 100, 200);
-		Database.instance.saveNonBlocking(entry);
-
-		assertEquals(entry.toDbObject(), Database.instance.findMealEntry(entry));
+		Database.instance.save(usr);
+		assertEquals(usr.toDbObject(), Database.instance.findUserEntry(usr));
 		//TODO Drop the test DB
 	}
-	*/
 
-	/*
 	@Test
-	public void testSaveUser() {
+	public void testSaveUserNonBlocking() throws IOException{
 		Database.instance.setDbName("test");
 		Database.instance.startDb();
-<<<<<<< HEAD
-		MealEntry entry = new MealEntry("GRAPEFRUIT", 100, "GRAPEFRUIT", 100);
-=======
-		List<Integer> list = new ArrayList<>();
-<<<<<<< HEAD
-		UserEntry entry = new UserEntry(1, "Ivan","pass",100,1,6,list);
-=======
-		UserEntry entry = new UserEntry(1, "Ivan",100,1,6,list);
->>>>>>> master
->>>>>>> origin
-		Database.instance.save(entry);
-		assertEquals(entry.toDbObject(), Database.instance.findUserEntry(entry));
+		Database.instance.saveNonBlocking(usr);
+		assertEquals(usr.toDbObject(), Database.instance.findUserEntry(usr));
 		//TODO Drop the test DB
 	}
-	*/
-
-	/*
 	@Test
-	public void testSaveUserNonBlocking() {
+	public void testUserById() throws IOException{
 		Database.instance.setDbName("test");
 		Database.instance.startDb();
-		List<Integer> list = new ArrayList<>();
-		UserEntry entry = new UserEntry(1, "Ivan",100,1,6,list);
-		Database.instance.saveNonBlocking(entry);
-
-		assertEquals(entry.toDbObject(), Database.instance.findUserEntry(entry));
-		//TODO Drop the test DB
-	}
-	*/
-	/*
-	@Test
-	public void testUserById() {
-		Database.instance.setDbName("test");
-		Database.instance.startDb();
-		List<Integer> list = new ArrayList<>();
-		UserEntry entry = new UserEntry(1, "Ivan","pass",100,1,6,list);
-		Database.instance.saveNonBlocking(entry);
-		assertNotEquals(entry.toDbObject(),Database.instance.findUserById(2));
+		Database.instance.saveNonBlocking(usr);
+		assertNotEquals(usr.toDbObject(),Database.instance.findUserById(2));
 	}
 
 	@Test
-	public void testSortUsersByPoints() {
+	public void testFindByUserName() throws IOException{
 		Database.instance.setDbName("test");
 		Database.instance.startDb();
-		List<Integer> list = new ArrayList<>();
-		UserEntry entry = new UserEntry(1, "Ivan","pass",100,1,6,list);
-		Database.instance.saveNonBlocking(entry);
-		assertNotEquals(entry.toDbObject(),Database.instance.sortUsersByReducedCo2());
+		Database.instance.saveNonBlocking(usr);
+		assertNotEquals(usr.toDbObject(),Database.instance.findUserByName("Ivan"));
+	}
+
+
+	@Test
+	public void testSortUsersByPoints() throws IOException{
+		Database.instance.setDbName("test");
+		Database.instance.startDb();
+		Database.instance.saveNonBlocking(usr);
+		assertNotEquals(usr.toDbObject(),Database.instance.sortUsersByReducedCo2());
 	}
 
 	@Test
-	public void testAddFriend() {
+	public void testAddFriend() throws IOException{
 		Database.instance.setDbName("test");
 		Database.instance.startDb();
-		List<Integer> list = new ArrayList<>();
-		UserEntry entry = new UserEntry(1, "Ivan","pass",100,1,6,list);
-		Database.instance.saveNonBlocking(entry);
+		Database.instance.saveNonBlocking(usr);
 		Database.instance.addFriend("Ivan",2);
-		assertEquals(entry.getFriendsId(),list);
+		assertEquals(usr.getFriendsId(),friendsId);
 	}
-	*/
+
 //	@Test
-//	public void testUserById() throws IOException {
+//	public void testIncrementReducedCO2() throws IOException{
 //		Database.instance.setDbName("test");
 //		Database.instance.startDb();
-//		List<Integer> list = new ArrayList<>();
-//		UserEntry entry = new UserEntry(1, "Ivan",100,1,6,list);
-//		Database.instance.saveNonBlocking(entry);
-//		assertNotEquals(entry.toDbObject(),Database.instance.findUserById(2));
-//	}
-//
-//	@Test
-//	public void testSortUsersByPoints() throws IOException {
-//		Database.instance.setDbName("test");
-//		Database.instance.startDb();
-//		List<Integer> list = new ArrayList<>();
-//		UserEntry entry = new UserEntry(1, "Ivan",100,1,6,list);
-//		Database.instance.saveNonBlocking(entry);
-//		assertNotEquals(entry.toDbObject(),Database.instance.sortUsersByReducedCo2());
-//	}
-//
-//	@Test
-//	public void testAddFriend() throws IOException {
-//		Database.instance.setDbName("test");
-//		Database.instance.startDb();
-//		List<Integer> list = new ArrayList<>();
-//		UserEntry entry = new UserEntry(1, "Ivan",100,1,6,list);
-//		Database.instance.saveNonBlocking(entry);
-//		Database.instance.addFriend("Ivan",2);
-//		assertEquals(entry.getFriendsId(),list);
+//		Database.instance.saveNonBlocking(usr);
+//		Database.instance.incrementReducedCo2(1,2);
+//		assertEquals(11,usr.getReducedCo2());
 //	}
 }
