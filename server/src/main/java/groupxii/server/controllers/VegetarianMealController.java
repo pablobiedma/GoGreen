@@ -79,7 +79,7 @@ public class VegetarianMealController {
         eatenMealListClass.readDatabase();
         String jsonReturn = "";
         eatenMealList = eatenMealListClass.getEatenMealList();
-        for (int i = 0; i < eatenMealList.size(); i++ ){
+        for (int i = 0; i < eatenMealList.size(); i++ ) {
             jsonReturn += eatenMealList.get(i) + " - ";
         }
         return jsonReturn;

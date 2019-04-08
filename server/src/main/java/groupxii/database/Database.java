@@ -15,11 +15,9 @@ import java.io.IOException;
 import java.util.Iterator;
 import java.util.List;
 
-/* Apparently those are unneded
-import java.lang.System;
-import java.lang.NullPointerException;
-import java.lang.NumberFormatException;
-*/
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
 
 /**
  * Manages all database related operations between the server logic and MongoDB.
@@ -36,7 +34,7 @@ public class Database extends Thread {
     private DBCollection vehicleTrackerCollection;
     private DBCollection vegetarianMealCollection;
     private DBCollection mealEntryListCollection;
-    private DBCollection userCredentialsCollection;
+    private DBCollection userCollection;
 
     private MealListPublic mealListPublic;
 
@@ -103,7 +101,7 @@ public class Database extends Thread {
             vehicleTrackerCollection = mongodb.getCollection("vehicleTrackerCollection");
             vegetarianMealCollection = mongodb.getCollection("vegetarianMealCollection");
             mealEntryListCollection = mongodb.getCollection("mealEntryListCollection");
-            userCredentialsCollection = mongodb.getCollection("userCredentialsCollection");
+            userCollection = mongodb.getCollection("userCollection");
 
             mealEntryListCollection.drop();
             mealListPublic = new MealListPublic();
@@ -157,11 +155,9 @@ public class Database extends Thread {
         if (entry instanceof VehicleEntry) {
             this.vehicleTrackerCollection.insert(entry.toDbObject());
         }
-        /*
-        if (entry instanceof UserCredentialsEntry) {
-            this.userCredentialsCollection.insert(entry.toDbObject());
+        if (entry instanceof UserEntry) {
+            this.userCollection.insert(entry.toDbObject());
         }
-        */
         this.active = false;
     }
 
@@ -209,4 +205,50 @@ public class Database extends Thread {
         return this.mealListPublic.getMealList();
     }
 
+    /** Finds user entry.
+     */
+    public DBObject findUserEntry(UserEntry entry) {
+        while (this.isActive()) {}
+        DBCursor cursor = userCollection.find(entry.toDbObject());
+        return cursor.one();
+    }
+
+    /** Finds an UserEntry by id.
+     */
+    public DBObject findUserById(int id) {
+        BasicDBObject query = new BasicDBObject();
+        query.put("userId", id);
+        DBObject dbObject = userCollection.findOne(query);
+        return dbObject;
+    }
+
+    /** returns all users sorted by points.
+     */
+    public List<DBObject> sortUsersByReducedCo2() {
+        List<DBObject> list = new ArrayList<>();
+        Iterator<DBObject> cursor = userCollection.find().sort(new BasicDBObject("reducedCo2",-1));
+        while (cursor.hasNext()) {
+            DBObject obj = cursor.next();
+            list.add(obj);
+        }
+        return list;
+    }
+
+    /** receives two id's and adds the first one as a friend to the first one.
+     */
+    public void addFriend(String userString,int friendId) {
+        BasicDBObject newDocument = new BasicDBObject();
+        newDocument.append("$addToSet", new BasicDBObject().append("friendsId", friendId));
+        BasicDBObject searchQuery = new BasicDBObject().append("username", userString);
+        userCollection.update(searchQuery, newDocument);
+    }
+
+    /** Increments the reducedCo2.
+     */
+    public void incrementReducedCo2(int id,int amount) {
+        BasicDBObject newDocument = new BasicDBObject();
+        newDocument.append("$inc", new BasicDBObject().append("reducedCo2", amount));
+        BasicDBObject searchQuery = new BasicDBObject().append("userId", id);
+        userCollection.update(searchQuery, newDocument);
+    }
 }

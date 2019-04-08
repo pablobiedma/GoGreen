@@ -1,5 +1,6 @@
 package client.groupxii.controllers;
 
+import client.groupxii.Main;
 import client.groupxii.vegetarianmeal.SafeMeal;
 
 import groupxii.database.MealListPublic;
@@ -21,8 +22,6 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.Scanner;
-
-
 
 public class VegetarianMealController implements Initializable {
 
@@ -99,5 +98,11 @@ public class VegetarianMealController implements Initializable {
         int badServingSize = (int) slider1.getValue();
         safeMeal.safeMeal(goodFoodName, badFoodName, goodServingSize, badServingSize);
         updateListView();
+    }
+
+    @FXML
+    public void btnBack(MouseEvent event) throws IOException {
+        Main main = new Main();
+        main.changeScene("Menu.fxml", event);
     }
 }
