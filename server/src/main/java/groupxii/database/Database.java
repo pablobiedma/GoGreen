@@ -1,5 +1,7 @@
 package groupxii.database;
 
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.mongodb.BasicDBObject;
 import com.mongodb.DB;
 import com.mongodb.DBCollection;
@@ -7,6 +9,11 @@ import com.mongodb.DBCursor;
 import com.mongodb.DBObject;
 import com.mongodb.MongoClient;
 import com.mongodb.MongoException;
+import org.bson.BSONObject;
+
+import java.io.IOException;
+import java.util.Iterator;
+import java.util.List;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -26,8 +33,10 @@ public class Database extends Thread {
 
     private DBCollection vehicleTrackerCollection;
     private DBCollection vegetarianMealCollection;
+    private DBCollection mealEntryListCollection;
     private DBCollection userCollection;
-    private DBCollection userCredentialsCollection;
+
+    private MealListPublic mealListPublic;
 
     private boolean running;
     private boolean active;
@@ -84,14 +93,36 @@ public class Database extends Thread {
     /**
      * Starts instance of Database.
      */
-    public void startDb() {
+    public void startDb() throws IOException {
         try {
             mongoClient = new MongoClient(this.getDbAddr(), this.getDbPort());
             mongodb = this.mongoClient.getDB(this.getDbName());
+
             vehicleTrackerCollection = mongodb.getCollection("vehicleTrackerCollection");
             vegetarianMealCollection = mongodb.getCollection("vegetarianMealCollection");
+            mealEntryListCollection = mongodb.getCollection("mealEntryListCollection");
             userCollection = mongodb.getCollection("userCollection");
-            userCredentialsCollection = mongodb.getCollection("userCredentialsCollection");
+
+            mealEntryListCollection.drop();
+            mealListPublic = new MealListPublic();
+            ObjectMapper objectMapper = new ObjectMapper();
+            JsonNode rootNode = objectMapper.readTree(
+                                    getClass().getClassLoader().getResource("mealList.json"));
+            Iterator<JsonNode> elements;
+            for (elements = rootNode.elements(); elements.hasNext(); elements.next()) {
+                JsonNode node = elements.next();
+                String food  = node.get("food").asText();
+                double co2PerServing = node.get("grams_co2e_per_serving").asDouble();
+                double calPerServing = node.get("calories_per_serving").asDouble();
+                double sizeServing = node.get("serving_size").asDouble();
+                MealListEntry mealListEntry = new MealListEntry(
+                                                      food,
+                                                      co2PerServing,
+                                                      calPerServing,
+                                                      sizeServing);
+                mealEntryListCollection.insert(mealListEntry.toDbObject());
+                mealListPublic.addFoodName(food);
+            }
             running = true;
         } catch (MongoException e) {
             // I don't think this state is reachable.
@@ -127,11 +158,6 @@ public class Database extends Thread {
         if (entry instanceof UserEntry) {
             this.userCollection.insert(entry.toDbObject());
         }
-        /*
-        if (entry instanceof UserCredentialsEntry) {
-            this.userCredentialsCollection.insert(entry.toDbObject());
-        }
-        */
         this.active = false;
     }
 
@@ -163,6 +189,22 @@ public class Database extends Thread {
         return cursor.one();
     }
 
+    /**
+     * Given a food name, return the MealListEntry.
+     */
+    public MealListEntry findMealListEntry(String name) {
+        BasicDBObject query = new BasicDBObject("foodName", name);
+        DBCursor cursor = mealEntryListCollection.find(query);
+        return new MealListEntry((BSONObject)cursor.one());
+    }
+
+    /**
+     * Return the food names from the meal list.
+     */
+    public List<String> getMealListFoodNames() {
+        return this.mealListPublic.getMealList();
+    }
+
     /** Finds user entry.
      */
     public DBObject findUserEntry(UserEntry entry) {
@@ -176,6 +218,13 @@ public class Database extends Thread {
     public DBObject findUserById(int id) {
         BasicDBObject query = new BasicDBObject();
         query.put("userId", id);
+        DBObject dbObject = userCollection.findOne(query);
+        return dbObject;
+    }
+
+    public DBObject findUserByName(String username) {
+        BasicDBObject query = new BasicDBObject();
+        query.put("username", username);
         DBObject dbObject = userCollection.findOne(query);
         return dbObject;
     }
@@ -207,6 +256,13 @@ public class Database extends Thread {
         BasicDBObject newDocument = new BasicDBObject();
         newDocument.append("$inc", new BasicDBObject().append("reducedCo2", amount));
         BasicDBObject searchQuery = new BasicDBObject().append("userId", id);
+        userCollection.update(searchQuery, newDocument);
+    }
+
+    public void addEatenMeal(String userString, MealEntry mealEntry) {
+        BasicDBObject newDocument = new BasicDBObject();
+        newDocument.append("$addToSet", new BasicDBObject().append("eatenMeals", mealEntry.toDbObject()));
+        BasicDBObject searchQuery = new BasicDBObject().append("username", userString);
         userCollection.update(searchQuery, newDocument);
     }
 }

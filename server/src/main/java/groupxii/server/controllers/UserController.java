@@ -2,6 +2,7 @@ package groupxii.server.controllers;
 
 import com.mongodb.DBObject;
 import groupxii.database.Database;
+import groupxii.database.MealEntry;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -70,6 +71,7 @@ public class UserController {
         String user = principal.getName();
         Database.instance.addFriend(user,friendsId);
     }
+
 
     //TODO make internal for features
     /** Increments reducedCO2 with some reducedCo2 dependant on the meal.
