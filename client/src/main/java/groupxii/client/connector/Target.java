@@ -10,7 +10,7 @@ public class Target {
 	//TODO read those from file
 
 	public static String getHost() {
-		String host = "http://rilia.xyz:8080";
+		String host = "http://localhost:8080";
 		return host;
 	}
 }

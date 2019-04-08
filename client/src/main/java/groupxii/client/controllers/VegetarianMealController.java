@@ -1,5 +1,6 @@
 package groupxii.client.controllers;
 
+import groupxii.client.vegetarianmeal.EatenMealList;
 import groupxii.client.vegetarianmeal.MealList;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -45,6 +46,7 @@ public class VegetarianMealController implements Initializable {
     //private String eatenMealListStr = "";
  //   private SafeMeal safeMeal = new SafeMeal();
   //  private List<String> eatenMealListViewItems = new ArrayList<String>();
+    EatenMealList eatenMealList = new EatenMealList();
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -67,6 +69,7 @@ public class VegetarianMealController implements Initializable {
         ObservableList<String> listObservable = FXCollections.observableArrayList(mealList.getMealList());
         choiceBoxGoodFood.getItems().addAll(listObservable);
         choiceBoxBadFood.getItems().addAll(listObservable);
+        updateListView();
     }
 
     /**
@@ -74,6 +77,9 @@ public class VegetarianMealController implements Initializable {
      */
     @FXML
     public void updateListView() {
+        eatenMealList.setEeatenMealList();
+        ObservableList<String> eatenMealObservableList = FXCollections.observableArrayList(eatenMealList.getEatenMealList());
+        eatenMealsListView.setItems(eatenMealObservableList);
         /*
         try {
             eatenMealListStr = new Scanner(new URL(host + "eatenMealList").openStream(),

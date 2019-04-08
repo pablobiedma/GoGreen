@@ -16,4 +16,9 @@ public class VegetarianMealConnector {
 
 		return Connector.getRequest(resource);
 	}
+
+	public static String retrieveEatenMealList() {
+		String resource = "/eatenMealList";
+		return Connector.getRequest(resource);
+	}
 }
