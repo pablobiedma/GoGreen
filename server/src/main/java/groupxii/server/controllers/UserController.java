@@ -16,7 +16,6 @@ import java.util.List;
 public class UserController {
 
 
-    //TODO user registration
     /** Receives data and creates a user entry in the user collection.
      */
     @RequestMapping(method = RequestMethod.POST, value = "/saveUserData")

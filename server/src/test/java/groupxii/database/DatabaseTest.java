@@ -110,7 +110,7 @@ public class DatabaseTest {
 		Database.instance.setDbName("test");
 		Database.instance.startDb();
 		List<Integer> list = new ArrayList<>();
-		UserEntry entry = new UserEntry(1, "Ivan",100,1,6,list);
+		UserEntry entry = new UserEntry(1, "Ivan","pass",100,1,6,list);
 		Database.instance.save(entry);
 		assertEquals(entry.toDbObject(), Database.instance.findUserEntry(entry));
 		//TODO Drop the test DB
@@ -135,7 +135,7 @@ public class DatabaseTest {
 		Database.instance.setDbName("test");
 		Database.instance.startDb();
 		List<Integer> list = new ArrayList<>();
-		UserEntry entry = new UserEntry(1, "Ivan",100,1,6,list);
+		UserEntry entry = new UserEntry(1, "Ivan","pass",100,1,6,list);
 		Database.instance.saveNonBlocking(entry);
 		assertNotEquals(entry.toDbObject(),Database.instance.findUserById(2));
 	}
@@ -145,7 +145,7 @@ public class DatabaseTest {
 		Database.instance.setDbName("test");
 		Database.instance.startDb();
 		List<Integer> list = new ArrayList<>();
-		UserEntry entry = new UserEntry(1, "Ivan",100,1,6,list);
+		UserEntry entry = new UserEntry(1, "Ivan","pass",100,1,6,list);
 		Database.instance.saveNonBlocking(entry);
 		assertNotEquals(entry.toDbObject(),Database.instance.sortUsersByReducedCo2());
 	}
@@ -155,7 +155,7 @@ public class DatabaseTest {
 		Database.instance.setDbName("test");
 		Database.instance.startDb();
 		List<Integer> list = new ArrayList<>();
-		UserEntry entry = new UserEntry(1, "Ivan",100,1,6,list);
+		UserEntry entry = new UserEntry(1, "Ivan","pass",100,1,6,list);
 		Database.instance.saveNonBlocking(entry);
 		Database.instance.addFriend("Ivan",2);
 		assertEquals(entry.getFriendsId(),list);
