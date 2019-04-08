@@ -1,12 +1,14 @@
 package groupxii.server.controllers;
 
 import groupxii.database.MealEntry;
-import groupxii.server.ServerApplication;
-import groupxii.vegetarianmeal.*;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
+import groupxii.vegetarianmeal.Calculations;
+import groupxii.vegetarianmeal.EatenMealList;
+import groupxii.vegetarianmeal.GetMealData;
+import groupxii.vegetarianmeal.Meal;
+import groupxii.vegetarianmeal.MealNameList;
+import groupxii.vegetarianmeal.SaveMeal;
 import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.context.event.EventListener;
-import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -79,7 +81,7 @@ public class VegetarianMealController {
         eatenMealListClass.readDatabase();
         String jsonReturn = "";
         eatenMealList = eatenMealListClass.getEatenMealList();
-        for (int i = 0; i < eatenMealList.size(); i++ ){
+        for (int i = 0; i < eatenMealList.size(); i++ ) {
             jsonReturn += eatenMealList.get(i) + " - ";
         }
         return jsonReturn;
