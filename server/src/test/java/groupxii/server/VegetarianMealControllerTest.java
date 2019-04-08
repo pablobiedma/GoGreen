@@ -1,29 +1,40 @@
-package groupxii.server;
+package groupxii.server.controllers;
 
 import groupxii.database.MealEntry;
-import groupxii.server.controllers.VegetarianMealController;
+import groupxii.database.Database;
+import groupxii.database.MealListPublic;
+import groupxii.vegetarianmeal.CalculatedMeal;
 import org.junit.Test;
+import org.junit.Before;
 
 import java.io.IOException;
+import java.util.List;
 
 import static org.junit.Assert.*;
 
 public class VegetarianMealControllerTest {
 
-    VegetarianMealController vegetarianMealController = new VegetarianMealController();
-
-    @Test
-    public void saveMealTest() throws IOException {
-        vegetarianMealController.getMealData();
-        MealEntry entry = vegetarianMealController.saveMealData("APPLES", 50, "HAZELNUTS", 50);
-        assertEquals(entry.getBadFoodName(), "HAZELNUTS");
-        assertEquals(entry.getGoodServingSize(), 50);
+    VegetarianMealController vmc;
+    @Before
+    public void createVMC() {
+	    try {
+		    Database.instance.startDb();
+	    } catch (IOException e) {
+		    assertTrue(false);
+	    }
+	    vmc = new VegetarianMealController();
     }
 
     @Test
-    public void getNameList() throws IOException {
-        vegetarianMealController.getMealData();
-        String nameList = vegetarianMealController.getNameList();
-        assertTrue(nameList.contains("APPLES"));
+    public void calculateMealTest() {
+	CalculatedMeal localCalculateMeal = new CalculatedMeal("GRAPEFRUIT", 100, "EGGPLANT", 120);
+	CalculatedMeal remoteCalculateMeal = vmc.calculateMeal("GRAPEFRUIT", 100, "EGGPLANT", 120);
+        assertEquals(localCalculateMeal.getReducedCO2(), remoteCalculateMeal.getReducedCO2());
+    }
+
+    @Test
+    public void getNameList() {
+        List<String> nameList = vmc.getNameList();
+        assertFalse(nameList.isEmpty());
     }
 }

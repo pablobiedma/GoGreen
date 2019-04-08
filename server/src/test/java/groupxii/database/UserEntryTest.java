@@ -1,5 +1,6 @@
 package groupxii.database;
 
+import org.junit.Before;
 import org.junit.Test;
 
 import java.util.ArrayList;
@@ -8,52 +9,48 @@ import java.util.List;
 import static org.junit.Assert.*;
 
 public class UserEntryTest {
+    List<Integer> friendsId;
+    List<MealEntry> eatenMeals;
+    UserEntry usr;
+    @Before
+    public void createusr() {
+	    friendsId = new ArrayList<>();
+	    eatenMeals = new ArrayList<>();
+            usr = new UserEntry(1,"Ivan","pass",100,1,9,friendsId, eatenMeals);
+    }
 
     @Test
     public void getUserId() {
-        List<Integer> list = new ArrayList<>();
-        UserEntry usr = new UserEntry(1,"Ivan","pass",100,1,9,list);
         assertEquals(1,usr.getUserId());
     }
 
     @Test
     public void getUsername() {
-        List<Integer> list = new ArrayList<>();
-        UserEntry usr = new UserEntry(1,"Ivan","pass",100,1,9,list);
         assertEquals("Ivan",usr.getUsername());
     }
 
     @Test
     public void getPoints() {
-        List<Integer> list = new ArrayList<>();
-        UserEntry usr = new UserEntry(1,"Ivan","pass",100,1,9,list);
         assertEquals(100,usr.getPoints());
     }
 
     @Test
     public void getBadge() {
-        List<Integer> list = new ArrayList<>();
-        UserEntry usr = new UserEntry(1,"Ivan","pass",100,1,9,list);
         assertEquals(1,usr.getBadge());
     }
 
     @Test
     public void getReducedCo2() {
-        List<Integer> list = new ArrayList<>();
-        UserEntry usr = new UserEntry(1,"Ivan","pass",100,1,9,list);
         assertEquals(9,usr.getReducedCo2());
     }
 
     @Test
     public void getFriendsId() {
-        List<Integer> list = new ArrayList<>();
-        UserEntry usr = new UserEntry(1,"Ivan","pass",100,1,9,list);
-        assertEquals(list,usr.getFriendsId());
+        assertEquals(friendsId,usr.getFriendsId());
     }
 
-    //not sure how to test that
-//    @Test
-//    public void toDbObject() {
-//
-//    }
+    @Test
+    public void getEateanMealsTest() {
+	    assertEquals(eatenMeals, usr.getEatenMeals());
+    }
 }

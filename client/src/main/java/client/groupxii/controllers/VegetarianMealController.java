@@ -2,6 +2,7 @@ package client.groupxii.controllers;
 
 import client.groupxii.Main;
 import client.groupxii.vegetarianmeal.SafeMeal;
+
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;

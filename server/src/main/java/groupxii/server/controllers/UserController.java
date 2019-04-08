@@ -24,7 +24,7 @@ public class UserController {
                                   @RequestParam(value = "password",
                                           defaultValue = "Unknown")
                                           String password)  {
-            UserEntry userEntry = new UserEntry(Database.instance.getUserCount() + 1,username,password,0,1,0,new ArrayList<>());
+            UserEntry userEntry = new UserEntry(Database.instance.getUserCount() + 1,username,password,0,1,0,new ArrayList<>(), new ArrayList<>());
             Database.instance.save(userEntry);
     }
 
@@ -61,6 +61,7 @@ public class UserController {
         String user = principal.getName();
         Database.instance.addFriend(user,friendsId);
     }
+
 
     //TODO make internal for features
     /** Increments reducedCO2 with some reducedCo2 dependant on the meal.

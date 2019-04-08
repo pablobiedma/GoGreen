@@ -1,35 +1,31 @@
 package groupxii.database;
 
 import com.mongodb.DBObject;
+import groupxii.vegetarianmeal.CalculatedMeal;
 
 public class MealEntry extends Entry {
 
     /**
-     * Represents entries in the database which tracks
-     * which vehicle each request indicates.
+     * Represents entries in the database for every meal
+     * the client decides to post.
      */
-    private long userId;
     private String goodFoodName;
-    private String badFoodName;
     private int goodServingSize;
+    private String badFoodName;
     private int badServingSize;
     private int reducedCo2;
 
     /**
      * Constructor of MealEntry.
      */
-    public MealEntry(long userId, String goodFoodName, String badFoodName,
-                     int goodServingSize, int badServingSize, int reducedCo2) {
-        this.badFoodName = badFoodName;
-        this.badServingSize = badServingSize;
+    public MealEntry(String goodFoodName, int goodServingSize,
+                     String badFoodName, int badServingSize) {
         this.goodFoodName = goodFoodName;
         this.goodServingSize = goodServingSize;
-        this.reducedCo2 = reducedCo2;
-        this.userId = userId;
-    }
-
-    public long getUserId() {
-        return this.userId;
+        this.badFoodName = badFoodName;
+        this.badServingSize = badServingSize;
+        this.reducedCo2 = new CalculatedMeal(goodFoodName, goodServingSize,
+                                             badFoodName, badServingSize).getReducedCO2();
     }
 
     public String getGoodFoodName() {
@@ -52,36 +48,11 @@ public class MealEntry extends Entry {
         return reducedCo2;
     }
 
-    public void setUserId(long userId) {
-        this.userId = userId;
-    }
-
-    public void setGoodFoodName(String goodFoodName) {
-        this.goodFoodName = goodFoodName;
-    }
-
-    public void setBadFoodName(String badFoodName) {
-        this.badFoodName = badFoodName;
-    }
-
-    public void setGoodServingSize(int goodServingSize) {
-        this.goodServingSize = goodServingSize;
-    }
-
-    public void setBadServingSize(int badServingSize) {
-        this.badServingSize = badServingSize;
-    }
-
-    public void setReducedCo2(int reducedCo2) {
-        this.reducedCo2 = reducedCo2;
-    }
-
     /**
      * Translates into a MongoDB JSON object.
      */
     public final DBObject toDbObject() {
         return super.toBasicDbObject()
-                .append("userId", this.userId)
                 .append("goodFoodName", this.goodFoodName)
                 .append("goodServingSize", this.goodServingSize)
                 .append("badFoodName", this.badFoodName)
