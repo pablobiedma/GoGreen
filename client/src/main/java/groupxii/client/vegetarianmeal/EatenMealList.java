@@ -12,14 +12,19 @@ public class EatenMealList {
 
     private List<String> mealList;
 
+    public EatenMealList(){
+        mealList = Arrays.asList(VegetarianMealConnector.retrieveEatenMealList().split(" - "));
+    }
+
     /**
      * Asks the connector to retrieve the eaten meal list and parses it
      */
+    /*
     public void setEeatenMealList() {
         String eatenMealStr = VegetarianMealConnector.retrieveEatenMealList();
         mealList = Arrays.asList(eatenMealStr.split(" - "));
     }
-
+    */
     public List<String> getEatenMealList() {
         return this.mealList;
     }

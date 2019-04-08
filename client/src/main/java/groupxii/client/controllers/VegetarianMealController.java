@@ -1,5 +1,6 @@
 package groupxii.client.controllers;
 
+import groupxii.client.connector.VegetarianMealConnector;
 import groupxii.client.vegetarianmeal.EatenMealList;
 import groupxii.client.vegetarianmeal.MealList;
 import javafx.collections.FXCollections;
@@ -77,7 +78,7 @@ public class VegetarianMealController implements Initializable {
      */
     @FXML
     public void updateListView() {
-        eatenMealList.setEeatenMealList();
+        //eatenMealList.setEeatenMealList();
         ObservableList<String> eatenMealObservableList = FXCollections.observableArrayList(eatenMealList.getEatenMealList());
         eatenMealsListView.setItems(eatenMealObservableList);
         /*
@@ -91,6 +92,12 @@ public class VegetarianMealController implements Initializable {
         ObservableList<String> eatenMealsObservable = FXCollections.observableArrayList(eatenMealListViewItems);
         eatenMealsListView.setItems(eatenMealsObservable);
         */
+    }
+
+    //TODO
+    @FXML
+    public void calculateMeal(MouseEvent event) {
+
     }
 
     /**
@@ -107,11 +114,11 @@ public class VegetarianMealController implements Initializable {
         int badServingSize = (int)sliderBadFood.getValue();
 
         //TODO
-//        String result = VegetarianMealConnector
-  //                          .calculateCO2Reduction(goodFoodName,
-    //                                               goodServingSize,
-      //                                             badFoodName,
-        //                                           badServingSize);
+        String result = VegetarianMealConnector
+                            .calculateCO2Reduction(goodFoodName,
+                                                   goodServingSize,
+                                                   badFoodName,
+                                                 badServingSize);
 		//TODO update contoller to display result
         updateListView();
     }
