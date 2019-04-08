@@ -118,6 +118,7 @@ public class DatabaseTest {
 //		//TODO Drop the test DB
 //	}
 
+	/*
 	@Test
 	public void testSaveUser() throws IOException{
 		Database.instance.setDbName("test");
@@ -126,7 +127,9 @@ public class DatabaseTest {
 		assertEquals(usr.toDbObject(), Database.instance.findUserEntry(usr));
 		//TODO Drop the test DB
 	}
+	*/
 
+	/*
 	@Test
 	public void testSaveUserNonBlocking() throws IOException{
 		Database.instance.setDbName("test");
@@ -135,6 +138,7 @@ public class DatabaseTest {
 		assertEquals(usr.toDbObject(), Database.instance.findUserEntry(usr));
 		//TODO Drop the test DB
 	}
+	*/
 	@Test
 	public void testUserById() throws IOException{
 		Database.instance.setDbName("test");

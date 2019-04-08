@@ -123,6 +123,7 @@ public class Database extends Thread {
                 mealEntryListCollection.insert(mealListEntry.toDbObject());
                 mealListPublic.addFoodName(food);
             }
+
             running = true;
         } catch (MongoException e) {
             // I don't think this state is reachable.
@@ -151,20 +152,18 @@ public class Database extends Thread {
 
         if (entry instanceof MealEntry) {
             this.vegetarianMealCollection.insert(entry.toDbObject());
-        }
-        if (entry instanceof VehicleEntry) {
+        } else if (entry instanceof VehicleEntry) {
             this.vehicleTrackerCollection.insert(entry.toDbObject());
-        }
-        if (entry instanceof UserEntry) {
+        } else if (entry instanceof UserEntry) {
             this.userCollection.insert(entry.toDbObject());
         }
+
         this.active = false;
     }
 
     /**
      * Call save(Entry) on a new thread.
      */
-
     public void saveNonBlocking(Entry entry) {
         this.active = true;
         SaveNonBlocking worker = new SaveNonBlocking(entry);
@@ -204,16 +203,9 @@ public class Database extends Thread {
     public List<String> getMealListFoodNames() {
         return this.mealListPublic.getMealList();
     }
-
-    /** Finds user entry.
-     */
-    public DBObject findUserEntry(UserEntry entry) {
-        while (this.isActive()) {}
-        DBCursor cursor = userCollection.find(entry.toDbObject());
-        return cursor.one();
-    }
-
-    /** Finds an UserEntry by id.
+ 
+    /**
+     *Finds an UserEntry by id.
      */
     public DBObject findUserById(int id) {
         BasicDBObject query = new BasicDBObject();
@@ -222,6 +214,9 @@ public class Database extends Thread {
         return dbObject;
     }
 
+    /**
+     * Finds an UserEntry by username
+     */
     public DBObject findUserByName(String username) {
         BasicDBObject query = new BasicDBObject();
         query.put("username", username);
@@ -229,7 +224,8 @@ public class Database extends Thread {
         return dbObject;
     }
 
-    /** returns all users sorted by points.
+    /** 
+     * Returns all users sorted by points.
      */
     public List<DBObject> sortUsersByReducedCo2() {
         List<DBObject> list = new ArrayList<>();
@@ -241,7 +237,8 @@ public class Database extends Thread {
         return list;
     }
 
-    /** receives two id's and adds the first one as a friend to the first one.
+    /** 
+     * Receives two id's and adds the first one as a friend to the first one.
      */
     public void addFriend(String userString,int friendId) {
         BasicDBObject newDocument = new BasicDBObject();
@@ -250,7 +247,8 @@ public class Database extends Thread {
         userCollection.update(searchQuery, newDocument);
     }
 
-    /** Increments the reducedCo2.
+    /**
+     * Increments the reducedCo2.
      */
     public void incrementReducedCo2(int id,int amount) {
         BasicDBObject newDocument = new BasicDBObject();
@@ -259,13 +257,15 @@ public class Database extends Thread {
         userCollection.update(searchQuery, newDocument);
     }
 
-    /* counts how many entries there are in the database and increments the number by one for the userId.
+    /** 
+     * Counts how many entries there are in the database and increments the number by one for the userId.
      */
     public int getUserCount() {
-        return (int) userCollection.count();
+        return (int)userCollection.count();
     }
 
-    /* receives username and a MealEntry and adds the eaten meal to the eaten meal list of the user.
+    /**
+     * Receives username and a MealEntry and adds the eaten meal to the eaten meal list of the user.
      */
     public void addEatenMeal(String userString, MealEntry mealEntry) {
         BasicDBObject newDocument = new BasicDBObject();
