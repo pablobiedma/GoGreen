@@ -133,9 +133,15 @@ public class Database extends Thread {
             }
             Iterator<JsonNode> elements2 = rootNode2.elements();
             while (elements2.hasNext()) {
-
+                JsonNode node = elements2.next();
+                String panel = node.get("vehiclename").asText();
+                double co2 = node.get("grams_co2_by_vehicle_per_km").asDouble();
+                String fuel = node.get("fuel").asText();
+                int avgConsumption = node.get("average_consumption_liter/100km").asInt();
+                VehicleListEntry vehicleListEntry = new VehicleListEntry(panel,co2,fuel,avgConsumption);
+                vehicleEntryListCollection.insert(vehicleListEntry.toDbObject());
+                vehicleListPublic.addVehicleName(panel);
             }
-
             running = true;
         } catch (MongoException e) {
             // I don't think this state is reachable.
@@ -212,10 +218,26 @@ public class Database extends Thread {
     }
 
     /**
+     * Given a vehicle name, return the VehicleListEntry.
+     */
+    public VehicleListEntry findVehicleListEntry(String name) {
+        BasicDBObject query = new BasicDBObject("vehicletype", name);
+        DBCursor cursor = mealEntryListCollection.find(query);
+        return new VehicleListEntry((BSONObject)cursor.one());
+    }
+
+    /**
      * Return the food names from the meal list.
      */
     public List<String> getMealListFoodNames() {
         return this.mealListPublic.getMealList();
+    }
+
+    /**
+     * Return the vehicle names from the vehicle list.
+     */
+    public List<String> getVehicleListVehicleNames() {
+        return this.vehicleListPublic.getVehicleList();
     }
 
     /** Finds user entry.
@@ -283,6 +305,16 @@ public class Database extends Thread {
     public void addEatenMeal(String userString, MealEntry mealEntry) {
         BasicDBObject newDocument = new BasicDBObject();
         newDocument.append("$addToSet", new BasicDBObject().append("eatenMeals", mealEntry.toDbObject()));
+        BasicDBObject searchQuery = new BasicDBObject().append("username", userString);
+        userCollection.update(searchQuery, newDocument);
+    }
+
+    /**
+     * Add a used vehicle to the collection.
+     */
+    public void addUsedVehicle(String userString, VehicleEntry vehicleEntry) {
+        BasicDBObject newDocument = new BasicDBObject();
+        newDocument.append("$addToSet", new BasicDBObject().append("usedPanels", vehicleEntry.toDbObject()));
         BasicDBObject searchQuery = new BasicDBObject().append("username", userString);
         userCollection.update(searchQuery, newDocument);
     }
