@@ -209,4 +209,8 @@ public class Database extends Thread {
         BasicDBObject searchQuery = new BasicDBObject().append("userId", id);
         userCollection.update(searchQuery, newDocument);
     }
+
+    public int getUserCount() {
+        return (int) userCollection.count();
+    }
 }

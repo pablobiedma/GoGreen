@@ -2,6 +2,7 @@ package groupxii.server.controllers;
 
 import com.mongodb.DBObject;
 import groupxii.database.Database;
+import groupxii.database.UserEntry;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -18,24 +19,15 @@ public class UserController {
     //TODO user registration
     /** Receives data and creates a user entry in the user collection.
      */
-//    @RequestMapping(method = RequestMethod.POST, value = "/saveUserData")
-//    public UserEntry saveUserData(@RequestParam(value = "username",
-//            defaultValue = "Unknown") String username,
-//                                  @RequestParam(value = "points",
-//                                          defaultValue = "Unknown") int points,
-//                                  @RequestParam(value = "badge",
-//                                          defaultValue = "Unknown") int badge,
-//                                  @RequestParam(value = "reducedCo2",
-//                                          defaultValue = "Unknown")
-//                                          int reducedCo2,
-//                                  @RequestParam(value = "friendsId",
-//                                          defaultValue = "Unknown")
-//                                          List<Integer> friendsId) throws IOException {
-//        saveUser.setUserList(this.userList);
-//        saveUser.saveUser(counter++, username, points,
-//                badge, reducedCo2, friendsId);
-//        return saveUser.getUserEntry();
-//    }
+    @RequestMapping(method = RequestMethod.POST, value = "/saveUserData")
+    public void saveUserData(@RequestParam(value = "username",
+            defaultValue = "Unknown") String username,
+                                  @RequestParam(value = "password",
+                                          defaultValue = "Unknown")
+                                          String password)  {
+            UserEntry userEntry = new UserEntry(Database.instance.getUserCount() + 1,username,password,0,1,0,new ArrayList<>());
+            Database.instance.save(userEntry);
+    }
 
     /** Receives user's id and returns the list
      of his/her friends.
