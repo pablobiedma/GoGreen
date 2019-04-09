@@ -1,21 +1,30 @@
 package groupxii.solarpanels;
 
-import org.jboss.arquillian.container.test.api.Deployment;
-import org.jboss.arquillian.junit.Arquillian;
-import org.jboss.shrinkwrap.api.ShrinkWrap;
-import org.jboss.shrinkwrap.api.asset.EmptyAsset;
-import org.jboss.shrinkwrap.api.spec.JavaArchive;
-import org.junit.runner.RunWith;
+
+import groupxii.database.Database;
+import org.junit.Before;
+import org.junit.Test;
+
+import java.io.IOException;
 
 import static org.junit.Assert.*;
 
-@RunWith(Arquillian.class)
 public class CalculatedPanelTest {
-    @Deployment
-    public static JavaArchive createDeployment() {
-        return ShrinkWrap.create(JavaArchive.class)
-                .addClass(CalculatedPanel.class)
-                .addAsManifestResource(EmptyAsset.INSTANCE, "beans.xml");
+
+    @Before
+    public void startDB() {
+        try{
+            Database.instance.startDb();
+        } catch (IOException e) {
+            assertTrue(false);
+        }
     }
+
+    @Test
+    public void testCalculatePanel() {
+        CalculatedPanel calculatedPanel = new CalculatedPanel("Thin-Film", 34);
+        assertEquals(955,calculatedPanel.getReducedCO2());
+    }
+
 
 }
