@@ -11,23 +11,19 @@ import com.mongodb.MongoClient;
 import com.mongodb.MongoException;
 import org.bson.BSONObject;
 
-import java.lang.InterruptedException;
+import java.lang.Deprecated;
 import java.io.IOException;
 import java.util.Iterator;
 import java.util.List;
 import java.util.ArrayList;
 import java.util.Iterator;
-import java.util.LinkedList;
 import java.util.List;
-import java.util.Queue;
 
 /**
  * Manages all database related operations between the server logic and MongoDB.
  */
 public class Database extends Thread {
     public static final Database instance = new Database();
-    private Queue<Entry> queue;
-    private SaveNonBlocking worker;
 
     private String dbAddr;
     private int dbPort;
@@ -45,10 +41,6 @@ public class Database extends Thread {
     private boolean active;
 
     Database() {
-        worker = new SaveNonBlocking();
-	worker.start();
-        queue = new LinkedList<>();
-
         dbAddr = System.getenv("DB_ADDRESS");
         if (dbAddr == null) {
             dbAddr = "localhost";
@@ -76,71 +68,33 @@ public class Database extends Thread {
             mongodb = this.mongoClient.getDB(this.dbName);
 
             vehicleTrackerCollection = mongodb.getCollection("vehicleTrackerCollection");
-	    // no longer needed
-            //vegetarianMealCollection = mongodb.getCollection("vegetarianMealCollection");
             mealEntryListCollection = mongodb.getCollection("mealEntryListCollection");
             userCollection = mongodb.getCollection("userCollection");
 
-            mealEntryListCollection.drop();
-            mealListPublic = new MealListPublic();
-            ObjectMapper objectMapper = new ObjectMapper();
-            JsonNode rootNode = objectMapper.readTree(
-                                    getClass().getClassLoader().getResource("mealList.json"));
-            Iterator<JsonNode> elements;
-            for (elements = rootNode.elements(); elements.hasNext(); elements.next()) {
-                JsonNode node = elements.next();
-                String food  = node.get("food").asText();
-                double co2PerServing = node.get("grams_co2e_per_serving").asDouble();
-                double calPerServing = node.get("calories_per_serving").asDouble();
-                double sizeServing = node.get("serving_size").asDouble();
-                MealListEntry mealListEntry = new MealListEntry(
-                                                      food,
-                                                      co2PerServing,
-                                                      calPerServing,
-                                                      sizeServing);
-                mealEntryListCollection.insert(mealListEntry.toDbObject());
-                mealListPublic.addFoodName(food);
-            }
         } catch (MongoException e) {
             // I don't think this state is reachable.
             // -L
         }
-    }
 
-    public void addEntry(Entry entry) {
-        queue.add(entry);
-    }
-
-    private class SaveNonBlocking extends Thread {
-	private boolean busy;
-
-        SaveNonBlocking() {
-		this.busy = false;
-        }
-
-	public boolean isBusy() {
-		return this.busy;
-	}
-
-	private void processEntries() {
-            while (true) {
-                while (!queue.isEmpty()) {
-                    this.busy = true;
-                    Database.instance.save(queue.remove());
-                }
-		while (queue.isEmpty()) {
-	            this.busy = false;
-		    try {
-                        Thread.sleep(1000);
-		    } catch (InterruptedException e) {
-			    //dunno
-		    }
-		}
-	    }
-	}
-
-        public void run() {
-            processEntries();
+        mealEntryListCollection.drop();
+        mealListPublic = new MealListPublic();
+        ObjectMapper objectMapper = new ObjectMapper();
+        JsonNode rootNode = objectMapper.readTree(
+                                getClass().getClassLoader().getResource("mealList.json"));
+        Iterator<JsonNode> elements;
+        for (elements = rootNode.elements(); elements.hasNext(); elements.next()) {
+            JsonNode node = elements.next();
+            String food  = node.get("food").asText();
+            double co2PerServing = node.get("grams_co2e_per_serving").asDouble();
+            double calPerServing = node.get("calories_per_serving").asDouble();
+            double sizeServing = node.get("serving_size").asDouble();
+            MealListEntry mealListEntry = new MealListEntry(
+                                                  food,
+                                                  co2PerServing,
+                                                  calPerServing,
+                                                  sizeServing);
+            mealEntryListCollection.insert(mealListEntry.toDbObject());
+            mealListPublic.addFoodName(food);
         }
     }
 
@@ -157,9 +111,10 @@ public class Database extends Thread {
 
     /**
      * Call save(Entry) on a new thread.
+     * @Deprecated NonBlocking feature is dropped. This now just calls save.
      */
     public void saveNonBlocking(Entry entry) {
-        addEntry(entry);
+        save(entry);
     }
 
     /**

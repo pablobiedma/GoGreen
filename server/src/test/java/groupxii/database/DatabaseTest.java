@@ -42,33 +42,15 @@ public class DatabaseTest {
 		//nothing happens => test passes
 	}
 
-	/*
 	@Test
-	public void testSaveNonBlocking() {
-		VehicleEntry entry = new VehicleEntry(1337, "car");
+	public void testSaveNonBlocking() throws InterruptedException {
+		VehicleEntry entry = new VehicleEntry(1345, "car");
 		Database.instance.saveNonBlocking(entry);
 
 		assertEquals(entry.toDbObject(), Database.instance.findVehicleEntry(entry));
 		//TODO Drop the test DB
 	}
-	*/
-	/*
-	@Test
-	public void testSaveUser() {
-		Database.instance.save(usr);
-		assertEquals(usr.toDbObject(), Database.instance.findUserEntry(usr));
-		//TODO Drop the test DB
-	}
-	*/
 
-	/*
-	@Test
-	public void testSaveUserNonBlocking() {
-		Database.instance.saveNonBlocking(usr);
-		assertEquals(usr.toDbObject(), Database.instance.findUserEntry(usr));
-		//TODO Drop the test DB
-	}
-	*/
 	@Test
 	public void testUserById() {
 		Database.instance.save(usr);
