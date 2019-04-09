@@ -1,6 +1,9 @@
-package client.groupxii.controllers;
+package groupxii.client.controllers;
 
-import client.groupxii.Main;
+import groupxii.client.Main;
+import groupxii.client.leaderboard.JsonConverter;
+import com.mongodb.DBObject;
+import com.mongodb.util.JSON;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -13,6 +16,7 @@ import javafx.scene.control.ListView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
+import javafx.scene.text.Text;
 
 import java.io.IOException;
 import java.net.URL;
@@ -36,6 +40,9 @@ public class LeaderboardController implements Initializable {
 
     @FXML
     private ListView<HBoxCell> friendsLeaderboard = new ListView();
+
+    @FXML
+    private Text addedFriend = new Text();
 
     public static class HBoxCell extends HBox {
         Label label = new Label();
@@ -61,14 +68,19 @@ public class LeaderboardController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+
+        /*
         try {
-            overallListStr = new Scanner(new URL(host + "Leaderboard").openStream(),
+            List<DBObject> overallListJsonStr = (DBObject) JSON.parse(new Scanner(new URL(host + "Leaderboard").openStream(),
+                    "UTF-8").nextLine());
+            String friendListJsonStr = new Scanner(new URL(host + "getFriends?Id=" + userId).openStream(),
                     "UTF-8").nextLine();
-            friendListStr = new Scanner(new URL(host + "getFriends?Id=" + userId).openStream(),
-                    "UTF-8").nextLine();
+            JsonConverter jsonConverter = new JsonConverter();
+            overallListStr = jsonConverter.leaderboardToString(overallListJsonStr)
         } catch (IOException e) {
             e.printStackTrace();
         }
+        */
 
         List<String> overallLeaderboardList = Arrays.asList(overallListStr.split(", "));
         List<HBoxCell> overallList = new ArrayList<>();
@@ -94,6 +106,17 @@ public class LeaderboardController implements Initializable {
 
     public static void addFriend(int friendId){
 
+
+
+       /* try {
+            new Scanner(new URL(host + "addFriend?newFriend=" + friendId+ "&userId" + userId).openStream(),
+                    "UTF-8");
+            addedFriend.setText("Ädded new friend!");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        */
+
     }
 
     public void setUserId(String userId){
@@ -102,7 +125,6 @@ public class LeaderboardController implements Initializable {
 
     @FXML
     public void btnBack(MouseEvent event) throws IOException {
-
         main.changeScene("Menu.fxml", event);
     }
 }

@@ -2,7 +2,7 @@
 
 # Sprint Review
 
-## client.groupxii.Main problems  Encountered
+## Main problems  Encountered
 
 ### Problem 1: Multiple members were too late
 During the lab, multiple people arrived too late. This interfered with the meeting that was scheduled at that moment and it had to be postponed.

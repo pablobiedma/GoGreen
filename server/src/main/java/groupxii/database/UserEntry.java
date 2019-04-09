@@ -8,6 +8,7 @@ public class UserEntry extends Entry {
 
     private int userId;
     private String username;
+    private String password;
     private int points;
     private int badge;
     private int reducedCo2;
@@ -16,10 +17,11 @@ public class UserEntry extends Entry {
 
     /** Constructor for the UserEntry class.
      */
-    public UserEntry(int userId, String username,
-                     int points,int badge, int reducedCo2,List<Integer> friendsId,List<MealEntry> eatenMeals) {
+    public UserEntry(int userId, String username,String password,
+                     int points,int badge, int reducedCo2,List<Integer> friendsId, List<MealEntry> eatenMeals) {
         this.userId = userId;
         this.username = username;
+        this.password = password;
         this.points = points;
         this.badge = badge;
         this.reducedCo2 = reducedCo2;
@@ -50,6 +52,10 @@ public class UserEntry extends Entry {
     public List<Integer> getFriendsId() {
         return this.friendsId;
     }
+    
+    public List<MealEntry> getEatenMeals() {
+        return this.eatenMeals;
+    }
 
     /**
      * Translates into a MongoDB JSON object.
@@ -58,6 +64,7 @@ public class UserEntry extends Entry {
         return super.toBasicDbObject()
                 .append("userId", this.userId)
                 .append("username", this.username)
+                .append("password",this.password)
                 .append("points", this.points)
                 .append("badge", this.badge)
                 .append("reducedCo2", this.reducedCo2)
