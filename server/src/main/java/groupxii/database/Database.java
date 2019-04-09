@@ -105,8 +105,13 @@ public class Database extends Thread {
 
             vehicleTrackerCollection = mongodb.getCollection("vehicleTrackerCollection");
             vegetarianMealCollection = mongodb.getCollection("vegetarianMealCollection");
-            mealEntryListCollection = mongodb.getCollection("mealEntryListCollection");
+            solarPanelCollection = mongodb.getCollection("solarPanelCollection");
             userCollection = mongodb.getCollection("userCollection");
+        } catch (MongoException e) {
+            running = false;
+        }
+        try {
+            mealEntryListCollection = mongodb.getCollection("mealEntryListCollection");
 
             mealEntryListCollection.drop();
             mealListPublic = new MealListPublic();
@@ -128,18 +133,13 @@ public class Database extends Thread {
                 mealEntryListCollection.insert(mealListEntry.toDbObject());
                 mealListPublic.addFoodName(food);
             }
+            running = true;
 
         } catch (MongoException e) {
             running = false;
         }
         try {
-            mongoClient = new MongoClient(this.getDbAddr(), this.getDbPort());
-            mongodb = this.mongoClient.getDB(this.getDbName());
-
-            vehicleTrackerCollection = mongodb.getCollection("vehicleTrackerCollection");
-            vegetarianMealCollection = mongodb.getCollection("vegetarianMealCollection");
             vehicleEntryListCollection = mongodb.getCollection("vehicleEntryListCollection");
-            userCollection = mongodb.getCollection("userCollection");
 
             vehicleEntryListCollection.drop();
             vehicleListPublic = new VehicleListPublic();
@@ -156,6 +156,30 @@ public class Database extends Thread {
                 VehicleListEntry vehicleListEntry = new VehicleListEntry(panel,co2,fuel,avgConsumption);
                 vehicleEntryListCollection.insert(vehicleListEntry.toDbObject());
                 vehicleListPublic.addVehicleName(panel);
+            }
+            running = true;
+        } catch (MongoException e) {
+            // I don't think this state is reachable.
+            // -L
+            running = false;
+        }
+        try {
+            panelListEntryCollection = mongodb.getCollection("panelListEntryCollection");
+
+            panelListEntryCollection.drop();
+            panelListPublic = new PanelListPublic();
+            ObjectMapper objectMapper = new ObjectMapper();
+            JsonNode rootnode = objectMapper.readTree(getClass().getClassLoader().getResource("panelList.json"));
+            Iterator<JsonNode> elements = rootnode.elements();
+            while (elements.hasNext()){
+                JsonNode node = elements.next();
+                String paneltype = node.get("panelname").asText();
+                double co2PerPanel =  node.get("grams_co2_by_panel").asDouble();
+                int efficiencyrate = node.get("efficiencyrate_in_%").asInt();
+                int amount = node.get("amount").asInt();
+                PanelListEntry panelListEntry = new PanelListEntry(paneltype,co2PerPanel, efficiencyrate,amount);
+                panelListEntryCollection.insert(panelListEntry.toDbObject());
+                panelListPublic.addPaneltype(paneltype);
             }
             running = true;
         } catch (MongoException e) {
@@ -191,6 +215,9 @@ public class Database extends Thread {
         }
         if (entry instanceof UserEntry) {
             this.userCollection.insert(entry.toDbObject());
+        }
+        if (entry instanceof PanelEntry) {
+            this.solarPanelCollection.insert(entry.toDbObject());
         }
         this.active = false;
     }
@@ -329,7 +356,7 @@ public class Database extends Thread {
      */
     public void addUsedVehicle(String userString, VehicleEntry vehicleEntry) {
         BasicDBObject newDocument = new BasicDBObject();
-        newDocument.append("$addToSet", new BasicDBObject().append("usedPanels", vehicleEntry.toDbObject()));
+        newDocument.append("$addToSet", new BasicDBObject().append("usedVehicles", vehicleEntry.toDbObject()));
         BasicDBObject searchQuery = new BasicDBObject().append("username", userString);
         userCollection.update(searchQuery, newDocument);
     }
@@ -357,5 +384,15 @@ public class Database extends Thread {
      */
     public List<String> getPanelListPanelNames() {
         return this.panelListPublic.getPanelList();
+    }
+
+    /**
+     * Add a used panel to the collection.
+     */
+    public void addUsedPanel(String userString, PanelEntry panelEntry) {
+        BasicDBObject newDocument = new BasicDBObject();
+        newDocument.append("$addToSet", new BasicDBObject().append("usedPanels", panelEntry.toDbObject()));
+        BasicDBObject searchQuery = new BasicDBObject().append("username", userString);
+        userCollection.update(searchQuery, newDocument);
     }
 }

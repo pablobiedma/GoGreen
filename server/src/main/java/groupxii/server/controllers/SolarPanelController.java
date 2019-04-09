@@ -1,5 +1,6 @@
 package groupxii.server.controllers;
 
+import com.mongodb.DBObject;
 import groupxii.database.Database;
 import groupxii.database.PanelEntry;
 import groupxii.solarpanels.CalculatedPanel;
@@ -8,6 +9,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.security.Principal;
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -37,13 +40,22 @@ public class SolarPanelController {
     @RequestMapping(method = RequestMethod.POST, value = "/savePanelData")
     public void savePanelData(@RequestParam(value = "paneltype", defaultValue = "Unknown") String paneltype,
                               @RequestParam(value = "efficiencyrate", defaultValue = "-1") Integer efficiencyrate,
-                              @RequestParam(value = "amount", defaultValue = "-1") Integer amount) {
-        //TODO find the userID and append the CalculatedCO2
-        int userId = -1;
-        PanelEntry savePanel = new PanelEntry(paneltype, efficiencyrate, amount);
-        //TODO append the entry to the user's document
-        //Database.instance.saveNonBlocking(saveMeal);
+                              @RequestParam(value = "amount", defaultValue = "-1")
+                                          Integer amount, Principal principal) {
+       String username = principal.getName();
+       PanelEntry panelEntry = new PanelEntry(paneltype, efficiencyrate, amount);
+       Database.instance.addUsedPanel(username,panelEntry);
+    }
 
+    /**
+     * Given the principal, return the used panel list.
+     */
+    @RequestMapping(method = RequestMethod.GET, value = "/getUsedPanelList")
+    public List<DBObject> getUsedPanelList(Principal principal) {
+        String username = principal.getName();
+        DBObject user =  Database.instance.findUserByName(username);
+        List<DBObject> list = (ArrayList<DBObject>) user.get("usedPanels");
+        return list;
     }
 
 }
