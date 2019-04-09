@@ -14,6 +14,6 @@ public class LeaderBoardConnector {
 
     public static String addFriend(int userId, int friendId) {
         String resource = "/addFriend?newFriend=" + friendId + "&userId=" + userId;
-        return Connector.getRequest(resource);
+        return Connector.postRequest(resource);
     }
 }
