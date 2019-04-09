@@ -7,6 +7,9 @@ public class UserCredentialsEntry extends Entry {
     private String password;
     private String recoveryEmail;
 
+    /**
+     * Constructor of UserCredentialsEntry.
+     */
     UserCredentialsEntry(String username, String password, String recoveryEmail) {
         super();
         this.username = username;
@@ -26,10 +29,13 @@ public class UserCredentialsEntry extends Entry {
         return this.recoveryEmail;
     }
 
+    /**
+     * Returns a DBObject of userData.
+     */
     public DBObject toDbObject() {
         return super.toBasicDbObject()
-            .append("username", this.username)
-            .append("password", this.password)
-            .append("recoveryEmail", this.recoveryEmail);
+                .append("username", this.username)
+                .append("password", this.password)
+                .append("recoveryEmail", this.recoveryEmail);
     }
 }

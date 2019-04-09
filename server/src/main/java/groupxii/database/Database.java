@@ -12,9 +12,6 @@ import com.mongodb.MongoException;
 import org.bson.BSONObject;
 
 import java.io.IOException;
-import java.util.Iterator;
-import java.util.List;
-
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -121,7 +118,7 @@ public class Database extends Thread {
             Iterator<JsonNode> elements;
             for (elements = rootNode.elements(); elements.hasNext(); elements.next()) {
                 JsonNode node = elements.next();
-                String food  = node.get("food").asText();
+                String food = node.get("food").asText();
                 double co2PerServing = node.get("grams_co2e_per_serving").asDouble();
                 double calPerServing = node.get("calories_per_serving").asDouble();
                 double sizeServing = node.get("serving_size").asDouble();
@@ -139,7 +136,8 @@ public class Database extends Thread {
             running = false;
         }
         try {
-            vehicleEntryListCollection = mongodb.getCollection("vehicleEntryListCollection");
+            vehicleEntryListCollection =
+                    mongodb.getCollection("vehicleEntryListCollection");
 
             vehicleEntryListCollection.drop();
             vehicleListPublic = new VehicleListPublic();
@@ -153,7 +151,8 @@ public class Database extends Thread {
                 double co2 = node.get("grams_co2_by_vehicle_per_km").asDouble();
                 String fuel = node.get("fuel").asText();
                 int avgConsumption = node.get("average_consumption_liter/100km").asInt();
-                VehicleListEntry vehicleListEntry = new VehicleListEntry(panel,co2,fuel,avgConsumption);
+                VehicleListEntry vehicleListEntry =
+                        new VehicleListEntry(panel, co2, fuel, avgConsumption);
                 vehicleEntryListCollection.insert(vehicleListEntry.toDbObject());
                 vehicleListPublic.addVehicleName(panel);
             }
@@ -164,20 +163,23 @@ public class Database extends Thread {
             running = false;
         }
         try {
-            panelListEntryCollection = mongodb.getCollection("panelListEntryCollection");
+            panelListEntryCollection =
+                    mongodb.getCollection("panelListEntryCollection");
 
             panelListEntryCollection.drop();
             panelListPublic = new PanelListPublic();
             ObjectMapper objectMapper = new ObjectMapper();
-            JsonNode rootnode = objectMapper.readTree(getClass().getClassLoader().getResource("panelList.json"));
+            JsonNode rootnode = objectMapper.readTree(getClass().getClassLoader()
+                    .getResource("panelList.json"));
             Iterator<JsonNode> elements = rootnode.elements();
-            while (elements.hasNext()){
+            while (elements.hasNext()) {
                 JsonNode node = elements.next();
                 String paneltype = node.get("panelname").asText();
-                double co2PerPanel =  node.get("grams_co2_by_panel").asDouble();
+                double co2PerPanel = node.get("grams_co2_by_panel").asDouble();
                 int efficiencyrate = node.get("efficiencyrate_in_%").asInt();
                 int amount = node.get("amount").asInt();
-                PanelListEntry panelListEntry = new PanelListEntry(paneltype,co2PerPanel, efficiencyrate,amount);
+                PanelListEntry panelListEntry = new PanelListEntry(paneltype,
+                        co2PerPanel, efficiencyrate, amount);
                 panelListEntryCollection.insert(panelListEntry.toDbObject());
                 panelListPublic.addPaneltype(paneltype);
             }
@@ -236,7 +238,8 @@ public class Database extends Thread {
      * Given a vehicle entry, find it in the collection.
      */
     public DBObject findVehicleEntry(VehicleEntry entry) {
-        while (this.isActive()) {}
+        while (this.isActive()) {
+        }
         DBCursor cursor = vehicleTrackerCollection.find(entry.toDbObject());
         return cursor.one();
     }
@@ -245,7 +248,8 @@ public class Database extends Thread {
      * Given a meal entry, find it in the collection.
      */
     public DBObject findMealEntry(MealEntry entry) {
-        while (this.isActive()) {}
+        while (this.isActive()) {
+        }
         DBCursor cursor = vegetarianMealCollection.find(entry.toDbObject());
         return cursor.one();
     }
@@ -256,7 +260,7 @@ public class Database extends Thread {
     public MealListEntry findMealListEntry(String name) {
         BasicDBObject query = new BasicDBObject("foodName", name);
         DBCursor cursor = mealEntryListCollection.find(query);
-        return new MealListEntry((BSONObject)cursor.one());
+        return new MealListEntry((BSONObject) cursor.one());
     }
 
     /**
@@ -265,13 +269,14 @@ public class Database extends Thread {
     public VehicleListEntry findVehicleListEntry(String name) {
         BasicDBObject query = new BasicDBObject("vehicletype", name);
         DBCursor cursor = mealEntryListCollection.find(query);
-        return new VehicleListEntry((BSONObject)cursor.one());
+        return new VehicleListEntry((BSONObject) cursor.one());
     }
 
     /**
      * Return the food names from the meal list.
      */
     public List<String> getMealListFoodNames() {
+
         return this.mealListPublic.getMealList();
     }
 
@@ -279,18 +284,22 @@ public class Database extends Thread {
      * Return the vehicle names from the vehicle list.
      */
     public List<String> getVehicleListVehicleNames() {
+
         return this.vehicleListPublic.getVehicleList();
     }
 
-    /** Finds user entry.
+    /**
+     * Finds user entry.
      */
     public DBObject findUserEntry(UserEntry entry) {
-        while (this.isActive()) {}
+        while (this.isActive()) {
+        }
         DBCursor cursor = userCollection.find(entry.toDbObject());
         return cursor.one();
     }
 
-    /** Finds an UserEntry by id.
+    /**
+     * Finds an UserEntry by id.
      */
     public DBObject findUserById(int id) {
         BasicDBObject query = new BasicDBObject();
@@ -299,6 +308,9 @@ public class Database extends Thread {
         return dbObject;
     }
 
+    /**
+     * Finds User by name.
+     */
     public DBObject findUserByName(String username) {
         BasicDBObject query = new BasicDBObject();
         query.put("username", username);
@@ -306,11 +318,13 @@ public class Database extends Thread {
         return dbObject;
     }
 
-    /** returns all users sorted by points.
+    /**
+     * returns all users sorted by points.
      */
     public List<DBObject> sortUsersByReducedCo2() {
         List<DBObject> list = new ArrayList<>();
-        Iterator<DBObject> cursor = userCollection.find().sort(new BasicDBObject("reducedCo2",-1));
+        Iterator<DBObject> cursor = userCollection.find()
+                .sort(new BasicDBObject("reducedCo2", -1));
         while (cursor.hasNext()) {
             DBObject obj = cursor.next();
             list.add(obj);
@@ -318,35 +332,46 @@ public class Database extends Thread {
         return list;
     }
 
-    /** receives two id's and adds the first one as a friend to the first one.
+    /**
+     * receives two id's and adds the first one as a friend to the first one.
      */
-    public void addFriend(String userString,int friendId) {
+    public void addFriend(String userString, int friendId) {
         BasicDBObject newDocument = new BasicDBObject();
-        newDocument.append("$addToSet", new BasicDBObject().append("friendsId", friendId));
-        BasicDBObject searchQuery = new BasicDBObject().append("username", userString);
+        newDocument.append("$addToSet", new BasicDBObject()
+                .append("friendsId", friendId));
+        BasicDBObject searchQuery = new BasicDBObject()
+                .append("username", userString);
         userCollection.update(searchQuery, newDocument);
     }
 
-    /** Increments the reducedCo2.
+    /**
+     * Increments the reducedCo2.
      */
-    public void incrementReducedCo2(int id,int amount) {
+    public void incrementReducedCo2(int id, int amount) {
         BasicDBObject newDocument = new BasicDBObject();
-        newDocument.append("$inc", new BasicDBObject().append("reducedCo2", amount));
-        BasicDBObject searchQuery = new BasicDBObject().append("userId", id);
+        newDocument.append("$inc", new BasicDBObject()
+                .append("reducedCo2", amount));
+        BasicDBObject searchQuery = new BasicDBObject()
+                .append("userId", id);
         userCollection.update(searchQuery, newDocument);
     }
 
-    /* counts how many entries there are in the database and increments the number by one for the userId.
+    /**
+     * counts how many entries there are in the database and
+     * increments the number by one for the userId.
      */
     public int getUserCount() {
         return (int) userCollection.count();
     }
 
-    /* receives username and a MealEntry and adds the eaten meal to the eaten meal list of the user.
+    /**
+     * receives username and a MealEntry and adds the eaten meal to the
+     * eaten meal list of the user.
      */
     public void addEatenMeal(String userString, MealEntry mealEntry) {
         BasicDBObject newDocument = new BasicDBObject();
-        newDocument.append("$addToSet", new BasicDBObject().append("eatenMeals", mealEntry.toDbObject()));
+        newDocument.append("$addToSet", new BasicDBObject()
+                .append("eatenMeals", mealEntry.toDbObject()));
         BasicDBObject searchQuery = new BasicDBObject().append("username", userString);
         userCollection.update(searchQuery, newDocument);
     }
@@ -356,7 +381,8 @@ public class Database extends Thread {
      */
     public void addUsedVehicle(String userString, VehicleEntry vehicleEntry) {
         BasicDBObject newDocument = new BasicDBObject();
-        newDocument.append("$addToSet", new BasicDBObject().append("usedVehicles", vehicleEntry.toDbObject()));
+        newDocument.append("$addToSet", new BasicDBObject()
+                .append("usedVehicles", vehicleEntry.toDbObject()));
         BasicDBObject searchQuery = new BasicDBObject().append("username", userString);
         userCollection.update(searchQuery, newDocument);
     }
@@ -365,7 +391,8 @@ public class Database extends Thread {
      * Given a panel entry, find it in the collection.
      */
     public DBObject findPanelEntry(PanelEntry entry) {
-        while (this.isActive()) {}
+        while (this.isActive()) {
+        }
         DBCursor cursor = solarPanelCollection.find(entry.toDbObject());
         return cursor.one();
     }
@@ -373,10 +400,10 @@ public class Database extends Thread {
     /**
      * Given a paneltype, return the panelListEntry.
      */
-    public  PanelListEntry findPanelListEntry(String name) {
+    public PanelListEntry findPanelListEntry(String name) {
         BasicDBObject query = new BasicDBObject("paneltype", name);
         DBCursor cursor = panelListEntryCollection.find(query);
-        return new PanelListEntry((BSONObject)cursor.one());
+        return new PanelListEntry((BSONObject) cursor.one());
     }
 
     /**
@@ -391,7 +418,8 @@ public class Database extends Thread {
      */
     public void addUsedPanel(String userString, PanelEntry panelEntry) {
         BasicDBObject newDocument = new BasicDBObject();
-        newDocument.append("$addToSet", new BasicDBObject().append("usedPanels", panelEntry.toDbObject()));
+        newDocument.append("$addToSet", new BasicDBObject()
+                .append("usedPanels", panelEntry.toDbObject()));
         BasicDBObject searchQuery = new BasicDBObject().append("username", userString);
         userCollection.update(searchQuery, newDocument);
     }

@@ -28,23 +28,27 @@ public class SolarPanelController {
      * Calculate the saved CO2 and send the response to the server.
      */
     @RequestMapping(method = RequestMethod.GET, value = "/calculatePanel")
-    public CalculatedPanel calculatePanel(@RequestParam(value = "paneltype", defaultValue = "Unknown") String paneltype,
-                                          @RequestParam(value = "paneltype", defaultValue = "0") Integer amount) {
+    public CalculatedPanel calculatePanel(@RequestParam(value = "paneltype",
+            defaultValue = "Unknown") String paneltype,
+                                          @RequestParam(value = "paneltype",
+                                                  defaultValue = "0") Integer amount) {
         return new CalculatedPanel(paneltype, amount);
     }
 
     /**
-     the client can send data to the server with the right values as parameter,
-     then this method will store the data in the database.
+     * the client can send data to the server with the right values as parameter,
+     * then this method will store the data in the database.
      */
     @RequestMapping(method = RequestMethod.POST, value = "/savePanelData")
-    public void savePanelData(@RequestParam(value = "paneltype", defaultValue = "Unknown") String paneltype,
-                              @RequestParam(value = "efficiencyrate", defaultValue = "-1") Integer efficiencyrate,
+    public void savePanelData(@RequestParam(value = "paneltype", defaultValue = "Unknown")
+                                          String paneltype,
+                              @RequestParam(value = "efficiencyrate", defaultValue = "-1")
+                                      Integer efficiencyrate,
                               @RequestParam(value = "amount", defaultValue = "-1")
-                                          Integer amount, Principal principal) {
-       String username = principal.getName();
-       PanelEntry panelEntry = new PanelEntry(paneltype, efficiencyrate, amount);
-       Database.instance.addUsedPanel(username,panelEntry);
+                                      Integer amount, Principal principal) {
+        String username = principal.getName();
+        PanelEntry panelEntry = new PanelEntry(paneltype, efficiencyrate, amount);
+        Database.instance.addUsedPanel(username, panelEntry);
     }
 
     /**
@@ -53,7 +57,7 @@ public class SolarPanelController {
     @RequestMapping(method = RequestMethod.GET, value = "/getUsedPanelList")
     public List<DBObject> getUsedPanelList(Principal principal) {
         String username = principal.getName();
-        DBObject user =  Database.instance.findUserByName(username);
+        DBObject user = Database.instance.findUserByName(username);
         List<DBObject> list = (ArrayList<DBObject>) user.get("usedPanels");
         return list;
     }
