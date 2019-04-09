@@ -18,7 +18,8 @@ public class UserEntry extends Entry {
     /** Constructor for the UserEntry class.
      */
     public UserEntry(int userId, String username,String password,
-                     int points,int badge, int reducedCo2,List<Integer> friendsId, List<MealEntry> eatenMeals) {
+                     int points,int badge, int reducedCo2,List<Integer> friendsId,
+                     List<MealEntry> eatenMeals) {
         this.userId = userId;
         this.username = username;
         this.password = password;

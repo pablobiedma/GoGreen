@@ -29,24 +29,24 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
         List<AuthenticationProvider> allCustomProviders = new ArrayList<>();
         allCustomProviders.add(new UsernameAuthenticationProvider());
         allCustomProviders.add(new CredentialsDbAuthenticationProvider());
-        return new  ProviderManager(allCustomProviders);
+        return new ProviderManager(allCustomProviders);
     }
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
-        .addFilterBefore(new JwtVerificationFilter(authenticationManager()), 
-                         AnonymousAuthenticationFilter.class)
-        .csrf().disable() // Unecessary in REST
-        .sessionManagement()
-            .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-        .and()
-        .httpBasic().disable()
-        .addFilter(new JwtGeneratingFilter(authenticationManager()))
-        .authorizeRequests()
-//            .anyRequest().authenticated()
-            .antMatchers("/login").permitAll()
-            .antMatchers("/calculateMeal").permitAll();
+                .addFilterBefore(new JwtVerificationFilter(authenticationManager()),
+                        AnonymousAuthenticationFilter.class)
+                .csrf().disable() // Unecessary in REST
+                .sessionManagement()
+                .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+                .and()
+                .httpBasic().disable()
+                .addFilter(new JwtGeneratingFilter(authenticationManager()))
+                .authorizeRequests()
+//              .anyRequest().authenticated()
+                .antMatchers("/login").permitAll()
+                .antMatchers("/calculateMeal").permitAll();
     }
 
     @Bean
