@@ -35,10 +35,13 @@ public class Database extends Thread {
     private DBCollection vehicleEntryListCollection;
     private DBCollection vegetarianMealCollection;
     private DBCollection mealEntryListCollection;
+    private DBCollection solarPanelCollection;
+    private DBCollection panelListEntryCollection;
     private DBCollection userCollection;
 
     private VehicleListPublic vehicleListPublic;
     private MealListPublic mealListPublic;
+    private PanelListPublic panelListPublic;
 
     private boolean running;
     private boolean active;
@@ -329,5 +332,30 @@ public class Database extends Thread {
         newDocument.append("$addToSet", new BasicDBObject().append("usedPanels", vehicleEntry.toDbObject()));
         BasicDBObject searchQuery = new BasicDBObject().append("username", userString);
         userCollection.update(searchQuery, newDocument);
+    }
+
+    /**
+     * Given a panel entry, find it in the collection.
+     */
+    public DBObject findPanelEntry(PanelEntry entry) {
+        while (this.isActive()) {}
+        DBCursor cursor = solarPanelCollection.find(entry.toDbObject());
+        return cursor.one();
+    }
+
+    /**
+     * Given a paneltype, return the panelListEntry.
+     */
+    public  PanelListEntry findPanelListEntry(String name) {
+        BasicDBObject query = new BasicDBObject("paneltype", name);
+        DBCursor cursor = panelListEntryCollection.find(query);
+        return new PanelListEntry((BSONObject)cursor.one());
+    }
+
+    /**
+     * Return the paneltypes from the panel list.
+     */
+    public List<String> getPanelListPanelNames() {
+        return this.panelListPublic.getPanelList();
     }
 }
