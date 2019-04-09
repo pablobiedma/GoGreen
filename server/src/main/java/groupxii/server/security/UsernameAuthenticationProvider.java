@@ -20,7 +20,7 @@ import java.util.ArrayList;
 public class UsernameAuthenticationProvider implements AuthenticationProvider {
     @Override
     public Authentication authenticate(Authentication authentication)
-                                           throws AuthenticationException { 
+            throws AuthenticationException {
         Object principal = authentication.getPrincipal();
         if (principal == null) {
             throw new BadCredentialsException("Missing username");
@@ -34,13 +34,13 @@ public class UsernameAuthenticationProvider implements AuthenticationProvider {
             grantedAuthrities.add(new SimpleGrantedAuthority("USER"));
             return new UsernamePasswordAuthenticationToken(username, "null", grantedAuthrities);
         }
-    
+
         throw new BadCredentialsException("Username verification failed");
     }
 
     @Override
     public boolean supports(Class<?> authentication) {
         return authentication.equals(
-               UsernamePasswordAuthenticationToken.class);
+                UsernamePasswordAuthenticationToken.class);
     }
 }
