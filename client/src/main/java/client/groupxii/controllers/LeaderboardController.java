@@ -3,6 +3,8 @@ package client.groupxii.controllers;
 import client.groupxii.Main;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -39,13 +41,18 @@ public class LeaderboardController implements Initializable {
         Label label = new Label();
         Button button = new Button();
 
-        HBoxCell(String labelText, String buttonText) {
+        HBoxCell(String labelText, String buttonText, int friendId) {
             super();
 
             label.setText(labelText);
             label.setMaxWidth(Double.MAX_VALUE);
             HBox.setHgrow(label, Priority.ALWAYS);
-
+            button.setOnAction(new EventHandler<ActionEvent>() {
+                                   @Override
+                                   public void handle(ActionEvent e) {
+                                       addFriend(friendId);
+                                   }
+                               });
             button.setText(buttonText);
 
             this.getChildren().addAll(label, button);
@@ -66,7 +73,8 @@ public class LeaderboardController implements Initializable {
         List<String> overallLeaderboardList = Arrays.asList(overallListStr.split(", "));
         List<HBoxCell> overallList = new ArrayList<>();
         for (int i = 0; i < overallLeaderboardList.size(); i++) {
-            overallList.add(new HBoxCell(overallLeaderboardList.get(i), "ADD FRIEND"));
+            overallList.add(new HBoxCell(overallLeaderboardList.get(i), "ADD FRIEND", Integer.parseInt(overallLeaderboardList.get(i+1))));
+            i++;
         }
         ObservableList<HBoxCell> overallLeaderboardObservableList;
         overallLeaderboardObservableList = FXCollections.observableArrayList(overallList);
@@ -75,7 +83,8 @@ public class LeaderboardController implements Initializable {
         List<String> friendsLeaderboardList = Arrays.asList(friendListStr.split(", "));
         List<HBoxCell> list = new ArrayList<>();
         for (int i = 0; i < friendsLeaderboardList.size(); i++) {
-            list.add(new HBoxCell(friendsLeaderboardList.get(i), "UNFOLLOW"));
+            list.add(new HBoxCell(friendsLeaderboardList.get(i), "UNFOLLOW", Integer.parseInt(overallLeaderboardList.get(i+1))));
+            i++;
         }
         ObservableList<HBoxCell> friendsLeaderboardObservableList;
         friendsLeaderboardObservableList = FXCollections.observableArrayList(list);
@@ -83,7 +92,7 @@ public class LeaderboardController implements Initializable {
         System.out.println(userId);
     }
 
-    public void addFriend(){
+    public static void addFriend(int friendId){
 
     }
 

@@ -243,10 +243,10 @@ public class Database extends Thread {
 
     /** receives two id's and adds the first one as a friend to the first one.
      */
-    public void addFriend(String userString,int friendId) {
+    public void addFriend(int friendId, int userId) {
         BasicDBObject newDocument = new BasicDBObject();
         newDocument.append("$addToSet", new BasicDBObject().append("friendsId", friendId));
-        BasicDBObject searchQuery = new BasicDBObject().append("username", userString);
+        BasicDBObject searchQuery = new BasicDBObject().append("userId", userId);
         userCollection.update(searchQuery, newDocument);
     }
 

@@ -67,9 +67,11 @@ public class UserController {
     @RequestMapping(method = RequestMethod.POST, value = "/addFriend")
     public void addFriend(Principal principal,
                           @RequestParam(value = "newFriend" ,
-                                      defaultValue = "Unknown") int friendsId) {
-        String user = principal.getName();
-        Database.instance.addFriend(user,friendsId);
+                                      defaultValue = "Unknown") int friendsId,
+                          @RequestParam(value = "userId" ,
+                                        defaultValue = "Unknown") int userId){
+        //String user = principal.getName();
+        Database.instance.addFriend(friendsId, userId);
     }
 
 
