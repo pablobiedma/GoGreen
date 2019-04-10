@@ -1,19 +1,30 @@
 package groupxii.database;
 
+
+
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.junit.Rule;
+import static org.junit.Assert.*;
 
+import org.powermock.api.mockito.PowerMockito;
+import org.powermock.core.classloader.annotations.PrepareForTest;
+import org.powermock.modules.junit4.PowerMockRunner;
+
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.Assert.*;
-
-import java.io.IOException;
+@RunWith(PowerMockRunner.class)
+@PrepareForTest({Database.class})
 
 public class DatabaseTest {
 	List<Integer> friendsId;
 	List<MealEntry> eatenMeals;
 	UserEntry usr;
+	String addr;
+	String port;
 
 	@Before
 	public void createusr() {
@@ -24,8 +35,21 @@ public class DatabaseTest {
 
 	@Before
 	public void setUpDb() throws IOException {
+		addr = "localhost";
+		port = "27017";
 		Database.instance.setDbName("test");
 		Database.instance.startDb();
+	}
+
+	@Test
+	public void testEnvVar() {
+		PowerMockito.mockStatic(System.class);
+		PowerMockito.when(System.getenv("DB_ADDRESS")).thenReturn(addr);
+		PowerMockito.when(System.getenv("DB_PORT")).thenReturn(port);
+		Database test = new Database();
+
+		assertEquals(addr, test.getDbAddr());
+		assertEquals(Integer.parseInt(port), test.getDbPort());
 	}
 
 	@Test

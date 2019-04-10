@@ -98,6 +98,14 @@ public class Database extends Thread {
         }
     }
 
+    public String getDbAddr() {
+	    return this.dbAddr;
+    }
+
+    public int getDbPort() {
+	    return this.dbPort;
+    }
+
     /**
      * Determine in which collection to put an entry.
      */
