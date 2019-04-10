@@ -91,7 +91,6 @@ public class LeaderboardController implements Initializable {
         List<String> friendsLeaderboardList = Arrays.asList(friendListStr.split(","));
 
         //TODO Take a look at how to unfriend someone, (will fix this if we have time enough)
-        /*
         List<HBoxCell> friendList = new ArrayList<>();
         for (int i = 0; i < friendsLeaderboardList.size(); i++) {
             friendList.add(new HBoxCell(friendsLeaderboardList.get(i), "UNFOLLOW", Integer.parseInt(overallLeaderboardList.get(i+1))));
@@ -102,10 +101,8 @@ public class LeaderboardController implements Initializable {
         friendsLeaderboard.setItems(friendsLeaderboardObservableList);
         //System.out.println("Overall List:   " + overallLeaderboardList);
         //System.out.println("Friend List:   " + friendsLeaderboardList);
-        */
-
-        ObservableList<String> friendsLeaderboardObservableList = FXCollections.observableArrayList(friendsLeaderboardList);
-        friendsLeaderboard.setItems(friendsLeaderboardObservableList);
+        //ObservableList<String> friendsLeaderboardObservableList = FXCollections.observableArrayList(friendsLeaderboardList);
+        //friendsLeaderboard.setItems(friendsLeaderboardObservableList);
     }
 
     public static void addFriend(int friendId){
