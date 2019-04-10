@@ -1,9 +1,9 @@
 package groupxii.client.controllers;
 
 import groupxii.client.Main;
+import groupxii.client.connector.LeaderboardConnector;
+import groupxii.client.connector.Target;
 import groupxii.client.leaderboard.JsonConverter;
-import com.mongodb.DBObject;
-import com.mongodb.util.JSON;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -20,20 +20,14 @@ import javafx.scene.text.Text;
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.ResourceBundle;
-import java.util.Scanner;
+import java.util.*;
 
 public class LeaderboardController implements Initializable {
 
     private String overallListStr = "";
     private String friendListStr = "";
-    private String host = "http://localhost:8080/";
     //Should be the userId that is assigned to the user when he/she registers
-    private String userId = "1";
-    private Main main = new Main();
+    private static int userId = 1;
 
     @FXML
     private ListView<HBoxCell> overallLeaderboard = new ListView();
@@ -42,7 +36,7 @@ public class LeaderboardController implements Initializable {
     private ListView<HBoxCell> friendsLeaderboard = new ListView();
 
     @FXML
-    private Text addedFriend = new Text();
+    private static Text addedFriend = new Text();
 
     public static class HBoxCell extends HBox {
         Label label = new Label();
@@ -82,7 +76,8 @@ public class LeaderboardController implements Initializable {
         }
         */
 
-        List<String> overallLeaderboardList = Arrays.asList(overallListStr.split(", "));
+        overallListStr = JsonConverter.leaderboardToString(LeaderboardConnector.retrieveLeaderboard());
+        List<String> overallLeaderboardList = Arrays.asList(overallListStr.split(","));
         List<HBoxCell> overallList = new ArrayList<>();
         for (int i = 0; i < overallLeaderboardList.size(); i++) {
             overallList.add(new HBoxCell(overallLeaderboardList.get(i), "ADD FRIEND", Integer.parseInt(overallLeaderboardList.get(i+1))));
@@ -92,39 +87,33 @@ public class LeaderboardController implements Initializable {
         overallLeaderboardObservableList = FXCollections.observableArrayList(overallList);
         overallLeaderboard.setItems(overallLeaderboardObservableList);
 
-        List<String> friendsLeaderboardList = Arrays.asList(friendListStr.split(", "));
-        List<HBoxCell> list = new ArrayList<>();
+        friendListStr = JsonConverter.leaderboardToString(LeaderboardConnector.retrieveFriends(userId));
+        List<String> friendsLeaderboardList = Arrays.asList(friendListStr.split(","));
+        List<HBoxCell> friendList = new ArrayList<>();
         for (int i = 0; i < friendsLeaderboardList.size(); i++) {
-            list.add(new HBoxCell(friendsLeaderboardList.get(i), "UNFOLLOW", Integer.parseInt(overallLeaderboardList.get(i+1))));
+            friendList.add(new HBoxCell(friendsLeaderboardList.get(i), "UNFOLLOW", Integer.parseInt(overallLeaderboardList.get(i+1))));
             i++;
         }
         ObservableList<HBoxCell> friendsLeaderboardObservableList;
-        friendsLeaderboardObservableList = FXCollections.observableArrayList(list);
+        friendsLeaderboardObservableList = FXCollections.observableArrayList(friendList);
         friendsLeaderboard.setItems(friendsLeaderboardObservableList);
-        System.out.println(userId);
+        //System.out.println("Overall List:   " + overallLeaderboardList);
+        //System.out.println("Friend List:   " + friendsLeaderboardList);
+
     }
 
     public static void addFriend(int friendId){
-
-
-
-       /* try {
-            new Scanner(new URL(host + "addFriend?newFriend=" + friendId+ "&userId" + userId).openStream(),
-                    "UTF-8");
-            addedFriend.setText("Ädded new friend!");
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        */
-
+        LeaderboardConnector.addFriend(userId, friendId);
+        addedFriend.setText("Ädded new friend!");
     }
 
-    public void setUserId(String userId){
+    public void setUserId(int userId){
         this.userId = userId;
     }
 
     @FXML
     public void btnBack(MouseEvent event) throws IOException {
+        Main main = new Main();
         main.changeScene("Menu.fxml", event);
     }
 }

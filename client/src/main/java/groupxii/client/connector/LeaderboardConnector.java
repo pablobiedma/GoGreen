@@ -1,6 +1,6 @@
 package groupxii.client.connector;
 
-public class LeaderBoardConnector {
+public class LeaderboardConnector {
 
     public static String retrieveLeaderboard() {
         String resource = "/Leaderboard";
