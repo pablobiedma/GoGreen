@@ -103,7 +103,7 @@ public class LocalProductsController implements Initializable {
     }
 
     public void safeLocalProduct() throws IOException {
-        Connector.postRequest("/increaseReducedCO2?Id=" + userId + "&ReducedCO2=300");
+        Connector.instance.postRequest("/increaseReducedCO2?Id=" + userId + "&ReducedCO2=300");
         textfield.setText("You saved 300 grams of CO2 emission!");
     }
 
