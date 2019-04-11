@@ -30,9 +30,9 @@ public class DatabaseTest {
 	@Rule
 	ExpectedException thrown = ExpectedException.none();
 
-	List<Integer> friendsId;
-	List<MealEntry> eatenMeals;
-	UserEntry usr;
+	static List<Integer> friendsId;
+	static List<MealEntry> eatenMeals;
+	static UserEntry usr;
 	static String addr;
 	static String port;
 
@@ -42,10 +42,7 @@ public class DatabaseTest {
 		port = "27017";
 		Database.instance.setDbName("test");
 		Database.instance.startDb();
-	}
 
-	@Before
-	public void createusr() {
 		friendsId = new ArrayList<>();
 		eatenMeals = new ArrayList<>();
 
@@ -125,13 +122,18 @@ public class DatabaseTest {
 	}
 
 	@Test
-	public void testUserById() {
+	public void testUserByWrongId() {
 		assertNotEquals(usr.toDbObject(),Database.instance.findUserById(2));
 	}
 
 	@Test
+	public void testUserById() {
+		assertEquals(usr.toDbObject(),Database.instance.findUserById(1));
+	}
+
+	@Test
 	public void testFindByUserName() {
-		assertNotEquals(usr.toDbObject(),Database.instance.findUserByName("Ivan"));
+		assertEquals(usr.toDbObject(),Database.instance.findUserByName("Ivan"));
 	}
 
 
@@ -154,6 +156,11 @@ public class DatabaseTest {
 		assertEquals(2, usr.getReducedCo2());
 	}
 	*/
+
+	@Test
+	public void testGetUserCount() {
+		assertEquals(1, Database.instance.getUserCount());
+	}
 
 	@AfterClass
 	public static void dropTestDb() {
