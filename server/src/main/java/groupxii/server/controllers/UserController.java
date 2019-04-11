@@ -24,7 +24,8 @@ public class UserController {
                                   @RequestParam(value = "password",
                                           defaultValue = "Unknown")
                                           String password)  {
-            UserEntry userEntry = new UserEntry(Database.instance.getUserCount() + 1,username,password,0,1,0,new ArrayList<>(), new ArrayList<>());
+            int userId = Database.instance.getUserCount() + 1;
+            UserEntry userEntry = new UserEntry(userId, username, password);
             Database.instance.save(userEntry);
     }
 
@@ -37,7 +38,7 @@ public class UserController {
             DBObject user =  Database.instance.findUserById(userId);
             List<Integer> list = (ArrayList<Integer>) user.get("friendsId");
             List<DBObject> friends = new ArrayList<>();
-            for (int i = 0; i < list.size();i++) {
+            for (int i = 0; i < list.size(); i++) {
                 DBObject friend =  Database.instance.findUserById(list.get(i));
                 friends.add(friend);
             }

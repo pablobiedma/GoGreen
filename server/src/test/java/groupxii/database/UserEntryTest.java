@@ -16,7 +16,7 @@ public class UserEntryTest {
     public void createusr() {
 	    friendsId = new ArrayList<>();
 	    eatenMeals = new ArrayList<>();
-            usr = new UserEntry(1,"Ivan","pass",100,1,9,friendsId, eatenMeals);
+            usr = new UserEntry(1,"Ivan","pass");
     }
 
     @Test
@@ -31,17 +31,17 @@ public class UserEntryTest {
 
     @Test
     public void getPoints() {
-        assertEquals(100,usr.getPoints());
+        assertEquals(0,usr.getPoints());
     }
 
     @Test
     public void getBadge() {
-        assertEquals(1,usr.getBadge());
+        assertEquals(0,usr.getBadge());
     }
 
     @Test
     public void getReducedCo2() {
-        assertEquals(9,usr.getReducedCo2());
+        assertEquals(0,usr.getReducedCo2());
     }
 
     @Test

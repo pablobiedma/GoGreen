@@ -30,7 +30,7 @@ public class DatabaseTest {
 	public void createusr() {
 		friendsId = new ArrayList<>();
 		eatenMeals = new ArrayList<>();
-		usr = new UserEntry(1,"Ivan","pass",100,1,9,friendsId, eatenMeals);
+		usr = new UserEntry(1,"Ivan","pass");
 	}
 
 	@Before

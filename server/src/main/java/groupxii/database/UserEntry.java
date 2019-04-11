@@ -2,6 +2,7 @@ package groupxii.database;
 
 import com.mongodb.DBObject;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class UserEntry extends Entry {
@@ -15,18 +16,20 @@ public class UserEntry extends Entry {
     private List<Integer> friendsId ;
     private List<MealEntry> eatenMeals ;
 
-    /** Constructor for the UserEntry class.
+    /** 
+     * Constructor for the UserEntry class.
      */
-    public UserEntry(int userId, String username,String password,
-                     int points,int badge, int reducedCo2,List<Integer> friendsId, List<MealEntry> eatenMeals) {
+    public UserEntry(int userId, 
+                     String username,
+                     String password) {
         this.userId = userId;
         this.username = username;
         this.password = password;
-        this.points = points;
-        this.badge = badge;
-        this.reducedCo2 = reducedCo2;
-        this.friendsId = friendsId;
-        this.eatenMeals = eatenMeals;
+        this.points = 0;
+        this.badge = 0;
+        this.reducedCo2 = 0;
+        this.friendsId = new ArrayList<>();
+        this.eatenMeals = new ArrayList<>();
     }
 
     public int getUserId() {
