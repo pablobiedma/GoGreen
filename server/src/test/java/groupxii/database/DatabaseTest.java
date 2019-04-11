@@ -7,10 +7,13 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.Rule;
 import static org.junit.Assert.*;
+import org.junit.rules.ExpectedException;
 
 import org.powermock.api.mockito.PowerMockito;
 import org.powermock.core.classloader.annotations.PrepareForTest;
 import org.powermock.modules.junit4.PowerMockRunner;
+
+import org.mockito.Mockito.*;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -20,6 +23,9 @@ import java.util.List;
 @PrepareForTest({Database.class})
 
 public class DatabaseTest {
+	@Rule
+	ExpectedException thrown = ExpectedException.none();
+
 	List<Integer> friendsId;
 	List<MealEntry> eatenMeals;
 	UserEntry usr;
@@ -51,6 +57,44 @@ public class DatabaseTest {
 		assertEquals(addr, test.getDbAddr());
 		assertEquals(Integer.parseInt(port), test.getDbPort());
 	}
+
+	@Test
+	public void testNoEnvPort() {
+		PowerMockito.mockStatic(System.class);
+		PowerMockito.when(System.getenv("DB_ADDRESS")).thenReturn(addr);
+		PowerMockito.when(System.getenv("DB_PORT")).thenReturn(null);
+
+		Database test = new Database();
+
+		assertEquals(addr, test.getDbAddr());
+		assertEquals(27017, test.getDbPort());
+	}
+
+	@Test
+	public void testNoEnvAddr() {
+		PowerMockito.mockStatic(System.class);
+		PowerMockito.when(System.getenv("DB_ADDRESS")).thenReturn(null);
+		PowerMockito.when(System.getenv("DB_PORT")).thenReturn(null);
+
+		Database test = new Database();
+
+		assertEquals("localhost", test.getDbAddr());
+		assertEquals(Integer.parseInt(port), test.getDbPort());
+	}
+
+	@Test
+	public void testBadEnvPort() {
+		port = "PORT_IS_27017";
+		PowerMockito.mockStatic(System.class);
+		PowerMockito.when(System.getenv("DB_ADDRESS")).thenReturn(addr);
+		PowerMockito.when(System.getenv("DB_PORT")).thenReturn(port);
+
+		Database test = new Database();
+
+		assertEquals(addr, test.getDbAddr());
+		assertEquals(27017, test.getDbPort());
+	}
+
 
 	@Test
 	public void testSave() {
