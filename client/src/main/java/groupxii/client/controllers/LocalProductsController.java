@@ -1,9 +1,9 @@
 package groupxii.client.controllers;
 
-import client.groupxii.localproducts.GetUserLocation;
 import com.maxmind.geoip2.exception.GeoIp2Exception;
 import groupxii.client.Main;
 import groupxii.client.connector.Connector;
+import groupxii.client.connector.LocalProductsConnector;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -35,21 +35,14 @@ public class LocalProductsController implements Initializable {
     @FXML
     private ImageView mapsImage = new ImageView();
 
+    private int userId = 1;
     //private List<String> listViewItems = new ArrayList<String>();
     //private ObservableList<String> listViewObservable;
-    private String listItemsStr = "";
+    //private String listItemsStr = "";
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        try {
-            GetUserLocation getUserLocation = new GetUserLocation();
-            listItemsStr = Connector.instance.getLocalShops("/localshops?location="
-                    + getUserLocation.getUserLocation());
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (GeoIp2Exception e) {
-            e.printStackTrace();
-        }
+        String listItemsStr = LocalProductsConnector.retrieveLocalShops();
         //listItemsStr = new Scanner(new URL("/localshops?location=" +
         // getUserLocation.getUserLocation()).openStream(),"UTF-8").nextLine();
         List<String> listViewItems = new ArrayList<>();
@@ -103,6 +96,15 @@ public class LocalProductsController implements Initializable {
                 locationStr.indexOf(" - RATING:"));
         locationStr = locationStr.replace(' ', '+').substring(0, locationStr.length() - 1);
         return locationStr;
+    }
+
+    public void setUserId(int userId) {
+        this.userId = userId;
+    }
+
+    public void safeLocalProduct() throws IOException {
+        Connector.postRequest("/increaseReducedCO2?Id=" + userId + "&ReducedCO2=300");
+        textfield.setText("You saved 300 grams of CO2 emission!");
     }
 
     @FXML
