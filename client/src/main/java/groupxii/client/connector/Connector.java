@@ -1,9 +1,5 @@
 package groupxii.client.connector;
 
-import groupxii.client.vegetarianmeal.MealList;
-
-import com.fasterxml.jackson.databind.ObjectMapper;
-
 import java.net.*;
 import java.io.*;
 
@@ -39,10 +35,4 @@ public class Connector {
 		return null;
 
 	}
-
-	public MealList getMealList() {
-		String resource = "/getMealList";
-		return new MealList(getRequest(resource));
-	}
-
 }
