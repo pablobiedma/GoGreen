@@ -39,7 +39,6 @@ public class DatabaseTest {
 	@BeforeClass
 	public static void setUpDb() throws IOException {
 		addr = "localhost";
-		port = "27017";
 		Database.instance.setDbName("test");
 		Database.instance.startDb();
 
@@ -53,6 +52,7 @@ public class DatabaseTest {
 
 	@Test
 	public void testEnvVar() {
+		port = "27017";
 		PowerMockito.mockStatic(System.class);
 		PowerMockito.when(System.getenv("DB_ADDRESS")).thenReturn(addr);
 		PowerMockito.when(System.getenv("DB_PORT")).thenReturn(port);
@@ -76,9 +76,10 @@ public class DatabaseTest {
 
 	@Test
 	public void testNoEnvAddr() {
+		port = "27017";
 		PowerMockito.mockStatic(System.class);
 		PowerMockito.when(System.getenv("DB_ADDRESS")).thenReturn(null);
-		PowerMockito.when(System.getenv("DB_PORT")).thenReturn(null);
+		PowerMockito.when(System.getenv("DB_PORT")).thenReturn(port);
 
 		Database test = new Database();
 
@@ -151,8 +152,8 @@ public class DatabaseTest {
 	/*
 	@Test
 	public void testIncrementReducedCO2() {
-		Database.instance.save(usr);
 		Database.instance.incrementReducedCo2(1,2);
+		usr = Database.instance.findUserById(usr.getID						)
 		assertEquals(2, usr.getReducedCo2());
 	}
 	*/
