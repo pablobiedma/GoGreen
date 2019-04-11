@@ -14,7 +14,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane id="AnchorPane" style="-fx-background-color: #fff;" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="groupxii.client.controllers.VegetarianMealController">
+<AnchorPane id="AnchorPane" style="-fx-background-color: #fff;" xmlns="http://javafx.com/javafx/8.0.201" xmlns:fx="http://javafx.com/fxml/1" fx:controller="groupxii.client.controllers.VegetarianMealController">
    <children>
       <Pane prefHeight="127.0" prefWidth="904.0" style="-fx-background-color: #2B8E00;">
          <children>
@@ -31,6 +31,11 @@
                   <Font name="Segoe UI" size="18.0" />
                </font>
             </Label>
+            <ImageView fitHeight="56.0" fitWidth="52.0" layoutX="799.0" layoutY="35.0" onMouseClicked="#btnBack" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/icons8-home-64.png" />
+               </image>
+            </ImageView>
             <Label alignment="CENTER" layoutX="144.0" layoutY="64.0" prefHeight="23.0" prefWidth="206.0" text="The change starts with you!" textFill="WHITE">
                <font>
                   <Font name="Segoe UI" size="12.0" />
@@ -40,15 +45,15 @@
       </Pane>
       <Pane layoutY="125.0" prefHeight="534.0" prefWidth="904.0">
          <children>
-            <Button fx:id="btnCalculateMeal" alignment="CENTER" contentDisplay="TOP" graphicTextGap="0.0" layoutX="422.0" layoutY="437.0" mnemonicParsing="false" onMouseClicked="#calculateMeal" prefHeight="64.0" prefWidth="200.0" stylesheets="@../fullpackstyling.css" text="Calculate">
+            <Button fx:id="btnSafeMeal" alignment="CENTER" contentDisplay="TOP" graphicTextGap="0.0" layoutX="530.0" layoutY="437.0" mnemonicParsing="false" onMouseClicked="#safeMeal" prefHeight="64.0" prefWidth="200.0" stylesheets="@../fullpackstyling.css" text="Calculate">
                <opaqueInsets>
                   <Insets />
                </opaqueInsets>
             </Button>
-            <Slider fx:id="sliderGoodFood" layoutX="422.0" layoutY="246.0" majorTickUnit="50.0" max="500.0" prefHeight="37.0" prefWidth="415.0" showTickLabels="true" showTickMarks="true" />
-            <Slider fx:id="sliderBadFood" layoutX="422.0" layoutY="333.0" majorTickUnit="50.0" max="500.0" prefHeight="37.0" prefWidth="415.0" showTickLabels="true" showTickMarks="true" />
-            <ChoiceBox fx:id="choiceBoxGoodFood" layoutX="77.0" layoutY="159.0" prefHeight="20" prefWidth="200" />
-            <ChoiceBox fx:id="choiceBoxBadFood" layoutX="630.0" layoutY="159.0" prefHeight="20" prefWidth="200" />
+            <Slider fx:id="slider" layoutX="422.0" layoutY="246.0" majorTickUnit="50.0" max="500.0" prefHeight="37.0" prefWidth="415.0" showTickLabels="true" showTickMarks="true" />
+            <Slider fx:id="slider1" layoutX="422.0" layoutY="333.0" majorTickUnit="50.0" max="500.0" prefHeight="37.0" prefWidth="415.0" showTickLabels="true" showTickMarks="true" />
+            <ChoiceBox fx:id="cb" layoutX="77.0" layoutY="159.0" prefHeight="20" prefWidth="200" />
+            <ChoiceBox fx:id="cb1" layoutX="630.0" layoutY="159.0" prefHeight="20" prefWidth="200" />
             <Text layoutX="80.0" layoutY="112.0" strokeType="OUTSIDE" strokeWidth="0.0" text="I ate..." textAlignment="CENTER" wrappingWidth="193.93243408203125">
                <font>
                   <Font name="Segoe UI Bold" size="46.0" />
@@ -69,16 +74,8 @@
                   <Font name="Segoe UI Bold" size="20.0" />
                </font>
             </Text>
-            <Text fx:id="reducedCo2Text" layoutX="418.0" layoutY="411.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="422.93658447265625">
-               <font>
-                  <Font size="18.0" />
-               </font></Text>
+            <Text fx:id="textfield" layoutX="212.0" layoutY="410.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="478.13665771484375" />
             <ListView fx:id="eatenMealsListView" layoutX="48.0" layoutY="229.0" prefHeight="255.0" prefWidth="328.0" />
-            <Button fx:id="btnSafeMeal" alignment="CENTER" contentDisplay="TOP" graphicTextGap="0.0" layoutX="637.0" layoutY="437.0" mnemonicParsing="false" onMouseClicked="#safeMeal" prefHeight="64.0" prefWidth="200.0" stylesheets="@../fullpackstyling.css" text="Safe Meal">
-               <opaqueInsets>
-                  <Insets />
-               </opaqueInsets>
-            </Button>
          </children>
       </Pane>
    </children>

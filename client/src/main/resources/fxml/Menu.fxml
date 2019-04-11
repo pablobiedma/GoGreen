@@ -56,7 +56,7 @@
                </graphic>
             </Button>
             <Text layoutX="243.0" layoutY="142.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-size: 20;" text="Grams of CO2  emission reduced" textAlignment="CENTER" wrappingWidth="200.00001668930054" />
-            <Text fx:id="grams" layoutX="315.0" layoutY="99.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-size: 80; -fx-font-weight: bold;" text="1" />
+            <Text fx:id="reducedCo2Text" layoutX="265.0" layoutY="99.0" strokeType="OUTSIDE" textAlignment="CENTER" strokeWidth="0.0" style="-fx-font-size: 70; -fx-font-weight: bold;" text="1" />
             <Line endX="233.99993896484375" endY="-10.0" fill="#2b8e00" layoutX="2.0" layoutY="10.0" startX="233.99993896484375" startY="190.0" stroke="#2b8e00" strokeType="OUTSIDE" strokeWidth="2.0" />
             <Line endX="435.0" endY="-20.0" fill="#2b8e00" layoutX="13.0" layoutY="20.0" startX="435.0" startY="180.0" stroke="#2b8e00" strokeType="OUTSIDE" strokeWidth="2.0" />
             <Line endX="435.0" endY="-20.0" fill="#2b8e00" layoutX="237.0" layoutY="19.0" startX="435.0" startY="180.0" stroke="#2b8e00" strokeType="OUTSIDE" strokeWidth="2.0" />
