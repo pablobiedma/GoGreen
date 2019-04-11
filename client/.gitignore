@@ -1,3 +1,5 @@
+<<<<<<< HEAD
+=======
 HELP.md
 /target/
 !.mvn/wrapper/maven-wrapper.jar
@@ -11,11 +13,14 @@ HELP.md
 .springBeans
 .sts4-cache
 
+>>>>>>> master
 ### IntelliJ IDEA ###
 .idea
 *.iws
 *.iml
 *.ipr
+<<<<<<< HEAD
+=======
 
 ### NetBeans ###
 /nbproject/private/
@@ -24,3 +29,4 @@ HELP.md
 /nbdist/
 /.nb-gradle/
 /build/
+>>>>>>> master
