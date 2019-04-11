@@ -58,67 +58,10 @@ public class TransportationController implements Initializable {
     //    @FXML
 //    private ListView<String> usedTransportListView = new ListView();
     UsedTransportList usedTransportList = new UsedTransportList();
-//    private String A = "car";
-//    private String B = "bike";
-//    private String C = "taxi";
-//    private String D = "metro";
-//    private String E = "train";
-//    private String F = "airplane";
-//    private String P = "Diesel";
-//    private String Q = "Petrol";
-//    private String R = "Electric_Wires";
-//    private String S = "none";
-//    private String goodTransportName = "";
-//    private String badTransportName = "";
-//    private String goodfuel = "";
-//    private String badfuel = "";
-    //private String host = "http://localhost:8080/";
-//    private String transportNameListStr = "";
-//    private String usedTransportListStr = "";
-//    private SafeVehicle safeTransport = new SafeVehicle();
-//   private List<String> usedTransportListViewItems = new ArrayList<String>();
-//    private List<String> l = new ArrayList<>();
-//    private List<String> l2 = new ArrayList<>();
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-//        try {
-//            transportNameListStr = new Scanner(new URL(host + "TransportNameList").openStream(),
-//                    "UTF-8").nextLine();
-//            usedTransportListStr = new Scanner(new URL(host + "usedTransportList").openStream(),
-//                    "UTF-8").nextLine();
-//
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
-//        System.out.println(transportNameListStr);
-//        System.out.println("TEST");
-//
-//        usedTransportListViewItems = Arrays.asList(usedTransportListStr.split(" - "));
-//        ObservableList<String> usedTransportObservable =
-//                FXCollections.observableArrayList(usedTransportListViewItems);
-//        usedTransportListView.setItems(usedTransportObservable);
-//        List<String> items = Arrays.asList(transportNameListStr.split(", "));
-//        ObservableList<String> listObservable = FXCollections.observableArrayList(items);
-//        l.add(A);
-//        l.add(B);
-//        l.add(C);
-//        l.add(D);
-//        l.add(E);
-//        l.add(F);
-//        l2.add(P);
-//        l2.add(Q);
-//        l2.add(R);
-//        l2.add(S);
-//        cb.getItems().addAll(listObservable);
-//        cb.getItems().addAll(l);
-//        cb1.getItems().addAll(listObservable);
-//        cb1.getItems().addAll(l);
-//        cb3.getItems().addAll(listObservable);
-//        cb3.getItems().addAll(l2);
-//        cb4.getItems().addAll(listObservable);
-//        cb4.getItems().addAll(l2);
-//        updateListView();
+
         VehicleNameList vehicleNameList = new VehicleNameList();
         ObservableList<String> listObservable = FXCollections.observableArrayList(vehicleNameList.getVehicleNameList());
         cb1.getItems().addAll(listObservable);

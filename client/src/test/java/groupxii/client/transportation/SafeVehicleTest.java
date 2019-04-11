@@ -11,7 +11,7 @@ public class SafeVehicleTest {
     private SafeVehicle safeVehicle = new SafeVehicle();
 
     @Test
-    public void safePanel() throws IOException {
+    public void safeVehicle() throws IOException {
 
         assertTrue(safeVehicle.safeVehicle("Hello", "World", 0, 1).contains("Hello"));
     }
