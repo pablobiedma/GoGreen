@@ -3,25 +3,18 @@ package groupxii.client.controllers;
 import groupxii.client.connector.VegetarianMealConnector;
 import groupxii.client.vegetarianmeal.EatenMealList;
 import groupxii.client.vegetarianmeal.MealList;
-import groupxii.client.vegetarianmeal.ReducedCo2;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.ListView;
 import javafx.scene.control.Slider;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Text;
 
-import java.io.IOException;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 import java.util.ResourceBundle;
-import java.util.Scanner;
 
 
 
@@ -47,11 +40,11 @@ public class VegetarianMealController implements Initializable {
 
     //private String goodFoodName = "";
     //private String badFoodName = "";
-//    private String host = "http://localhost:8080/";
+    //private String host = "http://localhost:8080/";
     //private String foodNameListStr = "";
     //private String eatenMealListStr = "";
- //   private SafeMeal safeMeal = new SafeMeal();
-  //  private List<String> eatenMealListViewItems = new ArrayList<String>();
+    //private SafeMeal safeMeal = new SafeMeal();
+    //private List<String> eatenMealListViewItems = new ArrayList<String>();
     EatenMealList eatenMealList = new EatenMealList();
 
     @Override
@@ -68,23 +61,26 @@ public class VegetarianMealController implements Initializable {
             e.printStackTrace();
         }
         */
-//        eatenMealListViewItems = Arrays.asList(eatenMealListStr.split(" - "));
- //       ObservableList<String> eatenMealsObservable = FXCollections.observableArrayList(eatenMealListViewItems);
-  //      eatenMealsListView.setItems(eatenMealsObservable);
+        //eatenMealListViewItems = Arrays.asList(eatenMealListStr.split(" - "));
+        //ObservableList<String> eatenMealsObservable
+        // = FXCollections.observableArrayList(eatenMealListViewItems);
+        //eatenMealsListView.setItems(eatenMealsObservable);
         MealList mealList = new MealList();
-        ObservableList<String> listObservable = FXCollections.observableArrayList(mealList.getMealList());
+        ObservableList<String> listObservable
+                = FXCollections.observableArrayList(mealList.getMealList());
         choiceBoxGoodFood.getItems().addAll(listObservable);
         choiceBoxBadFood.getItems().addAll(listObservable);
         updateListView();
     }
 
     /**
-     * updates the listview with all the items from the database.
+     * updates the list view with all the items from the database.
      */
     @FXML
     public void updateListView() {
-        //eatenMealList.setEeatenMealList();
-        ObservableList<String> eatenMealObservableList = FXCollections.observableArrayList(eatenMealList.getEatenMealList());
+        //eatenMealList.setEatenMealList();
+        ObservableList<String> eatenMealObservableList
+                = FXCollections.observableArrayList(eatenMealList.getEatenMealList());
         eatenMealsListView.setItems(eatenMealObservableList);
         /*
         try {
@@ -94,7 +90,8 @@ public class VegetarianMealController implements Initializable {
             e.printStackTrace();
         }
         eatenMealListViewItems = Arrays.asList(eatenMealListStr.split(" - "));
-        ObservableList<String> eatenMealsObservable = FXCollections.observableArrayList(eatenMealListViewItems);
+        ObservableList<String> eatenMealsObservable
+        = FXCollections.observableArrayList(eatenMealListViewItems);
         eatenMealsListView.setItems(eatenMealsObservable);
         */
     }
@@ -106,7 +103,7 @@ public class VegetarianMealController implements Initializable {
     }
 
     /**
-     * Calculates the co2 reduced emmision when the user clicks the calculate button.
+     * Calculates the co2 reduced emission when the user clicks the calculate button.
      * it also calculates the amount of points the user earned.
      * @param event mouse click
      * @throws Exception throws exception when something went wrong
@@ -124,7 +121,7 @@ public class VegetarianMealController implements Initializable {
                                                    goodServingSize,
                                                    badFoodName,
                                                  badServingSize);
-		//TODO update contoller to display result
+        //TODO update controller to display result
         updateListView();
     }
 }

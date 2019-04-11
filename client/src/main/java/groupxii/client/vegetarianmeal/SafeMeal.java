@@ -7,8 +7,8 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 
 /**
- * Resuests - Sends and interprets requests to GoGreen server.
- * @throws IOException if it recives unexpected response
+ * Requests - Sends and interprets requests to GoGreen server.
+ * @throws IOException if it receives unexpected response.
  */
 public class SafeMeal {
 
@@ -17,7 +17,7 @@ public class SafeMeal {
 
     /**
      * getRequest - Sends and interprets requests to GoGreen server.
-     * @throws IOException if it recives unexpected response
+     * @throws IOException if it receives unexpected response
      */
     public String safeMeal(String goodFoodName, String badFoodName,
                            int goodServingSize, int badServingSize) throws IOException {

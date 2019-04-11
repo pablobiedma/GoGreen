@@ -9,13 +9,13 @@ import java.util.Arrays;
 import java.util.List;
 
 /**
- * Class that stores the meal list
+ * Class that stores the meal list.
  */
 public class MealList {
     private List<String> mealList;
 
     /**
-     * Asks the connector to retrieve the meal list and parses it
+     * Asks the connector to retrieve the meal list and parses it.
      */
     public MealList() {
         String json = VegetarianMealConnector.retrieveMealList();
@@ -31,9 +31,7 @@ public class MealList {
         ObjectMapper mapper = new ObjectMapper();
         try {
             //Does this has to be like this?
-            this.mealList = mapper.
-                    readValue(
-                            json,
+            this.mealList = mapper.readValue(json,
                             mapper.getTypeFactory()
                                     .constructCollectionType(List.class,
                                             String.class));
