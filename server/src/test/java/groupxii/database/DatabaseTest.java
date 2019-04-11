@@ -1,8 +1,12 @@
 package groupxii.database;
 
-
+import com.mongodb.DB;
+import com.mongodb.MongoClient;
 
 import org.junit.Before;
+import org.junit.BeforeClass;
+import org.junit.After;
+import org.junit.AfterClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.Rule;
@@ -29,23 +33,26 @@ public class DatabaseTest {
 	List<Integer> friendsId;
 	List<MealEntry> eatenMeals;
 	UserEntry usr;
-	String addr;
-	String port;
+	static String addr;
+	static String port;
 
-	@Before
-	public void createusr() {
-		friendsId = new ArrayList<>();
-		eatenMeals = new ArrayList<>();
-		usr = new UserEntry(1,"Ivan","pass");
-	}
-
-	@Before
-	public void setUpDb() throws IOException {
+	@BeforeClass
+	public static void setUpDb() throws IOException {
 		addr = "localhost";
 		port = "27017";
 		Database.instance.setDbName("test");
 		Database.instance.startDb();
 	}
+
+	@Before
+	public void createusr() {
+		friendsId = new ArrayList<>();
+		eatenMeals = new ArrayList<>();
+
+		usr = new UserEntry(1,"Ivan","pass");
+		Database.instance.save(usr);
+	}
+
 
 	@Test
 	public void testEnvVar() {
@@ -101,7 +108,6 @@ public class DatabaseTest {
 		VehicleEntry entry = new VehicleEntry(1337, "car");
 		Database.instance.save(entry);
 		assertEquals(entry.toDbObject(), Database.instance.findVehicleEntry(entry));
-		//TODO Drop the test DB
 	}
 
 	@Test
@@ -116,39 +122,46 @@ public class DatabaseTest {
 		Database.instance.saveNonBlocking(entry);
 
 		assertEquals(entry.toDbObject(), Database.instance.findVehicleEntry(entry));
-		//TODO Drop the test DB
 	}
 
 	@Test
 	public void testUserById() {
-		Database.instance.save(usr);
 		assertNotEquals(usr.toDbObject(),Database.instance.findUserById(2));
 	}
 
 	@Test
 	public void testFindByUserName() {
-		Database.instance.save(usr);
 		assertNotEquals(usr.toDbObject(),Database.instance.findUserByName("Ivan"));
 	}
 
 
 	@Test
 	public void testSortUsersByPoints() {
-		Database.instance.save(usr);
 		assertNotEquals(usr.toDbObject(),Database.instance.sortUsersByReducedCo2());
 	}
 
 	@Test
 	public void testAddFriend() {
-		Database.instance.save(usr);
 		Database.instance.addFriend("Ivan",2);
 		assertEquals(usr.getFriendsId(),friendsId);
 	}
 
-//	@Test
-//	public void testIncrementReducedCO2() {
-//		Database.instance.saveNonBlocking(usr);
-//		Database.instance.incrementReducedCo2(1,2);
-//		assertEquals(11,usr.getReducedCo2());
-//	}
+	/*
+	@Test
+	public void testIncrementReducedCO2() {
+		Database.instance.save(usr);
+		Database.instance.incrementReducedCo2(1,2);
+		assertEquals(2, usr.getReducedCo2());
+	}
+	*/
+
+	@AfterClass
+	public static void dropTestDb() {
+		MongoClient mc;
+		DB db;
+		mc = new MongoClient(Database.instance.getDbAddr(),
+				     Database.instance.getDbPort());
+		db = mc.getDB("test");
+		db.dropDatabase();
+	}
 }
