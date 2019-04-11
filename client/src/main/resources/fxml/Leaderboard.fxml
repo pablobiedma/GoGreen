@@ -10,7 +10,11 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
+<<<<<<< HEAD
 <AnchorPane id="AnchorPane" style="-fx-background-color: #fff;" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="groupxii.client.controllers.LeaderboardController">
+=======
+<AnchorPane id="AnchorPane" style="-fx-background-color: #fff;" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.groupxii.controllers.LeaderboardController">
+>>>>>>> master
    <children>
       <Pane prefHeight="127.0" prefWidth="904.0" style="-fx-background-color: #2B8E00;">
          <children>
@@ -41,8 +45,13 @@
       </Pane>
       <Pane layoutY="125.0" prefHeight="534.0" prefWidth="904.0">
          <children>
+<<<<<<< HEAD
             <ListView fx:id="overallLeaderboard" layoutX="14.0" layoutY="71.0" prefHeight="403.0" prefWidth="419.0" style="-fx-font-size: 14px; -fx-cell-size: 15px; -fx-font-weight: bold" />
             <ListView fx:id="friendsLeaderboard" layoutX="471.0" layoutY="71.0" prefHeight="403.0" prefWidth="419.0" style="-fx-font-size: 14px; -fx-cell-size: 15px; -fx-font-weight: bold" />
+=======
+            <ListView fx:id="overallLeaderboard" layoutX="14.0" layoutY="71.0" prefHeight="440.0" prefWidth="419.0" style="-fx-font-size: 14px; -fx-cell-size: 15px; -fx-font-weight: bold" />
+            <ListView fx:id="friendsLeaderboard" layoutX="471.0" layoutY="71.0" prefHeight="440.0" prefWidth="419.0" style="-fx-font-size: 14px; -fx-cell-size: 15px; -fx-font-weight: bold" />
+>>>>>>> master
             <Text layoutX="32.0" layoutY="50.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Overall Leaderboard" textAlignment="CENTER">
                <font>
                   <Font name="System Bold" size="40.0" />
@@ -53,11 +62,14 @@
                   <Font name="System Bold" size="40.0" />
                </font>
             </Text>
+<<<<<<< HEAD
             <Text fx:id="addedFriend" fill="#ff2525" layoutX="32.0" layoutY="517.0" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER">
                <font>
                   <Font name="System Bold" size="40.0" />
                </font>
             </Text>
+=======
+>>>>>>> master
          </children></Pane>
    </children>
 </AnchorPane>

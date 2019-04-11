@@ -1,11 +1,27 @@
 package groupxii.database;
 
+import org.junit.Before;
 import org.junit.Test;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import static org.junit.Assert.*;
+
+import java.io.IOException;
 
 public class DatabaseTest {
+	List<Integer> friendsId;
+	List<MealEntry> eatenMeals;
+	UserEntry usr;
+
+	@Before
+	public void createusr() {
+		friendsId = new ArrayList<>();
+		eatenMeals = new ArrayList<>();
+		usr = new UserEntry(1,"Ivan","pass",100,1,9,friendsId, eatenMeals);
+	}
+
 	@Test
 	public void testDbAddr() {
 		Database db = new Database();
@@ -44,7 +60,7 @@ public class DatabaseTest {
 	}
 
 	@Test
-	public void testRunning() {
+	public void testRunning() throws IOException {
 		Database db = new Database();
 		db.startDb();
 		assertTrue(db.isRunning());
@@ -60,49 +76,105 @@ public class DatabaseTest {
 	*/
 
 	@Test
-	public void testSave() {
+	public void testSave() throws IOException {
 		Database.instance.setDbName("test");
 		Database.instance.startDb();
-		VehicleEntry entry = new VehicleEntry(1337, "car");
+		VehicleEntry entry = new VehicleEntry("bike", "car", 4,8);
 		Database.instance.save(entry);
 		assertEquals(entry.toDbObject(), Database.instance.findVehicleEntry(entry));
 		//TODO Drop the test DB
 	}
 
-	/*
+//	@Test
+//	public void testSaveNonBlocking() {
+//		Database.instance.setDbName("test");
+//		Database.instance.startDb();
+//		VehicleEntry entry = new VehicleEntry(1337, "car");
+//		Database.instance.saveNonBlocking(entry);
+//
+//		assertEquals(entry.toDbObject(), Database.instance.findVehicleEntry(entry));
+//		//TODO Drop the test DB
+//	}
+
+
 	@Test
-	public void testSaveNonBlocking() {
+	public void testSaveMeal() throws IOException{
 		Database.instance.setDbName("test");
 		Database.instance.startDb();
-		VehicleEntry entry = new VehicleEntry(1337, "car");
-		Database.instance.saveNonBlocking(entry);
-
-		assertEquals(entry.toDbObject(), Database.instance.findVehicleEntry(entry));
-		//TODO Drop the test DB
-	}
-	*/
-
-	@Test
-	public void testSaveMeal() {
-		Database.instance.setDbName("test");
-		Database.instance.startDb();
-		MealEntry entry = new MealEntry(1, "apple", "pizza", 100, 100, 200);
+		MealEntry entry = new MealEntry("apple",10 , "pizza", 100);
 		Database.instance.save(entry);
 		assertEquals(entry.toDbObject(), Database.instance.findMealEntry(entry));
 		//TODO Drop the test DB
 	}
 
-	/*
+//	@Test
+//	public void testSaveMealNonBlocking() throws IOException{
+//		Database.instance.setDbName("test");
+//		Database.instance.startDb();
+//		MealEntry entry = new MealEntry( "apple",10, "pizza", 100 );
+//		Database.instance.saveNonBlocking(entry);
+//
+//		assertEquals(entry.toDbObject(), Database.instance.findMealEntry(entry));
+//		//TODO Drop the test DB
+//	}
+
 	@Test
-	public void testSaveMealNonBlocking() {
+	public void testSaveUser() throws IOException{
 		Database.instance.setDbName("test");
 		Database.instance.startDb();
-		MealEntry entry = new MealEntry(1, "apple", "pizza", 100, 100, 200);
-		Database.instance.saveNonBlocking(entry);
-
-		assertEquals(entry.toDbObject(), Database.instance.findMealEntry(entry));
+		Database.instance.save(usr);
+		assertEquals(usr.toDbObject(), Database.instance.findUserEntry(usr));
 		//TODO Drop the test DB
 	}
-	*/
 
+	@Test
+	public void testSaveUserNonBlocking() throws IOException{
+		Database.instance.setDbName("test");
+		Database.instance.startDb();
+		Database.instance.saveNonBlocking(usr);
+		assertEquals(usr.toDbObject(), Database.instance.findUserEntry(usr));
+		//TODO Drop the test DB
+	}
+	@Test
+	public void testUserById() throws IOException{
+		Database.instance.setDbName("test");
+		Database.instance.startDb();
+		Database.instance.saveNonBlocking(usr);
+		assertNotEquals(usr.toDbObject(),Database.instance.findUserById(2));
+	}
+
+	@Test
+	public void testFindByUserName() throws IOException{
+		Database.instance.setDbName("test");
+		Database.instance.startDb();
+		Database.instance.saveNonBlocking(usr);
+		assertNotEquals(usr.toDbObject(),Database.instance.findUserByName("Ivan"));
+	}
+
+
+	@Test
+	public void testSortUsersByPoints() throws IOException{
+		Database.instance.setDbName("test");
+		Database.instance.startDb();
+		Database.instance.saveNonBlocking(usr);
+		assertNotEquals(usr.toDbObject(),Database.instance.sortUsersByReducedCo2());
+	}
+
+	@Test
+	public void testAddFriend() throws IOException{
+		Database.instance.setDbName("test");
+		Database.instance.startDb();
+		Database.instance.saveNonBlocking(usr);
+		Database.instance.addFriend("Ivan",2);
+		assertEquals(usr.getFriendsId(),friendsId);
+	}
+
+//	@Test
+//	public void testIncrementReducedCO2() throws IOException{
+//		Database.instance.setDbName("test");
+//		Database.instance.startDb();
+//		Database.instance.saveNonBlocking(usr);
+//		Database.instance.incrementReducedCo2(1,2);
+//		assertEquals(11,usr.getReducedCo2());
+//	}
 }
