@@ -1,4 +1,4 @@
-##### **025/04/2019  |  Sprint Planning  |  week 8**
+##### **25/04/2019  |  Sprint Planning  |  week 8**
 
 #### - Sprint Goal
  Big clean up and refactor.
