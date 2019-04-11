@@ -43,8 +43,13 @@ public class VegetarianMealController implements Initializable {
     //private String host = "http://localhost:8080/";
     //private String foodNameListStr = "";
     //private String eatenMealListStr = "";
+<<<<<<< HEAD
     //private SafeMeal safeMeal = new SafeMeal();
     //private List<String> eatenMealListViewItems = new ArrayList<String>();
+=======
+    //   private SafeMeal safeMeal = new SafeMeal();
+    //  private List<String> eatenMealListViewItems = new ArrayList<String>();
+>>>>>>> refactor_client
     EatenMealList eatenMealList = new EatenMealList();
 
     @Override
@@ -61,10 +66,16 @@ public class VegetarianMealController implements Initializable {
             e.printStackTrace();
         }
         */
+<<<<<<< HEAD
         //eatenMealListViewItems = Arrays.asList(eatenMealListStr.split(" - "));
         //ObservableList<String> eatenMealsObservable
         // = FXCollections.observableArrayList(eatenMealListViewItems);
         //eatenMealsListView.setItems(eatenMealsObservable);
+=======
+//        eatenMealListViewItems = Arrays.asList(eatenMealListStr.split(" - "));
+        //       ObservableList<String> eatenMealsObservable = FXCollections.observableArrayList(eatenMealListViewItems);
+        //      eatenMealsListView.setItems(eatenMealsObservable);
+>>>>>>> refactor_client
         MealList mealList = new MealList();
         ObservableList<String> listObservable
                 = FXCollections.observableArrayList(mealList.getMealList());
@@ -117,11 +128,19 @@ public class VegetarianMealController implements Initializable {
 
         //TODO
         String result = VegetarianMealConnector
+<<<<<<< HEAD
                             .calculateCO2Reduction(goodFoodName,
                                                    goodServingSize,
                                                    badFoodName,
                                                  badServingSize);
         //TODO update controller to display result
+=======
+                .calculateCO2Reduction(goodFoodName,
+                        goodServingSize,
+                        badFoodName,
+                        badServingSize);
+        //TODO update contoller to display result
+>>>>>>> refactor_client
         updateListView();
     }
 }
