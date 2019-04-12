@@ -1,6 +1,5 @@
 package groupxii.server.controllers;
 
-import com.mongodb.DBObject;
 import groupxii.database.Database;
 import groupxii.database.UserEntry;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,13 +20,13 @@ public class UserController {
      */
     @RequestMapping(method = RequestMethod.POST, value = "/saveUserData")
     public void saveUserData(@RequestParam(value = "username",
-            defaultValue = "Unknown") String username,
-                                  @RequestParam(value = "password",
-                                          defaultValue = "Unknown")
-                                          String password)  {
-            int userId = Database.instance.getUserCount() + 1;
-            UserEntry userEntry = new UserEntry(userId, username, password);
-            Database.instance.save(userEntry);
+        defaultValue = "Unknown") String username,
+                              @RequestParam(value = "password",
+                                      defaultValue = "Unknown")
+                                      String password)  {
+        int userId = Database.instance.getUserCount() + 1;
+        UserEntry userEntry = new UserEntry(userId, username, password);
+        Database.instance.save(userEntry);
     }
 
     /**
@@ -37,16 +36,16 @@ public class UserController {
     //Isn't this unnecessary slow?
     @RequestMapping(method = RequestMethod.GET, value = "/getFriends")
     public List<UserEntry> getFriends(@RequestParam(value = "Id",
-            defaultValue = "-1") int userId) {
-            UserEntry user =  Database.instance.findUserById(userId);
-	    List<Integer> friendsIdList = user.getFriendsId();
+        defaultValue = "-1") int userId) {
+        UserEntry user =  Database.instance.findUserById(userId);
+        List<Integer> friendsIdList = user.getFriendsId();
 
-            List<UserEntry> friends = new ArrayList<>();
-            for (int i = 0; i < friendsIdList.size(); i++) {
-                UserEntry friend =  Database.instance.findUserById(friendsIdList.get(i));
-                friends.add(friend);
-            }
-            return friends;
+        List<UserEntry> friends = new ArrayList<>();
+        for (int i = 0; i < friendsIdList.size(); i++) {
+            UserEntry friend =  Database.instance.findUserById(friendsIdList.get(i));
+            friends.add(friend);
+        }
+        return friends;
     }
 
     /**
@@ -54,7 +53,7 @@ public class UserController {
      */
     @RequestMapping(method = RequestMethod.GET, value = "/Leaderboard")
     public List<UserEntry> leaderboard() {
-            List<UserEntry> users = Database.instance.sortUsersByReducedCo2();
+        List<UserEntry> users = Database.instance.sortUsersByReducedCo2();
         return users;
     }
 
@@ -75,14 +74,16 @@ public class UserController {
     /**
      * Increments reducedCO2 with some reducedCo2 dependant on the meal.
      */
-//    @RequestMapping(method = RequestMethod.GET, value = "increaseReducedCO2")
-//    public DBObject incReducedCO2(@RequestParam(value = "Id",defaultValue = "Unknown") int userId,
-//                              @RequestParam(value = "ReducedCO2",
-//                                      defaultValue = "Unknown") int reducedCo2) {
-//        Database.instance.incrementReducedCo2(userId,reducedCo2);
-//        DBObject user = Database.instance.findDocumentById(userId);
-//        return user;
-//    }
+    /*
+      @RequestMapping(method = RequestMethod.GET, value = "increaseReducedCO2")
+      public DBObject incReducedCO2(@RequestParam(value = "Id",defaultValue = "Unknown") int userId,
+                                @RequestParam(value = "ReducedCO2",
+                                        defaultValue = "Unknown") int reducedCo2) {
+          Database.instance.incrementReducedCo2(userId,reducedCo2);
+          DBObject user = Database.instance.findDocumentById(userId);
+          return user;
+      }
+      */
     @RequestMapping(method = RequestMethod.GET, value = "/getReducedCo2OfUser")
     public int getReducedCo2OfUser(@RequestParam(value = "Id", defaultValue = "-1") int userId) {
         UserEntry user = Database.instance.findUserById(userId);

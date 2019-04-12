@@ -80,12 +80,12 @@ public class Database extends Thread {
 
         ObjectMapper objectMapper = new ObjectMapper();
         JsonNode rootNode;
-        Iterator<JsonNode> elements;
 
         mealEntryListCollection.drop();
         mealListPublic = new MealListPublic();
         rootNode = objectMapper.readTree(
                 getClass().getClassLoader().getResource("mealList.json"));
+        Iterator<JsonNode> elements;
         for (elements = rootNode.elements(); elements.hasNext(); ) {
             JsonNode node = elements.next();
             String food = node.get("food").asText();
