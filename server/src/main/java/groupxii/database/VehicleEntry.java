@@ -1,30 +1,52 @@
 package groupxii.database;
 
 import com.mongodb.DBObject;
+import groupxii.transportation.CalculatedVehicle;
 
 /**
- * Represents entries in the database which tracks 
+ * Represents entries in the database which tracks
  * which vehicle each request indicates.
  */
 public class VehicleEntry extends Entry {
-    private long userId;
-    private String vehicleType;
+    private String goodvehicleType;
+    private String badvehicleType;
+    private int reducedco2;
+    private int goodavgconsumption;
+    private int badavgconsumption;
 
     /**
-     * Creates VehicleEntry with a userid and a vehicle type.
+     * Creates VehicleEntry with a userid, vehicle type, co2 emission and type of fuel.
      */
-    public VehicleEntry(long userId, String vehicleType) {
+    public VehicleEntry(String goodvehicleType, String badvehicletype,
+                        int goodavgconsumption,
+                        int badavgconsumption) {
         super();
-        this.userId = userId;
-        this.vehicleType = vehicleType;
+        this.goodvehicleType = goodvehicleType;
+        this.badvehicleType = badvehicletype;
+        this.reducedco2 = new CalculatedVehicle(goodvehicleType, badvehicletype ,
+                goodavgconsumption, badavgconsumption).getReducedCO2();
+        this.goodavgconsumption = goodavgconsumption;
+        this.badavgconsumption = badavgconsumption;
     }
 
-    public long getUserId() {
-        return this.userId;
+    public String getGoodVehicleType() {
+        return goodvehicleType;
     }
 
-    public String getVehicleType() {
-        return this.vehicleType;
+    public String getBadvehicleType() {
+        return badvehicleType;
+    }
+
+    public int getReducedco2() {
+        return reducedco2;
+    }
+
+    public int getGoodAvgconsumption() {
+        return goodavgconsumption;
+    }
+
+    public int getBadavgconsumption() {
+        return badavgconsumption;
     }
 
     /**
@@ -32,7 +54,10 @@ public class VehicleEntry extends Entry {
      */
     public final DBObject toDbObject() {
         return super.toBasicDbObject()
-                .append("userId", this.userId)
-                .append("vehicleType", this.vehicleType);
+                .append("goodvehicleType", this.goodvehicleType)
+                .append("badvehicleType", this.badvehicleType)
+                .append("reducedco2",this.reducedco2)
+                .append("goodavgconsumption",this.goodavgconsumption)
+                .append("badavgconsumption",this.badavgconsumption);
     }
 }

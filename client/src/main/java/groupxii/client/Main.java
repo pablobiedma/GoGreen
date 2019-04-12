@@ -1,4 +1,4 @@
-package client.groupxii;
+package groupxii.client;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -21,7 +21,7 @@ public class Main extends Application {
 
     @Override
     public void start(Stage stage) throws Exception {
-        // The FXML file (in which buttons/textviews/sizes etc. are declared) will be
+        // The FXML file (in which buttons/text views/sizes etc. are declared) will be
         // read and set as scene (the stuff inside the window of the program)
         Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("fxml/Login.fxml"));
         Scene scene = new Scene(root, 900, 650);
@@ -51,6 +51,5 @@ public class Main extends Application {
     public Scene getPrimaryScene() {
         return this.primaryScene;
     }
-
 }
 

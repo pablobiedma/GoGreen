@@ -16,7 +16,8 @@ import java.util.List;
 public class UserController {
 
 
-    /** Receives data and creates a user entry in the user collection.
+    /**
+     * Receives data and creates a user entry in the user collection.
      */
     @RequestMapping(method = RequestMethod.POST, value = "/saveUserData")
     public void saveUserData(@RequestParam(value = "username",
@@ -29,8 +30,9 @@ public class UserController {
             Database.instance.save(userEntry);
     }
 
-    /** Receives user's id and returns the list
-     of his/her friends.
+    /**
+     * Receives user's id and returns the list
+     * of his/her friends.
      */
     //Isn't this unnecessary slow?
     @RequestMapping(method = RequestMethod.GET, value = "/getFriends")
@@ -47,7 +49,8 @@ public class UserController {
             return friends;
     }
 
-    /** returns all users sorted by points.
+    /**
+     * returns all users sorted by points.
      */
     @RequestMapping(method = RequestMethod.GET, value = "/Leaderboard")
     public List<UserEntry> leaderboard() {
@@ -55,19 +58,22 @@ public class UserController {
         return users;
     }
 
-    /** receives two id's and adds the second one as a friend to the first one.
+    /**
+     * receives two id's and adds the second one as a friend to the first one.
      */
     @RequestMapping(method = RequestMethod.POST, value = "/addFriend")
     public void addFriend(Principal principal,
-                          @RequestParam(value = "newFriend" ,
-                                      defaultValue = "Unknown") int friendsId) {
+                          @RequestParam(value = "newFriend",
+                                  defaultValue = "Unknown") int friendsId) {
         String user = principal.getName();
-        Database.instance.addFriend(user,friendsId);
+        Database.instance.addFriend(user, friendsId);
     }
 
 
     //TODO make internal for features
-    /** Increments reducedCO2 with some reducedCo2 dependant on the meal.
+
+    /**
+     * Increments reducedCO2 with some reducedCo2 dependant on the meal.
      */
 //    @RequestMapping(method = RequestMethod.GET, value = "increaseReducedCO2")
 //    public DBObject incReducedCO2(@RequestParam(value = "Id",defaultValue = "Unknown") int userId,
@@ -77,7 +83,6 @@ public class UserController {
 //        DBObject user = Database.instance.findDocumentById(userId);
 //        return user;
 //    }
-
     @RequestMapping(method = RequestMethod.GET, value = "/getReducedCo2OfUser")
     public int getReducedCo2OfUser(@RequestParam(value = "Id", defaultValue = "-1") int userId) {
         UserEntry user = Database.instance.findUserById(userId);
