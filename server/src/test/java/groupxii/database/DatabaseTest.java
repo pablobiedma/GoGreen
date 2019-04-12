@@ -75,6 +75,23 @@ public class DatabaseTest {
 	}
 
 	@Test
+	public void testNPEPort() {
+		PowerMockito.mockStatic(System.class);
+		PowerMockito.when(System.getenv("DB_ADDRESS")).thenReturn(addr);
+		try {
+		PowerMockito.doThrow(new NullPointerException()).when(System.class, "getenv", "DB_PORT");
+
+		} catch (Exception e) {
+			//dunno
+			assertTrue(false);
+		}
+		Database test = new Database();
+
+		assertEquals(addr, test.getDbAddr());
+		assertEquals(27017, test.getDbPort());
+	}
+
+	@Test
 	public void testNoEnvAddr() {
 		port = "27017";
 		PowerMockito.mockStatic(System.class);
@@ -122,46 +139,65 @@ public class DatabaseTest {
 		assertEquals(entry.toDbObject(), Database.instance.findVehicleEntry(entry));
 	}
 
-	@Test
-	public void testUserByWrongId() {
-		assertNotEquals(usr.toDbObject(),Database.instance.findUserById(2));
-	}
-
+	// User operation realted test block:
+	// Only positive tests :/
 	@Test
 	public void testUserById() {
-		assertEquals(usr.toDbObject(),Database.instance.findUserById(1));
+		UserEntry foundUser = Database.instance.findUserById(1);
+		assertEquals(foundUser.getUserId(), usr.getUserId());
+		assertEquals(foundUser.getUsername(), usr.getUsername());
 	}
 
 	@Test
 	public void testFindByUserName() {
-		assertEquals(usr.toDbObject(),Database.instance.findUserByName("Ivan"));
+		UserEntry foundUser = Database.instance.findUserByName("Ivan");
+		assertEquals(foundUser.getUserId(), usr.getUserId());
+		assertEquals(foundUser.getUsername(), usr.getUsername());
 	}
 
 
 	@Test
 	public void testSortUsersByPoints() {
-		assertNotEquals(usr.toDbObject(),Database.instance.sortUsersByReducedCo2());
+		UserEntry usr2 = new UserEntry(2, "CO2Reducer", "pass");
+		Database.instance.save(usr2);
+		Database.instance.incrementReducedCo2(2, 2);
+		List<UserEntry> sorted = Database.instance.sortUsersByReducedCo2();
+		assertEquals(sorted.get(0).getUsername(), "CO2Reducer");
+		assertEquals(sorted.get(1).getUsername(), "Ivan");
 	}
 
 	@Test
 	public void testAddFriend() {
 		Database.instance.addFriend("Ivan",2);
-		assertEquals(usr.getFriendsId(),friendsId);
+		friendsId.add(2);
+		UserEntry updatedUser = Database.instance.findUserById(1);
+		assertEquals(updatedUser.getFriendsId(), friendsId);
 	}
 
-	/*
 	@Test
 	public void testIncrementReducedCO2() {
 		Database.instance.incrementReducedCo2(1,2);
-		usr = Database.instance.findUserById(usr.getID						)
-		assertEquals(2, usr.getReducedCo2());
+		UserEntry updatedUser = Database.instance.findUserById(1);
+		assertEquals(2, updatedUser.getReducedCo2());
 	}
-	*/
 
 	@Test
 	public void testGetUserCount() {
-		assertEquals(1, Database.instance.getUserCount());
+		//Users should be CO2Reducer and Ivan
+		assertEquals(2, Database.instance.getUserCount());
 	}
+
+	@Test
+	public void testAddMealEntry() {
+		MealEntry me = new MealEntry("GRAPEFRUIT", 100,
+				             "GRAPEFRUIT", 100);
+		Database.instance.addEatenMeal("Ivan", me);
+		UserEntry updatedUser = Database.instance.findUserById(1);
+		assertNotNull(updatedUser.getEatenMeals().get(0)); //:(
+	}
+
+
+	//End of User related operation block
 
 	@AfterClass
 	public static void dropTestDb() {

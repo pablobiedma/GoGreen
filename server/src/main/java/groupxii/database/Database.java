@@ -46,7 +46,8 @@ public class Database extends Thread {
             dbAddr = "localhost";
         }
         try {
-            dbPort = Integer.parseInt(System.getenv("DB_PORT"));
+            String envPort = System.getenv("DB_PORT");
+            dbPort = Integer.parseInt(envPort);
         } catch (NullPointerException e) {
             dbPort = 27017;
         } catch (NumberFormatException e) {
@@ -152,32 +153,32 @@ public class Database extends Thread {
     /**
      *Finds an UserEntry by id.
      */
-    public DBObject findUserById(int id) {
+    public UserEntry findUserById(int id) {
         BasicDBObject query = new BasicDBObject();
         query.put("userId", id);
         DBObject dbObject = userCollection.findOne(query);
-        return dbObject;
+        return new UserEntry(dbObject);
     }
 
     /**
      * Finds an UserEntry by username
      */
-    public DBObject findUserByName(String username) {
+    public UserEntry findUserByName(String username) {
         BasicDBObject query = new BasicDBObject();
         query.put("username", username);
         DBObject dbObject = userCollection.findOne(query);
-        return dbObject;
+        return new UserEntry(dbObject);
     }
 
     /** 
      * Returns all users sorted by points.
      */
-    public List<DBObject> sortUsersByReducedCo2() {
-        List<DBObject> list = new ArrayList<>();
+    public List<UserEntry> sortUsersByReducedCo2() {
+        List<UserEntry> list = new ArrayList<>();
         Iterator<DBObject> cursor = userCollection.find().sort(new BasicDBObject("reducedCo2",-1));
         while (cursor.hasNext()) {
             DBObject obj = cursor.next();
-            list.add(obj);
+            list.add(new UserEntry(obj));
         }
         return list;
     }
