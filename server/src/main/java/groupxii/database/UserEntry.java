@@ -16,6 +16,8 @@ public class UserEntry extends Entry {
     private int reducedCo2;
     private List<Integer> friendsId ;
     private List<MealEntry> eatenMeals ;
+    private List<VehicleEntry> usedVehicles;
+    private List<PanelEntry> usedPanels;
 
     /** 
      * Constructor for the UserEntry class.
@@ -31,6 +33,8 @@ public class UserEntry extends Entry {
         this.reducedCo2 = 0;
         this.friendsId = new ArrayList<>();
         this.eatenMeals = new ArrayList<>();
+        this.usedVehicles = new ArrayList<>();
+        this.usedPanels = new ArrayList<>();
     }
 
     /**
@@ -46,6 +50,8 @@ public class UserEntry extends Entry {
         this.reducedCo2 = (int)obj.get("reducedCo2");
         this.friendsId = (ArrayList<Integer>)obj.get("friendsId");
         this.eatenMeals = (ArrayList<MealEntry>)obj.get("eatenMeals");
+        this.usedVehicles = (ArrayList<VehicleEntry>)obj.get("usedVehicles");
+        this.usedPanels = (ArrayList<PanelEntry>)obj.get("usedPanels");
     }
 
     public int getUserId() {
@@ -76,6 +82,14 @@ public class UserEntry extends Entry {
         return this.eatenMeals;
     }
 
+    public List<VehicleEntry> getUsedVehicles() {
+        return this.usedVehicles;
+    }
+
+    public List<PanelEntry> getUsedPanels() {
+        return this.usedPanels;
+    }
+
     /**
      * Translates into a MongoDB JSON object.
      */
@@ -88,7 +102,9 @@ public class UserEntry extends Entry {
                 .append("badge", this.badge)
                 .append("reducedCo2", this.reducedCo2)
                 .append("friendsId",this.friendsId)
-                .append("eatenMeals",this.eatenMeals);
+                .append("eatenMeals",this.eatenMeals)
+                .append("usedVehicles", this.usedVehicles)
+                .append("usedPanels", this.usedPanels);
     }
 }
 

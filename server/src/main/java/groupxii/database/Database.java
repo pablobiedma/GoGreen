@@ -13,11 +13,6 @@ import org.bson.BSONObject;
 
 import java.io.IOException;
 import java.util.ArrayList;
-<<<<<<< HEAD
-import java.util.Iterator;
-import java.util.List;
-=======
->>>>>>> origin
 import java.util.Iterator;
 import java.util.List;
 
@@ -33,16 +28,11 @@ public class Database extends Thread {
     private MongoClient mongoClient;
     private DB mongodb;
 
-    private DBCollection vehicleTrackerCollection;
-<<<<<<< HEAD
-=======
-    private DBCollection vehicleEntryListCollection;
-    private DBCollection vegetarianMealCollection;
->>>>>>> origin
-    private DBCollection mealEntryListCollection;
-    private DBCollection solarPanelCollection;
-    private DBCollection panelListEntryCollection;
     private DBCollection userCollection;
+
+    private DBCollection mealEntryListCollection;
+    private DBCollection vehicleEntryListCollection;
+    private DBCollection panelListEntryCollection;
 
     private VehicleListPublic vehicleListPublic;
     private MealListPublic mealListPublic;
@@ -79,122 +69,71 @@ public class Database extends Thread {
             mongoClient = new MongoClient(this.dbAddr, this.dbPort);
             mongodb = this.mongoClient.getDB(this.dbName);
 
-            vehicleTrackerCollection = mongodb.getCollection("vehicleTrackerCollection");
-<<<<<<< HEAD
-            mealEntryListCollection = mongodb.getCollection("mealEntryListCollection");
-=======
-            vegetarianMealCollection = mongodb.getCollection("vegetarianMealCollection");
-            solarPanelCollection = mongodb.getCollection("solarPanelCollection");
->>>>>>> origin
             userCollection = mongodb.getCollection("userCollection");
-        } catch (MongoException e) {
-            running = false;
-        }
-        try {
+
             mealEntryListCollection = mongodb.getCollection("mealEntryListCollection");
-
-<<<<<<< HEAD
-=======
-            mealEntryListCollection.drop();
-            mealListPublic = new MealListPublic();
-            ObjectMapper objectMapper = new ObjectMapper();
-            JsonNode rootNode = objectMapper.readTree(
-                    getClass().getClassLoader().getResource("mealList.json"));
-            Iterator<JsonNode> elements;
-            for (elements = rootNode.elements(); elements.hasNext(); elements.next()) {
-                JsonNode node = elements.next();
-                String food = node.get("food").asText();
-                double co2PerServing = node.get("grams_co2e_per_serving").asDouble();
-                double calPerServing = node.get("calories_per_serving").asDouble();
-                double sizeServing = node.get("serving_size").asDouble();
-                MealListEntry mealListEntry = new MealListEntry(
-                        food,
-                        co2PerServing,
-                        calPerServing,
-                        sizeServing);
-                mealEntryListCollection.insert(mealListEntry.toDbObject());
-                mealListPublic.addFoodName(food);
-            }
-            running = true;
-
+            panelListEntryCollection = mongodb.getCollection("panelListEntryCollection");
+            vehicleEntryListCollection = mongodb.getCollection("vehicleEntryListCollection");
         } catch (MongoException e) {
             running = false;
         }
-        try {
-            vehicleEntryListCollection =
-                    mongodb.getCollection("vehicleEntryListCollection");
 
-            vehicleEntryListCollection.drop();
-            vehicleListPublic = new VehicleListPublic();
-            ObjectMapper objectMapper2 = new ObjectMapper();
-            JsonNode rootNode2 = objectMapper2.readTree(
-                    getClass().getClassLoader().getResource("transportationList.json"));
-            Iterator<JsonNode> elements2 = rootNode2.elements();
-            while (elements2.hasNext()) {
-                JsonNode node = elements2.next();
-                String panel = node.get("vehiclename").asText();
-                double co2 = node.get("grams_co2_by_vehicle_per_km").asDouble();
-                String fuel = node.get("fuel").asText();
-                int avgConsumption = node.get("average_consumption_liter/100km").asInt();
-                VehicleListEntry vehicleListEntry =
-                        new VehicleListEntry(panel, co2, fuel, avgConsumption);
-                vehicleEntryListCollection.insert(vehicleListEntry.toDbObject());
-                vehicleListPublic.addVehicleName(panel);
-            }
-            running = true;
-        } catch (MongoException e) {
-            // I don't think this state is reachable.
-            // -L
-            running = false;
-        }
-        try {
-            panelListEntryCollection =
-                    mongodb.getCollection("panelListEntryCollection");
-
-            panelListEntryCollection.drop();
-            panelListPublic = new PanelListPublic();
-            ObjectMapper objectMapper = new ObjectMapper();
-            JsonNode rootnode = objectMapper.readTree(getClass().getClassLoader()
-                    .getResource("panelList.json"));
-            Iterator<JsonNode> elements = rootnode.elements();
-            while (elements.hasNext()) {
-                JsonNode node = elements.next();
-                String paneltype = node.get("panelname").asText();
-                double co2PerPanel = node.get("grams_co2_by_panel").asDouble();
-                int efficiencyrate = node.get("efficiencyrate_in_%").asInt();
-                int amount = node.get("amount").asInt();
-                PanelListEntry panelListEntry = new PanelListEntry(paneltype,
-                        co2PerPanel, efficiencyrate, amount);
-                panelListEntryCollection.insert(panelListEntry.toDbObject());
-                panelListPublic.addPaneltype(paneltype);
-            }
-            running = true;
->>>>>>> origin
-        } catch (MongoException e) {
-            // I don't think this state is reachable.
-            // -L
-        }
+        ObjectMapper objectMapper = new ObjectMapper();
+        JsonNode rootNode;
+        Iterator<JsonNode> elements;
 
         mealEntryListCollection.drop();
         mealListPublic = new MealListPublic();
-        ObjectMapper objectMapper = new ObjectMapper();
-        JsonNode rootNode = objectMapper.readTree(
-                                getClass().getClassLoader().getResource("mealList.json"));
-        Iterator<JsonNode> elements;
-        for (elements = rootNode.elements(); elements.hasNext(); elements.next()) {
+        rootNode = objectMapper.readTree(
+                getClass().getClassLoader().getResource("mealList.json"));
+        for (elements = rootNode.elements(); elements.hasNext(); ) {
             JsonNode node = elements.next();
-            String food  = node.get("food").asText();
+            String food = node.get("food").asText();
             double co2PerServing = node.get("grams_co2e_per_serving").asDouble();
             double calPerServing = node.get("calories_per_serving").asDouble();
             double sizeServing = node.get("serving_size").asDouble();
             MealListEntry mealListEntry = new MealListEntry(
-                                                  food,
-                                                  co2PerServing,
-                                                  calPerServing,
-                                                  sizeServing);
+                    food,
+                    co2PerServing,
+                    calPerServing,
+                    sizeServing);
             mealEntryListCollection.insert(mealListEntry.toDbObject());
             mealListPublic.addFoodName(food);
         }
+
+        vehicleEntryListCollection.drop();
+        vehicleListPublic = new VehicleListPublic();
+        objectMapper = new ObjectMapper();
+        rootNode = objectMapper.readTree(
+                getClass().getClassLoader().getResource("transportationList.json"));
+        for (elements = rootNode.elements(); elements.hasNext(); ) {
+            JsonNode node = elements.next();
+            String panel = node.get("vehiclename").asText();
+            double co2 = node.get("grams_co2_by_vehicle_per_km").asDouble();
+            String fuel = node.get("fuel").asText();
+            int avgConsumption = node.get("average_consumption_liter/100km").asInt();
+            VehicleListEntry vehicleListEntry =
+                    new VehicleListEntry(panel, co2, fuel, avgConsumption);
+            vehicleEntryListCollection.insert(vehicleListEntry.toDbObject());
+            vehicleListPublic.addVehicleName(panel);
+        }
+
+        panelListEntryCollection.drop();
+        panelListPublic = new PanelListPublic();
+        rootNode = objectMapper.readTree(getClass().getClassLoader()
+                .getResource("panelList.json"));
+        for (elements = rootNode.elements(); elements.hasNext(); ) {
+            JsonNode node = elements.next();
+            String paneltype = node.get("panelname").asText();
+            double co2PerPanel = node.get("grams_co2_by_panel").asDouble();
+            int efficiencyrate = node.get("efficiencyrate_in_%").asInt();
+            int amount = node.get("amount").asInt();
+            PanelListEntry panelListEntry = new PanelListEntry(paneltype,
+                    co2PerPanel, efficiencyrate, amount);
+            panelListEntryCollection.insert(panelListEntry.toDbObject());
+            panelListPublic.addPaneltype(paneltype);
+        }
+
     }
 
     public String getDbAddr() {
@@ -209,12 +148,9 @@ public class Database extends Thread {
      * Determine in which collection to put an entry.
      */
     public void save(Entry entry) {
-        if (entry instanceof VehicleEntry) {
-            this.vehicleTrackerCollection.insert(entry.toDbObject());
-        } else if (entry instanceof UserEntry) {
+        //Is this the only thing we save?
+        if (entry instanceof UserEntry) {
             this.userCollection.insert(entry.toDbObject());
-        } else if (entry instanceof PanelEntry) {
-            this.solarPanelCollection.insert(entry.toDbObject());
         }
     }
 
@@ -229,10 +165,12 @@ public class Database extends Thread {
     /**
      * Given a vehicle entry, find it in the collection.
      */
+    /* Deprecated?
     public DBObject findVehicleEntry(VehicleEntry entry) {
         DBCursor cursor = vehicleTrackerCollection.find(entry.toDbObject());
         return cursor.one();
     }
+    */
 
     /**
      * Given a food name, return the MealListEntry.
@@ -357,12 +295,12 @@ public class Database extends Thread {
     /**
      * Given a panel entry, find it in the collection.
      */
+    /*why?
     public DBObject findPanelEntry(PanelEntry entry) {
-        while (this.isActive()) {
-        }
         DBCursor cursor = solarPanelCollection.find(entry.toDbObject());
         return cursor.one();
     }
+    */
 
     /**
      * Given a paneltype, return the panelListEntry.

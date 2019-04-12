@@ -13,6 +13,8 @@ import static org.junit.Assert.*;
 public class UserEntryTest {
     List<Integer> friendsId;
     List<MealEntry> eatenMeals;
+    List<VehicleEntry> usedVehicles;
+    List<PanelEntry> usedPanels;
     UserEntry usr;
     @Before
     public void createusr() {
@@ -57,6 +59,16 @@ public class UserEntryTest {
     }
 
     @Test
+    public void getUsedVehiclesTest() {
+	    assertEquals(eatenMeals, usr.getUsedVehicles());
+    }
+
+    @Test
+    public void getUsedPanelsTest() {
+	    assertEquals(eatenMeals, usr.getUsedPanels());
+    }
+
+    @Test
     public void testToDBObject() {
 	    DBObject obj = usr.toDbObject();
 	    assertTrue(obj.containsField("userId"));
@@ -67,6 +79,8 @@ public class UserEntryTest {
 	    assertTrue(obj.containsField("reducedCo2"));
 	    assertTrue(obj.containsField("friendsId"));
 	    assertTrue(obj.containsField("eatenMeals"));
+	    assertTrue(obj.containsField("usedVehicles"));
+	    assertTrue(obj.containsField("usedPanels"));
     }
 
     @Test

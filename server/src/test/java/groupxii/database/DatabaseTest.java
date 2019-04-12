@@ -118,12 +118,15 @@ public class DatabaseTest {
 	}
 
 
+	/*
+	 * deprecated?
 	@Test
 	public void testSave() {
 		VehicleEntry entry = new VehicleEntry(1337, "car");
 		Database.instance.save(entry);
 		assertEquals(entry.toDbObject(), Database.instance.findVehicleEntry(entry));
 	}
+	*/
 
 	@Test
 	public void testSaveNull() {
@@ -131,6 +134,8 @@ public class DatabaseTest {
 		//nothing happens => test passes
 	}
 
+	/*
+	 * deprecated?
 	@Test
 	public void testSaveNonBlocking() throws InterruptedException {
 		VehicleEntry entry = new VehicleEntry(1345, "car");
@@ -138,6 +143,7 @@ public class DatabaseTest {
 
 		assertEquals(entry.toDbObject(), Database.instance.findVehicleEntry(entry));
 	}
+	*/
 
 	// User operation realted test block:
 	// Only positive tests :/

@@ -3,6 +3,7 @@ package groupxii.server.controllers;
 import com.mongodb.DBObject;
 import groupxii.database.Database;
 import groupxii.database.VehicleEntry;
+import groupxii.database.UserEntry;
 import groupxii.transportation.CalculatedVehicle;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -73,11 +74,11 @@ public class TransportationController {
      * Given the principal, return the used vehicle list.
      */
     @RequestMapping(method = RequestMethod.GET, value = "/getUsedVehicleList")
-    public List<DBObject> getUsedVehicleList(Principal principal) {
+    public List<VehicleEntry> getUsedVehicleList(Principal principal) {
         String username = principal.getName();
-        DBObject user =  Database.instance.findUserByName(username);
-        List<DBObject> list = (ArrayList<DBObject>) user.get("usedVehicles");
-        return list;
+        UserEntry user =  Database.instance.findUserByName(username);
+        List<VehicleEntry> usedVehicles = user.getUsedVehicles();
+        return usedVehicles;
     }
 
 }
