@@ -8,14 +8,7 @@ import java.io.IOException;
 public class LocalProductsConnector {
 
     public static String retrieveLocalShops() {
-        String resource = null;
-        try {
-            resource = Connector.instance.getRequest("/localshops?location=" + GetUserLocation.getUserLocation());
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (GeoIp2Exception e) {
-            e.printStackTrace();
-        }
+        String resource = Connector.instance.getRequest("/localshops?location=" + GetUserLocation.getUserLocation());
         return resource;
     }
 }
