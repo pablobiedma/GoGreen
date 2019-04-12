@@ -22,7 +22,7 @@ public class VegetarianMealController {
     /**
      * Return a list of all available food entries that the vegetarian meal feature can process.
      */
-    @RequestMapping(method = RequestMethod.GET, value = "/getMealList")
+    @RequestMapping(method = RequestMethod.GET, value = "/mealNameList")
     public List<String> getNameList() {
         return Database.instance.getMealListFoodNames();
     }
@@ -74,7 +74,7 @@ public class VegetarianMealController {
     /**
      * Given the principal, return a EatenMealList.
      */
-    @RequestMapping(method = RequestMethod.GET, value = "/getEatenMealList")
+    @RequestMapping(method = RequestMethod.GET, value = "/eatenMealList")
     public List<DBObject> getEatenMealList(Principal principal) {
         String username = principal.getName();
         DBObject user =  Database.instance.findUserByName(username);

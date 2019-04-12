@@ -1,6 +1,7 @@
 package groupxii.client.controllers;
 
 import groupxii.client.Main;
+import groupxii.client.connector.Connector;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.input.MouseEvent;
@@ -33,12 +34,12 @@ public class MenuController implements Initializable {
 
     @FXML
     public void btnSolarPanels(MouseEvent event) throws Exception {
-        main.changeScene("VegetarianMeal.fxml", event);
+        main.changeScene("SolarPanels.fxml", event);
     }
 
     @FXML
     public void btnTransport(MouseEvent event) throws Exception {
-        main.changeScene("VegetarianMeal.fxml", event);
+        main.changeScene("Transportation.fxml", event);
     }
 
     @FXML
@@ -58,22 +59,13 @@ public class MenuController implements Initializable {
 
     @FXML
     public void btnTemperature(MouseEvent event) throws Exception {
-        main.changeScene("VegetarianMeal.fxml", event);
+        main.changeScene("Temperature.fxml", event);
     }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        String reducedCo2 = "";
-        try {
-            reducedCo2 = new Scanner(new URL("http://localhost:8080/getReducedCo2OfUser?Id=" + userId).openStream(),"UTF-8").nextLine();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        String reducedCo2 = Connector.getRequest("/getReducedCo2OfUser?Id=" + userId);
         reducedCo2Text.setText(reducedCo2);
-    }
-
-    public Main getMain(){
-        return this.main;
     }
 
 }

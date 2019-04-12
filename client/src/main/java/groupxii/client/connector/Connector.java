@@ -1,5 +1,7 @@
 package groupxii.client.connector;
 
+import groupxii.client.controllers.LoginController;
+
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
@@ -62,10 +64,8 @@ public class Connector {
 
 		return null;
 	}
-/*
-	public MealList getMealList() {
-		String resource = "/getMealList";
-		return new MealList(getRequest(resource));
-	}
-	*/
+
+	public static String updateReducedCo2(String amount){
+    	return postRequest("/increaseReducedCO2?Id=" + LoginController.userId + "&ReducedCO2=" + amount);
+    }
 }
