@@ -1,7 +1,9 @@
 package groupxii.database;
 
 import com.mongodb.DBObject;
+import org.bson.BSONObject;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class UserEntry extends Entry {
@@ -14,20 +16,42 @@ public class UserEntry extends Entry {
     private int reducedCo2;
     private List<Integer> friendsId ;
     private List<MealEntry> eatenMeals ;
+    private List<VehicleEntry> usedVehicles;
+    private List<PanelEntry> usedPanels;
 
-    /** Constructor for the UserEntry class.
+    /** 
+     * Constructor for the UserEntry class.
      */
-    public UserEntry(int userId, String username,String password,
-                     int points,int badge, int reducedCo2,List<Integer> friendsId,
-                     List<MealEntry> eatenMeals) {
+    public UserEntry(int userId, 
+                     String username,
+                     String password) {
         this.userId = userId;
         this.username = username;
         this.password = password;
-        this.points = points;
-        this.badge = badge;
-        this.reducedCo2 = reducedCo2;
-        this.friendsId = friendsId;
-        this.eatenMeals = eatenMeals;
+        this.points = 0;
+        this.badge = 0;
+        this.reducedCo2 = 0;
+        this.friendsId = new ArrayList<>();
+        this.eatenMeals = new ArrayList<>();
+        this.usedVehicles = new ArrayList<>();
+        this.usedPanels = new ArrayList<>();
+    }
+
+    /**
+     * Construct UserEntry from a BSONObject, 
+     * mostly used to translate find queries form Database to easier to work with format.
+     */
+    public UserEntry(BSONObject obj) {
+        this.userId = (int)obj.get("userId");
+        this.username = (String)obj.get("username");
+        this.password = (String)obj.get("password");
+        this.points = (int)obj.get("points");
+        this.badge = (int)obj.get("badge");
+        this.reducedCo2 = (int)obj.get("reducedCo2");
+        this.friendsId = (ArrayList<Integer>)obj.get("friendsId");
+        this.eatenMeals = (ArrayList<MealEntry>)obj.get("eatenMeals");
+        this.usedVehicles = (ArrayList<VehicleEntry>)obj.get("usedVehicles");
+        this.usedPanels = (ArrayList<PanelEntry>)obj.get("usedPanels");
     }
 
     public int getUserId() {
@@ -58,6 +82,14 @@ public class UserEntry extends Entry {
         return this.eatenMeals;
     }
 
+    public List<VehicleEntry> getUsedVehicles() {
+        return this.usedVehicles;
+    }
+
+    public List<PanelEntry> getUsedPanels() {
+        return this.usedPanels;
+    }
+
     /**
      * Translates into a MongoDB JSON object.
      */
@@ -70,7 +102,9 @@ public class UserEntry extends Entry {
                 .append("badge", this.badge)
                 .append("reducedCo2", this.reducedCo2)
                 .append("friendsId",this.friendsId)
-                .append("eatenMeals",this.eatenMeals);
+                .append("eatenMeals",this.eatenMeals)
+                .append("usedVehicles", this.usedVehicles)
+                .append("usedPanels", this.usedPanels);
     }
 }
 

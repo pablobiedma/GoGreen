@@ -1,8 +1,8 @@
 package groupxii.server.controllers;
 
-import com.mongodb.DBObject;
 import groupxii.database.Database;
 import groupxii.database.MealEntry;
+import groupxii.database.UserEntry;
 import groupxii.vegetarianmeal.CalculatedMeal;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.security.Principal;
-import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -75,10 +74,10 @@ public class VegetarianMealController {
      * Given the principal, return a EatenMealList.
      */
     @RequestMapping(method = RequestMethod.GET, value = "/getEatenMealList")
-    public List<DBObject> getEatenMealList(Principal principal) {
+    public List<MealEntry> getEatenMealList(Principal principal) {
         String username = principal.getName();
-        DBObject user =  Database.instance.findUserByName(username);
-        List<DBObject> list = (ArrayList<DBObject>) user.get("eatenMeals");
+        UserEntry user =  Database.instance.findUserByName(username);
+        List<MealEntry> list = user.getEatenMeals(); 
         return list;
     }
 }

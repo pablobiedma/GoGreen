@@ -42,20 +42,34 @@ public class VehicleListEntryTest {
         assertNull(vle.getVehicletype());
         assertEquals(vle.getCo2PerVehicle(), 0.0, 0);
         assertNull(vle.getFuel());
-        assertEquals(vle.getAvgConsumption(),0);
+        assertEquals(vle.getAvgConsumption(), 0);
     }
 
     @Test
-    public void testFromBadObj() {
+    public void testFromDBObj() {
         DBObject obj = new BasicDBObject().append("vehicletype","car")
                 .append("co2PerVehicle", 84.3)
                 .append("fuel", "Diesel")
                 .append("AvgConsumption", 5);
         vle = new VehicleListEntry(obj);
-        assertNotNull(vle.getVehicletype());
+        assertEquals(vle.getVehicletype(), "car");
         assertEquals(vle.getCo2PerVehicle(), 84.3, 0);
-        assertNotNull(vle.getFuel());
-        assertEquals(vle.getAvgConsumption(),5);
+        assertEquals(vle.getFuel(), "Diesel");
+        assertEquals(vle.getAvgConsumption(), 5);
+    }
+
+
+    @Test
+    public void testFromBadObj() {
+        DBObject obj = new BasicDBObject().append("vhcltype","car")
+                .append("co2", 84.3)
+                .append("gorivo", "Diesel")
+                .append("Consum", 5);
+        vle = new VehicleListEntry(obj);
+        assertNull(vle.getVehicletype());
+        assertEquals(vle.getCo2PerVehicle(), 0.0, 0);
+        assertNull(vle.getFuel());
+        assertEquals(vle.getAvgConsumption(), 0);
     }
 
     @Test
