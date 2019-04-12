@@ -45,8 +45,7 @@ public class LocalProductsController implements Initializable {
         String listItemsStr = LocalProductsConnector.retrieveLocalShops();
         //listItemsStr = new Scanner(new URL("/localshops?location=" +
         // getUserLocation.getUserLocation()).openStream(),"UTF-8").nextLine();
-        List<String> listViewItems = new ArrayList<>();
-        listViewItems = Arrays.asList(listItemsStr.split(", "));
+        List<String> listViewItems = Arrays.asList(listItemsStr.split(", "));
         ObservableList<String> listViewObservable =
                 FXCollections.observableArrayList(listViewItems);
         //listViewObservable = FXCollections.observableArrayList(listViewItems);
@@ -96,10 +95,6 @@ public class LocalProductsController implements Initializable {
                 locationStr.indexOf(" - RATING:"));
         locationStr = locationStr.replace(' ', '+').substring(0, locationStr.length() - 1);
         return locationStr;
-    }
-
-    public void setUserId(int userId) {
-        this.userId = userId;
     }
 
     public void safeLocalProduct() throws IOException {

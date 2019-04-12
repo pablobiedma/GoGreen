@@ -3,7 +3,6 @@ package groupxii.client.localproducts;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.maxmind.geoip2.exception.GeoIp2Exception;
-import groupxii.client.connector.Connector;
 
 import java.io.IOException;
 import java.net.URL;
@@ -19,11 +18,10 @@ public class GetUserLocation {
      * @throws GeoIp2Exception if ip cannot be turned into a location.
      */
     public static String getUserLocation() {
-        String ipAddress = Connector.instance.getRequest("http://eth0.me/");
         ObjectMapper objectMapper = new ObjectMapper();
-        String url = "http://api.ipstack.com/" + ipAddress + "?access_key=f8449c29422a48b1dd367afadaa10714";
         JsonNode rootNode = null;
         try {
+            String ipAddress = new Scanner(new URL("http://eth0.me/").openStream()).nextLine();
             rootNode = objectMapper.readTree(new URL("http://api.ipstack.com/" + ipAddress + "?access_key=f8449c29422a48b1dd367afadaa10714"));
         } catch (IOException e) {
             e.printStackTrace();
