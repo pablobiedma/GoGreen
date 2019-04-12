@@ -11,11 +11,10 @@ import com.mongodb.MongoClient;
 import com.mongodb.MongoException;
 import org.bson.BSONObject;
 
-import java.lang.Deprecated;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
-import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
@@ -100,11 +99,11 @@ public class Database extends Thread {
     }
 
     public String getDbAddr() {
-	    return this.dbAddr;
+        return this.dbAddr;
     }
 
     public int getDbPort() {
-	    return this.dbPort;
+        return this.dbPort;
     }
 
     /**
@@ -161,7 +160,7 @@ public class Database extends Thread {
     }
 
     /**
-     * Finds an UserEntry by username
+     * Finds an UserEntry by username.
      */
     public UserEntry findUserByName(String username) {
         BasicDBObject query = new BasicDBObject();
@@ -204,14 +203,15 @@ public class Database extends Thread {
     }
 
     /** 
-     * Counts how many entries there are in the database and increments the number by one for the userId.
+     * Counts how many entries there are in the database.
      */
     public int getUserCount() {
         return (int)userCollection.count();
     }
 
     /**
-     * Receives username and a MealEntry and adds the eaten meal to the eaten meal list of the user.
+     * Receives username and a MealEntry and adds the eaten meal 
+     * to the "eatenMeal" list of the user's database entry.
      */
     public void addEatenMeal(String userString, MealEntry mealEntry) {
         BasicDBObject newDocument = new BasicDBObject();

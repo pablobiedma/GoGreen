@@ -1,7 +1,6 @@
 package groupxii.database;
 
 import com.mongodb.DBObject;
-import org.bson.types.BasicBSONList;
 import org.bson.BSONObject;
 
 import java.util.ArrayList;
