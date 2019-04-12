@@ -1,5 +1,7 @@
 package groupxii.database;
 
+import com.mongodb.DBObject;
+
 import org.junit.Before;
 import org.junit.Test;
 
@@ -52,5 +54,25 @@ public class UserEntryTest {
     @Test
     public void getEatenMealsTest() {
 	    assertEquals(eatenMeals, usr.getEatenMeals());
+    }
+
+    @Test
+    public void testToDBObject() {
+	    DBObject obj = usr.toDbObject();
+	    assertTrue(obj.containsField("userId"));
+	    assertTrue(obj.containsField("username"));
+	    assertTrue(obj.containsField("password"));
+	    assertTrue(obj.containsField("points"));
+	    assertTrue(obj.containsField("badge"));
+	    assertTrue(obj.containsField("reducedCo2"));
+	    assertTrue(obj.containsField("friendsId"));
+	    assertTrue(obj.containsField("eatenMeals"));
+    }
+
+    @Test
+    public void testFromDBObject() {
+	    DBObject obj = usr.toDbObject();
+	    usr = new UserEntry(obj);
+	    testToDBObject();
     }
 }
