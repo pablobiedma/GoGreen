@@ -75,10 +75,12 @@ public class VegetarianMealController {
      * Given the principal, return a EatenMealList.
      */
     @RequestMapping(method = RequestMethod.GET, value = "/eatenMealList")
-    public List<DBObject> getEatenMealList(Principal principal) {
-        String username = principal.getName();
-        DBObject user =  Database.instance.findUserByName(username);
-        List<DBObject> list = (ArrayList<DBObject>) user.get("eatenMeals");
+    public List<String> getEatenMealList(@RequestParam(value = "userId",
+                                                        defaultValue = "-1")
+                                                       Integer userId,
+                                           Principal principal) {
+        DBObject user =  Database.instance.findUserById(userId);
+        List<String> list = (ArrayList<String>) user.get("eatenMeals");
         return list;
     }
 }
