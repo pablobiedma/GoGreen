@@ -40,7 +40,7 @@ public class Connector {
             String responseLine;
             while ((responseLine = in.readLine()) != null) {
                 response.append(responseLine);
-			}
+            }
             in.close();
 
             // Temporary hack
