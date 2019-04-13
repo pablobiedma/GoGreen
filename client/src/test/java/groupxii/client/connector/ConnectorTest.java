@@ -12,7 +12,9 @@ import org.powermock.modules.junit4.PowerMockRunner;
 
 import static org.mockito.Mockito.*;
 
+import java.io.ByteArrayOutputStream;
 import java.io.StringBufferInputStream;
+import java.io.OutputStream;
 import java.io.IOException;
 import java.net.HttpURLConnection;
 import java.net.URL;
@@ -22,14 +24,22 @@ import java.net.URL;
 public class ConnectorTest {
 	URL url;
 	HttpURLConnection huc;
+	String resource;
+
+	OutputStream postedBody;
 
 	@Before
 	public void mock() throws Exception {
+		resource = "/something";
+		postedBody = new ByteArrayOutputStream();
 
 		PowerMockito.mockStatic(OpenConnection.class);
 
 		huc = PowerMockito.mock(HttpURLConnection.class);
 		PowerMockito.when(OpenConnection.openConnection(anyString())).thenReturn(huc);
+		PowerMockito.when(huc.getInputStream()).thenReturn(new StringBufferInputStream("You got it"));
+
+		PowerMockito.when(huc.getOutputStream()).thenReturn(postedBody);
 	}
 
 	@Test
@@ -40,13 +50,34 @@ public class ConnectorTest {
 
 	@Test
 	public void testGet() throws Exception {
-		String resource = "/something";
-		String body = "";
-
-		PowerMockito.when(huc.getInputStream()).thenReturn(new StringBufferInputStream("You got it"));
-
 		String result = Connector.getRequest(resource);
 
 		assertEquals("You got it", result);
 	}
+
+	@Test
+	public void testPostNoBody() throws Exception {
+		String result = Connector.postRequest(resource);
+		assertEquals("You got it", result);
+		assertEquals("", postedBody.toString());
+	}
+
+	@Test
+	public void testPostBody() throws Exception {
+		String body = "Hi";
+		String result = Connector.postRequest(resource, body);
+		assertEquals("You got it", result);
+		assertEquals(body, postedBody.toString());
+	}
+
+	@Test
+	public void testLogin() throws Exception {
+		String body = "Credentials";
+		PowerMockito.when(huc.getHeaderField("Authorization")).thenReturn("Token");
+
+		String result = Connector.postRequest("/login", body);
+		assertEquals("Token", result);
+		assertEquals(body, postedBody.toString());
+	}
+
 }
