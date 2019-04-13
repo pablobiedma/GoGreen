@@ -40,6 +40,13 @@ public class TokenManager implements Runnable {
 	public void run() {
 		while (true) {
 			refreshToken();
+
+			try {
+				Thread.sleep(timeout);
+			} catch (InterruptedException e) {
+				//Die
+				break;
+			}
 		}
 	}
 
