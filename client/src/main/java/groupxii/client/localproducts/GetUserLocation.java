@@ -25,6 +25,7 @@ public class GetUserLocation {
             rootNode = objectMapper.readTree(new URL("http://api.ipstack.com/" + ipAddress + "?access_key=f8449c29422a48b1dd367afadaa10714"));
         } catch (IOException e) {
             e.printStackTrace();
+            return "52.011578,4.357068";
         }
         String longitude = rootNode.get("longitude").asText();
         String latitude = rootNode.get("latitude").asText();

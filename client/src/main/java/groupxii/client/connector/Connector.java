@@ -43,7 +43,7 @@ public class Connector {
             System.err.println("An error has occured");
         }
 
-        return null;
+        return "An error has occured";
     }
 
     /**

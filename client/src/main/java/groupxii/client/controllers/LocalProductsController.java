@@ -22,14 +22,13 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.ResourceBundle;
 
-
 public class LocalProductsController implements Initializable {
 
     @FXML
     private Text textfield = new Text();
 
     @FXML
-    private ListView<String> localShops = new ListView();
+    private ListView<String> localShops = new ListView<String>();
 
     @FXML
     private ImageView mapsImage = new ImageView();
@@ -89,11 +88,16 @@ public class LocalProductsController implements Initializable {
      * @return String with the adress of the shop.
      */
     public String getShopLocation() {
-        String locationStr = localShops.getSelectionModel().getSelectedItem();
-        locationStr = locationStr.substring(locationStr.indexOf("LOCATED AT: "),
-                locationStr.indexOf(" - RATING:"));
-        locationStr = locationStr.replace(' ', '+').substring(0, locationStr.length() - 1);
-        return locationStr;
+
+        if(localShops.getSelectionModel().getSelectedItem() == null){
+            return "server is not running";
+        } else {
+            String locationStr = localShops.getSelectionModel().getSelectedItem();
+            locationStr = locationStr.substring(locationStr.indexOf("LOCATED AT: "),
+                    locationStr.indexOf(" - RATING:"));
+            locationStr = locationStr.replace(' ', '+').substring(0, locationStr.length() - 1);
+            return locationStr;
+        }
     }
 
     public void safeLocalProduct() throws IOException {
