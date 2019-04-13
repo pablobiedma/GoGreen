@@ -17,12 +17,13 @@ import java.net.URL;
 public class Connector {
     public static Connector instance = new Connector();
 
-    private static String request(String reqType, String resource, String body) {
+    public static String request(String reqType, String resource, String body) {
         //TODO append token as Authorization: Bearer <token>
         HttpURLConnection connection;
         try {
-            URL url = new URL(Target.getHost() + resource);
-            connection = (HttpURLConnection)url.openConnection();
+//            URL url = URLFactory.newURL(Target.getHost() + resource);
+ //           connection = (HttpURLConnection)url.openConnection();
+			connection = OpenConnection.openConnection(Target.getHost() + resource);
             if (reqType.equals("POST")) {
                 connection.setDoOutput(true);
             }
@@ -50,6 +51,7 @@ public class Connector {
                 requestBodyWriter.write(body);
                 requestBodyWriter.close();
             } catch (IOException e) {
+				e.printStackTrace();
                 //TODO
             }
         }
@@ -67,7 +69,8 @@ public class Connector {
             in.close();
             response = responseBuilder.toString();
         } catch (IOException e) {
-            //TODO
+			e.printStackTrace();
+			//TODO
         }
 
         // Temporary hack
