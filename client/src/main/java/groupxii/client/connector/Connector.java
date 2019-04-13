@@ -34,7 +34,7 @@ public class Connector {
 
 			return response.toString();
 		} catch (Exception e) {
-			System.err.println("An error has occured");
+			System.err.println("An connection error has occured");
 		}
 
 		return null;
@@ -66,17 +66,19 @@ public class Connector {
 				response.append(responseLine);
 			in.close();
 
+			// Temporary hack
+			// Since login is likely the only resource whose response
+			// will have Authorization filed...
+			String authorization = connection.getHeaderField("Authorization");
+			if (resource.equals("/login")) {
+				return authorization;
+			}
+
 			return response.toString();
 		} catch (Exception e) {
-			System.err.println("An error has occured");
+			System.err.println("An connection error has occured");
 		}
 
 		return null;
 	}
-/*
-	public MealList getMealList() {
-		String resource = "/getMealList";
-		return new MealList(getRequest(resource));
-	}
-	*/
 }

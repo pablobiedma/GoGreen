@@ -1,5 +1,7 @@
 package groupxii.client;
 
+import groupxii.client.connector.LoginConnector;
+
 /**
  * Holds the verification token and periodically updates it from the server.
  */
@@ -65,8 +67,6 @@ public class TokenManager {
 
 
 	public void refreshToken() {
-		//TODO
-		//Connector.postLogin(reqBody) or something
-		//Store that response in jwt
+		jwt = LoginConnector.postCredentials(loginReqBody);
 	}
 }
