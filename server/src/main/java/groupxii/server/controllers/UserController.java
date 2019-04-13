@@ -60,7 +60,9 @@ public class UserController {
     /**
      * receives two id's and adds the second one as a friend to the first one.
      */
-    //TODO why does it take the userID of the friend but not of the user itself? on the client everything is based on the userID since that was the first intention and is much better.
+    //TODO why does it take the userID of the friend but not of the user itself?
+    // on the client everything is based on the userID since
+    // that was the first intention and is much better.
     @RequestMapping(method = RequestMethod.POST, value = "/addFriend")
     public void addFriend(Principal principal,
                           @RequestParam(value = "newFriend",

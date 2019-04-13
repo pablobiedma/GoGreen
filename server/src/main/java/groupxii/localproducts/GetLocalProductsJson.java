@@ -11,6 +11,11 @@ public class GetLocalProductsJson {
 
     private URL url;
 
+    /**
+     * uses the google api to search for shops nearby.
+     * @param location longitude and latitude of the user
+     * @return String with a list of local shops.
+     */
     public String getLocalShopJson(String location) {
         String localShopDataJson = "";
         try {
@@ -25,6 +30,11 @@ public class GetLocalProductsJson {
         return localShopDataJson;
     }
 
+    /**
+     * reads the data from the google maps api.
+     * @return JSON string with the data from google
+     * @throws IOException if nothing is returned from the GET request
+     */
     public String readJson() throws IOException {
         String readLine = "";
         HttpURLConnection connection = (HttpURLConnection) url.openConnection();

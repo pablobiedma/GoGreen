@@ -22,6 +22,12 @@ public class LocalProductsController {
         this.localShopList = localShopList;
     }
 
+    /**
+     * get the local shop data.
+     * @param location long- and latitude of the user
+     * @return String with the local shops data
+     * @throws IOException if it is not able to connect to the api
+     */
     @RequestMapping(method = RequestMethod.GET, value = "/localshops")
     public String localShopData(@RequestParam(value = "location",
             defaultValue = "52.011578,4.357068") String location) throws IOException {

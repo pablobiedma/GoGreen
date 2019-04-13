@@ -2,7 +2,6 @@ package groupxii.client.controllers;
 
 import groupxii.client.Main;
 import groupxii.client.connector.VegetarianMealConnector;
-import groupxii.client.vegetarianmeal.EatenMealList;
 import groupxii.client.vegetarianmeal.MealList;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;

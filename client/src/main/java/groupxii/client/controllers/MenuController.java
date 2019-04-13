@@ -8,10 +8,8 @@ import javafx.scene.control.ProgressBar;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Text;
 
-import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
-import java.util.Scanner;
 
 
 public class MenuController implements Initializable {
@@ -81,7 +79,7 @@ public class MenuController implements Initializable {
         trees.setText(Double.toString(savedTrees).substring(0,3));
         int levelNumber = (int) reducedCo2Number / 10000;
         level.setText(Integer.toString(levelNumber));
-        double levelProgressNumber = (reducedCo2Number % 10000)/10000;
+        double levelProgressNumber = (reducedCo2Number % 10000) / 10000;
         levelProgress.setProgress(levelProgressNumber);
     }
 
