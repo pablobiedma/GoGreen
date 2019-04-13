@@ -17,6 +17,7 @@ import static org.junit.Assert.*;
 public class TransportationControllerTest {
 
     TransportationController transportationController;
+    UserEntry usr;
     @Before
     public void createTC() {
         try {
@@ -25,6 +26,8 @@ public class TransportationControllerTest {
             assertTrue(false);
         }
         transportationController = new TransportationController();
+        usr = new UserEntry(1,"Ivan","pass");
+        Database.instance.saveNonBlocking(usr);
     }
     @Before
 
