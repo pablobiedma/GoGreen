@@ -12,9 +12,10 @@ public class LoginController {
 		String password = "pass";
 		//TODO how do you read those?
 
-		Thread loginDaemon = new Thread(new TokenManager(username, password));
-		loginDaemon.setDaemon(true);
-		loginDaemon.start();
+		// Initializa TokenManager
+		TokenManager.instance = new TokenManager(username, password);
+
+		//TODO error checks
 
         Main main = new Main();
         main.changeScene("Menu.fxml", event);

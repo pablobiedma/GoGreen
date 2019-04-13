@@ -4,7 +4,8 @@ package groupxii.client;
  * Holds the verification token and periodically updates it from the server.
  */
 
-public class TokenManager implements Runnable {
+public class TokenManager {
+	public static TokenManager instance;
 	/**
 	 * Holds the JSON request to be posted on login.
 	 */
@@ -22,7 +23,6 @@ public class TokenManager implements Runnable {
 	public final static int timeout = 86390000;
 
 	public TokenManager(String username, String password) {
-
 		jwt = null;
 
 		loginReqBody = "{"
@@ -31,24 +31,38 @@ public class TokenManager implements Runnable {
 			+"\"password\":"
 			+ "\"" + password + "\"}";
 		//TODO hash+salt the password
+
+		Thread daemon = new Thread(new Daemon());
+		daemon.setDaemon(true);
+		daemon.start();
 	}
 
 	/**
-	 * Periodically requests a new token from the server.
-	 * Should be a daemon thread.
+	 * Returns the currently held JWT
 	 */
-	public void run() {
-		while (true) {
-			refreshToken();
+	public String getToken() {
+		return this.jwt;
+	}
 
-			try {
-				Thread.sleep(timeout);
-			} catch (InterruptedException e) {
-				//Die
-				break;
+	class Daemon implements Runnable {
+		/**
+		 * Periodically requests a new token from the server.
+		 * Should be a daemon thread.
+		 */
+		public void run() {
+			while (true) {
+				refreshToken();
+
+				try {
+					Thread.sleep(timeout);
+				} catch (InterruptedException e) {
+					//Die
+					break;
+				}
 			}
 		}
 	}
+
 
 	public void refreshToken() {
 		//TODO
