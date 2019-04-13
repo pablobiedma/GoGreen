@@ -59,7 +59,7 @@ public class TokenManager {
 					Thread.sleep(timeout);
 				} catch (InterruptedException e) {
 					//Die
-					break;
+					return;
 				}
 			}
 		}
