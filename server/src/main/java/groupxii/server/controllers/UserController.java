@@ -1,5 +1,6 @@
 package groupxii.server.controllers;
 
+import com.mongodb.DBObject;
 import groupxii.database.Database;
 import groupxii.database.UserEntry;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -78,11 +79,11 @@ public class UserController {
      * Increments reducedCO2 with some reducedCo2 dependant on the meal.
      */
     @RequestMapping(method = RequestMethod.POST, value = "/increaseReducedCO2")
-    public DBObject incReducedCO2(@RequestParam(value = "Id",defaultValue = "Unknown") int userId,
-                              @RequestParam(value = "ReducedCO2",
+    public UserEntry incReducedCO2(@RequestParam(value = "Id",defaultValue = "Unknown") int userId,
+                                  @RequestParam(value = "ReducedCO2",
                                       defaultValue = "Unknown") int reducedCo2) {
         Database.instance.incrementReducedCo2(userId,reducedCo2);
-        DBObject user = Database.instance.findUserById(userId);
+        UserEntry user = Database.instance.findUserById(userId);
         return user;
     }
 

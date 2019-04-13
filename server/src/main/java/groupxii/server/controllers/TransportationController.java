@@ -1,5 +1,6 @@
 package groupxii.server.controllers;
 
+import com.mongodb.DBObject;
 import groupxii.database.Database;
 import groupxii.database.UserEntry;
 import groupxii.database.VehicleEntry;
@@ -72,7 +73,7 @@ public class TransportationController {
      * Given the principal, return the used vehicle list.
      */
     @RequestMapping(method = RequestMethod.GET, value = "/usedTransportList")
-    public List<DBObject> getUsedVehicleList(Principal principal) {
+    public List<VehicleEntry> getUsedVehicleList(Principal principal) {
         String username = principal.getName();
         UserEntry user =  Database.instance.findUserByName(username);
         List<VehicleEntry> usedVehicles = user.getUsedVehicles();
