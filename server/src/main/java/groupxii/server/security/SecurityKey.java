@@ -10,7 +10,7 @@ import java.nio.file.Paths;
 public final class SecurityKey {
     public static SecurityKey instance = new SecurityKey();
 
-    public final String defaultFilename = "C:\\Users\\flo\\Desktop\\template\\server\\src\\main\\java\\groupxii\\server\\key"; // Fuck Checkstyle :-)
+    public final String defaultFilename = "key"; // Fuck Checkstyle :-)
     private byte[] key;
 
     public void readKey() throws IOException {
