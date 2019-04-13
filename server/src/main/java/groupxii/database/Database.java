@@ -28,13 +28,11 @@ public class Database extends Thread {
     private MongoClient mongoClient;
     private DB mongodb;
 
-    private DBCollection vehicleTrackerCollection;
-    private DBCollection vehicleEntryListCollection;
-    private DBCollection vegetarianMealCollection;
-    private DBCollection mealEntryListCollection;
-    private DBCollection solarPanelCollection;
-    private DBCollection panelListEntryCollection;
     private DBCollection userCollection;
+
+    private DBCollection mealEntryListCollection;
+    private DBCollection vehicleEntryListCollection;
+    private DBCollection panelListEntryCollection;
 
     private VehicleListPublic vehicleListPublic;
     private MealListPublic mealListPublic;
@@ -49,35 +47,93 @@ public class Database extends Thread {
             dbAddr = "localhost";
         }
         try {
-            dbPort = Integer.parseInt(System.getenv("DB_PORT"));
+            String envPort = System.getenv("DB_PORT");
+            dbPort = Integer.parseInt(envPort);
         } catch (NullPointerException e) {
             dbPort = 27017;
         } catch (NumberFormatException e) {
             dbPort = 27017;
         }
         dbName = "GoGreen";
-        running = false;
-        active = false;
-    }
-
-    public boolean isRunning() {
-        return this.running;
-    }
-
-    public boolean isActive() {
-        return active;
-    }
-
-    public void setDbAddr(String dbAddr) {
-        this.dbAddr = dbAddr;
-    }
-
-    public void setDbPort(int dbPort) {
-        this.dbPort = dbPort;
     }
 
     public void setDbName(String dbName) {
         this.dbName = dbName;
+    }
+
+    /**
+     * Starts instance of Database.
+     */
+    public void startDb() throws IOException {
+        try {
+            mongoClient = new MongoClient(this.dbAddr, this.dbPort);
+            mongodb = this.mongoClient.getDB(this.dbName);
+
+            userCollection = mongodb.getCollection("userCollection");
+
+            mealEntryListCollection = mongodb.getCollection("mealEntryListCollection");
+            panelListEntryCollection = mongodb.getCollection("panelListEntryCollection");
+            vehicleEntryListCollection = mongodb.getCollection("vehicleEntryListCollection");
+        } catch (MongoException e) {
+            running = false;
+        }
+
+        ObjectMapper objectMapper = new ObjectMapper();
+        JsonNode rootNode;
+
+        mealEntryListCollection.drop();
+        mealListPublic = new MealListPublic();
+        rootNode = objectMapper.readTree(
+                getClass().getClassLoader().getResource("mealList.json"));
+        Iterator<JsonNode> elements;
+        for (elements = rootNode.elements(); elements.hasNext(); ) {
+            JsonNode node = elements.next();
+            String food = node.get("food").asText();
+            double co2PerServing = node.get("grams_co2e_per_serving").asDouble();
+            double calPerServing = node.get("calories_per_serving").asDouble();
+            double sizeServing = node.get("serving_size").asDouble();
+            MealListEntry mealListEntry = new MealListEntry(
+                    food,
+                    co2PerServing,
+                    calPerServing,
+                    sizeServing);
+            mealEntryListCollection.insert(mealListEntry.toDbObject());
+            mealListPublic.addFoodName(food);
+        }
+
+        vehicleEntryListCollection.drop();
+        vehicleListPublic = new VehicleListPublic();
+        objectMapper = new ObjectMapper();
+        rootNode = objectMapper.readTree(
+                getClass().getClassLoader().getResource("transportationList.json"));
+        for (elements = rootNode.elements(); elements.hasNext(); ) {
+            JsonNode node = elements.next();
+            String panel = node.get("vehiclename").asText();
+            double co2 = node.get("grams_co2_by_vehicle_per_km").asDouble();
+            String fuel = node.get("fuel").asText();
+            int avgConsumption = node.get("average_consumption_liter/100km").asInt();
+            VehicleListEntry vehicleListEntry =
+                    new VehicleListEntry(panel, co2, fuel, avgConsumption);
+            vehicleEntryListCollection.insert(vehicleListEntry.toDbObject());
+            vehicleListPublic.addVehicleName(panel);
+        }
+
+        panelListEntryCollection.drop();
+        panelListPublic = new PanelListPublic();
+        rootNode = objectMapper.readTree(getClass().getClassLoader()
+                .getResource("panelList.json"));
+        for (elements = rootNode.elements(); elements.hasNext(); ) {
+            JsonNode node = elements.next();
+            String paneltype = node.get("panelname").asText();
+            double co2PerPanel = node.get("grams_co2_by_panel").asDouble();
+            int efficiencyrate = node.get("efficiencyrate_in_%").asInt();
+            int amount = node.get("amount").asInt();
+            PanelListEntry panelListEntry = new PanelListEntry(paneltype,
+                    co2PerPanel, efficiencyrate, amount);
+            panelListEntryCollection.insert(panelListEntry.toDbObject());
+            panelListPublic.addPaneltype(paneltype);
+        }
+
     }
 
     public String getDbAddr() {
@@ -88,171 +144,33 @@ public class Database extends Thread {
         return this.dbPort;
     }
 
-    public String getDbName() {
-        return this.dbName;
-    }
-
-    /**
-     * Starts instance of Database.
-     */
-    public void startDb() throws IOException {
-        try {
-            mongoClient = new MongoClient(this.getDbAddr(), this.getDbPort());
-            mongodb = this.mongoClient.getDB(this.getDbName());
-
-            vehicleTrackerCollection = mongodb.getCollection("vehicleTrackerCollection");
-            vegetarianMealCollection = mongodb.getCollection("vegetarianMealCollection");
-            solarPanelCollection = mongodb.getCollection("solarPanelCollection");
-            userCollection = mongodb.getCollection("userCollection");
-        } catch (MongoException e) {
-            running = false;
-        }
-        try {
-            mealEntryListCollection = mongodb.getCollection("mealEntryListCollection");
-
-            mealEntryListCollection.drop();
-            mealListPublic = new MealListPublic();
-            ObjectMapper objectMapper = new ObjectMapper();
-            JsonNode rootNode = objectMapper.readTree(
-                    getClass().getClassLoader().getResource("mealList.json"));
-            Iterator<JsonNode> elements;
-            for (elements = rootNode.elements(); elements.hasNext(); elements.next()) {
-                JsonNode node = elements.next();
-                String food = node.get("food").asText();
-                double co2PerServing = node.get("grams_co2e_per_serving").asDouble();
-                double calPerServing = node.get("calories_per_serving").asDouble();
-                double sizeServing = node.get("serving_size").asDouble();
-                MealListEntry mealListEntry = new MealListEntry(
-                        food,
-                        co2PerServing,
-                        calPerServing,
-                        sizeServing);
-                mealEntryListCollection.insert(mealListEntry.toDbObject());
-                mealListPublic.addFoodName(food);
-            }
-            running = true;
-
-        } catch (MongoException e) {
-            running = false;
-        }
-        try {
-            vehicleEntryListCollection =
-                    mongodb.getCollection("vehicleEntryListCollection");
-
-            vehicleEntryListCollection.drop();
-            vehicleListPublic = new VehicleListPublic();
-            ObjectMapper objectMapper2 = new ObjectMapper();
-            JsonNode rootNode2 = objectMapper2.readTree(
-                    getClass().getClassLoader().getResource("transportationList.json"));
-            Iterator<JsonNode> elements2 = rootNode2.elements();
-            while (elements2.hasNext()) {
-                JsonNode node = elements2.next();
-                String panel = node.get("vehiclename").asText();
-                double co2 = node.get("grams_co2_by_vehicle_per_km").asDouble();
-                String fuel = node.get("fuel").asText();
-                int avgConsumption = node.get("average_consumption_liter/100km").asInt();
-                VehicleListEntry vehicleListEntry =
-                        new VehicleListEntry(panel, co2, fuel, avgConsumption);
-                vehicleEntryListCollection.insert(vehicleListEntry.toDbObject());
-                vehicleListPublic.addVehicleName(panel);
-            }
-            running = true;
-        } catch (MongoException e) {
-            // I don't think this state is reachable.
-            // -L
-            running = false;
-        }
-        try {
-            panelListEntryCollection =
-                    mongodb.getCollection("panelListEntryCollection");
-
-            panelListEntryCollection.drop();
-            panelListPublic = new PanelListPublic();
-            ObjectMapper objectMapper = new ObjectMapper();
-            JsonNode rootnode = objectMapper.readTree(getClass().getClassLoader()
-                    .getResource("panelList.json"));
-            Iterator<JsonNode> elements = rootnode.elements();
-            while (elements.hasNext()) {
-                JsonNode node = elements.next();
-                String paneltype = node.get("panelname").asText();
-                double co2PerPanel = node.get("grams_co2_by_panel").asDouble();
-                int efficiencyrate = node.get("efficiencyrate_in_%").asInt();
-                int amount = node.get("amount").asInt();
-                PanelListEntry panelListEntry = new PanelListEntry(paneltype,
-                        co2PerPanel, efficiencyrate, amount);
-                panelListEntryCollection.insert(panelListEntry.toDbObject());
-                panelListPublic.addPaneltype(paneltype);
-            }
-            running = true;
-        } catch (MongoException e) {
-            // I don't think this state is reachable.
-            // -L
-            running = false;
-        }
-    }
-
-    private class SaveNonBlocking extends Thread {
-        private Entry entry;
-
-        SaveNonBlocking(Entry entry) {
-            this.entry = entry;
-        }
-
-        public void run() {
-            Database.instance.save(entry);
-        }
-    }
-
     /**
      * Determine in which collection to put an entry.
      */
     public void save(Entry entry) {
-        this.active = true;
-
-        if (entry instanceof MealEntry) {
-            this.vegetarianMealCollection.insert(entry.toDbObject());
-        }
-        if (entry instanceof VehicleEntry) {
-            this.vehicleTrackerCollection.insert(entry.toDbObject());
-        }
+        //Is this the only thing we save?
         if (entry instanceof UserEntry) {
             this.userCollection.insert(entry.toDbObject());
         }
-        if (entry instanceof PanelEntry) {
-            this.solarPanelCollection.insert(entry.toDbObject());
-        }
-        this.active = false;
     }
 
     /**
      * Call save(Entry) on a new thread.
+     * @Deprecated NonBlocking feature is dropped. This now just calls save.
      */
-
     public void saveNonBlocking(Entry entry) {
-        this.active = true;
-        SaveNonBlocking worker = new SaveNonBlocking(entry);
-        worker.start();
+        save(entry);
     }
 
     /**
      * Given a vehicle entry, find it in the collection.
      */
+    /* Deprecated?
     public DBObject findVehicleEntry(VehicleEntry entry) {
-        while (this.isActive()) {
-        }
         DBCursor cursor = vehicleTrackerCollection.find(entry.toDbObject());
         return cursor.one();
     }
-
-    /**
-     * Given a meal entry, find it in the collection.
-     */
-    public DBObject findMealEntry(MealEntry entry) {
-        while (this.isActive()) {
-        }
-        DBCursor cursor = vegetarianMealCollection.find(entry.toDbObject());
-        return cursor.one();
-    }
+    */
 
     /**
      * Given a food name, return the MealListEntry.
@@ -284,56 +202,44 @@ public class Database extends Thread {
      * Return the vehicle names from the vehicle list.
      */
     public List<String> getVehicleListVehicleNames() {
-
         return this.vehicleListPublic.getVehicleList();
-    }
-
-    /**
-     * Finds user entry.
-     */
-    public DBObject findUserEntry(UserEntry entry) {
-        while (this.isActive()) {
-        }
-        DBCursor cursor = userCollection.find(entry.toDbObject());
-        return cursor.one();
     }
 
     /**
      * Finds an UserEntry by id.
      */
-    public DBObject findUserById(int id) {
+    public UserEntry findUserById(int id) {
         BasicDBObject query = new BasicDBObject();
         query.put("userId", id);
         DBObject dbObject = userCollection.findOne(query);
-        return dbObject;
+        return new UserEntry(dbObject);
     }
 
     /**
-     * Finds User by name.
+     * Finds an UserEntry by username.
      */
-    public DBObject findUserByName(String username) {
+    public UserEntry findUserByName(String username) {
         BasicDBObject query = new BasicDBObject();
         query.put("username", username);
         DBObject dbObject = userCollection.findOne(query);
-        return dbObject;
+        return new UserEntry(dbObject);
     }
 
-    /**
-     * returns all users sorted by points.
+    /** 
+     * Returns all users sorted by points.
      */
-    public List<DBObject> sortUsersByReducedCo2() {
-        List<DBObject> list = new ArrayList<>();
-        Iterator<DBObject> cursor = userCollection.find()
-                .sort(new BasicDBObject("reducedCo2", -1));
+    public List<UserEntry> sortUsersByReducedCo2() {
+        List<UserEntry> list = new ArrayList<>();
+        Iterator<DBObject> cursor = userCollection.find().sort(new BasicDBObject("reducedCo2",-1));
         while (cursor.hasNext()) {
             DBObject obj = cursor.next();
-            list.add(obj);
+            list.add(new UserEntry(obj));
         }
         return list;
     }
 
-    /**
-     * receives two id's and adds the first one as a friend to the first one.
+    /** 
+     * Receives two id's and adds the first one as a friend to the first one.
      */
     public void addFriend(String userString, int friendId) {
         BasicDBObject newDocument = new BasicDBObject();
@@ -356,17 +262,16 @@ public class Database extends Thread {
         userCollection.update(searchQuery, newDocument);
     }
 
-    /**
-     * counts how many entries there are in the database and
-     * increments the number by one for the userId.
+    /** 
+     * Counts how many entries there are in the database.
      */
     public int getUserCount() {
-        return (int) userCollection.count();
+        return (int)userCollection.count();
     }
 
     /**
-     * receives username and a MealEntry and adds the eaten meal to the
-     * eaten meal list of the user.
+     * Receives username and a MealEntry and adds the eaten meal 
+     * to the "eatenMeal" list of the user's database entry.
      */
     public void addEatenMeal(String userString, MealEntry mealEntry) {
         BasicDBObject newDocument = new BasicDBObject();
@@ -390,12 +295,12 @@ public class Database extends Thread {
     /**
      * Given a panel entry, find it in the collection.
      */
+    /*why?
     public DBObject findPanelEntry(PanelEntry entry) {
-        while (this.isActive()) {
-        }
         DBCursor cursor = solarPanelCollection.find(entry.toDbObject());
         return cursor.one();
     }
+    */
 
     /**
      * Given a paneltype, return the panelListEntry.

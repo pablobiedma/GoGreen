@@ -1,8 +1,8 @@
 package groupxii.server.controllers;
 
-import com.mongodb.DBObject;
 import groupxii.database.Database;
 import groupxii.database.PanelEntry;
+import groupxii.database.UserEntry;
 import groupxii.solarpanels.CalculatedPanel;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.security.Principal;
-import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -55,11 +54,11 @@ public class SolarPanelController {
      * Given the principal, return the used panel list.
      */
     @RequestMapping(method = RequestMethod.GET, value = "/getUsedPanelList")
-    public List<DBObject> getUsedPanelList(Principal principal) {
+    public List<PanelEntry> getUsedPanelList(Principal principal) {
         String username = principal.getName();
-        DBObject user = Database.instance.findUserByName(username);
-        List<DBObject> list = (ArrayList<DBObject>) user.get("usedPanels");
-        return list;
+        UserEntry user = Database.instance.findUserByName(username);
+        List<PanelEntry> usedPanels = user.getUsedPanels();
+        return usedPanels;
     }
 
 }

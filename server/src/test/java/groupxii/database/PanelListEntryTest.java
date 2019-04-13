@@ -68,15 +68,15 @@ public class PanelListEntryTest {
     @Test
     public void testFromBadDBObject() {
         DBObject obj = new BasicDBObject()
-                .append("paneltype", "Monocrystalline")
-                .append("co2PerPanel", 45.0)
-                .append("efficiencyrate", 32)
-                .append("amount", 44);
+                .append("type", "Monocrystalline")
+                .append("co2", 45.0)
+                .append("eff", 32)
+                .append("howMuch", 44);
         panelListEntry = new PanelListEntry(obj);
-        assertNotNull(panelListEntry.getPaneltype());
-        assertNotEquals(panelListEntry.getCo2PerPanel(), 0.0, 0);
-        assertNotEquals(panelListEntry.getEfficiencyrate(), 0);
-        assertNotEquals(panelListEntry.getAmount(), 0);
+        assertNull(panelListEntry.getPaneltype());
+        assertEquals(panelListEntry.getCo2PerPanel(), 0.0, 0);
+        assertEquals(panelListEntry.getEfficiencyrate(), 0);
+        assertEquals(panelListEntry.getAmount(),  0);
     }
 
 
