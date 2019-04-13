@@ -54,17 +54,17 @@ public class SolarPanelControllerTest {
         assertEquals(solarPanelController.getNameList(),Database.instance.getPanelListPanelNames());
     }
 
-//    @Test
-//    public void getUsedPanelList() {
-//        Principal principal = new Principal() {
-//            @Override
-//            public String getName() {
-//                return "Ivan";
-//            }
-//        };
-//        String username = principal.getName();
-//        UserEntry userEntry = Database.instance.findUserByName(username);
-//        List<PanelEntry> panelEntries = solarPanelController.getUsedPanelList(principal);
-//        assertEquals(userEntry.getUsedPanels(),panelEntries);
-//    }
+    @Test
+    public void getUsedPanelList() {
+        Principal principal = new Principal() {
+            @Override
+            public String getName() {
+                return "Ivan";
+            }
+        };
+        String username = principal.getName();
+        UserEntry userEntry = Database.instance.findUserByName(username);
+        List<PanelEntry> panelEntries = solarPanelController.getUsedPanelList(principal);
+        assertEquals(userEntry.getUsedPanels(),panelEntries);
+    }
 }

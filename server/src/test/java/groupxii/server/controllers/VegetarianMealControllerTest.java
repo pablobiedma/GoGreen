@@ -3,6 +3,7 @@ package groupxii.server.controllers;
 import groupxii.database.MealEntry;
 import groupxii.database.Database;
 import groupxii.database.MealListPublic;
+import groupxii.database.UserEntry;
 import groupxii.vegetarianmeal.CalculatedMeal;
 import org.junit.Test;
 import org.junit.Before;
@@ -53,4 +54,19 @@ public class VegetarianMealControllerTest {
         vegetarianMealController.saveMealData("GRAPEFRUIT", 100, "BUTTER", 120,principal);
         assertEquals(vegetarianMealController.getNameList(),Database.instance.getMealListFoodNames());
     }
+
+    @Test
+    public void testGetEatenMealList() {
+        Principal principal = new Principal() {
+            @Override
+            public String getName() {
+                return "Ivan";
+            }
+        };
+        String username = principal.getName();
+        UserEntry userEntry = Database.instance.findUserByName(username);
+        List<MealEntry> mealEntries = vegetarianMealController.getEatenMealList(principal);
+        assertEquals(userEntry.getEatenMeals(),mealEntries);
+    }
+
 }

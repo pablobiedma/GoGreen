@@ -1,6 +1,7 @@
 package groupxii.server.controllers;
 
 import groupxii.database.Database;
+import groupxii.database.UserEntry;
 import groupxii.database.VehicleEntry;
 import groupxii.transportation.CalculatedVehicle;
 import org.junit.Before;
@@ -53,5 +54,19 @@ public class TransportationControllerTest {
         Database.instance.addUsedVehicle(username, vehicleEntry);
         transportationController.saveVehicleData("bike",4,"car",8,principal);
         assertEquals(transportationController.getNameList(),Database.instance.getVehicleListVehicleNames());
+    }
+
+    @Test
+    public void testGetUsedVehicles() {
+        Principal principal = new Principal() {
+            @Override
+            public String getName() {
+                return "Ivan";
+            }
+        };
+        String username = principal.getName();
+        UserEntry userEntry = Database.instance.findUserByName(username);
+        List<VehicleEntry> vehicleEntries = transportationController.getUsedVehicleList(principal);
+        assertEquals(userEntry.getUsedVehicles(),vehicleEntries);
     }
 }
