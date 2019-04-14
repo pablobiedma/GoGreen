@@ -31,18 +31,31 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
         allCustomProviders.add(new CredentialsDbAuthenticationProvider());
         return new ProviderManager(allCustomProviders);
     }
+ 
+    protected AuthenticationManager credentialsAuthentiactionManager() throws Exception {
+        List<AuthenticationProvider> allCustomProviders = new ArrayList<>();
+        allCustomProviders.add(new CredentialsDbAuthenticationProvider());
+        return new ProviderManager(allCustomProviders);
+    }
+ 
+    protected AuthenticationManager usernameAuthentiactionManager() throws Exception {
+        List<AuthenticationProvider> allCustomProviders = new ArrayList<>();
+        allCustomProviders.add(new UsernameAuthenticationProvider());
+        return new ProviderManager(allCustomProviders);
+    }
+
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
-                .addFilterBefore(new JwtVerificationFilter(authenticationManager()),
+                .addFilterBefore(new JwtVerificationFilter(usernameAuthentiactionManager()),
                         AnonymousAuthenticationFilter.class)
                 .csrf().disable() // Unecessary in REST
                 .sessionManagement()
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
                 .httpBasic().disable()
-                .addFilter(new JwtGeneratingFilter(authenticationManager()))
+                .addFilter(new JwtGeneratingFilter(credentialsAuthentiactionManager()))
                 .authorizeRequests()
                 //.anyRequest().authenticated()
                 .antMatchers("/login").permitAll()

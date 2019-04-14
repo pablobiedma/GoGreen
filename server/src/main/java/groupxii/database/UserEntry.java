@@ -42,6 +42,9 @@ public class UserEntry extends Entry {
      * mostly used to translate find queries form Database to easier to work with format.
      */
     public UserEntry(BSONObject obj) {
+        if (obj == null) {
+            return;
+	}
         this.userId = (int)obj.get("userId");
         this.username = (String)obj.get("username");
         this.password = (String)obj.get("password");

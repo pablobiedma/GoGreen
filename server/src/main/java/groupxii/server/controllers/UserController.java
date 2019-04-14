@@ -24,7 +24,7 @@ public class UserController {
                               @RequestParam(value = "password",
                                       defaultValue = "")
                                       String password)  {
-        //TODO error handlind, return responses
+        //TODO error handling, return responses
         if (username.isEmpty() || password.isEmpty()) {
             return;
         }
