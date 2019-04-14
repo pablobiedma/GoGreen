@@ -31,6 +31,9 @@ public class TrivialConnectorTest {
 		//that has only one static method?
 		LoginConnector lc = new LoginConnector();
 		assertEquals(lc.postCredentials("credentials"), "Token");
+
+		PowerMockito.when(Connector.postRequest(anyString())).thenReturn("Registered");
+		assertEquals("Registered", lc.register("user", "password"));
 	}
 
 	@Test

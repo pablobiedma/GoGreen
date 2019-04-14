@@ -2,6 +2,7 @@ package groupxii.client.controllers;
 
 import groupxii.client.Main;
 import groupxii.client.TokenManager;
+import groupxii.client.connector.LoginConnector;
 import javafx.fxml.FXML;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
@@ -21,24 +22,37 @@ public class LoginController {
 
     @FXML
     public void loginButton(MouseEvent event) throws Exception {
-		if(txtUsername.getText().isEmpty() || txtPassword.getText().isEmpty()){
-		    errorMessage.setText("Please enter a username and/or password.");
+        if(txtUsername.getText().isEmpty() || txtPassword.getText().isEmpty()){
+            errorMessage.setText("Please enter a username and/or password.");
         } else{
             String username = txtUsername.getText();
             String password = txtPassword.getText();
             // Initializa TokenManager
             TokenManager.instance = new TokenManager(username, password);
+            TokenManager.instance.refreshToken();
 
-            //TODO error checks
-
-            Main main = new Main();
-            main.changeScene("Menu.fxml", event);
+            //TODO better error checks
+            if (TokenManager.instance.getToken() != null) {
+                Main main = new Main();
+                main.changeScene("Menu.fxml", event);
+            } else {
+                errorMessage.setText("Could not authenticate, "
+                        + "please check your username/password or network connection");
+            }
         }
     }
 
     @FXML
     public void signUpButton(MouseEvent event) {
-        System.out.println("Signup");
+        if(txtUsername.getText().isEmpty() || txtPassword.getText().isEmpty()){
+            errorMessage.setText("Please enter a username and/or password.");
+        } else{
+            String username = txtUsername.getText();
+            String password = txtPassword.getText();
+
+            //This should not stay like that
+            LoginConnector.register(username, password);
+        }
     }
 }
 
