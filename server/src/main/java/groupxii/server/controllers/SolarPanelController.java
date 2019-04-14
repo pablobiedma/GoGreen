@@ -18,7 +18,7 @@ public class SolarPanelController {
     /**
      * Return a list of all available panel entries that the solar panel feature can process.
      */
-    @RequestMapping(method = RequestMethod.GET, value = "/getPanelList")
+    @RequestMapping(method = RequestMethod.GET, value = "/panelNameList")
     public List<String> getNameList() {
         return Database.instance.getPanelListPanelNames();
     }

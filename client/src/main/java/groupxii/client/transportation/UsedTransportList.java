@@ -17,7 +17,7 @@ public class UsedTransportList {
 
 
     /**
-     * Asks the connector to retrieve the eaten meal list and parses it
+     * Asks the connector to retrieve the used transport list and parses it
      */
     public void setUsedTransportList() {
         String usedTransportStr = TransportConnector.retrieveUsedTransportList();
