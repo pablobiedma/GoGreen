@@ -1,5 +1,6 @@
 package groupxii.client.connector;
 
+import groupxii.client.TokenManager;
 import groupxii.client.controllers.LoginController;
 
 import java.io.BufferedReader;
@@ -37,6 +38,9 @@ public class Connector {
             return null;
         }
 
+		if (TokenManager.instance.getToken() != null) {
+			connection.setRequestProperty("Authorization", TokenManager.instance.getToken());
+		}
 
         try {
             connection.setRequestMethod(reqType);
