@@ -9,9 +9,23 @@ import org.springframework.security.core.Authentication;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.Rule;
+import org.junit.runner.RunWith;
 import org.junit.rules.ExpectedException;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.assertFalse;
+
+import org.mockito.Mockito;
+
+import org.powermock.api.mockito.PowerMockito;
+import org.powermock.core.classloader.annotations.PrepareForTest;
+import org.powermock.modules.junit4.PowerMockRunner;
+import org.powermock.reflect.Whitebox;
+
+import groupxii.database.Database;
+import groupxii.database.UserEntry;
+
+@RunWith(PowerMockRunner.class)
+@PrepareForTest({Database.class})
 
 public class CredentialsDbAuthenticationProviderTest {
 	@Rule
@@ -51,20 +65,29 @@ public class CredentialsDbAuthenticationProviderTest {
 		assertFalse(cdap.supports(AnonymousAuthenticationToken.class));
 	}
 
-	// THE FOLLOWING TESTS ARE TEMP HACK
-	
 	@Test
 	public void testUsername0day() {
+		Database mockedDB = Mockito.mock(Database.class);
+		Mockito.when(mockedDB.findUserByName("0day")).thenReturn(new UserEntry(0, "0day", "pass"));
+
+		Whitebox.setInternalState(Database.class, "instance", mockedDB);
+
 		Authentication zeroDay = new UsernamePasswordAuthenticationToken("0day", "pass");
 		cdap.authenticate(zeroDay);
 		// No exception thrown -> test pass
 	}
 
 	@Test
-	public void testUsername1day() {
+	public void testUsernameBadPass() {
 		thrown.expect(BadCredentialsException.class);
 		thrown.expectMessage("Authentication failed");
-		Authentication firstDay = new UsernamePasswordAuthenticationToken("1day", "pass");
+
+		Database mockedDB = Mockito.mock(Database.class);
+		Mockito.when(mockedDB.findUserByName("0day")).thenReturn(new UserEntry(0, "0day", "pass"));
+
+		Whitebox.setInternalState(Database.class, "instance", mockedDB);
+
+		Authentication firstDay = new UsernamePasswordAuthenticationToken("0day", "hacker");
 		cdap.authenticate(firstDay);
 	}
 

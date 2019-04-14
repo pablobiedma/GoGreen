@@ -62,6 +62,10 @@ public class UserEntry extends Entry {
         return username;
     }
 
+    public String getPassword() {
+        return password;
+    }
+
     public int getPoints() {
         return points;
     }
