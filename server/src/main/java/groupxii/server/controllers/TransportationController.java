@@ -1,5 +1,6 @@
 package groupxii.server.controllers;
 
+import com.mongodb.DBObject;
 import groupxii.database.Database;
 import groupxii.database.UserEntry;
 import groupxii.database.VehicleEntry;
@@ -19,7 +20,7 @@ public class TransportationController {
     /**
      * Return a list of all available vehicle entries that the solar panel feature can process.
      */
-    @RequestMapping(method = RequestMethod.GET, value = "/getVehicleList")
+    @RequestMapping(method = RequestMethod.GET, value = "/vehicleNameList")
     public List<String> getNameList() {
         return Database.instance.getVehicleListVehicleNames();
     }
@@ -27,7 +28,7 @@ public class TransportationController {
     /**
      * Calculate the saved CO2 and send the response to the server.
      */
-    @RequestMapping(method = RequestMethod.GET, value = "/calculateVehicle")
+    @RequestMapping(method = RequestMethod.GET, value = "/calculateTransport")
     public CalculatedVehicle calculateVehicle(@RequestParam(value = "goodVehicleType",
             defaultValue = "Unknown")
                                                       String goodVehicleType,
@@ -71,7 +72,7 @@ public class TransportationController {
     /**
      * Given the principal, return the used vehicle list.
      */
-    @RequestMapping(method = RequestMethod.GET, value = "/getUsedVehicleList")
+    @RequestMapping(method = RequestMethod.GET, value = "/usedTransportList")
     public List<VehicleEntry> getUsedVehicleList(Principal principal) {
         String username = principal.getName();
         UserEntry user =  Database.instance.findUserByName(username);

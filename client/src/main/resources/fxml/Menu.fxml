@@ -40,7 +40,7 @@
       <Pane layoutY="120.0" prefHeight="200.0" prefWidth="900.0">
          <children>
             <Line endX="-1.220703143189894E-5" endY="200.0" fill="#2b8e00" startX="904.0" startY="200.0" stroke="#2b8e00" strokeType="OUTSIDE" strokeWidth="2.0" />
-            <ProgressBar layoutX="14.0" layoutY="147.0" prefWidth="200.0" progress="0.0" style="-fx-accent: #2B8E00;" stylesheets="@../fullpackstyling.css" />
+            <ProgressBar fx:id="levelProgress" layoutX="14.0" layoutY="147.0" prefWidth="200.0" progress="0.0" style="-fx-accent: #2B8E00;" stylesheets="@../fullpackstyling.css" />
             <Text layoutX="17.0" layoutY="57.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-size: 40;" text="LEVEL" textAlignment="CENTER" wrappingWidth="200.00001668930054" />
             <Text fx:id="level" layoutX="91.0" layoutY="132.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-size: 80; -fx-font-weight: bold;" text="1" />
             <Button fx:id="btnLeaderboard" alignment="BOTTOM_CENTER" contentDisplay="TOP" graphicTextGap="7.0" layoutX="686.0" layoutY="37.0" mnemonicParsing="false" onMouseClicked="#btnLeaderBoard" prefHeight="127.0" prefWidth="200.0" stylesheets="@../fullpackstyling.css" text="LEADERBOARD">

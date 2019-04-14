@@ -1,21 +1,16 @@
 package groupxii.client.connector;
 
-import com.maxmind.geoip2.exception.GeoIp2Exception;
 import groupxii.client.localproducts.GetUserLocation;
-
-import java.io.IOException;
 
 public class LocalProductsConnector {
 
+    /**
+     * asks for the local shops from the server.
+     * @return list with the shops nearby
+     */
     public static String retrieveLocalShops() {
-        String resource = null;
-        try {
-            resource = Connector.instance.getRequest("/localshops?location=" + GetUserLocation.getUserLocation());
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (GeoIp2Exception e) {
-            e.printStackTrace();
-        }
+        String resource = Connector.instance.getRequest("/localshops?location="
+                + GetUserLocation.getUserLocation());
         return resource;
     }
 }

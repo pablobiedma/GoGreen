@@ -3,7 +3,6 @@ package groupxii.client.localproducts;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.maxmind.geoip2.exception.GeoIp2Exception;
-import groupxii.client.connector.Connector;
 
 import java.io.IOException;
 import java.net.URL;
@@ -18,11 +17,16 @@ public class GetUserLocation {
      * @throws IOException if it is not able to connect to the api.
      * @throws GeoIp2Exception if ip cannot be turned into a location.
      */
-    public static String getUserLocation() throws IOException, GeoIp2Exception {
-        String ipAddress = Connector.instance.getRequest("http://eth0.me/");
+    public static String getUserLocation() {
         ObjectMapper objectMapper = new ObjectMapper();
-        String url = "http://api.ipstack.com/" + ipAddress + "?access_key=f8449c29422a48b1dd367afadaa10714";
-        JsonNode rootNode = objectMapper.readTree(new URL("http://api.ipstack.com/" + ipAddress + "?access_key=f8449c29422a48b1dd367afadaa10714"));
+        JsonNode rootNode = null;
+        try {
+            String ipAddress = new Scanner(new URL("http://eth0.me/").openStream()).nextLine();
+            rootNode = objectMapper.readTree(new URL("http://api.ipstack.com/" + ipAddress + "?access_key=f8449c29422a48b1dd367afadaa10714"));
+        } catch (IOException e) {
+            e.printStackTrace();
+            return "52.011578,4.357068";
+        }
         String longitude = rootNode.get("longitude").asText();
         String latitude = rootNode.get("latitude").asText();
 

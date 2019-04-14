@@ -10,7 +10,6 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Text;
 
 public class LoginController {
-
     @FXML
     private TextField txtUsername = new TextField();
 
@@ -19,6 +18,8 @@ public class LoginController {
 
     @FXML
     private Text errorMessage = new Text();
+
+    public static int userId;
 
     @FXML
     public void loginButton(MouseEvent event) throws Exception {

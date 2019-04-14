@@ -11,7 +11,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane id="AnchorPane" style="-fx-background-color: #fff;" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.groupxii.controllers.LocalProductsController">
+<AnchorPane id="AnchorPane" style="-fx-background-color: #fff;" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="groupxii.client.controllers.LocalProductsController">
    <children>
       <Pane prefHeight="127.0" prefWidth="904.0" style="-fx-background-color: #2B8E00;">
          <children>
@@ -46,7 +46,7 @@
             <Button fx:id="navigate" layoutX="20.0" layoutY="443.0" mnemonicParsing="false" onMouseClicked="#navigate" prefHeight="67.0" prefWidth="206.0" stylesheets="@../fullpackstyling.css" text="NAVIGATE TO SHOP" />
             <Button id="redbutton" fx:id="getLocation" layoutX="350.0" layoutY="443.0" mnemonicParsing="false" onMouseClicked="#getLocation" prefHeight="67.0" prefWidth="206.0" stylesheets="@../fullpackstyling.css" text="SHOW LOCATION OF SHOP" />
             <ImageView fx:id="mapsImage" fitHeight="186.0" fitWidth="865.0" layoutX="17.0" layoutY="227.0" pickOnBounds="true" preserveRatio="true" />
-            <Button fx:id="boughtLocalProduct" layoutX="679.0" layoutY="443.0" mnemonicParsing="false" onMouseClicked="#navigate" prefHeight="67.0" prefWidth="206.0" stylesheets="@../fullpackstyling.css" text="I BOUGHT A LOCAL PRODUCT" />
+            <Button fx:id="boughtLocalProduct" layoutX="679.0" layoutY="443.0" mnemonicParsing="false" onMouseClicked="#safeLocalProduct" prefHeight="67.0" prefWidth="206.0" stylesheets="@../fullpackstyling.css" text="I BOUGHT A LOCAL PRODUCT" />
             <Text fx:id="textfield" layoutX="262.0" layoutY="439.0" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="374.93670654296875">
                <font>
                   <Font name="System Bold" size="14.0" />
