@@ -70,6 +70,7 @@ public class VegetarianMealController implements Initializable {
         //eatenMealsListView.setItems(eatenMealsObservable);
 
         MealList mealList = new MealList();
+		System.out.println(mealList.getMealList().get(0));
         ObservableList<String> listObservable
                 = FXCollections.observableArrayList(mealList.getMealList());
         choiceBoxGoodFood.getItems().addAll(listObservable);

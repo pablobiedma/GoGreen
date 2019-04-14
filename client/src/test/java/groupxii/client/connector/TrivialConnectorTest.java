@@ -77,7 +77,7 @@ public class TrivialConnectorTest {
 
 	@Test
 	public void vegetarianMealConnectorTest() {
-		PowerMockito.when(Connector.getRequest("/mealNameList")).thenReturn("meal list");
+		PowerMockito.when(Connector.getRequest("/getMealList")).thenReturn("meal list");
 
 		VegetarianMealConnector vmc = new VegetarianMealConnector();
 		assertEquals(vmc.retrieveMealList(), "meal list");
