@@ -2,7 +2,7 @@ package groupxii.client.connector;
 
 public class VegetarianMealConnector {
     public static String retrieveMealList() {
-        String resource = "/getMealList";
+        String resource = "/mealNameList";
         return Connector.getRequest(resource);
     }
 
@@ -26,7 +26,7 @@ public class VegetarianMealConnector {
     }
 
     public static String retrieveEatenMealList() {
-        String resource = "/eatenMealList";
+        String resource = "/getEatenMealList";
         return Connector.getRequest(resource);
     }
 }
