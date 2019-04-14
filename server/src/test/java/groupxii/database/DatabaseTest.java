@@ -190,7 +190,7 @@ public class DatabaseTest {
 	@Test
 	public void testGetUserCount() {
 		//Users should be CO2Reducer and Ivan
-		assertEquals(1, Database.instance.getUserCount());
+		assertEquals(2, Database.instance.getUserCount());
 	}
 
 	@Test
