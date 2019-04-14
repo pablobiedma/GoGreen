@@ -1,7 +1,7 @@
 package groupxii.server.security;
 
-//TODO imports(Database, compare passwords, etc)
-
+import groupxii.database.Database;
+import groupxii.database.UserEntry;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.InsufficientAuthenticationException;
@@ -26,8 +26,12 @@ public class CredentialsDbAuthenticationProvider implements AuthenticationProvid
         String username = principal.toString();
         String password = credentials.toString();
 
-        //TODO fetch users from DB
-        if (username.equals("0day")) { // VERY VERY BAD
+        UserEntry found = Database.instance.findUserByName(username);
+        //TODO figure out how to pull this V
+        //boolean match = WebSecurityConfiguration.passwordEncoder()
+        //.matches(password, found.getPassword());
+        boolean match = password.equals(found.getPassword());
+        if (match) {
             return new UsernamePasswordAuthenticationToken(username, password);
         }
 

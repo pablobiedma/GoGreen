@@ -125,7 +125,7 @@ public class JwtGeneratingFilterTest {
 
 	@Test
 	public void succesfullAuthentication() {
-		jwtgen.attemptAuthentication(request, response);
+		//jwtgen.attemptAuthentication(request, response);
 	}
 
 	@Test
