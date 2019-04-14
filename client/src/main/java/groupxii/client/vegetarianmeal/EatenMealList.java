@@ -8,36 +8,29 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Class that stores the eaten meal list.
+ * Class that retrieves and parses the eaten meal list.
  */
-//TODO
 public class EatenMealList {
-    private List<String> mealList;
-
     /**
      * Asks the connector to retrieve the eaten meal list and parses it.
      */
-    public void setEatenMealList() {
-		mealList = new ArrayList<>();
+    public static List<String> getEatenMealList() {
+        List<String> eatenMealList = new ArrayList<>();
 
-        String eatenMealList = VegetarianMealConnector.retrieveEatenMealList();
+        JSONArray jsonArray = new JSONArray(VegetarianMealConnector.retrieveEatenMealList());
 
-		JSONArray jsonArray = new JSONArray(eatenMealList);
+        for (int i = 0; i < jsonArray.length(); i++ ) {
+            JSONObject jsonEntry = (JSONObject)jsonArray.get(i);
+            String entry = "Ate a ";
 
-		for (int i = 0; i < jsonArray.length(); i++ ) {
-			JSONObject jsonEntry = (JSONObject)jsonArray.get(i);
-			String entry = "Ate a ";
+            entry += jsonEntry.get("goodFoodName").toString();
+            entry += " and saved: ";
+            entry += jsonEntry.get("reducedCo2").toString();
+            entry += " of Co2!";
 
-			entry += jsonEntry.get("goodFoodName").toString();
-			entry += " and saved: ";
-			entry += jsonEntry.get("reducedCo2").toString();
-			entry += " of Co2!";
+            eatenMealList.add(entry);
+        }
 
-			mealList.add(entry);
-		}
-    }
-
-    public List<String> getEatenMealList() {
-        return this.mealList;
+		return eatenMealList;
     }
 }

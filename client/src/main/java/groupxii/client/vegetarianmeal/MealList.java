@@ -21,10 +21,6 @@ public class MealList {
         this.parseJson(json);
     }
 
-    public MealList(String json) {
-        this.parseJson(json);
-    }
-
     private void parseJson(String json) {
         ObjectMapper mapper = new ObjectMapper();
         try {
