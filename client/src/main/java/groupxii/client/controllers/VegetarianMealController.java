@@ -17,6 +17,8 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import java.util.*;
+
 
 
 public class VegetarianMealController implements Initializable {
@@ -70,9 +72,12 @@ public class VegetarianMealController implements Initializable {
         //eatenMealsListView.setItems(eatenMealsObservable);
 
         MealList mealList = new MealList();
+		List<String> temp = new ArrayList<String>();
+		temp.add("Hi");
+		temp.add("Entry");
 		System.out.println(mealList.getMealList().get(0));
         ObservableList<String> listObservable
-                = FXCollections.observableArrayList(mealList.getMealList());
+                = FXCollections.observableArrayList(temp);//mealList.getMealList());
         choiceBoxGoodFood.getItems().addAll(listObservable);
         choiceBoxBadFood.getItems().addAll(listObservable);
         //updateListView();
