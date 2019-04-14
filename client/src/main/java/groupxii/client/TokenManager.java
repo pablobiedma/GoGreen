@@ -5,69 +5,71 @@ import groupxii.client.connector.LoginConnector;
 /**
  * Holds the verification token and periodically updates it from the server.
  */
-
 public class TokenManager {
-	public static TokenManager instance;
-	/**
-	 * Holds the JSON request to be posted on login.
-	 */
-	private String loginReqBody;
+    public static TokenManager instance;
 
-	/**
-	 * Holds the JWT from the server.
-	 */
-	private String jwt;
+    /**
+     * The daemon timeout should roughly match the validty of the token.
+     * TODO read the validity off the token.
+     */
+    public static final int timeout = 86390000;
 
-	/**
-	 * The daemon timeout should roughly match the validty of the token.
-	 * TODO read the validity off the token.
-	 */
-	public final static int timeout = 86390000;
+    /**
+     * Holds the JSON request to be posted on login.
+     */
+    private String loginReqBody;
 
-	public TokenManager(String username, String password) {
-		jwt = null;
+    /**
+     * Holds the JWT from the server.
+     */
+    private String jwt;
 
-		loginReqBody = "{"
-			+ "\"username\":"
-			+ "\"" + username + "\", "
-			+"\"password\":"
-			+ "\"" + password + "\"}";
-		//TODO hash+salt the password
+    /**
+     * Constructs a token manager for the provided username and password.
+     */
+    public TokenManager(String username, String password) {
+        jwt = null;
 
-		Thread daemon = new Thread(new Daemon());
-		daemon.setDaemon(true);
-		daemon.start();
-	}
+        loginReqBody = "{"
+            + "\"username\":"
+            + "\"" + username + "\", "
+            + "\"password\":"
+            + "\"" + password + "\"}";
+        //TODO hash+salt the password
 
-	/**
-	 * Returns the currently held JWT
-	 */
-	public String getToken() {
-		return this.jwt;
-	}
+        Thread daemon = new Thread(new Daemon());
+        daemon.setDaemon(true);
+        daemon.start();
+    }
 
-	class Daemon implements Runnable {
-		/**
-		 * Periodically requests a new token from the server.
-		 * Should be a daemon thread.
-		 */
-		public void run() {
-			while (true) {
-				refreshToken();
+    /**
+     * Returns the currently held JWT.
+     */
+    public String getToken() {
+        return this.jwt;
+    }
 
-				try {
-					Thread.sleep(timeout);
-				} catch (InterruptedException e) {
-					//Die
-					return;
-				}
-			}
-		}
-	}
+    class Daemon implements Runnable {
+        /**
+         * Periodically requests a new token from the server.
+         * Should be a daemon thread.
+         */
+        public void run() {
+            while (true) {
+                refreshToken();
 
+                try {
+                    Thread.sleep(timeout);
+                } catch (InterruptedException e) {
+                    //Die
+                    return;
+                }
+            }
+        }
+    }
 
-	public void refreshToken() {
-		jwt = LoginConnector.postCredentials(loginReqBody);
-		System.err.println("DEBUG: Recieved Token: " + jwt);
-	}
+    public void refreshToken() {
+        jwt = LoginConnector.postCredentials(loginReqBody);
+        System.err.println("DEBUG: Recieved Token: " + jwt);
+    }
 }

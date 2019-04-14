@@ -1,7 +1,6 @@
 package groupxii.client.connector;
 
 import groupxii.client.TokenManager;
-import groupxii.client.controllers.LoginController;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -26,9 +25,6 @@ public class Connector {
         HttpURLConnection connection;
         try {
             connection = OpenConnection.openConnection(Target.getHost() + resource);
-            if (reqType.equals("POST")) {
-                connection.setDoOutput(true);
-            }
         } catch (MalformedURLException e) {
             //TODO
             return null;
@@ -37,9 +33,9 @@ public class Connector {
             return null;
         }
 
-		if (TokenManager.instance.getToken() != null) {
-			connection.setRequestProperty("Authorization", TokenManager.instance.getToken());
-		}
+        if (TokenManager.instance.getToken() != null) {
+            connection.setRequestProperty("Authorization", TokenManager.instance.getToken());
+        }
 
         try {
             connection.setRequestMethod(reqType);
@@ -49,6 +45,7 @@ public class Connector {
         }
 
         if (reqType.equals("POST")) {
+            connection.setDoOutput(true);
             try {
                 int length = body.length();
                 connection.setFixedLengthStreamingMode(length);
@@ -105,17 +102,5 @@ public class Connector {
 
     public static String postRequest(String resource, String body) {
         return request("POST", resource, body);
-	}
-
-	//WHY THE FUCK IS THIS HERE
-    /**
-     * communicates with the target server, and updates the
-     * total co2 reduction of the user in the database.
-     * @param amount of CO2 the user has reduced
-     * @return JSON String
-     */
-    public static String updateReducedCo2(String amount) {
-        return postRequest("/increaseReducedCO2?Id="
-                + LoginController.userId + "&ReducedCO2=" + amount);
     }
 }
