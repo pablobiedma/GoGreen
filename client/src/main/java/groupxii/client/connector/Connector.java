@@ -23,7 +23,6 @@ public class Connector {
      * Performs an HTTP request to a server.
      */
     public static String request(String reqType, String resource, String body) {
-        //TODO append token as Authorization: Bearer <token>
         HttpURLConnection connection;
         try {
             connection = OpenConnection.openConnection(Target.getHost() + resource);

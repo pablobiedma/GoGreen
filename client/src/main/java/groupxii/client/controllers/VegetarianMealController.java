@@ -2,6 +2,7 @@ package groupxii.client.controllers;
 
 import groupxii.client.Main;
 import groupxii.client.connector.VegetarianMealConnector;
+import groupxii.client.vegetarianmeal.ReducedCo2;
 import groupxii.client.vegetarianmeal.MealList;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -108,6 +109,17 @@ public class VegetarianMealController implements Initializable {
 
     @FXML
     public void calculateMeal(MouseEvent event) {
+        String goodFoodName = choiceBoxGoodFood.getValue();
+        int goodServingSize = (int)sliderGoodFood.getValue();
+        String badFoodName = choiceBoxBadFood.getValue();
+        int badServingSize = (int)sliderBadFood.getValue();
+
+		String result = ReducedCo2.getReducedCo2(
+				goodFoodName,
+				goodServingSize,
+				badFoodName,
+				badServingSize);
+		reducedCo2Text.setText("This will reduce " + result + " grams of CO2");
 
     }
 
@@ -124,15 +136,13 @@ public class VegetarianMealController implements Initializable {
         String badFoodName = choiceBoxBadFood.getValue();
         int badServingSize = (int)sliderBadFood.getValue();
 
-        //TODO
-        String result = VegetarianMealConnector
-                .calculateCO2Reduction(goodFoodName,
+        VegetarianMealConnector.commitMeal(goodFoodName,
                         goodServingSize,
                         badFoodName,
                         badServingSize);
         //TODO update contoller to display result
         //updateListView();
-        reducedCo2Text.setText("You reduced " + result + " grams of CO2");
+        reducedCo2Text.setText("Enjoy your meal :-)");
     }
 
     @FXML
