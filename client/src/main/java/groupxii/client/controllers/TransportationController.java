@@ -1,6 +1,8 @@
 package groupxii.client.controllers;
 
+import groupxii.client.Main;
 import groupxii.client.connector.TransportConnector;
+import groupxii.client.transportation.Reducedco2;
 import groupxii.client.transportation.UsedTransportList;
 import groupxii.client.transportation.VehicleNameList;
 import javafx.collections.FXCollections;
@@ -14,6 +16,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Text;
 
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -39,9 +42,6 @@ public class TransportationController implements Initializable {
     private Slider slider1 = new Slider();
 
     @FXML
-    private Text savedCo2 = new Text();
-
-    @FXML
     private ListView<String> usedTransportListView = new ListView();
 
 
@@ -51,8 +51,8 @@ public class TransportationController implements Initializable {
         VehicleNameList vehicleNameList = new VehicleNameList();
         ObservableList<String> listObservable =
                 FXCollections.observableArrayList(vehicleNameList.getVehicleNameList());
-        cb1.getItems().addAll(listObservable);
-        cb.getItems().addAll(listObservable);
+        cb.setItems(listObservable);
+        cb1.setItems(listObservable);
         updateListView();
     }
 
@@ -61,17 +61,24 @@ public class TransportationController implements Initializable {
      */
     @FXML
     public void updateListView() {
+        UsedTransportList usedTransportList = new UsedTransportList();
         usedTransportList.setUsedTransportList();
-        ObservableList<String> usedTransportObservableList =
-                FXCollections.observableArrayList(usedTransportList.getUsedTransportList());
-        usedTransportListView.setItems(usedTransportObservableList);
+        ObservableList<String> ObservableList
+                = FXCollections.observableArrayList(usedTransportList.getUsedTransportList());
+        usedTransportListView.setItems(ObservableList);
 
     }
 
     //TODO
     @FXML
     public void calculateTransport(MouseEvent event) {
-
+        String goodVehicle = cb.getValue();
+        String badVehicle = cb1.getValue();
+        int goodConsumption = (int) slider.getValue();
+        int badConsumption = (int) slider1.getValue();
+        String result = Reducedco2.getReducedCo2(goodVehicle,
+                goodConsumption, badVehicle, badConsumption);
+        reducedCo2Text.setText("This will reduce" + result + "grams of CO2");
     }
 
     /**
@@ -88,9 +95,15 @@ public class TransportationController implements Initializable {
         String badTransportName = cb1.getValue();
         int badConsumption = (int) slider1.getValue();
 
-        String result = TransportConnector.calculateCO2Reduction(goodTransportName,
-                badTransportName, goodConsumption, badConsumption);
-        //TODO update controller to display result
+        TransportConnector.commitTransport(goodTransportName,  goodConsumption,
+                badTransportName, badConsumption);
         updateListView();
+        reducedCo2Text.setText("Enjoy your transport :-)");
+    }
+
+    @FXML
+    public void btnBack(MouseEvent event) throws IOException {
+        Main main = new Main();
+        main.changeScene("Menu.fxml", event);
     }
 }
