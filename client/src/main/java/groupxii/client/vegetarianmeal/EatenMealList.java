@@ -1,8 +1,8 @@
 package groupxii.client.vegetarianmeal;
 
+import groupxii.client.connector.VegetarianMealConnector;
 import org.json.JSONArray;
 import org.json.JSONObject;
-import groupxii.client.connector.VegetarianMealConnector;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -31,6 +31,6 @@ public class EatenMealList {
             eatenMealList.add(entry);
         }
 
-		return eatenMealList;
+        return eatenMealList;
     }
 }

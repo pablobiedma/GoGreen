@@ -60,6 +60,9 @@ public class VegetarianMealController implements Initializable {
         eatenMealsListView.setItems(eatenMealObservableList);
     }
 
+    /**
+     * Sends request to calculate a meal and displays the result.
+     */
     @FXML
     public void calculateMeal(MouseEvent event) {
         String goodFoodName = choiceBoxGoodFood.getValue();
@@ -77,7 +80,6 @@ public class VegetarianMealController implements Initializable {
 
     /**
      * Calculates the co2 reduced emission when the user clicks the calculate button.
-     * it also calculates the amount of points the user earned.
      * @param event mouse click
      * @throws Exception throws exception when something went wrong
      */
