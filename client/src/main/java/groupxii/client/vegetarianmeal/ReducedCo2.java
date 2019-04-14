@@ -31,7 +31,7 @@ public class ReducedCo2 {
         try {
             node = objectMapper.readTree(response);
         } catch (IOException e) {
-            e.printStack();
+            e.printStackTrace();
         }
 
         String result = node.get("reducedCO2").asText();
