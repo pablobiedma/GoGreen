@@ -2,6 +2,7 @@ package groupxii.client.controllers;
 
 import groupxii.client.Main;
 import groupxii.client.connector.VegetarianMealConnector;
+import groupxii.client.vegetarianmeal.EatenMealList;
 import groupxii.client.vegetarianmeal.MealList;
 import groupxii.client.vegetarianmeal.ReducedCo2;
 import javafx.collections.FXCollections;
@@ -73,7 +74,7 @@ public class VegetarianMealController implements Initializable {
                 = FXCollections.observableArrayList(mealList.getMealList());
         choiceBoxGoodFood.setItems(listObservable);
         choiceBoxBadFood.setItems(listObservable);
-        //updateListView();
+        updateListView();
     }
 
     /**
@@ -83,11 +84,11 @@ public class VegetarianMealController implements Initializable {
     @FXML
     public void updateListView() {
         //TODO this first commended-out part has to be fixed
-        /*
+		EatenMealList eatenMealList = new EatenMealList();
+		eatenMealList.setEatenMealList();
         ObservableList<String> eatenMealObservableList
                 = FXCollections.observableArrayList(eatenMealList.getEatenMealList());
         eatenMealsListView.setItems(eatenMealObservableList);
-        */
         /*
         try {
             eatenMealListStr = new Scanner(new URL(host + "eatenMealList").openStream(),
