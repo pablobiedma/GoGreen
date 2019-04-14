@@ -22,7 +22,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.ResourceBundle;
 
-public class LocalProductsController implements Initializable {
+public class LocalProductsController {
 
     @FXML
     private Text textfield = new Text();
@@ -38,8 +38,7 @@ public class LocalProductsController implements Initializable {
     //private ObservableList<String> listViewObservable;
     //private String listItemsStr = "";
 
-    @Override
-    public void initialize(URL location, ResourceBundle resources) {
+    public void initialize() {
         String listItemsStr = LocalProductsConnector.retrieveLocalShops();
         //listItemsStr = new Scanner(new URL("/localshops?location=" +
         // getUserLocation.getUserLocation()).openStream(),"UTF-8").nextLine();
