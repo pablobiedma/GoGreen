@@ -57,7 +57,7 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .httpBasic().disable()
                 .addFilter(new JwtGeneratingFilter(credentialsAuthentiactionManager()))
                 .authorizeRequests()
-                //.anyRequest().authenticated()
+                .anyRequest().authenticated()
                 .antMatchers("/login").permitAll()
                 .antMatchers("/calculateMeal").permitAll();
     }

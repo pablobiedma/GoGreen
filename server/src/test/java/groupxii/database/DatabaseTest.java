@@ -166,7 +166,7 @@ public class DatabaseTest {
 	public void testSortUsersByPoints() {
 		UserEntry usr2 = new UserEntry(2, "CO2Reducer", "pass");
 		Database.instance.save(usr2);
-		Database.instance.incrementReducedCo2(2, 2);
+		Database.instance.incrementReducedCo2("CO2Reducer", 2);
 		List<UserEntry> sorted = Database.instance.sortUsersByReducedCo2();
 		assertEquals(sorted.get(0).getUsername(), "CO2Reducer");
 		assertEquals(sorted.get(1).getUsername(), "Ivan");
@@ -182,7 +182,7 @@ public class DatabaseTest {
 
 	@Test
 	public void testIncrementReducedCO2() {
-		Database.instance.incrementReducedCo2(1,2);
+		Database.instance.incrementReducedCo2("Ivan", 2);
 		UserEntry updatedUser = Database.instance.findUserById(1);
 		assertEquals(2, updatedUser.getReducedCo2());
 	}
