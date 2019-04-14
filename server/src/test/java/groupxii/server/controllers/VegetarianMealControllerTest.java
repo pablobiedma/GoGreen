@@ -17,6 +17,7 @@ import static org.junit.Assert.*;
 public class VegetarianMealControllerTest {
 
     VegetarianMealController vegetarianMealController;
+    UserEntry usr;
     @Before
     public void createVMC() {
 	    try {
@@ -25,6 +26,8 @@ public class VegetarianMealControllerTest {
 		    assertTrue(false);
 	    }
 	    vegetarianMealController = new VegetarianMealController();
+        usr = new UserEntry(1,"Ivan","pass");
+        Database.instance.saveNonBlocking(usr);
     }
 
     @Test

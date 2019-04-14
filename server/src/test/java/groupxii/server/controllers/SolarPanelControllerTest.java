@@ -16,6 +16,7 @@ import static org.junit.Assert.*;
 public class SolarPanelControllerTest {
 
     SolarPanelController solarPanelController;
+    UserEntry usr;
     @Before
     public void createSPC() {
         try {
@@ -24,6 +25,8 @@ public class SolarPanelControllerTest {
             assertTrue(false);
         }
         solarPanelController = new SolarPanelController();
+        usr = new UserEntry(1,"Ivan","pass");
+        Database.instance.saveNonBlocking(usr);
     }
 
     @Test
