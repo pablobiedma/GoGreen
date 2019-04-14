@@ -23,7 +23,7 @@ public class UsedTransportList {
         transportList = Arrays.asList(usedTransportStr.split(" - "));
     }
 
-    public List<String> getEatenMealList() {
+    public List<String> getUsedTransportList() {
         return this.transportList;
     }
 }

@@ -4,7 +4,7 @@ package groupxii.client.solarpanels;
 import groupxii.client.connector.Connector;
 import org.junit.Test;
 
-import static groupxii.client.solarpanels.ReducedCo2.getReducedCo2;
+import static groupxii.client.solarpanels.ReducedCO2.getReducedCo2;
 import static org.junit.Assert.assertTrue;
 
 public class ReducedCo2Test {

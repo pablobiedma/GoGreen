@@ -3,6 +3,8 @@ package groupxii.client.controllers;
 import groupxii.client.Main;
 import groupxii.client.connector.SolarPanelConnector;
 import groupxii.client.solarpanels.PanelNameList;
+import groupxii.client.solarpanels.ReducedCO2;
+import groupxii.client.solarpanels.UsedPanelList;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -37,7 +39,8 @@ public class SolarPanelController implements Initializable {
         PanelNameList panelNameList = new PanelNameList();
         ObservableList<String> observableList =
                 FXCollections.observableArrayList(panelNameList.getPanelList());
-        chosenSolarPanel.getItems().addAll(observableList);
+        chosenSolarPanel.setItems(observableList);
+        updateListView();
     }
 
     /**
@@ -45,6 +48,20 @@ public class SolarPanelController implements Initializable {
      */
     @FXML
     public void updateListView() {
+        UsedPanelList usedPanelList = new UsedPanelList();
+        usedPanelList.setUsedPanelList();
+        ObservableList<String> usedPanelObservableList
+                = FXCollections.observableArrayList(usedPanelList.getUsedPanelList());
+        usedPanelsListView.setItems(usedPanelObservableList);
+    }
+
+    @FXML
+    public void calculatePanel(MouseEvent event) {
+        String panel = chosenSolarPanel.getValue();
+        int amount = (int)amountOfSolarPanels.getValue();
+
+        String result = ReducedCO2.getReducedCo2(panel, amount);
+        savedCo2.setText("This will reduce " + result + " grams of CO2");
 
     }
 
@@ -59,7 +76,11 @@ public class SolarPanelController implements Initializable {
     void safePanel(MouseEvent event) throws Exception {
         String panel = chosenSolarPanel.getValue();
         int amount = (int) amountOfSolarPanels.getValue();
-        String res = SolarPanelConnector.calculateCO2Reduction(panel, amount);
+
+        SolarPanelConnector.commitPanel(panel, amount);
+        //TODO update contoller to display result
+        updateListView();
+        savedCo2.setText("Enjoy using your panels :-)");
     }
 
     @FXML

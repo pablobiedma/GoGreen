@@ -16,7 +16,7 @@ public class PanelNameList {
      */
     public PanelNameList() {
         String json = SolarPanelConnector.retrievePanelList();
-        panelList = Arrays.asList(json.split(","));
+        this.parseJson(json);
     }
 
     public PanelNameList(String json) {

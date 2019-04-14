@@ -1,6 +1,7 @@
 package groupxii.client.connector;
 
 public class SolarPanelConnector {
+
     public static String retrievePanelList() {
         String resource = "/panelNameList";
         return Connector.getRequest(resource);
@@ -17,8 +18,18 @@ public class SolarPanelConnector {
         return Connector.getRequest(resource);
     }
 
+    /**
+     * Shortcut for /savePanelData.
+     */
+    public static String commitPanel(String panel, int amount) {
+        String resource = "/savePanelData"
+                + "?panel=" + panel + ""
+                + "&amount=" + amount;
+
+        return Connector.postRequest(resource);
+    }
     public static String retrieveUsedPanelList() {
-        String resource = "/usedPanelList";
+        String resource = "/getUsedPanelList";
         return Connector.getRequest(resource);
     }
 }
