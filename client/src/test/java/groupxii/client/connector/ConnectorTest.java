@@ -1,5 +1,7 @@
 package groupxii.client.connector;
 
+import groupxii.client.TokenManager;
+
 import org.junit.runner.RunWith;
 import org.junit.Before;
 import org.junit.Rule;
@@ -9,8 +11,10 @@ import static org.junit.Assert.*;
 import org.powermock.api.mockito.PowerMockito;
 import org.powermock.core.classloader.annotations.PrepareForTest;
 import org.powermock.modules.junit4.PowerMockRunner;
+import org.powermock.reflect.Whitebox;
 
 import static org.mockito.Mockito.*;
+import org.mockito.Mockito;
 
 import java.io.ByteArrayOutputStream;
 import java.io.StringBufferInputStream;
@@ -20,7 +24,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 
 @RunWith(PowerMockRunner.class)
-@PrepareForTest({HttpURLConnection.class, OpenConnection.class})
+@PrepareForTest({HttpURLConnection.class, OpenConnection.class, TokenManager.class})
 public class ConnectorTest {
 	URL url;
 	HttpURLConnection huc;
@@ -28,12 +32,18 @@ public class ConnectorTest {
 
 	OutputStream postedBody;
 
+	TokenManager mockedTM;
+
 	@Before
 	public void mock() throws Exception {
 		resource = "/something";
 		postedBody = new ByteArrayOutputStream();
 
 		PowerMockito.mockStatic(OpenConnection.class);
+
+		mockedTM = Mockito.mock(TokenManager.class);
+		Mockito.when(mockedTM.getToken()).thenReturn("Token");
+		Whitebox.setInternalState(TokenManager.class, "instance", mockedTM);
 
 		huc = PowerMockito.mock(HttpURLConnection.class);
 		PowerMockito.when(OpenConnection.openConnection(anyString())).thenReturn(huc);
@@ -64,7 +74,8 @@ public class ConnectorTest {
 
 	@Test
 	public void testPostBody() throws Exception {
-		String body = "Hi";
+		Mockito.when(mockedTM.getToken()).thenReturn(null);
+		String body = "Hi, I don't have authorization";
 		String result = Connector.postRequest(resource, body);
 		assertEquals("You got it", result);
 		assertEquals(body, postedBody.toString());

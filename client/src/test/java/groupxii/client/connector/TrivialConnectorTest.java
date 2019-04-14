@@ -86,7 +86,7 @@ public class TrivialConnectorTest {
 		assertEquals(vmc.calculateCO2Reduction("food", 1, "food", 2), "CO2");
 
 
-		PowerMockito.when(Connector.getRequest("/eatenMealList")).thenReturn("eaten meal list");
+		PowerMockito.when(Connector.getRequest("/getEatenMealList")).thenReturn("eaten meal list");
 		assertEquals(vmc.retrieveEatenMealList(), "eaten meal list");
 	}
 }
