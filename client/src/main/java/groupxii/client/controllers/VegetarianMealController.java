@@ -2,6 +2,7 @@ package groupxii.client.controllers;
 
 import groupxii.client.Main;
 import groupxii.client.connector.VegetarianMealConnector;
+import groupxii.client.vegetarianmeal.ReducedCo2;
 import groupxii.client.vegetarianmeal.MealList;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -16,6 +17,8 @@ import javafx.scene.text.Text;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+
+import java.util.*;
 
 
 
@@ -72,8 +75,8 @@ public class VegetarianMealController implements Initializable {
         MealList mealList = new MealList();
         ObservableList<String> listObservable
                 = FXCollections.observableArrayList(mealList.getMealList());
-        choiceBoxGoodFood.getItems().addAll(listObservable);
-        choiceBoxBadFood.getItems().addAll(listObservable);
+        choiceBoxGoodFood.setItems(listObservable);
+        choiceBoxBadFood.setItems(listObservable);
         //updateListView();
     }
 
@@ -106,6 +109,17 @@ public class VegetarianMealController implements Initializable {
 
     @FXML
     public void calculateMeal(MouseEvent event) {
+        String goodFoodName = choiceBoxGoodFood.getValue();
+        int goodServingSize = (int)sliderGoodFood.getValue();
+        String badFoodName = choiceBoxBadFood.getValue();
+        int badServingSize = (int)sliderBadFood.getValue();
+
+		String result = ReducedCo2.getReducedCo2(
+				goodFoodName,
+				goodServingSize,
+				badFoodName,
+				badServingSize);
+		reducedCo2Text.setText("This will reduce " + result + " grams of CO2");
 
     }
 
@@ -122,14 +136,13 @@ public class VegetarianMealController implements Initializable {
         String badFoodName = choiceBoxBadFood.getValue();
         int badServingSize = (int)sliderBadFood.getValue();
 
-        //TODO
-        String result = VegetarianMealConnector
-                .calculateCO2Reduction(goodFoodName,
+        VegetarianMealConnector.commitMeal(goodFoodName,
                         goodServingSize,
                         badFoodName,
                         badServingSize);
         //TODO update contoller to display result
         //updateListView();
+        reducedCo2Text.setText("Enjoy your meal :-)");
     }
 
     @FXML

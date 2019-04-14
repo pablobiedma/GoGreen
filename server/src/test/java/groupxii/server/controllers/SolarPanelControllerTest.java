@@ -1,16 +1,14 @@
-package groupxii.server;
+package groupxii.server.controllers;
 
-import com.mongodb.DBObject;
 import groupxii.database.Database;
 import groupxii.database.PanelEntry;
-import groupxii.server.controllers.SolarPanelController;
+import groupxii.database.UserEntry;
 import groupxii.solarpanels.CalculatedPanel;
 import org.junit.Before;
 import org.junit.Test;
 
 import java.io.IOException;
 import java.security.Principal;
-import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.Assert.*;
@@ -18,6 +16,7 @@ import static org.junit.Assert.*;
 public class SolarPanelControllerTest {
 
     SolarPanelController solarPanelController;
+    UserEntry usr;
     @Before
     public void createSPC() {
         try {
@@ -26,6 +25,8 @@ public class SolarPanelControllerTest {
             assertTrue(false);
         }
         solarPanelController = new SolarPanelController();
+        usr = new UserEntry(1,"Ivan","pass");
+        Database.instance.saveNonBlocking(usr);
     }
 
     @Test
@@ -47,17 +48,26 @@ public class SolarPanelControllerTest {
         Principal principal = new Principal() {
             @Override
             public String getName() {
-                return "user1";
+                return "Ivan";
             }
         };
         String username = principal.getName();
         Database.instance.addUsedPanel(username, panelEntry);
-        assertTrue(solarPanelController.getNameList().equals(Database.instance.getPanelListPanelNames()));
+        solarPanelController.savePanelData("Monocrystalline", 34,45,principal);
+        assertEquals(solarPanelController.getNameList(),Database.instance.getPanelListPanelNames());
     }
 
     @Test
     public void getUsedPanelList() {
-
+        Principal principal = new Principal() {
+            @Override
+            public String getName() {
+                return "Ivan";
+            }
+        };
+        String username = principal.getName();
+        UserEntry userEntry = Database.instance.findUserByName(username);
+        List<PanelEntry> panelEntries = solarPanelController.getUsedPanelList(principal);
+        assertEquals(userEntry.getUsedPanels(),panelEntries);
     }
-
 }

@@ -13,6 +13,8 @@ public class EatenMealList {
     private List<String> mealList;
 
     public EatenMealList() {
+        System.out.println(VegetarianMealConnector.retrieveEatenMealList());
+        System.out.println(VegetarianMealConnector.retrieveMealList());
         mealList = Arrays.asList(VegetarianMealConnector.retrieveEatenMealList().split(" - "));
     }
 

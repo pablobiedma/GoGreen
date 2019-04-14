@@ -253,12 +253,12 @@ public class Database extends Thread {
     /**
      * Increments the reducedCo2.
      */
-    public void incrementReducedCo2(int id, int amount) {
+    public void incrementReducedCo2(String username, int amount) {
         BasicDBObject newDocument = new BasicDBObject();
         newDocument.append("$inc", new BasicDBObject()
                 .append("reducedCo2", amount));
         BasicDBObject searchQuery = new BasicDBObject()
-                .append("userId", id);
+                .append("username", username);
         userCollection.update(searchQuery, newDocument);
     }
 

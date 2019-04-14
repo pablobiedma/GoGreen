@@ -1,4 +1,4 @@
-package groupxii.server;
+package groupxii.server.controllers;
 
 import groupxii.database.UserEntry;
 import groupxii.server.controllers.UserController;
