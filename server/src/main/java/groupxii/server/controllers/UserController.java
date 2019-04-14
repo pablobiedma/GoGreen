@@ -84,21 +84,6 @@ public class UserController {
         Database.instance.addFriend(user, friendsId);
     }
 
-
-    //TODO make internal for features
-
-    /**
-     * Increments reducedCO2 with some reducedCo2 dependant on the meal.
-     */
-    @RequestMapping(method = RequestMethod.POST, value = "/increaseReducedCO2")
-    public UserEntry incReducedCO2(@RequestParam(value = "Id",defaultValue = "Unknown") int userId,
-                                  @RequestParam(value = "ReducedCO2",
-                                      defaultValue = "Unknown") int reducedCo2) {
-        Database.instance.incrementReducedCo2(userId,reducedCo2);
-        UserEntry user = Database.instance.findUserById(userId);
-        return user;
-    }
-
     @RequestMapping(method = RequestMethod.GET, value = "/getReducedCo2OfUser")
     public int getReducedCo2OfUser(Principal principal) {
         String username = principal.getName();
