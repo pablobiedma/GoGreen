@@ -15,7 +15,6 @@ import java.util.ResourceBundle;
 public class MenuController implements Initializable {
 
     private Main main = new Main();
-    private String userId = "1";
 
     @FXML
     private Text reducedCo2Text = new Text();
@@ -72,7 +71,8 @@ public class MenuController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        String reducedCo2 = Connector.getRequest("/getReducedCo2OfUser?Id=" + userId);
+        String reducedCo2 = Connector.getRequest("/getReducedCo2OfUser");
+		//What are all this things?
         reducedCo2Text.setText(reducedCo2);
         double reducedCo2Number = Double.parseDouble(reducedCo2);
         double savedTrees = reducedCo2Number / 24500;
