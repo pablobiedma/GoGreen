@@ -19,8 +19,7 @@ public class MealList {
      */
     public MealList() {
         String json = VegetarianMealConnector.retrieveMealList();
-        mealList = Arrays.asList(json.split(","));
-        //this.parseJson(json);
+        this.parseJson(json);
     }
 
     public MealList(String json) {
