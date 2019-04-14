@@ -3,9 +3,8 @@ package groupxii.client.connector;
 import groupxii.client.localproducts.GetUserLocation;
 
 public class LocalProductsConnector {
-
     /**
-     * asks for the local shops from the server.
+     * Asks for the local shops from the server.
      * @return list with the shops nearby
      */
     public static String retrieveLocalShops() {

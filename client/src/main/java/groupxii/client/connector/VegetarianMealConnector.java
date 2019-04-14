@@ -1,8 +1,11 @@
 package groupxii.client.connector;
 
 public class VegetarianMealConnector {
+    /**
+     * Shortcut for /mealNameList.
+     */
     public static String retrieveMealList() {
-        String resource = "/getMealList";
+        String resource = "/mealNameList";
         return Connector.getRequest(resource);
     }
 
@@ -25,6 +28,9 @@ public class VegetarianMealConnector {
         return Connector.getRequest(resource);
     }
 
+    /**
+     * Shortcut for /saveMealData.
+     */
     public static String commitMeal(String goodFoodName, int goodServingSize,
                                     String badFoodName, int badServingSize) {
         String resource = "/saveMealData"
@@ -36,6 +42,9 @@ public class VegetarianMealConnector {
         return Connector.postRequest(resource);
     }
 
+    /**
+     * Shortcut for /getEatenMealList.
+     */
     public static String retrieveEatenMealList() {
         String resource = "/getEatenMealList";
         return Connector.getRequest(resource);
