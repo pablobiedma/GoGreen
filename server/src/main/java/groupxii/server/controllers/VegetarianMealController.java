@@ -21,7 +21,7 @@ public class VegetarianMealController {
     /**
      * Return a list of all available food entries that the vegetarian meal feature can process.
      */
-    @RequestMapping(method = RequestMethod.GET, value = "/mealNameList")
+    @RequestMapping(method = RequestMethod.GET, value = "/getMealList")
     public List<String> getNameList() {
         return Database.instance.getMealListFoodNames();
     }

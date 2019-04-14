@@ -24,12 +24,12 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.ResourceBundle;
 
-public class LeaderboardController implements Initializable {
+public class LeaderboardController {
 
     private static int userId = 1;
 
     @FXML
-    private static Text addedFriend = new Text();
+    private Text addedFriend = new Text();
 
     private String overallListStr = "";
     private String friendListStr = "";
@@ -41,7 +41,7 @@ public class LeaderboardController implements Initializable {
     @FXML
     private ListView friendsLeaderboard = new ListView();
 
-    public static class HBoxCell extends HBox {
+    public class HBoxCell extends HBox {
         Label label = new Label();
         Button button = new Button();
 
@@ -63,8 +63,7 @@ public class LeaderboardController implements Initializable {
         }
     }
 
-    @Override
-    public void initialize(URL location, ResourceBundle resources) {
+    public void initialize() {
 
         /*
         try {
@@ -119,9 +118,10 @@ public class LeaderboardController implements Initializable {
         //friendsLeaderboard.setItems(friendsLeaderboardObservableList);
     }
 
-    public static void addFriend(int friendId) {
+    public void addFriend(int friendId) {
         LeaderboardConnector.addFriend(userId, friendId);
-        addedFriend.setText("Ädded new friend!");
+        addedFriend.setText("Added new friend!");
+        initialize();
     }
 
     public void setUserId(int userId) {
