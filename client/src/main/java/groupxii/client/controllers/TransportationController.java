@@ -1,5 +1,7 @@
 package groupxii.client.controllers;
 
+import groupxii.client.connector.TransportConnector;
+import groupxii.client.transportation.UsedTransportList;
 import groupxii.client.transportation.VehicleNameList;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -10,9 +12,7 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.Slider;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Text;
-//import javafx.scene.text.Text;
-import groupxii.client.transportation.UsedTransportList;
-import groupxii.client.connector.TransportConnector;
+
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -20,13 +20,8 @@ import java.util.ResourceBundle;
 
 public class TransportationController implements Initializable {
 
-    /*
-    @FXML
-    private Button btnCalculateTransport = new Button();
 
-    @FXML
-    private Button btnSafeTransport = new Button();
-    */
+    UsedTransportList usedTransportList = new UsedTransportList();
 
     @FXML
     private ChoiceBox<String> cb = new ChoiceBox();
@@ -49,15 +44,13 @@ public class TransportationController implements Initializable {
     @FXML
     private ListView<String> usedTransportListView = new ListView();
 
-    //    @FXML
-//    private ListView<String> usedTransportListView = new ListView();
-    UsedTransportList usedTransportList = new UsedTransportList();
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
         VehicleNameList vehicleNameList = new VehicleNameList();
-        ObservableList<String> listObservable = FXCollections.observableArrayList(vehicleNameList.getVehicleNameList());
+        ObservableList<String> listObservable =
+                FXCollections.observableArrayList(vehicleNameList.getVehicleNameList());
         cb1.getItems().addAll(listObservable);
         cb.getItems().addAll(listObservable);
         updateListView();
@@ -69,20 +62,10 @@ public class TransportationController implements Initializable {
     @FXML
     public void updateListView() {
         usedTransportList.setUsedTransportList();
-        ObservableList<String> usedTransportObservableList = FXCollections.observableArrayList(usedTransportList.getEatenMealList());
+        ObservableList<String> usedTransportObservableList =
+                FXCollections.observableArrayList(usedTransportList.getUsedTransportList());
         usedTransportListView.setItems(usedTransportObservableList);
 
-
-//        try {
-//            usedTransportListStr = new Scanner(new URL(host + "usedTransportList").openStream(),
-//                    "UTF-8").nextLine();
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
-//        usedTransportListViewItems = Arrays.asList(usedTransportListStr.split(" - "));
-//        ObservableList<String> usedTransportObservable =
-//                FXCollections.observableArrayList(usedTransportListViewItems);
-//        usedTransportListView.setItems(usedTransportObservable);
     }
 
     //TODO
@@ -100,22 +83,14 @@ public class TransportationController implements Initializable {
      */
     @FXML
     public void safeTransport(MouseEvent event) throws Exception {
-//        badTransportName = cb1.getValue();
-//        goodTransportName = cb.getValue();
-//        goodfuel = cb3.getValue();
-//        badfuel = cb4.getValue();
-//        int goodConsumption = (int) slider.getValue();
-//        int badConsumption = (int) slider1.getValue();
-//        safeTransport.safeVehicle(goodTransportName, badTransportName,goodfuel,
-//                badfuel,goodConsumption , badConsumption);
         String goodTransportName = cb.getValue();
         int goodConsumption = (int) slider.getValue();
         String badTransportName = cb1.getValue();
         int badConsumption = (int) slider1.getValue();
 
-
-        String result = TransportConnector.calculateCO2Reduction(goodTransportName, badTransportName, goodConsumption, badConsumption);
-        //TODO update contoller to display result
+        String result = TransportConnector.calculateCO2Reduction(goodTransportName,
+                badTransportName, goodConsumption, badConsumption);
+        //TODO update controller to display result
         updateListView();
     }
 }

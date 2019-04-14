@@ -89,7 +89,7 @@ public class LocalProductsController implements Initializable {
      */
     public String getShopLocation() {
 
-        if(localShops.getSelectionModel().getSelectedItem() == null){
+        if (localShops.getSelectionModel().getSelectedItem() == null) {
             return "server is not running";
         } else {
             String locationStr = localShops.getSelectionModel().getSelectedItem();

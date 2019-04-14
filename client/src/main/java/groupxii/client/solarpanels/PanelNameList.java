@@ -10,6 +10,7 @@ import java.util.List;
 
 public class PanelNameList {
     private List<String> panelList;
+
     /**
      * Asks the connector to retrieve the panel list and parses it.
      */
