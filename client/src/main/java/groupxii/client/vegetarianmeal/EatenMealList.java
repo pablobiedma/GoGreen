@@ -10,6 +10,7 @@ import java.util.List;
 /**
  * Class that retrieves and parses the eaten meal list.
  */
+//TODO
 public class EatenMealList {
     /**
      * Asks the connector to retrieve the eaten meal list and parses it.
