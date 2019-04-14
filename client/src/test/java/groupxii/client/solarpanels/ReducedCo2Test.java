@@ -10,7 +10,7 @@ import static org.junit.Assert.assertTrue;
 public class ReducedCo2Test {
     @Test
     public void getReducedCo2Test() {
-        if(Connector.getRequest("/getPanelNameList") != "An error has occurred"){
+        if(Connector.getRequest("/getPanelNameList") != "An error has occured"){
             assertTrue(getReducedCo2("Monocrystalline", 100).contains("{\"reducedCO2\":"));
         }
         else{
