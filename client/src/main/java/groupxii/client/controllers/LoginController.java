@@ -19,7 +19,7 @@ public class LoginController {
     @FXML
     private Text errorMessage = new Text();
 
-    public static int userId;
+    public static int userId = 1;
 
     @FXML
     public void loginButton(MouseEvent event) throws Exception {
