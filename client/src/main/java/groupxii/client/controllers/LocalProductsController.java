@@ -2,8 +2,8 @@ package groupxii.client.controllers;
 
 import com.maxmind.geoip2.exception.GeoIp2Exception;
 import groupxii.client.Main;
-import groupxii.client.connector.Connector;
 import groupxii.client.connector.LocalProductsConnector;
+import groupxii.client.connector.UserConnector;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -101,7 +101,7 @@ public class LocalProductsController implements Initializable {
     }
 
     public void safeLocalProduct() throws IOException {
-        Connector.instance.postRequest("/increaseReducedCO2?Id=" + userId + "&ReducedCO2=300");
+        UserConnector.updateReducedCo2(300);
         textfield.setText("You saved 300 grams of CO2 emission!");
     }
 

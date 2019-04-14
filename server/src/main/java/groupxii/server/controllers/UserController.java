@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.xml.crypto.Data;
 import java.security.Principal;
 import java.util.ArrayList;
 import java.util.List;
@@ -73,9 +74,6 @@ public class UserController {
     /**
      * receives two id's and adds the second one as a friend to the first one.
      */
-    //TODO why does it take the userID of the friend but not of the user itself?
-    // on the client everything is based on the userID since
-    // that was the first intention and is much better.
     @RequestMapping(method = RequestMethod.POST, value = "/addFriend")
     public void addFriend(Principal principal,
                           @RequestParam(value = "newFriend",
@@ -90,6 +88,17 @@ public class UserController {
         UserEntry user = Database.instance.findUserByName(username);
         int reducedCo2 = user.getReducedCo2();
         return reducedCo2;
+    }
+
+    @RequestMapping(method = RequestMethod.POST, value = "/increaseReducedCo2OfUser")
+    public int increaserReducedCo2OfUser(Principal principal,
+                                         @RequestParam(value = "amount",
+                                                 defaultValue = "0") int amount){
+        String username = principal.getName();
+        UserEntry user = Database.instance.findUserByName(username);
+        int reducedCo2 = amount;
+        Database.instance.incrementReducedCo2(username, amount);
+        return amount;
     }
 }
 
