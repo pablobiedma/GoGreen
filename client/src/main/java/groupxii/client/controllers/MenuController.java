@@ -1,15 +1,15 @@
 package groupxii.client.controllers;
 
 import groupxii.client.Main;
+import groupxii.client.connector.Connector;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.ProgressBar;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Text;
 
-import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
-import java.util.Scanner;
 
 
 public class MenuController implements Initializable {
@@ -19,6 +19,15 @@ public class MenuController implements Initializable {
 
     @FXML
     private Text reducedCo2Text = new Text();
+
+    @FXML
+    private Text trees = new Text();
+
+    @FXML
+    private ProgressBar levelProgress = new ProgressBar();
+
+    @FXML
+    private Text level = new Text();
 
     /**
      * switches to the vegetarian meal feature.
@@ -33,12 +42,12 @@ public class MenuController implements Initializable {
 
     @FXML
     public void btnSolarPanels(MouseEvent event) throws Exception {
-        main.changeScene("VegetarianMeal.fxml", event);
+        main.changeScene("SolarPanels.fxml", event);
     }
 
     @FXML
     public void btnTransport(MouseEvent event) throws Exception {
-        main.changeScene("VegetarianMeal.fxml", event);
+        main.changeScene("Transportation.fxml", event);
     }
 
     @FXML
@@ -58,22 +67,20 @@ public class MenuController implements Initializable {
 
     @FXML
     public void btnTemperature(MouseEvent event) throws Exception {
-        main.changeScene("VegetarianMeal.fxml", event);
+        main.changeScene("Temperature.fxml", event);
     }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        String reducedCo2 = "";
-        try {
-            reducedCo2 = new Scanner(new URL("http://localhost:8080/getReducedCo2OfUser?Id=" + userId).openStream(),"UTF-8").nextLine();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        String reducedCo2 = Connector.getRequest("/getReducedCo2OfUser?Id=" + userId);
         reducedCo2Text.setText(reducedCo2);
-    }
-
-    public Main getMain(){
-        return this.main;
+        double reducedCo2Number = Double.parseDouble(reducedCo2);
+        double savedTrees = reducedCo2Number / 24500;
+        trees.setText(Double.toString(savedTrees).substring(0,3));
+        int levelNumber = (int) reducedCo2Number / 10000;
+        level.setText(Integer.toString(levelNumber));
+        double levelProgressNumber = (reducedCo2Number % 10000) / 10000;
+        levelProgress.setProgress(levelProgressNumber);
     }
 
 }

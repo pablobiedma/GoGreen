@@ -1,7 +1,7 @@
 package groupxii.client.controllers;
 
+import groupxii.client.Main;
 import groupxii.client.connector.VegetarianMealConnector;
-import groupxii.client.vegetarianmeal.EatenMealList;
 import groupxii.client.vegetarianmeal.MealList;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -13,6 +13,7 @@ import javafx.scene.control.Slider;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Text;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -47,7 +48,7 @@ public class VegetarianMealController implements Initializable {
     //private SafeMeal safeMeal = new SafeMeal();
     //private List<String> eatenMealListViewItems = new ArrayList<String>();
 
-    EatenMealList eatenMealList = new EatenMealList();
+    //EatenMealList eatenMealList = new EatenMealList();
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -73,18 +74,21 @@ public class VegetarianMealController implements Initializable {
                 = FXCollections.observableArrayList(mealList.getMealList());
         choiceBoxGoodFood.getItems().addAll(listObservable);
         choiceBoxBadFood.getItems().addAll(listObservable);
-        updateListView();
+        //updateListView();
     }
 
     /**
      * updates the list view with all the items from the database.
      */
+
     @FXML
     public void updateListView() {
-        //eatenMealList.setEatenMealList();
+        //TODO this first commended-out part has to be fixed
+        /*
         ObservableList<String> eatenMealObservableList
                 = FXCollections.observableArrayList(eatenMealList.getEatenMealList());
         eatenMealsListView.setItems(eatenMealObservableList);
+        */
         /*
         try {
             eatenMealListStr = new Scanner(new URL(host + "eatenMealList").openStream(),
@@ -97,9 +101,9 @@ public class VegetarianMealController implements Initializable {
         = FXCollections.observableArrayList(eatenMealListViewItems);
         eatenMealsListView.setItems(eatenMealsObservable);
         */
+
     }
 
-    //TODO
     @FXML
     public void calculateMeal(MouseEvent event) {
 
@@ -125,6 +129,12 @@ public class VegetarianMealController implements Initializable {
                         badFoodName,
                         badServingSize);
         //TODO update contoller to display result
-        updateListView();
+        //updateListView();
+    }
+
+    @FXML
+    public void btnBack(MouseEvent event) throws IOException {
+        Main main = new Main();
+        main.changeScene("Menu.fxml", event);
     }
 }

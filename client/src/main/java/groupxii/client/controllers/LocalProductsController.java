@@ -18,11 +18,9 @@ import java.awt.Desktop;
 import java.io.IOException;
 import java.net.URI;
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.ResourceBundle;
-
 
 public class LocalProductsController implements Initializable {
 
@@ -30,7 +28,7 @@ public class LocalProductsController implements Initializable {
     private Text textfield = new Text();
 
     @FXML
-    private ListView<String> localShops = new ListView();
+    private ListView<String> localShops = new ListView<String>();
 
     @FXML
     private ImageView mapsImage = new ImageView();
@@ -45,8 +43,7 @@ public class LocalProductsController implements Initializable {
         String listItemsStr = LocalProductsConnector.retrieveLocalShops();
         //listItemsStr = new Scanner(new URL("/localshops?location=" +
         // getUserLocation.getUserLocation()).openStream(),"UTF-8").nextLine();
-        List<String> listViewItems = new ArrayList<>();
-        listViewItems = Arrays.asList(listItemsStr.split(", "));
+        List<String> listViewItems = Arrays.asList(listItemsStr.split(", "));
         ObservableList<String> listViewObservable =
                 FXCollections.observableArrayList(listViewItems);
         //listViewObservable = FXCollections.observableArrayList(listViewItems);
@@ -91,15 +88,16 @@ public class LocalProductsController implements Initializable {
      * @return String with the adress of the shop.
      */
     public String getShopLocation() {
-        String locationStr = localShops.getSelectionModel().getSelectedItem();
-        locationStr = locationStr.substring(locationStr.indexOf("LOCATED AT: "),
-                locationStr.indexOf(" - RATING:"));
-        locationStr = locationStr.replace(' ', '+').substring(0, locationStr.length() - 1);
-        return locationStr;
-    }
 
-    public void setUserId(int userId) {
-        this.userId = userId;
+        if(localShops.getSelectionModel().getSelectedItem() == null){
+            return "server is not running";
+        } else {
+            String locationStr = localShops.getSelectionModel().getSelectedItem();
+            locationStr = locationStr.substring(locationStr.indexOf("LOCATED AT: "),
+                    locationStr.indexOf(" - RATING:"));
+            locationStr = locationStr.replace(' ', '+').substring(0, locationStr.length() - 1);
+            return locationStr;
+        }
     }
 
     public void safeLocalProduct() throws IOException {

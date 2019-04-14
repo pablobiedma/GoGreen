@@ -5,6 +5,8 @@ import javafx.fxml.FXML;
 import javafx.scene.input.MouseEvent;
 
 public class LoginController {
+    public static int userId;
+
     @FXML
     public void loginButton(MouseEvent event) throws Exception {
         Main main = new Main();

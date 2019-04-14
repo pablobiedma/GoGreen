@@ -1,5 +1,6 @@
 package groupxii.server.controllers;
 
+import com.mongodb.DBObject;
 import groupxii.database.Database;
 import groupxii.database.UserEntry;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -60,6 +61,9 @@ public class UserController {
     /**
      * receives two id's and adds the second one as a friend to the first one.
      */
+    //TODO why does it take the userID of the friend but not of the user itself?
+    // on the client everything is based on the userID since
+    // that was the first intention and is much better.
     @RequestMapping(method = RequestMethod.POST, value = "/addFriend")
     public void addFriend(Principal principal,
                           @RequestParam(value = "newFriend",
@@ -74,16 +78,15 @@ public class UserController {
     /**
      * Increments reducedCO2 with some reducedCo2 dependant on the meal.
      */
-    /*
-      @RequestMapping(method = RequestMethod.GET, value = "increaseReducedCO2")
-      public DBObject incReducedCO2(@RequestParam(value = "Id",defaultValue = "Unknown") int userId,
-                                @RequestParam(value = "ReducedCO2",
-                                        defaultValue = "Unknown") int reducedCo2) {
-          Database.instance.incrementReducedCo2(userId,reducedCo2);
-          DBObject user = Database.instance.findDocumentById(userId);
-          return user;
-      }
-      */
+    @RequestMapping(method = RequestMethod.POST, value = "/increaseReducedCO2")
+    public UserEntry incReducedCO2(@RequestParam(value = "Id",defaultValue = "Unknown") int userId,
+                                  @RequestParam(value = "ReducedCO2",
+                                      defaultValue = "Unknown") int reducedCo2) {
+        Database.instance.incrementReducedCo2(userId,reducedCo2);
+        UserEntry user = Database.instance.findUserById(userId);
+        return user;
+    }
+
     @RequestMapping(method = RequestMethod.GET, value = "/getReducedCo2OfUser")
     public int getReducedCo2OfUser(@RequestParam(value = "Id", defaultValue = "-1") int userId) {
         UserEntry user = Database.instance.findUserById(userId);
