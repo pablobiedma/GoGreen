@@ -9,8 +9,8 @@ public class LoginConnector {
 
     public static String register(String username, String password) {
         String resource = "/register"
-            + "?" + username
-            + "&" + password;
+            + "?username=" + username
+            + "&password=" + password;
 
         return Connector.postRequest(resource);
     }
