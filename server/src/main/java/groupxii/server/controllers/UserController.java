@@ -19,12 +19,24 @@ public class UserController {
     /**
      * Receives data and creates a user entry in the user collection.
      */
-    @RequestMapping(method = RequestMethod.POST, value = "/saveUserData")
+    @RequestMapping(method = RequestMethod.POST, value = "/register")
     public void saveUserData(@RequestParam(value = "username",
-        defaultValue = "Unknown") String username,
+        defaultValue = "") String username,
                               @RequestParam(value = "password",
-                                      defaultValue = "Unknown")
+                                      defaultValue = "")
                                       String password)  {
+        //TODO error handling, return responses
+        if (username.isEmpty() || password.isEmpty()) {
+            return;
+        }
+
+	//TODO verify name is unique
+	/*
+        if (Database.instance.findUserByName(username)) {
+            return;
+        }
+	*/
+
         int userId = Database.instance.getUserCount() + 1;
         UserEntry userEntry = new UserEntry(userId, username, password);
         Database.instance.save(userEntry);

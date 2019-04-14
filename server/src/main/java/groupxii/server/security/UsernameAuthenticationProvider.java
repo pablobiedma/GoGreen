@@ -1,7 +1,8 @@
 package groupxii.server.security;
 
-//TODO imports(maybe just Database?)
 
+//import groupxii.database.Database;
+//import groupxii.database.UserEntry;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -26,16 +27,18 @@ public class UsernameAuthenticationProvider implements AuthenticationProvider {
             throw new BadCredentialsException("Missing username");
         }
 
+        // Blind trust
         String username = principal.toString();
 
-        //TODO fetch username from DB
-        if (username.equals("0day")) {
-            ArrayList<GrantedAuthority> grantedAuthrities = new ArrayList<GrantedAuthority>();
-            grantedAuthrities.add(new SimpleGrantedAuthority("USER"));
-            return new UsernamePasswordAuthenticationToken(username, "null", grantedAuthrities);
-        }
+        //UserEntry found = Database.instance.findUserByName(username);
+
+        //if (username.equals(found.getUsername())) { //pointless?
+        ArrayList<GrantedAuthority> grantedAuthrities = new ArrayList<GrantedAuthority>();
+        grantedAuthrities.add(new SimpleGrantedAuthority("USER"));
+        return new UsernamePasswordAuthenticationToken(username, "null", grantedAuthrities);
+        //}
     
-        throw new BadCredentialsException("Username verification failed");
+        //throw new BadCredentialsException("Username verification failed");
     }
 
     @Override
