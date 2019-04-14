@@ -43,7 +43,7 @@ public class VegetarianMealController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         MealList mealList = new MealList();
         ObservableList<String> listObservable
-                = FXCollections.observableArrayList(mealList.getMealList());
+				= FXCollections.observableArrayList(mealList.getMealList());
         choiceBoxGoodFood.setItems(listObservable);
         choiceBoxBadFood.setItems(listObservable);
         updateListView();

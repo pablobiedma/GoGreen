@@ -26,6 +26,24 @@ public class TransportConnector {
     }
 
     /**
+     * Shortcut for /saveVehicleData.
+     */
+    public static String commitTransport(String goodTransportName,
+                                         String badTransportName,
+                                         int goodConsumption,
+                                         int badConsumption) {
+        String resource = "/saveVehicleData"
+                + "?goodVehicleType=" + goodTransportName
+                + "&badVehicleType" + badTransportName
+                + "&goodAvgConsumption" + goodConsumption
+                + "&badAvgConsumption" + badConsumption;
+
+        return Connector.postRequest(resource);
+    }
+
+
+
+    /**
      * Shortcut for /usedTransportList.
      */
     public static String retrieveUsedTransportList() {
