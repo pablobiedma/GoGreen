@@ -48,9 +48,9 @@ public class UserController {
      */
     //Isn't this unnecessary slow?
     @RequestMapping(method = RequestMethod.GET, value = "/getFriends")
-    public List<UserEntry> getFriends(@RequestParam(value = "Id",
-        defaultValue = "-1") int userId) {
-        UserEntry user =  Database.instance.findUserById(userId);
+    public List<UserEntry> getFriends(Principal principal) {
+        String username = principal.getName();
+        UserEntry user =  Database.instance.findUserByName(username);
         List<Integer> friendsIdList = user.getFriendsId();
 
         List<UserEntry> friends = new ArrayList<>();
@@ -100,8 +100,9 @@ public class UserController {
     }
 
     @RequestMapping(method = RequestMethod.GET, value = "/getReducedCo2OfUser")
-    public int getReducedCo2OfUser(@RequestParam(value = "Id", defaultValue = "-1") int userId) {
-        UserEntry user = Database.instance.findUserById(userId);
+    public int getReducedCo2OfUser(Principal principal) {
+        String username = principal.getName();
+        UserEntry user = Database.instance.findUserByName(username);
         int reducedCo2 = user.getReducedCo2();
         return reducedCo2;
     }
