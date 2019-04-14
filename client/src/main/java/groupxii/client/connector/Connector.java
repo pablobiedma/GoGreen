@@ -8,7 +8,6 @@ import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.ProtocolException;
-import java.net.URL;
 
 /**
  * Connects to the target server, sends requests and returns
@@ -17,13 +16,14 @@ import java.net.URL;
 public class Connector {
     public static Connector instance = new Connector();
 
+    /**
+     * Performs an HTTP request to a server.
+     */
     public static String request(String reqType, String resource, String body) {
         //TODO append token as Authorization: Bearer <token>
         HttpURLConnection connection;
         try {
-//            URL url = URLFactory.newURL(Target.getHost() + resource);
- //           connection = (HttpURLConnection)url.openConnection();
-			connection = OpenConnection.openConnection(Target.getHost() + resource);
+            connection = OpenConnection.openConnection(Target.getHost() + resource);
             if (reqType.equals("POST")) {
                 connection.setDoOutput(true);
             }
@@ -39,8 +39,8 @@ public class Connector {
         try {
             connection.setRequestMethod(reqType);
         } catch (ProtocolException e) {
-             //TODO
-             return null;
+            //TODO
+            return null;
         }
 
         if (reqType.equals("POST")) {
@@ -51,7 +51,7 @@ public class Connector {
                 requestBodyWriter.write(body);
                 requestBodyWriter.close();
             } catch (IOException e) {
-				e.printStackTrace();
+                e.printStackTrace();
                 //TODO
             }
         }
@@ -69,8 +69,8 @@ public class Connector {
             in.close();
             response = responseBuilder.toString();
         } catch (IOException e) {
-			e.printStackTrace();
-			//TODO
+            e.printStackTrace();
+            //TODO
         }
 
         // Temporary hack
