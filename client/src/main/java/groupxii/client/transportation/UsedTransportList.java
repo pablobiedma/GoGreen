@@ -6,18 +6,17 @@ import java.util.Arrays;
 import java.util.List;
 
 /**
- * Class that stores the used transport
+ * Class that stores the used transport.
  */
 public class UsedTransportList {
-
     private List<String> transportList;
-    public UsedTransportList(){
+
+    public UsedTransportList() {
         transportList = Arrays.asList(TransportConnector.retrieveUsedTransportList().split(" - "));
     }
 
-
     /**
-     * Asks the connector to retrieve the eaten meal list and parses it
+     * Asks the connector to retrieve the eaten meal list and parses it.
      */
     public void setUsedTransportList() {
         String usedTransportStr = TransportConnector.retrieveUsedTransportList();

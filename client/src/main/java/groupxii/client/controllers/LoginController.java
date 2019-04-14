@@ -19,13 +19,11 @@ public class LoginController {
     @FXML
     private Text errorMessage = new Text();
 
-    public static int userId = 1;
-
     @FXML
     public void loginButton(MouseEvent event) throws Exception {
-        if(txtUsername.getText().isEmpty() || txtPassword.getText().isEmpty()){
+        if (txtUsername.getText().isEmpty() || txtPassword.getText().isEmpty()) {
             errorMessage.setText("Please enter a username and/or password.");
-        } else{
+        } else {
             String username = txtUsername.getText();
             String password = txtPassword.getText();
             // Initializa TokenManager
@@ -45,9 +43,9 @@ public class LoginController {
 
     @FXML
     public void signUpButton(MouseEvent event) {
-        if(txtUsername.getText().isEmpty() || txtPassword.getText().isEmpty()){
+        if (txtUsername.getText().isEmpty() || txtPassword.getText().isEmpty()) {
             errorMessage.setText("Please enter a username and/or password.");
-        } else{
+        } else {
             String username = txtUsername.getText();
             String password = txtPassword.getText();
 

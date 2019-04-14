@@ -1,7 +1,7 @@
 package groupxii.client.vegetarianmeal;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import groupxii.client.connector.VegetarianMealConnector;
 
 import java.io.IOException;
@@ -25,15 +25,16 @@ public class ReducedCo2 {
                         goodServingSize,
                         badFoodName,
                         badServingSize);
-		ObjectMapper objectMapper = new ObjectMapper();
+        ObjectMapper objectMapper = new ObjectMapper();
 
-		JsonNode node = null;
-		try {
-			node = objectMapper.readTree(response);
-		} catch (IOException e) {
-		}
+        JsonNode node = null;
+        try {
+            node = objectMapper.readTree(response);
+        } catch (IOException e) {
+            e.printStack();
+        }
 
-		String result = node.get("reducedCO2").asText();
+        String result = node.get("reducedCO2").asText();
         return result;
-	}
+    }
 }
