@@ -68,5 +68,6 @@ public class TokenManager {
 
 	public void refreshToken() {
 		jwt = LoginConnector.postCredentials(loginReqBody);
+		System.err.println("DEBUG: Recieved Token: " + jwt);
 	}
 }

@@ -45,10 +45,15 @@ public class Connector {
 
         if (reqType.equals("POST")) {
             try {
+                int length = body.length();
+                connection.setFixedLengthStreamingMode(length);
+                connection.setRequestProperty("Content-Type", "application/json");
+                connection.connect();
                 BufferedWriter requestBodyWriter = new BufferedWriter(
                         new OutputStreamWriter(
                             connection.getOutputStream()));
                 requestBodyWriter.write(body);
+                requestBodyWriter.flush();
                 requestBodyWriter.close();
             } catch (IOException e) {
                 e.printStackTrace();
@@ -61,6 +66,7 @@ public class Connector {
             BufferedReader in = new BufferedReader(
                     new InputStreamReader(
                             connection.getInputStream()));
+
             StringBuilder responseBuilder = new StringBuilder();
             String responseLine;
             while ((responseLine = in.readLine()) != null) {
