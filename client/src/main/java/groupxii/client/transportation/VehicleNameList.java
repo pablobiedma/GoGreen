@@ -5,12 +5,10 @@ import groupxii.client.connector.TransportConnector;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
-
 /**
- * Class that stores the  list.
+ * Class that stores the VehicleNameList.
  */
 public class VehicleNameList {
     private List<String> vehicleNameList;
@@ -20,8 +18,7 @@ public class VehicleNameList {
      */
     public VehicleNameList() {
         String json = TransportConnector.retrieveTransportList();
-        vehicleNameList = Arrays.asList(json.split(","));
-        //this.parseJson(json);
+        this.parseJson(json);
     }
 
     public VehicleNameList(String json) {
@@ -31,12 +28,13 @@ public class VehicleNameList {
     private void parseJson(String json) {
         ObjectMapper mapper = new ObjectMapper();
         try {
-
             //Does this has to be like this? -p
-            this.vehicleNameList = mapper.readValue(json,
-                    mapper.getTypeFactory()
-                            .constructCollectionType(List.class,
-                                    String.class));
+            this.vehicleNameList = mapper
+                    .readValue(
+                            json,
+                            mapper.getTypeFactory()
+                                    .constructCollectionType(List.class,
+                                            String.class));
         } catch (IOException e) {
             this.vehicleNameList = new ArrayList<>();
             System.err.println(e.getMessage());

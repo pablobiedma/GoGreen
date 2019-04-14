@@ -1,31 +1,35 @@
 package groupxii.client.connector;
 
 public class TransportConnector {
+    /**
+     * Shortcut for /vehicleNameList.
+     */
     public static String retrieveTransportList() {
         String resource = "/vehicleNameList";
         return Connector.getRequest(resource);
     }
 
     /**
-     * Calculate the co2 reduction of a vehicle.
+     * Shortcut for /calculateTransprot.
      */
     public static String calculateCO2Reduction(String goodTransportName,
-                                               String badTransportName ,
-                                               int goodConsumption ,
+                                               String badTransportName,
+                                               int goodConsumption,
                                                int badConsumption) {
         String resource = "/calculateTransport"
-                + "?" + goodTransportName
-                + "&" + badTransportName
-                + "&" + goodConsumption
-                + "&" + badConsumption;
+                + "?goodVehicleType=" + goodTransportName
+                + "&badVehicleType" + badTransportName
+                + "&goodAvgConsumption" + goodConsumption
+                + "&badAvgConsumption" + badConsumption;
 
         return Connector.getRequest(resource);
     }
 
+    /**
+     * Shortcut for /usedTransportList.
+     */
     public static String retrieveUsedTransportList() {
         String resource = "/usedTransportList";
         return Connector.getRequest(resource);
     }
-
-
 }

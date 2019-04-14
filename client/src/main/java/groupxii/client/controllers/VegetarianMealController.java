@@ -2,8 +2,9 @@ package groupxii.client.controllers;
 
 import groupxii.client.Main;
 import groupxii.client.connector.VegetarianMealConnector;
-import groupxii.client.vegetarianmeal.ReducedCo2;
+import groupxii.client.vegetarianmeal.EatenMealList;
 import groupxii.client.vegetarianmeal.MealList;
+import groupxii.client.vegetarianmeal.ReducedCo2;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -17,10 +18,6 @@ import javafx.scene.text.Text;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
-
-import java.util.*;
-
-
 
 public class VegetarianMealController implements Initializable {
 
@@ -77,7 +74,7 @@ public class VegetarianMealController implements Initializable {
                 = FXCollections.observableArrayList(mealList.getMealList());
         choiceBoxGoodFood.setItems(listObservable);
         choiceBoxBadFood.setItems(listObservable);
-        //updateListView();
+        updateListView();
     }
 
     /**
@@ -87,11 +84,11 @@ public class VegetarianMealController implements Initializable {
     @FXML
     public void updateListView() {
         //TODO this first commended-out part has to be fixed
-        /*
+		EatenMealList eatenMealList = new EatenMealList();
+		eatenMealList.setEatenMealList();
         ObservableList<String> eatenMealObservableList
                 = FXCollections.observableArrayList(eatenMealList.getEatenMealList());
         eatenMealsListView.setItems(eatenMealObservableList);
-        */
         /*
         try {
             eatenMealListStr = new Scanner(new URL(host + "eatenMealList").openStream(),
@@ -104,7 +101,6 @@ public class VegetarianMealController implements Initializable {
         = FXCollections.observableArrayList(eatenMealListViewItems);
         eatenMealsListView.setItems(eatenMealsObservable);
         */
-
     }
 
     @FXML
@@ -114,12 +110,12 @@ public class VegetarianMealController implements Initializable {
         String badFoodName = choiceBoxBadFood.getValue();
         int badServingSize = (int)sliderBadFood.getValue();
 
-		String result = ReducedCo2.getReducedCo2(
-				goodFoodName,
-				goodServingSize,
-				badFoodName,
-				badServingSize);
-		reducedCo2Text.setText("This will reduce " + result + " grams of CO2");
+        String result = ReducedCo2.getReducedCo2(
+                goodFoodName,
+                goodServingSize,
+                badFoodName,
+                badServingSize);
+        reducedCo2Text.setText("This will reduce " + result + " grams of CO2");
 
     }
 
@@ -141,7 +137,7 @@ public class VegetarianMealController implements Initializable {
                         badFoodName,
                         badServingSize);
         //TODO update contoller to display result
-        //updateListView();
+        updateListView();
         reducedCo2Text.setText("Enjoy your meal :-)");
     }
 

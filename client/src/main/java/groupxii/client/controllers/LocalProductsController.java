@@ -34,19 +34,13 @@ public class LocalProductsController implements Initializable {
     private ImageView mapsImage = new ImageView();
 
     private int userId = 1;
-    //private List<String> listViewItems = new ArrayList<String>();
-    //private ObservableList<String> listViewObservable;
-    //private String listItemsStr = "";
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         String listItemsStr = LocalProductsConnector.retrieveLocalShops();
-        //listItemsStr = new Scanner(new URL("/localshops?location=" +
-        // getUserLocation.getUserLocation()).openStream(),"UTF-8").nextLine();
         List<String> listViewItems = Arrays.asList(listItemsStr.split(", "));
         ObservableList<String> listViewObservable =
                 FXCollections.observableArrayList(listViewItems);
-        //listViewObservable = FXCollections.observableArrayList(listViewItems);
         localShops.setItems(listViewObservable);
     }
 
@@ -62,8 +56,6 @@ public class LocalProductsController implements Initializable {
         if (url == null) {
             textfield.setText("Please choose a shop first");
         }  else {
-            //GetUserLocation getUserLocation = new GetUserLocation();
-            //String location = getUserLocation.getUserLocation();
             mapsImage.setImage(new Image("https://maps.googleapis.com/maps/api/staticmap?center=" + url + "&zoom=12&size=900x150&maptype=roadmap&markers=color:red%7Clabel:Shop%7C" + url + "&key=AIzaSyBvn_zZpLGUjLJBxIUoGHgJjzo2VlZm3jg"));
         }
     }
