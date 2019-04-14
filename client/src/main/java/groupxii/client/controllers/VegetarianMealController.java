@@ -130,6 +130,7 @@ public class VegetarianMealController implements Initializable {
                         badServingSize);
         //TODO update contoller to display result
         //updateListView();
+        reducedCo2Text.setText("You reduced " + result + " grams of CO2");
     }
 
     @FXML
