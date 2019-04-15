@@ -57,13 +57,13 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .httpBasic().disable()
                 .addFilter(new JwtGeneratingFilter(credentialsAuthentiactionManager()))
                 .authorizeRequests()
-                	.antMatchers("/login").permitAll()
-			.and()
-		.authorizeRequests()
-			.antMatchers("/register").permitAll()
-			.and()
-		.authorizeRequests()
-			.anyRequest().authenticated();
+            .antMatchers("/login").permitAll()
+            .and()
+            .authorizeRequests()
+            .antMatchers("/register").permitAll()
+            .and()
+            .authorizeRequests()
+            .anyRequest().authenticated();
     }
 
     @Bean

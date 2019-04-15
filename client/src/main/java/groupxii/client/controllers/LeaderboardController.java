@@ -60,6 +60,9 @@ public class LeaderboardController {
         }
     }
 
+    /**
+    Initializes the leaderboard page.
+     */
     public void initialize() {
 
         /*
@@ -115,6 +118,9 @@ public class LeaderboardController {
         //friendsLeaderboard.setItems(friendsLeaderboardObservableList);
     }
 
+    /**
+     * Receives an id of an user and adds him/her to the friend list.
+     */
     public String addFriend(int friendId) {
         LeaderboardConnector.addFriend(userId, friendId);
         addedFriend.setText("Added new friend!");

@@ -19,6 +19,9 @@ public class LoginController {
     @FXML
     private Text errorMessage = new Text();
 
+    /**
+     * Login button functionality.
+     */
     @FXML
     public void loginButton(MouseEvent event) throws Exception {
         if (txtUsername.getText().isEmpty() || txtPassword.getText().isEmpty()) {
@@ -41,6 +44,9 @@ public class LoginController {
         }
     }
 
+    /**
+     * Sign up(register) button functionality.
+     */
     @FXML
     public void signUpButton(MouseEvent event) {
         if (txtUsername.getText().isEmpty() || txtPassword.getText().isEmpty()) {
