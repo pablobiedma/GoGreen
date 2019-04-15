@@ -2,7 +2,6 @@ package groupxii.client.controllers;
 
 import com.maxmind.geoip2.exception.GeoIp2Exception;
 import groupxii.client.Main;
-import groupxii.client.connector.Connector;
 import groupxii.client.connector.LocalProductsConnector;
 import groupxii.client.connector.UserConnector;
 import javafx.collections.FXCollections;
@@ -33,6 +32,9 @@ public class LocalProductsController {
 
     private int userId = 1;
 
+    /**
+     * Initializes the local products page.
+     */
     public void initialize() {
         String listItemsStr = LocalProductsConnector.retrieveLocalShops();
         List<String> listViewItems = Arrays.asList(listItemsStr.split(", "));
@@ -89,10 +91,13 @@ public class LocalProductsController {
         }
     }
 
+    /**
+     * When a shop is chosen it saves the saved Co2 to the user's score.
+     */
     public void safeLocalProduct() {
         if (localShops.getSelectionModel().getSelectedItem() == null) {
             textfield.setText("Please choose a shop first");
-        } else{
+        } else {
             UserConnector.updateReducedCo2(300);
             textfield.setText("You saved 300 grams of CO2 emission!");
         }

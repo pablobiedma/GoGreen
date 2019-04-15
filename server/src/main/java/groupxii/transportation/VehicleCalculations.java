@@ -1,6 +1,5 @@
 package groupxii.transportation;
 
-
 import groupxii.database.Database;
 import groupxii.database.VehicleListEntry;
 

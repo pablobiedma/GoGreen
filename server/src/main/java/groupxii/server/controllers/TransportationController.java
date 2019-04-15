@@ -1,6 +1,5 @@
 package groupxii.server.controllers;
 
-import com.mongodb.DBObject;
 import groupxii.database.Database;
 import groupxii.database.UserEntry;
 import groupxii.database.VehicleEntry;

@@ -44,7 +44,7 @@ public class UserEntry extends Entry {
     public UserEntry(BSONObject obj) {
         if (obj == null) {
             return;
-	}
+        }
         this.userId = (int)obj.get("userId");
         this.username = (String)obj.get("username");
         this.password = (String)obj.get("password");

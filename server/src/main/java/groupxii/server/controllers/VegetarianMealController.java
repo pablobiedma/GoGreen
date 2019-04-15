@@ -68,7 +68,7 @@ public class VegetarianMealController {
         MealEntry saveMeal = new MealEntry(goodFoodName, goodServingSize,
                                            badFoodName, badServingSize);
         Database.instance.addEatenMeal(username, saveMeal);
-	Database.instance.incrementReducedCo2(username, saveMeal.getReducedCo2());
+        Database.instance.incrementReducedCo2(username, saveMeal.getReducedCo2());
     }
 
     /**

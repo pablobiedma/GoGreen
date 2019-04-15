@@ -1,6 +1,5 @@
 package groupxii.server.controllers;
 
-import com.mongodb.DBObject;
 import groupxii.database.Database;
 import groupxii.database.UserEntry;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -30,12 +29,12 @@ public class UserController {
             return;
         }
 
-	//TODO verify name is unique
-	/*
+        //TODO verify name is unique
+        /*
         if (Database.instance.findUserByName(username)) {
             return;
         }
-	*/
+        */
 
         int userId = Database.instance.getUserCount() + 1;
         UserEntry userEntry = new UserEntry(userId, username, password);
@@ -84,6 +83,9 @@ public class UserController {
         Database.instance.addFriend(user, friendsId);
     }
 
+    /**
+     * Returns the reduced Co2(points) of a particular user.
+     */
     @RequestMapping(method = RequestMethod.GET, value = "/getReducedCo2OfUser")
     public int getReducedCo2OfUser(Principal principal) {
         String username = principal.getName();
@@ -92,10 +94,13 @@ public class UserController {
         return reducedCo2;
     }
 
+    /**
+     * Increases the reduced Co2 of an user by a given amount.
+     */
     @RequestMapping(method = RequestMethod.POST, value = "/increaseReducedCo2OfUser")
     public int increaserReducedCo2OfUser(Principal principal,
                                          @RequestParam(value = "amount",
-                                                 defaultValue = "0") int amount){
+                                                 defaultValue = "0") int amount) {
         String username = principal.getName();
         //UserEntry user = Database.instance.findUserByName(username);
         Database.instance.incrementReducedCo2(username, amount);
