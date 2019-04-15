@@ -1,5 +1,6 @@
 package groupxii.client.controllers;
 
+import groupxii.client.Main;
 import groupxii.client.transportation.VehicleNameList;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -14,6 +15,7 @@ import javafx.scene.text.Text;
 import groupxii.client.transportation.UsedTransportList;
 import groupxii.client.connector.TransportConnector;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -117,5 +119,11 @@ public class TransportationController implements Initializable {
         String result = TransportConnector.calculateCO2Reduction(goodTransportName, badTransportName, goodConsumption, badConsumption);
         //TODO update contoller to display result
         updateListView();
+    }
+
+    @FXML
+    public void btnBack(MouseEvent event) throws IOException {
+        Main main = new Main();
+        main.changeScene("Menu.fxml", event);
     }
 }

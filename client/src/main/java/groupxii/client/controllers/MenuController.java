@@ -68,6 +68,11 @@ public class MenuController implements Initializable {
         main.changeScene("Temperature.fxml", event);
     }
 
+    @FXML
+    public void logout(MouseEvent event) throws Exception {
+        main.changeScene("Login.fxml", event);
+    }
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         String reducedCo2 = Connector.getRequest("/getReducedCo2OfUser");
