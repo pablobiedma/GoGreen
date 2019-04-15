@@ -15,19 +15,11 @@
 
 <AnchorPane id="AnchorPane" style="-fx-background-color: #fff;" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="groupxii.client.controllers.MenuController">
    <children>
-      <Pane prefHeight="127.0" prefWidth="904.0" style="-fx-background-color: #2B8E00;" stylesheets="@../fullpackstyling.css">
+      <Pane prefHeight="127.0" prefWidth="904.0" style="-fx-background-color: #2B8E00;">
          <children>
             <ImageView fitHeight="103.0" fitWidth="120.0" layoutX="10.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../images/gogreen logo groter.png" />
-               </image>
-               <viewport>
-                  <Rectangle2D />
-               </viewport>
-            </ImageView>
-            <ImageView fitHeight="73.0" fitWidth="73.0" layoutX="749.0" layoutY="25.0" onMouseClicked="#logout" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../images/icons8-shutdown-64.png" />
                </image>
                <viewport>
                   <Rectangle2D />
@@ -43,6 +35,11 @@
                   <Font name="Segoe UI" size="12.0" />
                </font>
             </Label>
+            <Button layoutX="732.0" layoutY="42.0" mnemonicParsing="false" onMouseClicked="#logout" prefHeight="39.0" prefWidth="102.0" stylesheets="@../fullpackstyling.css" text="Logout">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Button>
          </children>
       </Pane>
       <Pane layoutY="120.0" prefHeight="200.0" prefWidth="900.0">
