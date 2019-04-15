@@ -126,5 +126,21 @@
             </Button>
          </children>
       </Pane>
+      <Pane layoutY="485.0" prefHeight="167.0" prefWidth="900.0">
+         <children>
+            <Button alignment="BOTTOM_CENTER" contentDisplay="TOP" graphicTextGap="7.0" layoutX="14.0" layoutY="19.0" mnemonicParsing="false" prefHeight="127.0" prefWidth="871.0" stylesheets="@../fullpackstyling.css" text="MORE FEATURES COMING SOON">
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+               <graphic>
+                  <ImageView fitHeight="93.0" fitWidth="87.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../images/icons8-error-64.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
+         </children>
+      </Pane>
    </children>
 </AnchorPane>
