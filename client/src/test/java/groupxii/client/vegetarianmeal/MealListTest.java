@@ -13,21 +13,28 @@ import org.powermock.modules.junit4.PowerMockRunner;
 
 import static org.mockito.Mockito.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @RunWith(PowerMockRunner.class)
 @PrepareForTest({VegetarianMealConnector.class})
 
-public class ReducedCo2Test {
+public class MealListTest {
 
     @Test
     public void getReducedCo2Test() {
 		PowerMockito.mockStatic(VegetarianMealConnector.class);
 		PowerMockito.when(
-						VegetarianMealConnector.calculateCO2Reduction(anyString(), anyInt(),
-						                                             anyString(), anyInt()))
-					.thenReturn("{\"reducedCO2\":\"120\"}");
+						VegetarianMealConnector.retrieveMealList())
+					.thenReturn("[\"APPLE\", \"GRAPEFRUIT\"]");
 
-		ReducedCo2 rco2 = new ReducedCo2();
-		assertEquals("120", rco2.getReducedCo2("food", 3, "food2", 2));
+		MealList ml = new MealList();
+
+		List<String> expected = new ArrayList<String>();
+		expected.add("APPLE");
+		expected.add("GRAPEFRUIT");
+
+		assertEquals(expected, ml.getMealList());
 
     }
 }

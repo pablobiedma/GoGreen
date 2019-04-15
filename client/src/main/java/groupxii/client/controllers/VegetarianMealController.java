@@ -2,6 +2,7 @@ package groupxii.client.controllers;
 
 import groupxii.client.Main;
 import groupxii.client.connector.VegetarianMealConnector;
+import groupxii.client.vegetarianmeal.EatenMealList;
 import groupxii.client.vegetarianmeal.MealList;
 import groupxii.client.vegetarianmeal.ReducedCo2;
 import javafx.collections.FXCollections;
@@ -38,42 +39,14 @@ public class VegetarianMealController implements Initializable {
     @FXML
     private ListView<String> eatenMealsListView = new ListView();
 
-    //private String goodFoodName = "";
-    //private String badFoodName = "";
-    //private String host = "http://localhost:8080/";
-    //private String foodNameListStr = "";
-    //private String eatenMealListStr = "";
-
-    //private SafeMeal safeMeal = new SafeMeal();
-    //private List<String> eatenMealListViewItems = new ArrayList<String>();
-
-    //EatenMealList eatenMealList = new EatenMealList();
-
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-
-        /*
-        try {
-            foodNameListStr = new Scanner(new URL(host + "mealNameList").openStream(),
-                    "UTF-8").nextLine();
-            eatenMealListStr = new Scanner(new URL(host + "eatenMealList").openStream(),
-                    "UTF-8").nextLine();
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        */
-        //eatenMealListViewItems = Arrays.asList(eatenMealListStr.split(" - "));
-        //ObservableList<String> eatenMealsObservable
-        // = FXCollections.observableArrayList(eatenMealListViewItems);
-        //eatenMealsListView.setItems(eatenMealsObservable);
-
         MealList mealList = new MealList();
         ObservableList<String> listObservable
                 = FXCollections.observableArrayList(mealList.getMealList());
         choiceBoxGoodFood.setItems(listObservable);
         choiceBoxBadFood.setItems(listObservable);
-        //updateListView();
+        updateListView();
     }
 
     /**
@@ -82,26 +55,14 @@ public class VegetarianMealController implements Initializable {
 
     @FXML
     public void updateListView() {
-        //TODO this first commended-out part has to be fixed
-        /*
         ObservableList<String> eatenMealObservableList
-                = FXCollections.observableArrayList(eatenMealList.getEatenMealList());
+                = FXCollections.observableArrayList(EatenMealList.getEatenMealList());
         eatenMealsListView.setItems(eatenMealObservableList);
-        */
-        /*
-        try {
-            eatenMealListStr = new Scanner(new URL(host + "eatenMealList").openStream(),
-                    "UTF-8").nextLine();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        eatenMealListViewItems = Arrays.asList(eatenMealListStr.split(" - "));
-        ObservableList<String> eatenMealsObservable
-        = FXCollections.observableArrayList(eatenMealListViewItems);
-        eatenMealsListView.setItems(eatenMealsObservable);
-        */
     }
 
+    /**
+     * Sends request to calculate a meal and displays the result.
+     */
     @FXML
     public void calculateMeal(MouseEvent event) {
         String goodFoodName = choiceBoxGoodFood.getValue();
@@ -109,18 +70,16 @@ public class VegetarianMealController implements Initializable {
         String badFoodName = choiceBoxBadFood.getValue();
         int badServingSize = (int)sliderBadFood.getValue();
 
-        String result = ReducedCo2.getReducedCo2(
-                goodFoodName,
-                goodServingSize,
-                badFoodName,
-                badServingSize);
-        reducedCo2Text.setText("This will reduce " + result + " grams of CO2");
+        String result = ReducedCo2.getReducedCo2(goodFoodName,
+                                                 goodServingSize,
+                                                 badFoodName,
+                                                 badServingSize);
 
+        reducedCo2Text.setText("This will reduce " + result + " grams of CO2");
     }
 
     /**
      * Calculates the co2 reduced emission when the user clicks the calculate button.
-     * it also calculates the amount of points the user earned.
      * @param event mouse click
      * @throws Exception throws exception when something went wrong
      */
@@ -132,12 +91,12 @@ public class VegetarianMealController implements Initializable {
         int badServingSize = (int)sliderBadFood.getValue();
 
         VegetarianMealConnector.commitMeal(goodFoodName,
-                        goodServingSize,
-                        badFoodName,
-                        badServingSize);
-        //TODO update contoller to display result
-        updateListView();
+                                           goodServingSize,
+                                           badFoodName,
+                                           badServingSize);
+
         reducedCo2Text.setText("Enjoy your meal :-)");
+        updateListView();
     }
 
     @FXML
