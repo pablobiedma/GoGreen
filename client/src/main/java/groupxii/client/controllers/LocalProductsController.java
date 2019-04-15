@@ -4,6 +4,7 @@ import com.maxmind.geoip2.exception.GeoIp2Exception;
 import groupxii.client.Main;
 import groupxii.client.connector.Connector;
 import groupxii.client.connector.LocalProductsConnector;
+import groupxii.client.connector.UserConnector;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -92,8 +93,14 @@ public class LocalProductsController implements Initializable {
         }
     }
 
-    public void safeLocalProduct() throws IOException {
-        Connector.instance.postRequest("/increaseReducedCO2?Id=" + userId + "&ReducedCO2=300");
+    public void safeLocalProduct() {
+        if (localShops.getSelectionModel().getSelectedItem() == null) {
+            textfield.setText("Please choose a shop first");
+        } else{
+            UserConnector.updateReducedCo2(300);
+            textfield.setText("You saved 300 grams of CO2 emission!");
+        }
+        UserConnector.updateReducedCo2(300);
         textfield.setText("You saved 300 grams of CO2 emission!");
     }
 
