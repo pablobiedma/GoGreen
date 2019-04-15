@@ -8,7 +8,6 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
@@ -18,18 +17,16 @@ import javafx.scene.layout.Priority;
 import javafx.scene.text.Text;
 
 import java.io.IOException;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.ResourceBundle;
 
-public class LeaderboardController implements Initializable {
+public class LeaderboardController {
 
     private static int userId = 1;
 
     @FXML
-    private static Text addedFriend = new Text();
+    private Text addedFriend = new Text();
 
     private String overallListStr = "";
     private String friendListStr = "";
@@ -41,7 +38,7 @@ public class LeaderboardController implements Initializable {
     @FXML
     private ListView friendsLeaderboard = new ListView();
 
-    public static class HBoxCell extends HBox {
+    public class HBoxCell extends HBox {
         Label label = new Label();
         Button button = new Button();
 
@@ -63,8 +60,7 @@ public class LeaderboardController implements Initializable {
         }
     }
 
-    @Override
-    public void initialize(URL location, ResourceBundle resources) {
+    public void initialize() {
 
         /*
         try {
@@ -119,13 +115,11 @@ public class LeaderboardController implements Initializable {
         //friendsLeaderboard.setItems(friendsLeaderboardObservableList);
     }
 
-    public static void addFriend(int friendId) {
+    public String addFriend(int friendId) {
         LeaderboardConnector.addFriend(userId, friendId);
-        addedFriend.setText("Ädded new friend!");
-    }
-
-    public void setUserId(int userId) {
-        this.userId = userId;
+        addedFriend.setText("Added new friend!");
+        initialize();
+        return "Added new friend!";
     }
 
     @FXML

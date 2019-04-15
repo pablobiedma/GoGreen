@@ -91,6 +91,18 @@ public class UserController {
         int reducedCo2 = user.getReducedCo2();
         return reducedCo2;
     }
+
+    @RequestMapping(method = RequestMethod.POST, value = "/increaseReducedCo2OfUser")
+    public int increaserReducedCo2OfUser(Principal principal,
+                                         @RequestParam(value = "amount",
+                                                 defaultValue = "0") int amount){
+        String username = principal.getName();
+        //UserEntry user = Database.instance.findUserByName(username);
+        Database.instance.incrementReducedCo2(username, amount);
+        return amount;
+    }
+
+
 }
 
 

@@ -4,10 +4,10 @@ import com.maxmind.geoip2.exception.GeoIp2Exception;
 import groupxii.client.Main;
 import groupxii.client.connector.Connector;
 import groupxii.client.connector.LocalProductsConnector;
+import groupxii.client.connector.UserConnector;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
 import javafx.scene.control.ListView;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -17,12 +17,10 @@ import javafx.scene.text.Text;
 import java.awt.Desktop;
 import java.io.IOException;
 import java.net.URI;
-import java.net.URL;
 import java.util.Arrays;
 import java.util.List;
-import java.util.ResourceBundle;
 
-public class LocalProductsController implements Initializable {
+public class LocalProductsController {
 
     @FXML
     private Text textfield = new Text();
@@ -35,8 +33,7 @@ public class LocalProductsController implements Initializable {
 
     private int userId = 1;
 
-    @Override
-    public void initialize(URL location, ResourceBundle resources) {
+    public void initialize() {
         String listItemsStr = LocalProductsConnector.retrieveLocalShops();
         List<String> listViewItems = Arrays.asList(listItemsStr.split(", "));
         ObservableList<String> listViewObservable =
@@ -92,9 +89,13 @@ public class LocalProductsController implements Initializable {
         }
     }
 
-    public void safeLocalProduct() throws IOException {
-        Connector.instance.postRequest("/increaseReducedCO2?Id=" + userId + "&ReducedCO2=300");
-        textfield.setText("You saved 300 grams of CO2 emission!");
+    public void safeLocalProduct() {
+        if (localShops.getSelectionModel().getSelectedItem() == null) {
+            textfield.setText("Please choose a shop first");
+        } else{
+            UserConnector.updateReducedCo2(300);
+            textfield.setText("You saved 300 grams of CO2 emission!");
+        }
     }
 
     @FXML
